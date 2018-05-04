@@ -1,20 +1,16 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using Domain;
 
 namespace UnitTestDomain
 {
     [TestClass]
-    public class UsuarioTest
+    public class UserTest
     {
         [TestMethod]
-        public void TestCreateValidAdministrator()
+        public void TestCreateAdministratorWithoutParameters()
         {
             Administrator administrator = new Administrator();
+            Assert.IsNotNull(administrator);
         }
 
     }

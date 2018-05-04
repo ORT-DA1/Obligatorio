@@ -50,14 +50,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UsuarioTest.cs" />
-    <Compile Include="DoorTest.cs" />
-    <Compile Include="GridTest.cs" />
-    <Compile Include="LineTest.cs" />
+    <Compile Include="UserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WallBeamTest.cs" />
-    <Compile Include="WallTest.cs" />
-    <Compile Include="WindowTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{f63c7c33-b2bf-4696-a4fa-9182dc48ff2e}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

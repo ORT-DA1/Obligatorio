@@ -5,14 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace UnitTestDomain
 {
     [TestClass]
-    public class WallTest
+    public class UsuarioTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestCreateValidAdministrator()
         {
+            Administrator administrator = new Administrator();
         }
+
     }
 }

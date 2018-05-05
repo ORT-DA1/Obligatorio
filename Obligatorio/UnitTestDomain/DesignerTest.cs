@@ -23,6 +23,39 @@ namespace UnitTestDomain
         }
 
         [TestMethod]
+        public void TestDesignerSetUsername()
+        {
+            Designer designer = new Designer();
+            designer.Username = USERNAME_OK;
+            Assert.AreEqual(designer.Username, USERNAME_OK);
+        }
+
+        [TestMethod]
+        public void TestDesignerSetPassword()
+        {
+            Designer designer = new Designer();
+            designer.Password = PASSWORD_OK;
+            Assert.AreEqual(designer.Password, PASSWORD_OK);
+        }
+
+        [TestMethod]
+        public void TestDesignerSetName()
+        {
+            Designer designer = new Designer();
+            designer.Name = NAME_OK;
+            Assert.AreEqual(designer.Name, NAME_OK);
+        }
+
+        [TestMethod]
+        public void TestDesignerSetSurname()
+        {
+            Designer designer = new Designer();
+            designer.Surname = SURNAME_OK;
+            Assert.AreEqual(designer.Surname, USERNAME_OK);
+        }
+
+
+        [TestMethod]
         public void TestCreateDesignerWithParameters()
         {
             Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK);
@@ -31,7 +64,6 @@ namespace UnitTestDomain
                 && designer.Name.Equals(NAME_OK) && designer.Surname.Equals(SURNAME_OK)
                 && designer.RegistrationDate.Equals(REGISTRATIONDATE_OK));
         }
-
 
         public Designer CreateDesigner(string username, string password, string name, string surname, DateTime registrationDate)
         {

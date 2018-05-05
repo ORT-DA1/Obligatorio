@@ -30,6 +30,62 @@ namespace UnitTestDomain
         }
 
         [TestMethod]
+        public void TestClientSetUsername()
+        {
+            Client client = new Client();
+            client.Username = USERNAME_OK;
+            Assert.AreEqual(client.Username, USERNAME_OK);
+        }
+
+        [TestMethod]
+        public void TestClientSetPassword()
+        {
+            Client client = new Client();
+            client.Password = PASSWORD_OK;
+            Assert.AreEqual(client.Password, PASSWORD_OK);
+        }
+
+        [TestMethod]
+        public void TestClientSetName()
+        {
+            Client client = new Client();
+            client.Name = NAME_OK;
+            Assert.AreEqual(client.Name, NAME_OK);
+        }
+
+        [TestMethod]
+        public void TestClientSetSurname()
+        {
+            Client client = new Client();
+            client.Surname = SURNAME_OK;
+            Assert.AreEqual(client.Surname, SURNAME_OK);
+        }
+
+        [TestMethod]
+        public void TestClientSetIdentityCard()
+        {
+            Client client = new Client();
+            client.IdentityCard = CI_OK;
+            Assert.AreEqual(client.IdentityCard, CI_OK);
+        }
+
+        [TestMethod]
+        public void TestClientSetPhone()
+        {
+            Client client = new Client();
+            client.Phone = PHONE_OK;
+            Assert.AreEqual(client.Phone, PHONE_OK);
+        }
+
+        [TestMethod]
+        public void TestClientSetAddress()
+        {
+            Client client = new Client();
+            client.Address = ADDRESS_OK;
+            Assert.AreEqual(client.Address, ADDRESS_OK);
+        }
+
+        [TestMethod]
         public void TestCreateClientWithParameters()
         {
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK);

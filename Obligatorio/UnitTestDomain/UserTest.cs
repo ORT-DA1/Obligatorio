@@ -37,5 +37,12 @@ namespace UnitTestDomain
             Assert.IsNotNull(administrator);
         }
 
+        [TestMethod]
+        public void TestCreateClientWithoutParameters()
+        {
+            Client client = new Client();
+            Assert.IsNotNull(client);
+        }
+
     }
 }

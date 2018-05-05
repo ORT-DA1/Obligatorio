@@ -16,5 +16,10 @@ namespace Gui
         {
             InitializeComponent();
         }
+
+        private void loginBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

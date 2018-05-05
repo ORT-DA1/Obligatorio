@@ -44,5 +44,13 @@ namespace UnitTestDomain
             Assert.IsNotNull(client);
         }
 
+        [TestMethod]
+        public void TestCreateClientWithParameters()
+        {
+            DateTime registrationDate = DateTime.Now;
+            Client client = new Client("client", "client", "Pablo", "Pereira", "5407350-0", 093535858, "Cuareim 1558", registrationDate);
+            Assert.IsNotNull(client);
+        }
+
     }
 }

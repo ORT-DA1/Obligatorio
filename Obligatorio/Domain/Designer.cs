@@ -8,5 +8,10 @@ namespace Domain
 {
     public class Designer : User
     {
+
+        public Designer()
+        {
+
+        }
     }
 }

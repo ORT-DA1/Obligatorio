@@ -46,8 +46,12 @@ namespace UnitTestDomain
         public void TestCreateDesignerWithParameters()
         {
             DateTime registrationDate = DateTime.Now;
-            Administrator administrator = new Administrator(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK);
-            Assert.IsNotNull(administrator);
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK);
+            Assert.IsNotNull(designer);
+
+            Assert.IsTrue(designer.Username.Equals(USERNAME_OK) && designer.Password.Equals(PASSWORD_OK)
+                && designer.Name.Equals(NAME_OK) && designer.Surname.Equals(SURNAME_OK)
+                && designer.RegistrationDate.Equals(REGISTRATIONDATE_OK));
         }
 
         [TestMethod]

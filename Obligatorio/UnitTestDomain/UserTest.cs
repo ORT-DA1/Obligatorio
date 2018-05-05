@@ -47,7 +47,6 @@ namespace UnitTestDomain
         {
             DateTime registrationDate = DateTime.Now;
             Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK);
-            Assert.IsNotNull(designer);
 
             Assert.IsTrue(designer.Username.Equals(USERNAME_OK) && designer.Password.Equals(PASSWORD_OK)
                 && designer.Name.Equals(NAME_OK) && designer.Surname.Equals(SURNAME_OK)
@@ -66,7 +65,11 @@ namespace UnitTestDomain
         {
             DateTime registrationDate = DateTime.Now;
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK);
-            Assert.IsNotNull(client);
+
+            Assert.IsTrue(client.Username.Equals(USERNAME_OK) && client.Password.Equals(PASSWORD_OK)
+                && client.Name.Equals(NAME_OK) && client.Surname.Equals(SURNAME_OK) && client.IdentityCard.Equals(CI_OK) 
+                && client.Phone.Equals(PHONE_OK) && client.Address.Equals(ADDRESS_OK)
+                && client.RegistrationDate.Equals(REGISTRATIONDATE_OK));  
         }
 
     }

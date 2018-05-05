@@ -28,25 +28,83 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.userlbl = new System.Windows.Forms.Label();
+            this.passlbl = new System.Windows.Forms.Label();
+            this.usernameTxt = new System.Windows.Forms.TextBox();
+            this.passwordTxt = new System.Windows.Forms.TextBox();
+            this.titleLbl = new System.Windows.Forms.Label();
+            this.loginBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // userlbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(69, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(133, 31);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Welcome";
+            this.userlbl.AutoSize = true;
+            this.userlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userlbl.Location = new System.Drawing.Point(42, 111);
+            this.userlbl.Name = "userlbl";
+            this.userlbl.Size = new System.Drawing.Size(77, 15);
+            this.userlbl.TabIndex = 1;
+            this.userlbl.Text = "Username:";
+            // 
+            // passlbl
+            // 
+            this.passlbl.AutoSize = true;
+            this.passlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passlbl.Location = new System.Drawing.Point(42, 162);
+            this.passlbl.Name = "passlbl";
+            this.passlbl.Size = new System.Drawing.Size(73, 15);
+            this.passlbl.TabIndex = 2;
+            this.passlbl.Text = "Password:";
+            // 
+            // usernameTxt
+            // 
+            this.usernameTxt.Location = new System.Drawing.Point(132, 110);
+            this.usernameTxt.Name = "usernameTxt";
+            this.usernameTxt.Size = new System.Drawing.Size(135, 20);
+            this.usernameTxt.TabIndex = 3;
+            // 
+            // passwordTxt
+            // 
+            this.passwordTxt.Location = new System.Drawing.Point(132, 161);
+            this.passwordTxt.Name = "passwordTxt";
+            this.passwordTxt.PasswordChar = '*';
+            this.passwordTxt.Size = new System.Drawing.Size(135, 20);
+            this.passwordTxt.TabIndex = 4;
+            // 
+            // titleLbl
+            // 
+            this.titleLbl.AutoSize = true;
+            this.titleLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLbl.ForeColor = System.Drawing.Color.DarkBlue;
+            this.titleLbl.Location = new System.Drawing.Point(16, 26);
+            this.titleLbl.Name = "titleLbl";
+            this.titleLbl.Size = new System.Drawing.Size(348, 31);
+            this.titleLbl.TabIndex = 5;
+            this.titleLbl.Text = "Welcome to Graphic Master";
+            // 
+            // loginBtn
+            // 
+            this.loginBtn.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.loginBtn.Location = new System.Drawing.Point(149, 209);
+            this.loginBtn.Name = "loginBtn";
+            this.loginBtn.Size = new System.Drawing.Size(99, 29);
+            this.loginBtn.TabIndex = 6;
+            this.loginBtn.Text = "Login";
+            this.loginBtn.UseVisualStyleBackColor = false;
+            this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 
             // WelcomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.label1);
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.ClientSize = new System.Drawing.Size(376, 313);
+            this.Controls.Add(this.loginBtn);
+            this.Controls.Add(this.titleLbl);
+            this.Controls.Add(this.passwordTxt);
+            this.Controls.Add(this.usernameTxt);
+            this.Controls.Add(this.passlbl);
+            this.Controls.Add(this.userlbl);
             this.Name = "WelcomeForm";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -55,8 +113,12 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label userlbl;
+        private System.Windows.Forms.Label passlbl;
+        private System.Windows.Forms.TextBox usernameTxt;
+        private System.Windows.Forms.TextBox passwordTxt;
+        private System.Windows.Forms.Label titleLbl;
+        private System.Windows.Forms.Button loginBtn;
     }
 }
 

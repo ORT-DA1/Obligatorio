@@ -83,7 +83,7 @@ namespace UnitTestDomain
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void TestCreateUserWithNameEmpty()
+        public void TestCreateUserWithNameAndSurnameValid()
         {
             User user = CreateUser(USERNAME_OK, PASSWORD_OK, "", SURNAME_OK, REGISTRATIONDATE_OK);
         }

@@ -27,5 +27,11 @@ namespace Domain
             this.Surname = surname;
             this.RegistrationDate = registrationDate;
         }
+
+        public virtual bool NameAndSurnameValidate(string name, string surname)
+        {
+            return true;
+        }
+       
     }
 }

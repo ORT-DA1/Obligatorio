@@ -8,5 +8,9 @@ namespace Domain
 {
     public class Client : User
     {
+        public Client()
+        {
+
+        }
     }
 }

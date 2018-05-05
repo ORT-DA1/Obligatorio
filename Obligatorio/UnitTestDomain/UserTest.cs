@@ -26,7 +26,6 @@ namespace UnitTestDomain
         [TestMethod]
         public void TestCreateAdministratorWithParameters()
         {
-            DateTime registrationDate = DateTime.Now;
             Administrator administrator = new Administrator(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK
                 , REGISTRATIONDATE_OK);
 
@@ -45,7 +44,6 @@ namespace UnitTestDomain
         [TestMethod]
         public void TestCreateDesignerWithParameters()
         {
-            DateTime registrationDate = DateTime.Now;
             Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK);
 
             Assert.IsTrue(designer.Username.Equals(USERNAME_OK) && designer.Password.Equals(PASSWORD_OK)
@@ -63,7 +61,6 @@ namespace UnitTestDomain
         [TestMethod]
         public void TestCreateClientWithParameters()
         {
-            DateTime registrationDate = DateTime.Now;
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK);
 
             Assert.IsTrue(client.Username.Equals(USERNAME_OK) && client.Password.Equals(PASSWORD_OK)
@@ -82,6 +79,13 @@ namespace UnitTestDomain
         public User CreateUser(string username, string password, string name, string surname, DateTime registrationDate)
         {
             return new User(username, password, name, surname, registrationDate);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void TestCreateUserWithNameEmpty()
+        {
+            User user = CreateUser(USERNAME_OK, PASSWORD_OK, "", SURNAME_OK, REGISTRATIONDATE_OK);
         }
 
     }

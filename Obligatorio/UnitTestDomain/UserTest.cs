@@ -13,7 +13,7 @@ namespace UnitTestDomain
         private readonly string SURNAME_OK = "Pereira";
         private readonly string CI_OK = "5407385-0";
         private readonly DateTime REGISTRATIONDATE_OK = new DateTime(2018,05,28,10,53,55);
-        private readonly string PHONE_OK = "093535858";
+        private readonly int PHONE_OK = 093535858;
         private readonly string ADDRESS_OK = "Cuareim 1818";
 
         [TestMethod]
@@ -27,7 +27,7 @@ namespace UnitTestDomain
         public void TestCreateAdministratorWithParameters()
         {
             DateTime registrationDate = DateTime.Now;
-            Administrator administrator = new Administrator("admin","admin","Pablo","Pereira",registrationDate);
+            Administrator administrator = new Administrator(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK);
             Assert.IsNotNull(administrator);
         }
 
@@ -42,7 +42,7 @@ namespace UnitTestDomain
         public void TestCreateDesignerWithParameters()
         {
             DateTime registrationDate = DateTime.Now;
-            Administrator administrator = new Administrator("designer", "designer", "Joaquin", "Touris", registrationDate);
+            Administrator administrator = new Administrator(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK);
             Assert.IsNotNull(administrator);
         }
 
@@ -57,7 +57,7 @@ namespace UnitTestDomain
         public void TestCreateClientWithParameters()
         {
             DateTime registrationDate = DateTime.Now;
-            Client client = new Client("client", "client", "Pablo", "Pereira", "5407350-0", 093535858, "Cuareim 1558", registrationDate);
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK);
             Assert.IsNotNull(client);
         }
 

@@ -8,10 +8,10 @@ namespace Domain
 {
     public class User
     {
-        public String Username { get; set; }
-        public String Password { get; set; }
-        public String Name { get; set; }
-        public String Surname { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
         public DateTime RegistrationDate { get; set; }
 
         public User ()
@@ -19,5 +19,13 @@ namespace Domain
             
         }
 
+        public User(string username, string password, string name, string surname, DateTime registrationDate)
+        {
+            this.Username = username;
+            this.Password = password;
+            this.Name = name;
+            this.Surname = surname;
+            this.RegistrationDate = registrationDate;
+        }
     }
 }

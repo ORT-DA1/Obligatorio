@@ -72,5 +72,17 @@ namespace UnitTestDomain
                 && client.RegistrationDate.Equals(REGISTRATIONDATE_OK));  
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void TestCreateUserWithUsernameEmpty()
+        {
+            User user = CreateUser("", PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK);
+        }
+
+        public User CreateUser(string username, string password, string name, string surname, DateTime registrationDate)
+        {
+            return new User(username, password, name, surname, registrationDate);
+        }
+
     }
 }

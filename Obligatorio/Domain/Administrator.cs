@@ -13,6 +13,7 @@ namespace Domain
 
         public Administrator(string username, string password, string name, string surname, DateTime registrationDate)
         {
+            this.NameAndSurnameValidate(username, surname);
             this.Username = username;
             this.Password = password;
             this.Name = name;

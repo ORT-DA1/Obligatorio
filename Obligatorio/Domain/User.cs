@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -13,6 +9,7 @@ namespace Domain
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime RegistrationDate { get; set; }
+        
 
         public User ()
         {
@@ -21,16 +18,12 @@ namespace Domain
 
         public User(string username, string password, string name, string surname, DateTime registrationDate)
         {
+            DataValidation.NameAndSurnameValidate(name, surname);
             this.Username = username;
             this.Password = password;
             this.Name = name;
             this.Surname = surname;
             this.RegistrationDate = registrationDate;
-        }
-
-        public virtual bool NameAndSurnameValidate(string name, string surname)
-        {
-            return true;
         }
        
     }

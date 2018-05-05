@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Administrator.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="DataValidation.cs" />
     <Compile Include="Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />

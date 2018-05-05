@@ -27,8 +27,12 @@ namespace UnitTestDomain
         public void TestCreateAdministratorWithParameters()
         {
             DateTime registrationDate = DateTime.Now;
-            Administrator administrator = new Administrator(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK);
-            Assert.IsNotNull(administrator);
+            Administrator administrator = new Administrator(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK
+                , REGISTRATIONDATE_OK);
+
+            Assert.IsTrue(administrator.Username.Equals(USERNAME_OK) && administrator.Password.Equals(PASSWORD_OK) 
+                && administrator.Name.Equals(NAME_OK) && administrator.Surname.Equals(SURNAME_OK) 
+                && administrator.RegistrationDate.Equals(REGISTRATIONDATE_OK));
         }
 
         [TestMethod]

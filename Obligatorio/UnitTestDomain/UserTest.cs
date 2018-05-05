@@ -29,5 +29,13 @@ namespace UnitTestDomain
             Assert.IsNotNull(designer);
         }
 
+        [TestMethod]
+        public void TestCreateDesignerWithParameters()
+        {
+            DateTime registrationDate = DateTime.Now;
+            Administrator administrator = new Administrator("designer", "designer", "Joaquin", "Touris", registrationDate);
+            Assert.IsNotNull(administrator);
+        }
+
     }
 }

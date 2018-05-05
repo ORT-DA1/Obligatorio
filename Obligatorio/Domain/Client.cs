@@ -4,9 +4,9 @@ namespace Domain
 {
     public class Client : User
     {
-        public String IdentityCard { get; set; }
+        public string IdentityCard { get; set; }
         public int Phone { get; set; }
-        public String Address { get; set; }
+        public string Address { get; set; }
         public DateTime LastAccess { get; set; }
         public bool FirstJoin { get; set; }
 

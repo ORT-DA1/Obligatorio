@@ -7,6 +7,15 @@ namespace UnitTestDomain
     [TestClass]
     public class UserTest
     {
+        private readonly string USERNAME_OK = "usuariotest";
+        private readonly string PASSWORD_OK = "1234";
+        private readonly string NAME_OK = "Pablo";
+        private readonly string SURNAME_OK = "Pereira";
+        private readonly string CI_OK = "5407385-0";
+        private readonly DateTime REGISTRATIONDATE_OK = new DateTime(2018,05,28,10,53,55);
+        private readonly string PHONE_OK = "093535858";
+        private readonly string ADDRESS_OK = "Cuareim 1818";
+
         [TestMethod]
         public void TestCreateAdministratorWithoutParameters()
         {

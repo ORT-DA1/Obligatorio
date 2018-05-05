@@ -9,7 +9,7 @@ namespace UnitTestDomain
     class DesignerTest
     {
         private readonly string USERNAME_OK = "usuariotest";
-        private readonly string PASSWORD_OK = "1234";
+        private readonly string PASSWORD_OK = "12345";
         private readonly string NAME_OK = "Pablo";
         private readonly string SURNAME_OK = "Pereira";
         private readonly DateTime REGISTRATIONDATE_OK = new DateTime(2018, 05, 28, 10, 53, 55);

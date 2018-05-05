@@ -13,7 +13,7 @@ namespace UnitTestDomain
     class ClientTest
     {
         private readonly string USERNAME_OK = "usuariotest";
-        private readonly string PASSWORD_OK = "1234";
+        private readonly string PASSWORD_OK = "12345";
         private readonly string NAME_OK = "Joaquin";
         private readonly string SURNAME_OK = "Touris";
         private readonly string CI_OK = "5407385-0";

@@ -4,10 +4,6 @@ namespace Domain
 {
     public class Designer : User
     {
-        
-        public String IdentityCard { get; set; }
-        public int Phone { get; set; }
-        public String Address { get; set; }
         public DateTime LastAccess { get; set; }
 
         public Designer()

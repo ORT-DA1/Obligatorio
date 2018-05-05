@@ -22,5 +22,12 @@ namespace UnitTestDomain
             Assert.IsNotNull(administrator);
         }
 
+        [TestMethod]
+        public void TestCreateDesignerWithoutParameters()
+        {
+            Designer designer = new Designer();
+            Assert.IsNotNull(designer);
+        }
+
     }
 }

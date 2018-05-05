@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    class User
+    public class User
     {
+        public String Username { get; set; }
+        public String Password { get; set; }
+        public String Name { get; set; }
+        public String Surname { get; set; }
+        public DateTime RegistrationDate { get; set; }
+
+        public User ()
+        {
+            
+        }
+
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    class Designer : User
+    public class Designer : User
     {
     }
 }

@@ -18,7 +18,7 @@ namespace UnitTestDomain
         public void TestCreateAdministratorWithParameters()
         {
             DateTime registrationDate = DateTime.Now;
-            Administrator administrator = new Administrator("admin","admin","Pablo","Pereira",registrationDate,registrationDate);
+            Administrator administrator = new Administrator("admin","admin","Pablo","Pereira",registrationDate);
             Assert.IsNotNull(administrator);
         }
 

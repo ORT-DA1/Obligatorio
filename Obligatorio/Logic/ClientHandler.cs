@@ -9,6 +9,7 @@ namespace Logic
     {
         public static void AddClient(Client client)
         {
+
             DataValidation.NameAndSurnameValidate(client.Name, client.Surname);
         }
     }

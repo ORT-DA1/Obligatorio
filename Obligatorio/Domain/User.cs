@@ -9,6 +9,7 @@ namespace Domain
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime RegistrationDate { get; set; }
+        public Nullable<DateTime> LastAccess { get; set; }
         
 
         public User ()
@@ -16,7 +17,7 @@ namespace Domain
             
         }
 
-        public User(string username, string password, string name, string surname, DateTime registrationDate)
+        public User(string username, string password, string name, string surname, DateTime registrationDate, DateTime lastAccess)
         {
             DataValidation.NameAndSurnameValidate(name, surname);
             this.Username = username;
@@ -24,6 +25,7 @@ namespace Domain
             this.Name = name;
             this.Surname = surname;
             this.RegistrationDate = registrationDate;
+            this.LastAccess = lastAccess;
         }
        
     }

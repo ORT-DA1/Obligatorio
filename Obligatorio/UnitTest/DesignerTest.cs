@@ -1,12 +1,12 @@
 ﻿using System;
-using Logic;
+using Logica;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Domain;
 
-namespace UnitTestDomain
+namespace UnitTest
 {
     [TestClass]
-    class DesignerTest
+    public class DesignerTest
     {
         private readonly string USERNAME_OK = "usuariotest";
         private readonly string PASSWORD_OK = "1234";
@@ -51,7 +51,7 @@ namespace UnitTestDomain
         {
             Designer designer = new Designer();
             designer.Surname = SURNAME_OK;
-            Assert.AreEqual(designer.Surname, USERNAME_OK);
+            Assert.AreEqual(designer.Surname, SURNAME_OK);
         }
 
 

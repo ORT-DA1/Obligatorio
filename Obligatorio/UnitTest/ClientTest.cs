@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Logic;
+using Logica;
 using Domain;
 
-namespace UnitTestDomain
+namespace UnitTest
 {
     [TestClass]
-    class ClientTest
+    public class ClientTest
     {
         private readonly string USERNAME_OK = "usuariotest";
         private readonly string PASSWORD_OK = "1234";
@@ -104,7 +104,7 @@ namespace UnitTestDomain
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void TestCreateDesignerWithUsernameInvalid()
+        public void TestCreateClientWithUsernameInvalid()
         {
             Client client = CreateClient("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK);
             ClientHandler.AddClient(client);
@@ -112,7 +112,7 @@ namespace UnitTestDomain
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void TestCreateDesignerWithPasswordInvalid()
+        public void TestCreateClientWithPasswordInvalid()
         {
             Client client = CreateClient("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK);
             ClientHandler.AddClient(client);
@@ -120,7 +120,7 @@ namespace UnitTestDomain
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void TestCreateDesignerWithNameInvalid()
+        public void TestCreateClientWithNameInvalid()
         {
             Client client = CreateClient("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK);
             ClientHandler.AddClient(client);
@@ -128,7 +128,7 @@ namespace UnitTestDomain
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void TestCreateDesignerWithSurnameInvalid()
+        public void TestCreateClientWithSurnameInvalid()
         {
             Client client = CreateClient("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK);
             ClientHandler.AddClient(client);

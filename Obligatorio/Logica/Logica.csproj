@@ -41,7 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientHandler.cs" />
+    <Compile Include="DesignerHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{f63c7c33-b2bf-4696-a4fa-9182dc48ff2e}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

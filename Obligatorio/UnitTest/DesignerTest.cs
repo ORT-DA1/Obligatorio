@@ -58,7 +58,7 @@ namespace UnitTest
         [TestMethod]
         public void TestCreateDesignerWithParameters()
         {
-            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK);
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
 
             Assert.IsTrue(designer.Username.Equals(USERNAME_OK) && designer.Password.Equals(PASSWORD_OK)
                 && designer.Name.Equals(NAME_OK) && designer.Surname.Equals(SURNAME_OK)
@@ -67,7 +67,7 @@ namespace UnitTest
 
         public Designer CreateDesigner(string username, string password, string name, string surname, DateTime registrationDate)
         {
-            return new Designer(username, password, name, surname, registrationDate);
+            return new Designer(username, password, name, surname, registrationDate, null);
         }
 
         [TestMethod]

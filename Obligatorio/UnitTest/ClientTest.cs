@@ -88,7 +88,7 @@ namespace UnitTest
         [TestMethod]
         public void TestCreateClientWithParameters()
         {
-            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK);
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
 
             Assert.IsTrue(client.Username.Equals(USERNAME_OK) && client.Password.Equals(PASSWORD_OK)
                 && client.Name.Equals(NAME_OK) && client.Surname.Equals(SURNAME_OK) && client.IdentityCard.Equals(CI_OK)
@@ -99,7 +99,7 @@ namespace UnitTest
         public Client CreateClient(string username, string password, string name, string surname, string identityCard, int phone,
             string address, DateTime registrationDate)
         {
-            return new Client(username, password, name, surname, identityCard, phone, address, registrationDate);
+            return new Client(username, password, name, surname, identityCard, phone, address, registrationDate, null);
         }
 
         [TestMethod]

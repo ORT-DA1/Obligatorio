@@ -4,11 +4,6 @@ namespace Domain
 {
     public class Administrator : User
     {
-        public Administrator() 
-        {
-
-        }
-
         public Administrator(string username, string password, string name, string surname, DateTime registrationDate, DateTime lastAccess)
         {
             this.Username = username;

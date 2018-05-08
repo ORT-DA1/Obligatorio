@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="ClientStorageHandler.cs" />
     <Compile Include="DataStorage.cs" />
+    <Compile Include="DesignerStorageHandler.cs" />
     <Compile Include="Interface\IGlobalStorageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

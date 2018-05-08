@@ -15,18 +15,19 @@ namespace GlobalStorage
         private static DataStorage storageInstance;
         public List<Client> Clients { get; }
         public List<Designer> Designers { get; }
+        public Administrator Administrator { get; }
 
 
         private DataStorage()
         {
             this.Clients = new List<Client>();
             this.Designers = new List<Designer>();
+            this.Administrator = new Administrator("admin","admin","Joaquin","Touris", new DateTime(2018, 05, 05), new DateTime(2018, 05, 05));
         }
 
         /// <summary>
-        /// Gets the instance of the class
+        /// Gets the Instance of the GlobalStorage in the system
         /// </summary>
-        /// <returns></returns>
         public static DataStorage GetStorageInstance()
         {
             if (storageInstance == null)

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain;
 
-namespace Logica
+namespace Logic
 {
     public class DesignerHandler
     {

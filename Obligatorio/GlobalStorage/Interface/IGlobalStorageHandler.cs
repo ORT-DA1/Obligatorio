@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GlobalStorage.Interface
 {
-    interface IGlobalStorageHandler<T>
+    public interface IGlobalStorageHandler<T>
 {
         T Get(T globalObject);
         List<T> GetCollection();

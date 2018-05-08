@@ -18,8 +18,38 @@ namespace GlobalStorage
         }
         public Designer Get(Designer DesiredDesigner)
         {
-            return this.dataStorage.Designers.First(designer => designer.Equals(DesiredDesigner));
+            return dataStorage.Designers.First(designer => designer.Equals(DesiredDesigner));
         }
 
+        public List<Designer> GetCollection()
+        {
+            return dataStorage.Designers;
+        }
+
+        public void Save(Designer designer)
+        {
+            dataStorage.Designers.Add(designer);
+        }
+
+        public void Modify(Designer designerToModify , Designer modifiedDesigner)
+        {
+            Designer designer = Get(designerToModify);
+            designer.LastAccess = modifiedDesigner.LastAccess;
+            designer.Name = modifiedDesigner.Name;
+            designer.Password = modifiedDesigner.Password;
+            designer.RegistrationDate = modifiedDesigner.RegistrationDate;
+            designer.Surname = modifiedDesigner.Surname;
+            designer.Username = modifiedDesigner.Username;
+        }
+
+        public void Delete(Designer designer)
+        {
+            dataStorage.Designers.Remove(designer);
+        }
+
+        public bool Exist(Designer designer)
+        {
+            return dataStorage.Designers.Contains(designer);
+        }
     }
 }

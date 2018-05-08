@@ -15,4 +15,4 @@ namespace GlobalStorage.Interface
         void Delete(T globalObject);
         bool Exist(T globalObject);
 }
-}
+} 

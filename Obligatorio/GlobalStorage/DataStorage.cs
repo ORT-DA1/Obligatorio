@@ -9,6 +9,9 @@ namespace GlobalStorage
 {
     public class DataStorage
     {
+        /// <summary>
+        /// Single reference of the instance
+        /// </summary>
         private static DataStorage storageInstance;
         public List<Client> Clients { get; }
         public List<Designer> Designers { get; }
@@ -20,6 +23,10 @@ namespace GlobalStorage
             this.Designers = new List<Designer>();
         }
 
+        /// <summary>
+        /// Gets the instance of the class
+        /// </summary>
+        /// <returns></returns>
         public static DataStorage GetStorageInstance()
         {
             if (storageInstance == null)

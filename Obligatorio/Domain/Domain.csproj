@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,6 +46,13 @@
     <Compile Include="Data\DataStorage.cs" />
     <Compile Include="Data\DataValidation.cs" />
     <Compile Include="Entities\Designer.cs" />
+    <Compile Include="Entities\Door.cs" />
+    <Compile Include="Entities\Drawable.cs" />
+    <Compile Include="Entities\Grid.cs" />
+    <Compile Include="Entities\Opening.cs" />
+    <Compile Include="Entities\Wall.cs" />
+    <Compile Include="Entities\WallBeam.cs" />
+    <Compile Include="Entities\Window.cs" />
     <Compile Include="Exceptions\ExceptionController.cs" />
     <Compile Include="Exceptions\ExceptionMessage.cs" />
     <Compile Include="Interface\IUserHandler.cs" />

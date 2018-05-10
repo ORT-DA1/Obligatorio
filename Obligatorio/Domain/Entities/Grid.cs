@@ -33,5 +33,21 @@
 
         }
 
+        public void RemoveWall(Wall wall)
+        {
+
+        }
+
+        public void RemoveWallBeam(Wall wall)
+        {
+
+        }
+
+        public void RemoveOpening(Wall wall)
+        {
+
+        }
+
+
     }
 }

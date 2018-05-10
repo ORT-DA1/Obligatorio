@@ -5,6 +5,8 @@ namespace Domain.Entities
 {
     public class WallBeam : Drawable
     {
+        public Point point { get; set; }
+
         public override void Draw(Graphics graphic)
         {
             throw new NotImplementedException();

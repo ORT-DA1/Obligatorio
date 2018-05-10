@@ -12,5 +12,6 @@ namespace UnitTest
             Wall wall = new Wall();
             Assert.IsNotNull(wall);
         }
+
     }
 }

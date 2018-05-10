@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class Opening
+    public class Opening : Drawable
     {
         public Opening()
         {

@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class WallBeam : Drawable
+    public class Drawable
     {
-        public WallBeam()
-        {
-
-        }
     }
 }

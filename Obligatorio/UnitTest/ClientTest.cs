@@ -103,12 +103,6 @@ namespace UnitTest
                 && client.RegistrationDate.Equals(REGISTRATIONDATE_OK));
         }
 
-        public Client CreateClient(string username, string password, string name, string surname, string identityCard, int phone,
-            string address, DateTime registrationDate)
-        {
-            return new Client(username, password, name, surname, identityCard, phone, address, registrationDate, null);
-        }
-
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void TestCreateClientWithUsernameInvalid()

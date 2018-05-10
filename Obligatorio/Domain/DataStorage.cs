@@ -1,11 +1,10 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Domain;
 
-namespace GlobalStorage
+namespace Domain
 {
     public class DataStorage
     {
@@ -22,10 +21,25 @@ namespace GlobalStorage
         {
             this.Clients = new List<Client>();
             this.Designers = new List<Designer>();
-            this.Administrator = new Administrator("admin","admin","Joaquin","Touris", new DateTime(2018, 05, 05), new DateTime(2018, 05, 05));
+            this.Administrator = new Administrator("admin", "admin", "Joaquin", "Touris", new DateTime(2018, 05, 05), new DateTime(2018, 05, 05));
         }
 
-        /// <summary>
+        public void SaveClient(Client client)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteClient(Client client)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ModifyClient()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary> 
         /// Gets the Instance of the GlobalStorage in the system
         /// </summary>
         public static DataStorage GetStorageInstance()
@@ -38,10 +52,16 @@ namespace GlobalStorage
             return storageInstance;
         }
 
+        public Client GetClient(Client client)
+        {
+            throw new NotImplementedException();
+        }
+
         public void EmptyStorage()
         {
             this.Clients.Clear();
             this.Designers.Clear();
         }
+
     }
 }

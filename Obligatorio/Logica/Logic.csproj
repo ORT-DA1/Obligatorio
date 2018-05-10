@@ -50,10 +50,6 @@
       <Project>{f63c7c33-b2bf-4696-a4fa-9182dc48ff2e}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GlobalStorage\GlobalStorage.csproj">
-      <Project>{d372a857-7ef6-4634-9d7c-db552f38e5d3}</Project>
-      <Name>GlobalStorage</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

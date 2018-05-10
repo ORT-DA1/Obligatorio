@@ -14,6 +14,5 @@ namespace Logic.Interface
         void Modify(T globalObject, T anotherGlobalObject);
         void Exist(T globalObject);
         void Validate(T globalObject);
-        bool ValidateLogin(string username, string password);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace Domain.Entities
 {
     public class Grid
     {
@@ -6,6 +8,8 @@
         public Designer Designer { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
+        public List<Wall> Walls { get; set; }
+        public List<Opening> Openings { get; set; }
 
         public Grid() { }
 

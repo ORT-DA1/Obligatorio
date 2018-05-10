@@ -5,7 +5,8 @@ namespace Domain.Entities
 {
     public class WallBeam : Drawable
     {
-        public Point point { get; set; }
+        public Point Point { get; set; }
+        public List<Wall> AssociatedWalls;
 
         public override void Draw(Graphics graphic)
         {

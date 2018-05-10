@@ -15,5 +15,12 @@ namespace UnitTest
             Grid grid = new Grid();
             Assert.IsNotNull(grid);
         }
+
+        [TestMethod]
+        public void TestCreateGridWithParameters()
+        {
+            Grid grid = new Grid();
+            Assert.IsNotNull(grid);
+        }
     }
 }

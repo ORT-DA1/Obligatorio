@@ -34,6 +34,7 @@
             this.passwordTxt = new System.Windows.Forms.TextBox();
             this.titleLbl = new System.Windows.Forms.Label();
             this.loginBtn = new System.Windows.Forms.Button();
+            this.exitBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // userlbl
@@ -85,7 +86,7 @@
             // loginBtn
             // 
             this.loginBtn.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.loginBtn.Location = new System.Drawing.Point(149, 209);
+            this.loginBtn.Location = new System.Drawing.Point(57, 222);
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(99, 29);
             this.loginBtn.TabIndex = 6;
@@ -93,12 +94,23 @@
             this.loginBtn.UseVisualStyleBackColor = false;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 
+            // exitBtn
+            // 
+            this.exitBtn.Location = new System.Drawing.Point(206, 222);
+            this.exitBtn.Name = "exitBtn";
+            this.exitBtn.Size = new System.Drawing.Size(99, 29);
+            this.exitBtn.TabIndex = 7;
+            this.exitBtn.Text = "Exit";
+            this.exitBtn.UseVisualStyleBackColor = true;
+            this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
+            // 
             // WelcomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(376, 313);
+            this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.titleLbl);
             this.Controls.Add(this.passwordTxt);
@@ -119,6 +131,7 @@
         private System.Windows.Forms.TextBox passwordTxt;
         private System.Windows.Forms.Label titleLbl;
         private System.Windows.Forms.Button loginBtn;
+        private System.Windows.Forms.Button exitBtn;
     }
 }
 

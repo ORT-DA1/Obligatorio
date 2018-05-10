@@ -4,17 +4,51 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain;
+using Logic;
+using Logic.Interface;
 
-namespace Logica
+namespace Logic
 {
-    public class ClientHandler
+    public class ClientHandler: IUserHandler<Client>
     {
-        public static void AddClient(Client client)
+        private DataStorage storage;
+        public ClientHandler()
         {
-            DataValidation.UsernameValidate(client.Name);
+            this.storage = DataStorage.GetStorageInstance();
+        }
+        public void Add(Client client)
+        {
+            Validate(client);
+            Exist(client);
+            this.storage.SaveClient(client);
+        }
+        public void Delete(Client client)
+        {
+            this.storage.DeleteClient(client);
+
+        }
+        public void Modify(Client clientToModify, Client modifiedClient)
+        {
+            this.storage.ModifyClient();
+
+        } 
+        public void Exist(Client client)
+        {
+        }
+
+        public void Validate(Client client)
+        {
+            DataValidation.UsernameValidate(client.Username);
             DataValidation.PasswordValidate(client.Password);
             DataValidation.NameAndSurnameValidate(client.Name, client.Surname);
         }
+        public Client Get(Client client)
+        {
+            //Validate before returning this.
+            return this.storage.GetClient(client);
+        }
+
+        //No estoy seguro de esto, no se si deberia devolver false o una exception.
     }
 
 }

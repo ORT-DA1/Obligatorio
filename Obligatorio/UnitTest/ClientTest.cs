@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Logica;
+using Logic;
+using Logic.Interface;
 using Domain;
+
 
 namespace UnitTest
 {
@@ -20,7 +22,12 @@ namespace UnitTest
         private readonly DateTime REGISTRATIONDATE_OK = new DateTime(2018, 05, 28, 10, 53, 55);
         private readonly int PHONE_OK = 093535858;
         private readonly string ADDRESS_OK = "Cuareim 1818";
-        private readonly ClientHandler HANDLER;
+        private readonly IUserHandler<Client> CLIENT_HANDLER;
+
+        public ClientTest()
+        {
+            this.CLIENT_HANDLER = new ClientHandler();
+        }
 
         [TestMethod]
         public void TestCreateClientWithoutParameters()
@@ -96,42 +103,36 @@ namespace UnitTest
                 && client.RegistrationDate.Equals(REGISTRATIONDATE_OK));
         }
 
-        public Client CreateClient(string username, string password, string name, string surname, string identityCard, int phone,
-            string address, DateTime registrationDate)
-        {
-            return new Client(username, password, name, surname, identityCard, phone, address, registrationDate, null);
-        }
-
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void TestCreateClientWithUsernameInvalid()
         {
-            Client client = CreateClient("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK);
-            ClientHandler.AddClient(client);
+            Client client = new Client("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(client);
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void TestCreateClientWithPasswordInvalid()
         {
-            Client client = CreateClient("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK);
-            ClientHandler.AddClient(client);
+            Client client = new Client("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(client);
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void TestCreateClientWithNameInvalid()
         {
-            Client client = CreateClient("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK);
-            ClientHandler.AddClient(client);
+            Client client = new Client("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(client);
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void TestCreateClientWithSurnameInvalid()
         {
-            Client client = CreateClient("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK);
-            ClientHandler.AddClient(client);
+            Client client = new Client("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(client);
         }
     }
 }

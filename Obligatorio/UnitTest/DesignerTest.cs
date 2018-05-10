@@ -1,5 +1,5 @@
 ﻿using System;
-using Logica;
+using Logic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Domain;
 

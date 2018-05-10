@@ -52,7 +52,6 @@
     <Compile Include="ClientTest.cs" />
     <Compile Include="DesignerTest.cs" />
     <Compile Include="GridTest.cs" />
-    <Compile Include="OpeningTest.cs" />
     <Compile Include="WallBeamTest.cs" />
     <Compile Include="WallTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

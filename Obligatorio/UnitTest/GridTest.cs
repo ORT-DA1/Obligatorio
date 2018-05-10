@@ -1,7 +1,6 @@
-﻿using System;
-using Logic;
+﻿using Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Domain;
+using System;
 
 namespace UnitTest
 {
@@ -26,7 +25,20 @@ namespace UnitTest
         [TestMethod]
         public void TestAddWall(Wall wall)
         {
-            return true;
+            
         }
+
+        [TestMethod]
+        public void TestAddWallBeam(WallBeam wallBeam)
+        {
+
+        }
+
+        [TestMethod]
+        public void TestAddOpening(Opening opening)
+        {
+
+        }
+        
     }
 }

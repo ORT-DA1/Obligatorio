@@ -4,19 +4,19 @@ namespace Domain.Entities
 {
     public class Client : User
     {
-        public string IdentityCard { get; set; }
+        public string Id { get; set; }
         public int Phone { get; set; }
         public string Address { get; set; }
 
         public Client(){ }
 
-        public Client(string username, string password, string name, string surname, string identityCard, int phone, string address, DateTime registrationDate, Nullable<DateTime> lastAccess)
+        public Client(string username, string password, string name, string surname, string id, int phone, string address, DateTime registrationDate, Nullable<DateTime> lastAccess)
         {
             this.Username = username;
             this.Password = password;
             this.Name = name;
             this.Surname = surname;
-            this.IdentityCard = identityCard;
+            this.Id = id;
             this.Phone = phone;
             this.Address = address;
             this.RegistrationDate = registrationDate;
@@ -29,7 +29,7 @@ namespace Domain.Entities
             if (clientObject != null && this.GetType().Equals(clientObject.GetType()))
             {
                 Client client = (Client)clientObject;
-                if (this.Username.Equals(client.Username))
+                if (this.Id.Equals(client.Id))
                 {
                     isEqual = true;
                 }

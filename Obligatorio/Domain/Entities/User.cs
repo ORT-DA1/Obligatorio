@@ -1,6 +1,7 @@
 ﻿using System;
+using Domain.Data;
 
-namespace Domain
+namespace Domain.Entities
 {
     public class User
     {

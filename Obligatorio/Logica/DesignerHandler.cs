@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain;
+using Domain.Data;
+using Domain.Entities;
 
 namespace Logic
 {

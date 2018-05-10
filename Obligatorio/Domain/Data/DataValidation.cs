@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Domain
+namespace Domain.Data
 {
     public class DataValidation
     {

@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Domain;
-using Logic;
-using Logic.Interface;
+using Domain.Entities;
+using Domain.Logic;
+using Domain.Interface;
 
 namespace Gui
 {

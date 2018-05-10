@@ -42,9 +42,12 @@ namespace Domain.Logic
 
         public void Validate(Client client)
         {
-            DataValidation.UsernameValidate(client.Username);
-            DataValidation.PasswordValidate(client.Password);
-            //DataValidation.NameAndSurnameValidate(client.Name, client.Surname);
+            DataValidation.ValidateUsername(client.Username);
+            DataValidation.ValidatePassword(client.Password);
+            DataValidation.ValidateNameAndSurname(client.Name, client.Surname);
+            DataValidation.ValidateID(client.Id);
+            DataValidation.ValidateAddress(client.Address);
+            //DataValidation.ValidatePhone(client.Phone);
         }
         public Client Get(Client client)
         {

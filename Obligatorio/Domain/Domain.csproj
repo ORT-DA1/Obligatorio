@@ -40,13 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administrator.cs" />
-    <Compile Include="Client.cs" />
-    <Compile Include="DataStorage.cs" />
-    <Compile Include="DataValidation.cs" />
-    <Compile Include="Designer.cs" />
+    <Compile Include="Entities\Administrator.cs" />
+    <Compile Include="Entities\Client.cs" />
+    <Compile Include="Data\DataStorage.cs" />
+    <Compile Include="Data\DataValidation.cs" />
+    <Compile Include="Entities\Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="Entities\User.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

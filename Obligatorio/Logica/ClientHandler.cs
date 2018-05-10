@@ -42,9 +42,9 @@ namespace Logic
 
         public void Validate(Client client)
         {
-            DataValidation.UsernameValidate(client.Username);
-            DataValidation.PasswordValidate(client.Password);
-            DataValidation.NameAndSurnameValidate(client.Name, client.Surname);
+            //DataValidation.UsernameValidate(client.Username);
+            //DataValidation.PasswordValidate(client.Password);
+            //DataValidation.NameAndSurnameValidate(client.Name, client.Surname);
         }
         public Client Get(Client client)
         {

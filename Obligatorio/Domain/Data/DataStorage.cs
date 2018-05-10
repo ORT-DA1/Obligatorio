@@ -24,21 +24,6 @@ namespace Domain
             this.Administrator = new Administrator("admin", "admin", "Joaquin", "Touris", new DateTime(2018, 05, 05), new DateTime(2018, 05, 05));
         }
 
-        public void SaveClient(Client client)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteClient(Client client)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ModifyClient()
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary> 
         /// Gets the Instance of the GlobalStorage in the system
         /// </summary>
@@ -52,15 +37,30 @@ namespace Domain
             return storageInstance;
         }
 
-        public Client GetClient(Client client)
-        {
-            throw new NotImplementedException();
-        }
-
         public void EmptyStorage()
         {
             this.Clients.Clear();
             this.Designers.Clear();
+        }
+
+        public Client GetClient(Client clientToFind)
+        {
+            return this.Clients.First(client => client.Equals(clientToFind));
+        }
+
+        public void SaveClient(Client client)
+        {
+            storageInstance.Clients.Add(client);
+        }
+
+        public void DeleteClient(Client client)
+        {
+            storageInstance.Clients.Remove(client);
+        }
+
+        public void ModifyClient()
+        {
+            throw new NotImplementedException();
         }
 
     }

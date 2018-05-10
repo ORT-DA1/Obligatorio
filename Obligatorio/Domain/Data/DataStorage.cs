@@ -16,6 +16,7 @@ namespace Domain.Data
         public List<Client> Clients { get; }
         public List<Designer> Designers { get; }
         public Administrator Administrator { get; }
+        public List<Grid> Grids { get; }
 
 
         private DataStorage()
@@ -23,6 +24,7 @@ namespace Domain.Data
             this.Clients = new List<Client>();
             this.Designers = new List<Designer>();
             this.Administrator = new Administrator("admin", "admin", "Joaquin", "Touris", new DateTime(2018, 05, 05), new DateTime(2018, 05, 05));
+            this.Grids = new List<Grid>;
         }
 
         /// <summary> 
@@ -42,6 +44,7 @@ namespace Domain.Data
         {
             this.Clients.Clear();
             this.Designers.Clear();
+            this.Grids.Clear();
         }
 
         public Client GetClient(Client clientToFind)
@@ -62,6 +65,21 @@ namespace Domain.Data
         public void ModifyClient()
         {
             throw new NotImplementedException();
+        }
+
+        public Grid GetGrid(Client client)
+        {
+            return this.Grids.First(grid => grid.Client.Equals(client));
+        }
+
+        public void SaveGrid(Grid grid)
+        {
+            storageInstance.Grids.Add(grid);
+        }
+
+        public void DeleteGrid(Grid grid)
+        {
+            storageInstance.Grids.Remove(grid);
         }
 
     }

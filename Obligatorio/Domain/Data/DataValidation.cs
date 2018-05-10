@@ -23,7 +23,7 @@ namespace Domain.Data
 
         public static void ValidatePassword(string password)
         {
-            if (!IsValidPassword(password))
+            if (!IsValidNumberCharacter(password))
             {
                 throw new ExceptionController(ExceptionMessage.USER_INVALID_PASSWORD);
             }
@@ -49,32 +49,14 @@ namespace Domain.Data
             }
         }
 
-        //internal static void ValidatePhone(int phone)
-        //{
-        //    if (isValidPhone)
-        //    {
-
-        //    }
-        //}
-
-        internal static void ValidateAddress(string address)
+        public static void ValidateAddress(string address)
         {
-            if (!IsValidAddress(address))
+            if (!IsValidNumberCharacterSpace(address))
             {
                 throw new ExceptionController(ExceptionMessage.USER_INVALID_ADDRESS);
             }
         }
 
-        private static bool IsValidAddress(string address)
-        {
-            Regex expression = new Regex(VALID_NUMBERS_CHARS_AND_SPACE);
-            if (string.IsNullOrEmpty(address) || !(expression.IsMatch(address)))
-            {
-                return false;
-            }
-
-            return true;
-        }
 
         private static bool isValidID(string id)
         {
@@ -92,7 +74,8 @@ namespace Domain.Data
             return id.Length == VALID_USER_ID_LENGTH;
         }
 
-        public static bool IsValidString(string element)
+
+        private static bool IsValidString(string element)
         {
             Regex expression = new Regex(VALID_CHARACTERS);
             if (string.IsNullOrEmpty(element) || !(expression.IsMatch(element)))
@@ -103,16 +86,24 @@ namespace Domain.Data
         }
 
 
-        public static bool IsValidPassword(string password)
+        private static bool IsValidNumberCharacterSpace(string element)
         {
-            Regex expression = new Regex(VALID_NUMBERS_AND_CHARACTERS);
-            if (string.IsNullOrEmpty(password) || !(expression.IsMatch(password)))
+            Regex expression = new Regex(VALID_NUMBERS_CHARS_AND_SPACE);
+            if (string.IsNullOrEmpty(element) || !(expression.IsMatch(element)))
             {
                 return false;
             }
             return true;
         }
 
-
+        private static bool IsValidNumberCharacter(string element)
+        {
+            Regex expression = new Regex(VALID_NUMBERS_AND_CHARACTERS);
+            if (string.IsNullOrEmpty(element) || !(expression.IsMatch(element)))
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

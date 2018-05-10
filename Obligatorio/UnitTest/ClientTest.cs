@@ -8,6 +8,7 @@ using Domain.Logic;
 using Domain.Interface;
 using Domain.Entities;
 using Domain.Data;
+using Domain.Exceptions;
 
 
 namespace UnitTest
@@ -30,6 +31,12 @@ namespace UnitTest
         {
             this.CLIENT_HANDLER = new ClientHandler();
             this.dataStorage = DataStorage.GetStorageInstance();
+        }
+
+        [TestInitialize]
+        public void TestCleanUp()
+        {
+            dataStorage.EmptyStorage();
         }
 
         [TestMethod]
@@ -115,38 +122,58 @@ namespace UnitTest
             Assert.IsFalse(dataStorage.Clients.Contains(client));
         }
 
+        [TestMethod]
+        public void TestModifyClientUserNamePassword()
+        {
+            Client clientToModify = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(clientToModify);
+            Client modifiedClient = new Client("newUsername", "password1234", NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Modify(clientToModify, modifiedClient);
+            Client testClient = CLIENT_HANDLER.Get(modifiedClient);
+            Assert.AreEqual(testClient.Id, modifiedClient.Id);
+        }
 
+        [TestMethod]
+        public void TestModifyClientNameAndSurnameAndID()
+        {
+            Client clientToModify = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(clientToModify);
+            Client modifiedClient = new Client(USERNAME_OK, PASSWORD_OK, "Miguel", "Pereira", "23345667", PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Modify(clientToModify, modifiedClient);
+            Client testClient = CLIENT_HANDLER.Get(modifiedClient);
+            Assert.AreEqual(testClient.Id, modifiedClient.Id);
+        }
 
-    //    [TestMethod]
-    //    [ExpectedException(typeof(Exception))]
-    //    public void TestCreateClientWithUsernameInvalid()
-    //    {
-    //        Client client = new Client("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
-    //        CLIENT_HANDLER.Add(client);
-    //    }
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestCreateClientWithUsernameInvalid()
+        {
+            Client client = new Client("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(client);
+        }
 
-    //    [TestMethod]
-    //    [ExpectedException(typeof(Exception))]
-    //    public void TestCreateClientWithPasswordInvalid()
-    //    {
-    //        Client client = new Client("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
-    //        CLIENT_HANDLER.Add(client);
-    //    }
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestCreateClientWithPasswordInvalid()
+        {
+            Client client = new Client("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(client);
+        }
 
-    //    [TestMethod]
-    //    [ExpectedException(typeof(Exception))]
-    //    public void TestCreateClientWithNameInvalid()
-    //    {
-    //        Client client = new Client("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
-    //        CLIENT_HANDLER.Add(client);
-    //    }
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestCreateClientWithNameInvalid()
+        {
+            Client client = new Client("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(client);
+        }
 
-    //    [TestMethod]
-    //    [ExpectedException(typeof(Exception))]
-    //    public void TestCreateClientWithSurnameInvalid()
-    //    {
-    //        Client client = new Client("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
-    //        CLIENT_HANDLER.Add(client);
-    //    }
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestCreateClientWithSurnameInvalid()
+        {
+            Client client = new Client("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(client);
+        }
     }
 }

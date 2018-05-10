@@ -25,9 +25,6 @@ namespace Domain.Data
             this.Administrator = new Administrator("admin", "admin", "Joaquin", "Touris", new DateTime(2018, 05, 05), new DateTime(2018, 05, 05));
         }
 
-        /// <summary> 
-        /// Gets the Instance of the GlobalStorage in the system
-        /// </summary>
         public static DataStorage GetStorageInstance()
         {
             if (storageInstance == null)
@@ -44,11 +41,7 @@ namespace Domain.Data
             this.Designers.Clear();
         }
 
-        public Client GetClient(Client clientToFind)
-        {
-            return this.Clients.First(client => client.Equals(clientToFind));
-        }
-
+        //Client Methods
         public void SaveClient(Client client)
         {
             storageInstance.Clients.Add(client);
@@ -59,10 +52,23 @@ namespace Domain.Data
             storageInstance.Clients.Remove(client);
         }
 
-        public void ModifyClient()
+        public void ModifyClient(Client clientToModify, Client modifiedClient)
         {
-            throw new NotImplementedException();
+            Client client = storageInstance.GetClient(clientToModify);
+            client.Username = modifiedClient.Username;
+            client.Password = modifiedClient.Password;
+            client.Name = modifiedClient.Name;
+            client.Surname = modifiedClient.Surname;
+            client.Id = modifiedClient.Id;
+            client.Phone = modifiedClient.Phone;
+            client.Address = modifiedClient.Address;
         }
 
+        public Client GetClient(Client clientToFind)
+        {
+            return storageInstance.Clients.First(client => client.Equals(clientToFind));
+        }
+
+        //Designer Methods
     }
 }

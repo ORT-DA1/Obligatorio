@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Exceptions
 {
-    class ExceptionController: Exception
+   public class ExceptionController: Exception
     {
         public ExceptionController(): base(){ }
 

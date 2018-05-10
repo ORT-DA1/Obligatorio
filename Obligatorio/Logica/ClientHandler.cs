@@ -34,6 +34,10 @@ namespace Logic
         } 
         public void Exist(Client client)
         {
+            if (storage.Clients.Contains(client))
+            {
+                throw new Exception();
+            }
         }
 
         public void Validate(Client client)

@@ -23,10 +23,12 @@ namespace UnitTest
         private readonly int PHONE_OK = 093535858;
         private readonly string ADDRESS_OK = "Cuareim 1818";
         private readonly IUserHandler<Client> CLIENT_HANDLER;
+        private DataStorage dataStorage;
 
         public ClientTest()
         {
             this.CLIENT_HANDLER = new ClientHandler();
+            this.dataStorage = DataStorage.GetStorageInstance();
         }
 
         [TestMethod]
@@ -102,6 +104,17 @@ namespace UnitTest
                 && client.Phone.Equals(PHONE_OK) && client.Address.Equals(ADDRESS_OK)
                 && client.RegistrationDate.Equals(REGISTRATIONDATE_OK));
         }
+
+        [TestMethod]
+        public void TestDeleteClient()
+        {
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(client);
+            CLIENT_HANDLER.Delete(client);
+            Assert.IsFalse(dataStorage.Clients.Contains(client));
+        }
+
+
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]

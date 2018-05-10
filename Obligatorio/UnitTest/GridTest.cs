@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Logic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Domain;
 
 namespace UnitTest
 {
@@ -15,11 +14,13 @@ namespace UnitTest
             Grid grid = new Grid();
             Assert.IsNotNull(grid);
         }
-        
+
+        [TestMethod]
         public void TestCreateGridWithParameters(Designer designer, Client client, int height ,int width)
         {
-            Grid grid = new Grid();
-            Assert.IsNotNull(grid);
+            Grid grid = new Grid(designer, client, height, width);
+            Assert.IsTrue(grid.Designer.Equals(designer) && grid.Client.Equals(client) && grid.Height.Equals(height) 
+                && grid.Width.Equals(width));
         }
 
     }

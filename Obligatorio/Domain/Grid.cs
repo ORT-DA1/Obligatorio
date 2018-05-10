@@ -13,5 +13,10 @@ namespace Domain
         {
 
         }
+
+        public Grid(Designer designer, Client client, int height, int width)
+        {
+
+        }
     }
 }

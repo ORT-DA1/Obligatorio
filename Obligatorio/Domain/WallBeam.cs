@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace Domain
 {
     public class WallBeam : Drawable
     {
         public WallBeam()
+        {
+
+        }
+
+        override public void Draw(Graphics graphics)
         {
 
         }

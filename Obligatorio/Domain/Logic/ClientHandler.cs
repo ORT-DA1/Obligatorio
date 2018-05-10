@@ -5,12 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities;
 using Domain.Data;
-using Logic;
-using Logic.Interface;
+using Domain.Interface;
 
-namespace Logic
+namespace Domain.Logic
 {
-    public class ClientHandler: IUserHandler<Client>
+    public class ClientHandler : IUserHandler<Client>
     {
         private DataStorage storage;
         public ClientHandler()
@@ -32,7 +31,7 @@ namespace Logic
         {
             this.storage.ModifyClient();
 
-        } 
+        }
         public void Exist(Client client)
         {
             if (storage.Clients.Contains(client))

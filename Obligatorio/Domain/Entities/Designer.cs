@@ -1,13 +1,10 @@
 ﻿using System;
 
-namespace Domain
+namespace Domain.Entities
 {
     public class Designer : User
     {
-        public Designer()
-        {
-
-        }
+        public Designer(){ }
 
         public Designer(string username, string password, string name, string surname, DateTime registrationDate, Nullable<DateTime> lastAccess)
         {

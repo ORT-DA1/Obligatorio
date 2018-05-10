@@ -1,13 +1,18 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Domain
 {
     public class Grid
     {
-        private Designer Designer { get; set; }
-        private Client Client { get; set; }
-        private int Height;
-        private int Width;
+        public Designer Designer { get; set; }
+        public Client Client { get; set; }
+        public int Height;
+        public int Width;
 
         public Grid()
         {
@@ -26,6 +31,7 @@ namespace Domain
         {
 
         }
+        
 
     }
 }

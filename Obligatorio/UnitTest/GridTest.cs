@@ -23,5 +23,10 @@ namespace UnitTest
                 && grid.Width.Equals(width));
         }
 
+        [TestMethod]
+        public void TestAddWall(Wall wall)
+        {
+            return true;
+        }
     }
 }

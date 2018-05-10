@@ -4,13 +4,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTest
 {
     [TestClass]
-    public class WallTest
+    public class DoorTest
     {
         [TestMethod]
-        public void TestCreateWall()
+        public void TestCreateDoor()
         {
-            Wall wall = new Wall();
-            Assert.IsNotNull(wall);
+            Door door = new Door();
+            Assert.IsNotNull(door);
         }
     }
 }

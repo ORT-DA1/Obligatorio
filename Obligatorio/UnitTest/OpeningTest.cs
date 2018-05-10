@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace UnitTest
 {
     [TestClass]
-    public class WallBeamTest
+    public class OpeningTest
     {
         [TestMethod]
-        public void TestCreateWall()
+        public void TestCreateOpening()
         {
-            WallBeam wallBeam = new WallBeam();
-            Assert.IsNotNull(wallBeam);
+            Opening opening = new Opening();
+            Assert.IsNotNull(opening);
         }
     }
 }

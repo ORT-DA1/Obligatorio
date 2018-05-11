@@ -10,9 +10,6 @@ namespace Domain.Data
 {
     public class DataStorage
     {
-        /// <summary>
-        /// Single reference of the instance
-        /// </summary>
         private static DataStorage storageInstance;
         private List<User> Users;
         public List<Client> Clients { get; }

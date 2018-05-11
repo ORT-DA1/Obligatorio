@@ -94,7 +94,7 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void TestRemoveWallBeam(Wall wall)
+        public void TestRemoveWallBeam()
         {
             WallBeam wallBeam = new WallBeam();
             WallBeams.Add(wallBeam);
@@ -104,7 +104,7 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void TestRemoveOpening(Wall wall)
+        public void TestRemoveOpening()
         {
             Opening opening = new Opening();
             Openings.Add(opening);
@@ -113,5 +113,13 @@ namespace UnitTest
             Assert.AreEqual(expectedResult, Openings.Count);
         }
 
+        [TestMethod]
+        public void TestAddGrid() {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
+            Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
+            GRID_HANDLER.Add(grid);
+            Assert.IsTrue(dataStorage.Grids.Contains(grid));
+        }
     }
 }

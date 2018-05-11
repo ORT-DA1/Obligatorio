@@ -1,5 +1,4 @@
-﻿using Domain.Data;
-namespace Domain.Exceptions
+﻿namespace Domain.Exceptions
 {
     public class ExceptionMessage
     {

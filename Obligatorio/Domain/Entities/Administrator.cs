@@ -17,7 +17,7 @@ namespace Domain.Entities
 
         public override bool CanDoSomething()
         {
-            return true;
+            return false;
         }
     }
 

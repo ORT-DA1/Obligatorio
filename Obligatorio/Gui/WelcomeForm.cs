@@ -26,7 +26,7 @@ namespace Gui
                 User user = dataStorage.GetUser(userName);
                 MainMenu mainMenu = new MainMenu(user);
                 mainMenu.Show();
-                Hide();
+                this.Hide();
             }
             catch (ExceptionController exceptionMessage)
             {

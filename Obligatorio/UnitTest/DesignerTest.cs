@@ -48,6 +48,17 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void TestModifyDesignerNameAndSurname()
+        {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
+            DESIGNER_HANDLER.Add(designer);
+            Designer modifiedDesigner = new Designer("ModifiedDesigner", "Helloworld123", NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
+            DESIGNER_HANDLER.Modify(designer, modifiedDesigner);
+            Designer designerTest = DESIGNER_HANDLER.Get(modifiedDesigner);
+            Assert.AreEqual(designerTest.Username, modifiedDesigner.Username);
+        }
+
+        [TestMethod]
         public void TestCreateDesignerWithoutParameters()
         {
             Designer designer = new Designer();

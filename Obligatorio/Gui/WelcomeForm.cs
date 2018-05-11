@@ -10,23 +10,25 @@ using System.Windows.Forms;
 using Domain.Entities;
 using Domain.Logic;
 using Domain.Interface;
+using Domain.Data;
 
 namespace Gui
 {
     public partial class WelcomeForm : Form
     {
-        private IUserHandler<Client> ClientHandler;
-        private IUserHandler<Designer> DesignerHandler;
+        private DataStorage dataStorage;
         public WelcomeForm()
         {
             InitializeComponent();
-            this.ClientHandler = new ClientHandler();
+            this.dataStorage = DataStorage.GetStorageInstance();
         }
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
             var userName = this.usernameTxt.Text;
             var password = this.passwordTxt.Text;
+
+            User user = 
 
         }
 

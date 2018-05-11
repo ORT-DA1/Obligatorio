@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Data;
+﻿using Domain.Data;
 using Domain.Entities;
 using Domain.Interface;
 using Domain.Exceptions;
@@ -21,7 +16,7 @@ namespace Domain.Logic
 
         public Designer Get(Designer designer)
         {
-            Exist(designer);
+            NotExist(designer);
             return this.storage.GetDesigner(designer);
         }
 
@@ -30,6 +25,13 @@ namespace Domain.Logic
             Validate(designer);
             Exist(designer);
             this.storage.SaveDesigner(designer);
+        }
+
+        public void Validate(Designer designer)
+        {
+            DataValidation.ValidateNameAndSurname(designer.Name, designer.Surname);
+            DataValidation.ValidateUsername(designer.Username);
+            DataValidation.ValidatePassword(designer.Password);
         }
 
         public void Delete(Designer designer)
@@ -58,19 +60,13 @@ namespace Domain.Logic
             }
         }
 
+
         public void NotExist(Designer designer)
         {
             if (!this.storage.Designers.Contains(designer))
             {
                 throw new ExceptionController(ExceptionMessage.USER_NOT_EXIST);
             }
-        }
-
-        public void Validate(Designer designer)
-        {
-            DataValidation.ValidateNameAndSurname(designer.Name, designer.Surname);
-            DataValidation.ValidateUsername(designer.Username);
-            DataValidation.ValidatePassword(designer.Password);
         }
     }
 }

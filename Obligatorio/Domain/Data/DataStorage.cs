@@ -36,10 +36,38 @@ namespace Domain.Data
             return storageInstance;
         }
 
+
+
         public void EmptyStorage()
         {
             this.Clients.Clear();
             this.Designers.Clear();
+        }
+
+        public bool UserExists(string userName)
+        {
+            foreach (var client in this.Clients)
+            {
+                if (client.Username.Equals(userName))
+                {
+                    return true;
+                }
+            }
+
+            foreach (var designer in this.Designers)
+            {
+                if (designer.Username.Equals(userName))
+                {
+                    return true;
+                }
+            }
+
+            if (this.Administrator.Username.Equals(userName))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         //Client Methods

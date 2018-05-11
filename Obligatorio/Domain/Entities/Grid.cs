@@ -9,22 +9,29 @@ namespace Domain.Entities
         public int Height { get; set; }
         public int Width { get; set; }
         public List<Wall> Walls { get; set; }
+        public List<WallBeam> WallBeams { get; set; }
         public List<Opening> Openings { get; set; }
 
         public Grid() { }
 
         public Grid (Designer designer, Client client, int height, int width) {
-            this.Designer = designer;
-            this.Client = client;
-            this.Height = height; 
-            this.Width = width;
+            Designer = designer;
+            Client = client;
+            Height = height; 
+            Width = width;
+        }
+
+        public bool validateWall(Wall wall)
+        {
+            return true;
         }
 
         public void AddWall(Wall wall)
         {
-            //debo pasarle los parametros correctos
-            WallBeam wallBeam = new WallBeam();
-            AddWallBeam(wallBeam);
+            /*if (validateWall(wall))
+            {
+                this.Walls.Add(wall);
+            }*/
         }
 
         public void AddWallBeam(WallBeam wallBeam)

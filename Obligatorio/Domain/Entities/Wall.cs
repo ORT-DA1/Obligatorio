@@ -9,7 +9,6 @@ namespace Domain.Entities
 
         public Point startUbicationPoint { get; set; }
         public Point endUbicationPoint { get; set; }
-        public List<WallBeam> AssociatedWallBeams { get; set; }
 
         public override void Draw(Graphics graphic)
         {

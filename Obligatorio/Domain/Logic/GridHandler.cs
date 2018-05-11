@@ -24,7 +24,7 @@ namespace Domain.Logic
         }
         public void Exist(Grid grid)
         {
-            if (storage.Grids.Contains(grid))
+            if (!storage.Grids.Contains(grid))
             {
                 throw new Exception();
             }

@@ -7,9 +7,14 @@ namespace UnitTest
     [TestClass]
     public class GridTest
     {
-        private readonly List<Wall> WALLS;
-        private readonly List<WallBeam> WALL_BEAMS;
-        private readonly List<Opening> OPENINGS;
+        public List<Wall> Walls = new List<Wall>();
+        public List<WallBeam> WallBeams = new List<WallBeam>();
+        public List<Opening> Openings = new List<Opening>();
+
+        public readonly Designer designer = new Designer();
+        public readonly Client client = new Client();
+        public readonly int HEIGHT = 100;
+        public readonly int WIDTH = 100;
 
         [TestMethod]
         public void TestCreateGridWithoutParameters()
@@ -19,35 +24,44 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void TestCreateGridWithParameters(Designer designer, Client client, int height ,int width)
+        public void TestCreateGridWithParameters()
         {
-            Grid grid = new Grid(designer, client, height, width);
-            Assert.IsTrue(grid.Designer.Equals(designer) && grid.Client.Equals(client) && grid.Height.Equals(height) 
-                && grid.Width.Equals(width));
+            Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
+            Assert.IsTrue(grid.Designer.Equals(designer) && grid.Height.Equals(HEIGHT)
+                && grid.Width.Equals(WIDTH));
+            //grid.Client.Equals(client) &&
         }
 
         [TestMethod]
-        public void TestAddWall(Wall wall)
+        public void TestAddWall()
         {
-
+            int expectedResult = Walls.Count + 1;
+            Wall wall = new Wall();
+            Walls.Add(wall);
+            Assert.AreEqual(expectedResult,Walls.Count);
         }
 
         [TestMethod]
-        public void TestAddWallBeam(WallBeam wallBeam)
+        public void TestAddWallBeam()
         {
-
+            int expectedResult = WallBeams.Count + 1;
+            WallBeam wallBeam = new WallBeam();
+            WallBeams.Add(wallBeam);
+            Assert.AreEqual(expectedResult, WallBeams.Count);
         }
 
         [TestMethod]
-        public void TestAddOpening(Opening opening)
+        public void TestAddOpening()
         {
-
+            int expectedResult = Openings.Count + 1;
+            Opening opening = new Opening();
+            Openings.Add(opening);
+            Assert.AreEqual(expectedResult, Openings.Count);
         }
 
         [TestMethod]
-        public void TestRemoveWall(Wall wall)
+        public void TestRemoveWall()
         {
-
         }
 
         [TestMethod]
@@ -59,7 +73,7 @@ namespace UnitTest
         [TestMethod]
         public void TestRemoveOpening(Wall wall)
         {
-
+            
         }
 
     }

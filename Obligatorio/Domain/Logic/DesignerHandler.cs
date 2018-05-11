@@ -42,6 +42,10 @@ namespace Domain.Logic
         {
             NotExist(designerTomodify);
             Validate(modifiedDesigner);
+            if (!designerTomodify.Equals(modifiedDesigner))
+            {
+                Exist(modifiedDesigner);
+            }
             this.storage.ModifyDesigner(designerTomodify, modifiedDesigner);
         }
 

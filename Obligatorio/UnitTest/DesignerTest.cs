@@ -2,6 +2,8 @@
 using Domain.Logic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Domain.Entities;
+using Domain.Exceptions;
+using Domain.Data;
 
 namespace UnitTest
 {
@@ -13,7 +15,37 @@ namespace UnitTest
         private readonly string NAME_OK = "Pablo";
         private readonly string SURNAME_OK = "Pereira";
         private readonly DateTime REGISTRATIONDATE_OK = new DateTime(2018, 05, 28, 10, 53, 55);
-        //private readonly DesignerHandler HANDLER;
+        private readonly DesignerHandler DESIGNER_HANDLER;
+        private DataStorage dataStorage;
+
+        public DesignerTest()
+        {
+            this.DESIGNER_HANDLER = new DesignerHandler();
+            this.dataStorage = DataStorage.GetStorageInstance();
+        }
+
+        [TestInitialize]
+        public void TestCleanUp()
+        {
+            this.dataStorage.EmptyStorage();
+        }
+
+        [TestMethod]
+        public void TestAddDesigner()
+        {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
+            DESIGNER_HANDLER.Add(designer);
+            Assert.IsTrue(dataStorage.Designers.Contains(designer));
+        }
+
+        [TestMethod]
+        public void TestDeleteDesigner()
+        {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
+            DESIGNER_HANDLER.Add(designer);
+            DESIGNER_HANDLER.Delete(designer);
+            Assert.IsFalse(dataStorage.Designers.Contains(designer));
+        }
 
         [TestMethod]
         public void TestCreateDesignerWithoutParameters()

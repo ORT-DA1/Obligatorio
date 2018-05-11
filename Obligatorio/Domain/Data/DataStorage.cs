@@ -17,7 +17,7 @@ namespace Domain.Data
         public List<Designer> Designers { get; }
         public Administrator Administrator { get; }
 
-
+        //Storage Methods
         private DataStorage()
         {
             this.Clients = new List<Client>();

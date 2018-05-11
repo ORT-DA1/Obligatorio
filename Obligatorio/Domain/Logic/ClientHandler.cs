@@ -36,17 +36,15 @@ namespace Domain.Logic
         }
         public void Modify(Client clientToModify, Client modifiedClient)
         {
-            
             NotExist(clientToModify);
             Validate(modifiedClient);
-            this.storage.ModifyClient(clientToModify, modifiedClient);
-;
             if (!clientToModify.Equals(modifiedClient))
             {
                 Exist(modifiedClient);
             }
             this.storage.ModifyClient(clientToModify, modifiedClient);
         }
+
         public void Exist(Client client)
         {
             if (this.storage.Clients.Contains(client))

@@ -13,14 +13,10 @@ namespace Domain.Entities
         public Nullable<DateTime> LastAccess { get; set; }
         
 
-        public User ()
-        {
-            
-        }
+        public User (){ }
 
         public User(string username, string password, string name, string surname, DateTime registrationDate, DateTime lastAccess)
         {
-            DataValidation.NameAndSurnameValidate(name, surname);
             this.Username = username;
             this.Password = password;
             this.Name = name;

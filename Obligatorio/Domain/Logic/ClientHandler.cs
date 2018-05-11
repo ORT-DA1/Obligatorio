@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Domain.Entities;
 using Domain.Data;
 using Domain.Interface;
+using Domain.Exceptions;
 
 namespace Domain.Logic
 {
@@ -16,6 +17,12 @@ namespace Domain.Logic
         {
             this.storage = DataStorage.GetStorageInstance();
         }
+
+        public Client Get(Client client)
+        {
+            NotExist(client);
+            return this.storage.GetClient(client);
+        }
         public void Add(Client client)
         {
             Validate(client);
@@ -24,35 +31,45 @@ namespace Domain.Logic
         }
         public void Delete(Client client)
         {
+            NotExist(client);
             this.storage.DeleteClient(client);
-
         }
         public void Modify(Client clientToModify, Client modifiedClient)
         {
-            this.storage.ModifyClient();
-
+            
+            NotExist(clientToModify);
+            Validate(modifiedClient);
+            this.storage.ModifyClient(clientToModify, modifiedClient);
+;
+            if (!clientToModify.Equals(modifiedClient))
+            {
+                Exist(modifiedClient);
+            }
+            this.storage.ModifyClient(clientToModify, modifiedClient);
         }
         public void Exist(Client client)
         {
-            if (storage.Clients.Contains(client))
+            if (this.storage.Clients.Contains(client))
             {
-                throw new Exception();
+                throw new ExceptionController(ExceptionMessage.USER_ALREADY_EXSIST);
+            }
+        }
+        public void NotExist(Client client)
+        {
+            if (!this.storage.Clients.Contains(client))
+            {
+                throw new ExceptionController(ExceptionMessage.USER_NOT_EXIST);
             }
         }
 
         public void Validate(Client client)
         {
-            //DataValidation.UsernameValidate(client.Username);
-            //DataValidation.PasswordValidate(client.Password);
-            //DataValidation.NameAndSurnameValidate(client.Name, client.Surname);
+            DataValidation.ValidateUsername(client.Username);
+            DataValidation.ValidatePassword(client.Password);
+            DataValidation.ValidateNameAndSurname(client.Name, client.Surname);
+            DataValidation.ValidateID(client.Id);
+            DataValidation.ValidateAddress(client.Address);
         }
-        public Client Get(Client client)
-        {
-            //Validate before returning this.
-            return this.storage.GetClient(client);
-        }
-
-        //No estoy seguro de esto, no se si deberia devolver false o una exception.
     }
 
 }

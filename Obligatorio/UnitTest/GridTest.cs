@@ -1,5 +1,6 @@
 ﻿using Domain.Data;
 using Domain.Entities;
+using Domain.Exceptions;
 using Domain.Logic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -10,15 +11,12 @@ namespace UnitTest
     [TestClass]
     public class GridTest
     {
-        private List<Wall> Walls;
-        private List<WallBeam> WallBeams;
-        private List<Opening> Openings;
         private DataStorage dataStorage;
         private readonly GridHandler GRID_HANDLER;
         private readonly int HEIGHT = 20;
         private readonly int WIDTH = 20;
-        private readonly string USERNAME_OK = "invict1";
-        private readonly string PASSWORD_OK = "invict2";
+        private readonly string USERNAME_OK = "pablo";
+        private readonly string PASSWORD_OK = "pablo";
         private readonly string NAME_OK = "Pablo";
         private readonly string SURNAME_OK = "Pereira";
         private readonly DateTime DATE_OK = new DateTime(1997, 07, 24);
@@ -57,63 +55,6 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void TestAddWall()
-        {
-            int expectedResult = Walls.Count + 1;
-            Wall wall = new Wall();
-            Walls.Add(wall);
-            Assert.AreEqual(expectedResult,Walls.Count);
-        }
-
-        [TestMethod]
-        public void TestAddWallBeam()
-        {
-            int expectedResult = WallBeams.Count + 1;
-            WallBeam wallBeam = new WallBeam();
-            WallBeams.Add(wallBeam);
-            Assert.AreEqual(expectedResult, WallBeams.Count);
-        }
-
-        [TestMethod]
-        public void TestAddOpening()
-        {
-            int expectedResult = Openings.Count + 1;
-            Opening opening = new Opening();
-            Openings.Add(opening);
-            Assert.AreEqual(expectedResult, Openings.Count);
-        }
-
-        [TestMethod]
-        public void TestRemoveWall()
-        {
-            Wall wall = new Wall();
-            Walls.Add(wall);
-            int expectedResult = Walls.Count - 1;
-            Walls.Remove(wall);
-            Assert.AreEqual(expectedResult, Walls.Count);
-        }
-
-        [TestMethod]
-        public void TestRemoveWallBeam()
-        {
-            WallBeam wallBeam = new WallBeam();
-            WallBeams.Add(wallBeam);
-            int expectedResult = WallBeams.Count - 1;
-            WallBeams.Remove(wallBeam);
-            Assert.AreEqual(expectedResult, WallBeams.Count);
-        }
-
-        [TestMethod]
-        public void TestRemoveOpening()
-        {
-            Opening opening = new Opening();
-            Openings.Add(opening);
-            int expectedResult = Openings.Count - 1;
-            Openings.Remove(opening);
-            Assert.AreEqual(expectedResult, Openings.Count);
-        }
-
-        [TestMethod]
         public void TestAddGrid() {
             Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
@@ -123,6 +64,7 @@ namespace UnitTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
         public void TestGetGrid()
         {
             Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
@@ -135,6 +77,7 @@ namespace UnitTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
         public void TestDeleteGrid()
         {
             Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
@@ -144,5 +87,17 @@ namespace UnitTest
             GRID_HANDLER.Delete(grid);
             Assert.IsFalse(dataStorage.Grids.Contains(grid));
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestExistGrid()
+        {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
+            Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
+            GRID_HANDLER.Add(grid);
+            GRID_HANDLER.Exist(grid);
+        }
+        
     }
 }

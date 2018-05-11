@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Domain.Entities;
 
 namespace Domain.Data
 {
     public class DataStorage
-    {
-        /// <summary>
-        /// Single reference of the instance
-        /// </summary>
+    {   
         private static DataStorage storageInstance;
         public List<Client> Clients { get; }
         public List<Designer> Designers { get; }
@@ -112,5 +107,6 @@ namespace Domain.Data
             designer.Username = modifiedDesigner.Username;
             designer.Password = modifiedDesigner.Password;
         }
+        
     }
 }

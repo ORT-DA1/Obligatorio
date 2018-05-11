@@ -1,6 +1,6 @@
 ﻿using Domain.Data;
 using Domain.Entities;
-using System;
+using Domain.Exceptions;
 
 namespace Domain.Logic
 {
@@ -34,16 +34,15 @@ namespace Domain.Logic
         public void Delete(Grid grid)
         {
             this.storage.DeleteGrid(grid);
-
         }
+
         public void Exist(Grid grid)
         {
-            if (storage.Grids.Contains(grid))
+            if (this.storage.Grids.Contains(grid))
             {
-                throw new Exception();
+                throw new ExceptionController(ExceptionMessage.GRID_ALREADY_EXIST);
             }
         }
-        
         
     }
 

@@ -24,6 +24,7 @@ namespace Domain.Data
             this.Clients = new List<Client>();
             this.Designers = new List<Designer>();
             this.Administrator = new Administrator("admin", "admin", "Joaquin", "Touris", new DateTime(2018, 05, 05), new DateTime(2018, 05, 05));
+            this.Grids = new List<Grid>();
         }
 
         public static DataStorage GetStorageInstance()

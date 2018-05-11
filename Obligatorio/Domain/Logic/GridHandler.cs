@@ -12,6 +12,12 @@ namespace Domain.Logic
         {
             this.storage = DataStorage.GetStorageInstance();
         }
+
+        public Grid Get(Client client)
+        {
+            return this.storage.GetGrid(client);
+        }
+
         public void Add(Grid grid)
         {
             Validate(grid);
@@ -23,7 +29,7 @@ namespace Domain.Logic
         {
             DataValidation.ValidateHeight(grid.Height);
             DataValidation.ValidateWidth(grid.Width);
-    }
+        }
 
         public void Delete(Grid grid)
         {
@@ -32,16 +38,12 @@ namespace Domain.Logic
         }
         public void Exist(Grid grid)
         {
-            if (!storage.Grids.Contains(grid))
+            if (storage.Grids.Contains(grid))
             {
                 throw new Exception();
             }
         }
         
-        public Grid Get(Client client)
-        {
-            return this.storage.GetGrid(client);
-        }
         
     }
 

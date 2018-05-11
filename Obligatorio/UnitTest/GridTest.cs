@@ -15,8 +15,8 @@ namespace UnitTest
         private List<Opening> Openings;
         private DataStorage dataStorage;
         private readonly GridHandler GRID_HANDLER;
-        private readonly int HEIGHT = 100;
-        private readonly int WIDTH = 100;
+        private readonly int HEIGHT = 20;
+        private readonly int WIDTH = 20;
         private readonly string USERNAME_OK = "invict1";
         private readonly string PASSWORD_OK = "invict2";
         private readonly string NAME_OK = "Pablo";
@@ -120,6 +120,29 @@ namespace UnitTest
             Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
             GRID_HANDLER.Add(grid);
             Assert.IsTrue(dataStorage.Grids.Contains(grid));
+        }
+
+        [TestMethod]
+        public void TestGetGrid()
+        {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
+            Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
+            GRID_HANDLER.Add(grid);
+            Grid resultGrid = GRID_HANDLER.Get(client);
+            Assert.AreEqual(grid, resultGrid);
+
+        }
+
+        [TestMethod]
+        public void TestDeleteGrid()
+        {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
+            Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
+            GRID_HANDLER.Add(grid);
+            GRID_HANDLER.Delete(grid);
+            Assert.IsFalse(dataStorage.Grids.Contains(grid));
         }
     }
 }

@@ -49,6 +49,7 @@
     <Compile Include="Exceptions\ExceptionMessage.cs" />
     <Compile Include="Interface\IUserHandler.cs" />
     <Compile Include="Logic\ClientHandler.cs" />
+    <Compile Include="Logic\DesignerHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\User.cs" />
   </ItemGroup>

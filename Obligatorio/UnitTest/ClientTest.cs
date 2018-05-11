@@ -121,6 +121,13 @@ namespace UnitTest
             CLIENT_HANDLER.Delete(client);
             Assert.IsFalse(dataStorage.Clients.Contains(client));
         }
+        [TestMethod]
+        public void TestAddClientOk()
+        {
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(client);
+            Assert.IsTrue(dataStorage.Clients.Contains(client)); 
+        }
 
         [TestMethod]
         public void TestModifyClientUserNamePassword()
@@ -174,6 +181,23 @@ namespace UnitTest
         {
             Client client = new Client("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
             CLIENT_HANDLER.Add(client);
+
         }
+
+        [TestMethod]
+        public void TestEqualsWithName()
+        {
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            Assert.IsFalse(client.Equals(USERNAME_OK));
+        }
+
+        [TestMethod]
+        public void TestEqualClient()
+        {
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            Client otherClient = new Client(USERNAME_OK, PASSWORD_OK, "Pedro", "Filgueira", CI_OK, PHONE_OK, ADDRESS_OK , REGISTRATIONDATE_OK, null);
+            Assert.IsTrue(client.Equals(otherClient));
+        }
+        
     }
 }

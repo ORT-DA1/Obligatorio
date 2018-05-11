@@ -15,5 +15,22 @@ namespace Domain.Entities
             this.RegistrationDate = registrationDate;
             this.LastAccess = lastAccess;
         }
+
+        public override bool Equals(object designerObject)
+        {
+            bool isEqual = false;
+            if (designerObject != null && this.GetType().Equals(designerObject.GetType()))
+            {
+                Designer designer = (Designer)designerObject;
+                if (this.Username.Equals(designer.Username))
+                {
+                    isEqual = true;
+                }
+
+            }
+            return isEqual;
+        }
     }
+
+
 }

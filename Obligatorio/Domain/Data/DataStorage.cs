@@ -69,6 +69,31 @@ namespace Domain.Data
             return storageInstance.Clients.First(client => client.Equals(clientToFind));
         }
 
+
         //Designer Methods
+
+        public Designer GetDesigner(Designer designerToFind)
+        {
+            return storageInstance.Designers.First(designer => designer.Equals(designerToFind));
+        }
+
+        public void SaveDesigner(Designer designer)
+        {
+            this.Designers.Add(designer);
+        }
+
+        public void DeleteDesigner(Designer designer)
+        {
+            this.Designers.Remove(designer);
+        }
+         
+        public void ModifyDesigner(Designer designerToModify, Designer modifiedDesigner)
+        {
+            Designer designer = storageInstance.GetDesigner(designerToModify);
+            designer.Name = modifiedDesigner.Name;
+            designer.Surname = modifiedDesigner.Surname;
+            designer.Username = modifiedDesigner.Username;
+            designer.Password = modifiedDesigner.Password;
+        }
     }
 }

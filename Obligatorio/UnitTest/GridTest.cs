@@ -1,12 +1,16 @@
 ﻿using Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+using System.Collections.Generic;
 
 namespace UnitTest
 {
     [TestClass]
     public class GridTest
     {
+        private readonly List<Wall> WALLS;
+        private readonly List<WallBeam> WALL_BEAMS;
+        private readonly List<Opening> OPENINGS;
+
         [TestMethod]
         public void TestCreateGridWithoutParameters()
         {
@@ -25,7 +29,7 @@ namespace UnitTest
         [TestMethod]
         public void TestAddWall(Wall wall)
         {
-            
+
         }
 
         [TestMethod]
@@ -39,6 +43,24 @@ namespace UnitTest
         {
 
         }
-        
+
+        [TestMethod]
+        public void TestRemoveWall(Wall wall)
+        {
+
+        }
+
+        [TestMethod]
+        public void TestRemoveWallBeam(Wall wall)
+        {
+
+        }
+
+        [TestMethod]
+        public void TestRemoveOpening(Wall wall)
+        {
+
+        }
+
     }
 }

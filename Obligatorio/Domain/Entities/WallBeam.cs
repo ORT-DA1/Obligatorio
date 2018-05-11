@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Domain.Entities
 {
     public class WallBeam : Drawable
     {
-        public Point Point { get; set; }
+        public Point UbicationPoint { get; set; }
         public List<Wall> AssociatedWalls;
 
         public override void Draw(Graphics graphic)

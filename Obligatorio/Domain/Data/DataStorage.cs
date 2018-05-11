@@ -26,8 +26,9 @@ namespace Domain.Data
             this.Users = new List<User>();
             this.Clients = new List<Client>();
             this.Designers = new List<Designer>();
+            this.Grids = new List<Grid>();
             this.Administrator = new Administrator("admin", "admin", "Joaquin", "Touris", new DateTime(2018, 05, 05), new DateTime(2018, 05, 05));
-
+            
             Initialize();
         }
 
@@ -63,7 +64,6 @@ namespace Domain.Data
                 {
                     userFound = true;
                 }
-                
             }
 
             if (!userFound)

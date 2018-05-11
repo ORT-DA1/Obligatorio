@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Domain.Entities;
+using Domain.Exceptions;
 
 namespace Domain.Data
 {
     public class DataStorage
-    {   
+    {
         private static DataStorage storageInstance;
+        private List<User> Users;
         public List<Client> Clients { get; }
         public List<Designer> Designers { get; }
         public Administrator Administrator { get; }
@@ -16,10 +20,18 @@ namespace Domain.Data
         //Storage Methods
         private DataStorage()
         {
+            this.Users = new List<User>();
             this.Clients = new List<Client>();
             this.Designers = new List<Designer>();
-            this.Administrator = new Administrator("admin", "admin", "Joaquin", "Touris", new DateTime(2018, 05, 05), new DateTime(2018, 05, 05));
             this.Grids = new List<Grid>();
+            this.Administrator = new Administrator("admin", "admin", "Joaquin", "Touris", new DateTime(2018, 05, 05), new DateTime(2018, 05, 05));
+            
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            this.Users.Add(Administrator);
         }
 
         public static DataStorage GetStorageInstance()
@@ -32,16 +44,41 @@ namespace Domain.Data
             return storageInstance;
         }
 
+
+
         public void EmptyStorage()
         {
             this.Clients.Clear();
             this.Designers.Clear();
         }
 
+        public void UserExist(string userName, string password)
+        {
+            bool userFound = false;
+            foreach (var user in this.Users)
+            {
+                if (user.Username.Equals(userName) && user.Password.Equals(password))
+                {
+                    userFound = true;
+                }
+            }
+
+            if (!userFound)
+            {
+                throw new ExceptionController(ExceptionMessage.USER_INVALID_PASSWORD);
+            }
+        }
+
+        public User GetUser(string username)
+        {
+            return this.Users.Find(user => user.Username.Equals(username));
+        }
+
         //Client Methods
         public void SaveClient(Client client)
         {
             storageInstance.Clients.Add(client);
+            storageInstance.Users.Add(client);
         }
 
         public void DeleteClient(Client client)
@@ -107,6 +144,5 @@ namespace Domain.Data
             designer.Username = modifiedDesigner.Username;
             designer.Password = modifiedDesigner.Password;
         }
-        
     }
 }

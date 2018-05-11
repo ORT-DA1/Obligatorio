@@ -29,6 +29,14 @@ namespace Domain.Logic
             Exist(client);
             this.storage.SaveClient(client);
         }
+        public void Validate(Client client)
+        {
+            DataValidation.ValidateUsername(client.Username);
+            DataValidation.ValidatePassword(client.Password);
+            DataValidation.ValidateNameAndSurname(client.Name, client.Surname);
+            DataValidation.ValidateID(client.Id);
+            DataValidation.ValidateAddress(client.Address);
+        }
         public void Delete(Client client)
         {
             NotExist(client);
@@ -58,15 +66,6 @@ namespace Domain.Logic
             {
                 throw new ExceptionController(ExceptionMessage.USER_NOT_EXIST);
             }
-        }
-
-        public void Validate(Client client)
-        {
-            DataValidation.ValidateUsername(client.Username);
-            DataValidation.ValidatePassword(client.Password);
-            DataValidation.ValidateNameAndSurname(client.Name, client.Surname);
-            DataValidation.ValidateID(client.Id);
-            DataValidation.ValidateAddress(client.Address);
         }
     }
 

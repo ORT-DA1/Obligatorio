@@ -1,32 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Domain.Entities;
-using Domain.Logic;
-using Domain.Interface;
+using Domain.Data;
+using Domain.Exceptions;
 
 namespace Gui
 {
     public partial class WelcomeForm : Form
     {
-        private IUserHandler<Client> ClientHandler;
-        private IUserHandler<Designer> DesignerHandler;
+        private DataStorage dataStorage;
         public WelcomeForm()
         {
             InitializeComponent();
-            this.ClientHandler = new ClientHandler();
+            this.dataStorage = DataStorage.GetStorageInstance();
         }
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
             var userName = this.usernameTxt.Text;
             var password = this.passwordTxt.Text;
+
+            try
+            {
+                dataStorage.UserExist(userName, password);
+                User user = dataStorage.GetUser(userName);
+                MainMenu mainMenu = new MainMenu(user);
+                mainMenu.Show();
+                Hide();
+            }
+            catch (ExceptionController exceptionMessage)
+            {
+                String msgError = exceptionMessage.Message;
+                MessageBox.Show(msgError, "Error en Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 

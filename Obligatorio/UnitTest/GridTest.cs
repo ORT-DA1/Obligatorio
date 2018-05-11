@@ -62,18 +62,31 @@ namespace UnitTest
         [TestMethod]
         public void TestRemoveWall()
         {
+            Wall wall = new Wall();
+            Walls.Add(wall);
+            int expectedResult = Walls.Count - 1;
+            Walls.Remove(wall);
+            Assert.AreEqual(expectedResult, Walls.Count);
         }
 
         [TestMethod]
         public void TestRemoveWallBeam(Wall wall)
         {
-
+            WallBeam wallBeam = new WallBeam();
+            WallBeams.Add(wallBeam);
+            int expectedResult = WallBeams.Count - 1;
+            WallBeams.Remove(wallBeam);
+            Assert.AreEqual(expectedResult, WallBeams.Count);
         }
 
         [TestMethod]
         public void TestRemoveOpening(Wall wall)
         {
-            
+            Opening opening = new Opening();
+            Openings.Add(opening);
+            int expectedResult = Openings.Count - 1;
+            Openings.Remove(opening);
+            Assert.AreEqual(expectedResult, Openings.Count);
         }
 
     }

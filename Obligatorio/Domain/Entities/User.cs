@@ -24,6 +24,11 @@ namespace Domain.Entities
             this.RegistrationDate = registrationDate;
             this.LastAccess = lastAccess;
         }
+
+        public virtual bool CanDoSomething()
+        {
+            return true;
+        }
        
     }
 }

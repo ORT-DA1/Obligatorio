@@ -14,6 +14,11 @@ namespace Domain.Entities
             this.RegistrationDate = registrationDate;
             this.LastAccess = lastAccess;
         }
+
+        public override bool CanDoSomething()
+        {
+            return true;
+        }
     }
 
     

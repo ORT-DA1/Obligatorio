@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities;
+using Domain.Exceptions;
 
 namespace Domain.Data
 {
@@ -13,6 +14,7 @@ namespace Domain.Data
         /// Single reference of the instance
         /// </summary>
         private static DataStorage storageInstance;
+        private List<User> Users;
         public List<Client> Clients { get; }
         public List<Designer> Designers { get; }
         public Administrator Administrator { get; }
@@ -21,9 +23,17 @@ namespace Domain.Data
         //Storage Methods
         private DataStorage()
         {
+            this.Users = new List<User>();
             this.Clients = new List<Client>();
             this.Designers = new List<Designer>();
             this.Administrator = new Administrator("admin", "admin", "Joaquin", "Touris", new DateTime(2018, 05, 05), new DateTime(2018, 05, 05));
+
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            this.Users.Add(Administrator);
         }
 
         public static DataStorage GetStorageInstance()
@@ -44,36 +54,34 @@ namespace Domain.Data
             this.Designers.Clear();
         }
 
-        public bool UserExists(string userName)
+        public void UserExist(string userName, string password)
         {
-            foreach (var client in this.Clients)
+            bool userFound = false;
+            foreach (var user in this.Users)
             {
-                if (client.Username.Equals(userName))
+                if (user.Username.Equals(userName) && user.Password.Equals(password))
                 {
-                    return true;
+                    userFound = true;
                 }
+                
             }
 
-            foreach (var designer in this.Designers)
+            if (!userFound)
             {
-                if (designer.Username.Equals(userName))
-                {
-                    return true;
-                }
+                throw new ExceptionController(ExceptionMessage.USER_INVALID_PASSWORD);
             }
+        }
 
-            if (this.Administrator.Username.Equals(userName))
-            {
-                return true;
-            }
-
-            return false;
+        public User GetUser(string username)
+        {
+            return this.Users.Find(user => user.Username.Equals(username));
         }
 
         //Client Methods
         public void SaveClient(Client client)
         {
             storageInstance.Clients.Add(client);
+            storageInstance.Users.Add(client);
         }
 
         public void DeleteClient(Client client)

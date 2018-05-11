@@ -1,5 +1,9 @@
-﻿using Domain.Entities;
+﻿using Domain.Data;
+using Domain.Entities;
+using Domain.Exceptions;
+using Domain.Logic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 
 namespace UnitTest
@@ -7,14 +11,30 @@ namespace UnitTest
     [TestClass]
     public class GridTest
     {
-        public List<Wall> Walls = new List<Wall>();
-        public List<WallBeam> WallBeams = new List<WallBeam>();
-        public List<Opening> Openings = new List<Opening>();
+        private DataStorage dataStorage;
+        private readonly GridHandler GRID_HANDLER;
+        private readonly int HEIGHT = 20;
+        private readonly int WIDTH = 20;
+        private readonly string USERNAME_OK = "pablo";
+        private readonly string PASSWORD_OK = "pablo";
+        private readonly string NAME_OK = "Pablo";
+        private readonly string SURNAME_OK = "Pereira";
+        private readonly DateTime DATE_OK = new DateTime(1997, 07, 24);
+        private readonly string ID_OK = "5407935-1";
+        private readonly int PHONE_OK = 093535851;
+        private readonly string ADDRESS_OK = "Brasil 1744";
 
-        public readonly Designer designer = new Designer();
-        public readonly Client client = new Client();
-        public readonly int HEIGHT = 100;
-        public readonly int WIDTH = 100;
+        public GridTest()
+        {
+            this.GRID_HANDLER = new GridHandler();
+            this.dataStorage = DataStorage.GetStorageInstance();
+        }
+
+        [TestInitialize]
+        public void TestCleanUp()
+        {
+            dataStorage.EmptyStorage();
+        }
 
         [TestMethod]
         public void TestCreateGridWithoutParameters()
@@ -26,68 +46,58 @@ namespace UnitTest
         [TestMethod]
         public void TestCreateGridWithParameters()
         {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
             Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
-            Assert.IsTrue(grid.Designer.Equals(designer) && grid.Height.Equals(HEIGHT)
+            Assert.IsTrue(grid.Designer.Equals(designer) && grid.Client.Equals(client) && grid.Height.Equals(HEIGHT)
                 && grid.Width.Equals(WIDTH));
-            //grid.Client.Equals(client) &&
+            
         }
 
         [TestMethod]
-        public void TestAddWall()
-        {
-            int expectedResult = Walls.Count + 1;
-            Wall wall = new Wall();
-            Walls.Add(wall);
-            Assert.AreEqual(expectedResult,Walls.Count);
+        public void TestAddGrid() {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
+            Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
+            GRID_HANDLER.Add(grid);
+            Assert.IsTrue(dataStorage.Grids.Contains(grid));
         }
 
         [TestMethod]
-        public void TestAddWallBeam()
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestGetGrid()
         {
-            int expectedResult = WallBeams.Count + 1;
-            WallBeam wallBeam = new WallBeam();
-            WallBeams.Add(wallBeam);
-            Assert.AreEqual(expectedResult, WallBeams.Count);
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
+            Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
+            GRID_HANDLER.Add(grid);
+            Grid resultGrid = GRID_HANDLER.Get(client);
+            Assert.AreEqual(grid, resultGrid);
+
         }
 
         [TestMethod]
-        public void TestAddOpening()
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestDeleteGrid()
         {
-            int expectedResult = Openings.Count + 1;
-            Opening opening = new Opening();
-            Openings.Add(opening);
-            Assert.AreEqual(expectedResult, Openings.Count);
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
+            Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
+            GRID_HANDLER.Add(grid);
+            GRID_HANDLER.Delete(grid);
+            Assert.IsFalse(dataStorage.Grids.Contains(grid));
         }
 
         [TestMethod]
-        public void TestRemoveWall()
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestExistGrid()
         {
-            Wall wall = new Wall();
-            Walls.Add(wall);
-            int expectedResult = Walls.Count - 1;
-            Walls.Remove(wall);
-            Assert.AreEqual(expectedResult, Walls.Count);
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
+            Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
+            GRID_HANDLER.Add(grid);
+            GRID_HANDLER.Exist(grid);
         }
-
-        [TestMethod]
-        public void TestRemoveWallBeam(Wall wall)
-        {
-            WallBeam wallBeam = new WallBeam();
-            WallBeams.Add(wallBeam);
-            int expectedResult = WallBeams.Count - 1;
-            WallBeams.Remove(wallBeam);
-            Assert.AreEqual(expectedResult, WallBeams.Count);
-        }
-
-        [TestMethod]
-        public void TestRemoveOpening(Wall wall)
-        {
-            Opening opening = new Opening();
-            Openings.Add(opening);
-            int expectedResult = Openings.Count - 1;
-            Openings.Remove(opening);
-            Assert.AreEqual(expectedResult, Openings.Count);
-        }
-
+        
     }
 }

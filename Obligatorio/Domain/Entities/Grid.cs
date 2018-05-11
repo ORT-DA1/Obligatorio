@@ -59,6 +59,19 @@ namespace Domain.Entities
 
         }
 
+        public override bool Equals(object gridObject)
+        {
+            bool isEqual = false;
+            if (gridObject != null && this.GetType().Equals(gridObject.GetType()))
+            {
+                Grid grid = (Grid)gridObject;
+                if (this.Designer.Equals(grid.Designer) && (this.Client.Equals(grid.Client)))
+                {
+                    isEqual = true;
+                }
 
+            }
+            return isEqual;
+        }
     }
 }

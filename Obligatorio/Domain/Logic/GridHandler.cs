@@ -1,6 +1,6 @@
 ﻿using Domain.Data;
 using Domain.Entities;
-using System;
+using Domain.Exceptions;
 
 namespace Domain.Logic
 {
@@ -12,27 +12,36 @@ namespace Domain.Logic
         {
             this.storage = DataStorage.GetStorageInstance();
         }
-        public void Add(Grid grid)
-        {
-            Exist(grid);
-            this.storage.SaveGrid(grid);
-        }
-        public void Delete(Grid grid)
-        {
-            this.storage.DeleteGrid(grid);
 
-        }
-        public void Exist(Grid grid)
-        {
-            if (!storage.Grids.Contains(grid))
-            {
-                throw new Exception();
-            }
-        }
-        
         public Grid Get(Client client)
         {
             return this.storage.GetGrid(client);
+        }
+
+        public void Add(Grid grid)
+        {
+            Validate(grid);
+            Exist(grid);
+            this.storage.SaveGrid(grid);
+        }
+
+        private void Validate(Grid grid)
+        {
+            DataValidation.ValidateHeight(grid.Height);
+            DataValidation.ValidateWidth(grid.Width);
+        }
+
+        public void Delete(Grid grid)
+        {
+            this.storage.DeleteGrid(grid);
+        }
+
+        public void Exist(Grid grid)
+        {
+            if (this.storage.Grids.Contains(grid))
+            {
+                throw new ExceptionController(ExceptionMessage.GRID_ALREADY_EXIST);
+            }
         }
         
     }

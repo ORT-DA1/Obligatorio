@@ -14,9 +14,17 @@ namespace Domain.Logic
         }
         public void Add(Grid grid)
         {
+            Validate(grid);
             Exist(grid);
             this.storage.SaveGrid(grid);
         }
+
+        private void Validate(Grid grid)
+        {
+            DataValidation.ValidateHeight(grid.Height);
+            DataValidation.ValidateWidth(grid.Width);
+    }
+
         public void Delete(Grid grid)
         {
             this.storage.DeleteGrid(grid);

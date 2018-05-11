@@ -11,7 +11,11 @@ namespace Domain.Data
         private static readonly string VALID_NUMBERS = "^[0-9]*$";
         private static readonly string VALID_NUMBERS_CHARS_AND_SPACE = "^[0-9a-zA-Z ]*$";
         private static readonly int VALID_USER_ID_LENGTH = 8;
-        
+        public static readonly int MAX_HEIGHT = 25;
+        public static readonly int MIN_HEIGHT = 0;
+        public static readonly int MAX_WIDTH = 25;
+        public static readonly int MIN_WIDTH = 0;
+
 
         public static void ValidateUsername(string username)
         {
@@ -104,6 +108,47 @@ namespace Domain.Data
                 return false;
             }
             return true;
+        }
+
+        public static void ValidateHeight(int height)
+        {
+            if (!IsValidHeight(height))
+            {
+                if (height > MAX_HEIGHT)
+                {
+                    throw new ExceptionController(ExceptionMessage.GRID_INVALID_HEIGHT_ABOVE);
+                }
+                else
+                {
+                    throw new ExceptionController(ExceptionMessage.GRID_INVALID_HEIGHT_UNDER);
+                }
+                
+            }
+        }
+
+        private static bool IsValidHeight(int height)
+        {
+            return (height> MIN_HEIGHT && height <= MAX_HEIGHT);
+        }
+
+        public static void ValidateWidth(int width)
+        {
+            if (!IsValidWidth(width))
+            {
+                if (width > MAX_WIDTH)
+                {
+                    throw new ExceptionController(ExceptionMessage.GRID_INVALID_WIDTH_ABOVE);
+                }
+                else
+                {
+                    throw new ExceptionController(ExceptionMessage.GRID_INVALID_WIDTH_UNDER);
+                }
+            }
+        }
+
+        private static bool IsValidWidth(int width)
+        {
+            return (width > MIN_HEIGHT && width <= MAX_WIDTH);
         }
     }
 }

@@ -1,5 +1,8 @@
-﻿using Domain.Entities;
+﻿using Domain.Data;
+using Domain.Entities;
+using Domain.Logic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 
 namespace UnitTest
@@ -7,14 +10,33 @@ namespace UnitTest
     [TestClass]
     public class GridTest
     {
-        public List<Wall> Walls = new List<Wall>();
-        public List<WallBeam> WallBeams = new List<WallBeam>();
-        public List<Opening> Openings = new List<Opening>();
+        private List<Wall> Walls;
+        private List<WallBeam> WallBeams;
+        private List<Opening> Openings;
+        private DataStorage dataStorage;
+        private readonly GridHandler GRID_HANDLER;
+        private readonly int HEIGHT = 100;
+        private readonly int WIDTH = 100;
+        private readonly string USERNAME_OK = "invict1";
+        private readonly string PASSWORD_OK = "invict2";
+        private readonly string NAME_OK = "Pablo";
+        private readonly string SURNAME_OK = "Pereira";
+        private readonly DateTime DATE_OK = new DateTime(1997, 07, 24);
+        private readonly string ID_OK = "5407935-1";
+        private readonly int PHONE_OK = 093535851;
+        private readonly string ADDRESS_OK = "Brasil 1744";
 
-        public readonly Designer designer = new Designer();
-        public readonly Client client = new Client();
-        public readonly int HEIGHT = 100;
-        public readonly int WIDTH = 100;
+        public GridTest()
+        {
+            this.GRID_HANDLER = new GridHandler();
+            this.dataStorage = DataStorage.GetStorageInstance();
+        }
+
+        [TestInitialize]
+        public void TestCleanUp()
+        {
+            dataStorage.EmptyStorage();
+        }
 
         [TestMethod]
         public void TestCreateGridWithoutParameters()
@@ -26,10 +48,12 @@ namespace UnitTest
         [TestMethod]
         public void TestCreateGridWithParameters()
         {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
             Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
-            Assert.IsTrue(grid.Designer.Equals(designer) && grid.Height.Equals(HEIGHT)
+            Assert.IsTrue(grid.Designer.Equals(designer) && grid.Client.Equals(client) && grid.Height.Equals(HEIGHT)
                 && grid.Width.Equals(WIDTH));
-            //grid.Client.Equals(client) &&
+            
         }
 
         [TestMethod]

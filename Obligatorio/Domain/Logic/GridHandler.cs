@@ -21,7 +21,6 @@ namespace Domain.Logic
         public void Add(Grid grid)
         {
             Validate(grid);
-            Exist(grid);
             this.storage.SaveGrid(grid);
         }
 
@@ -34,14 +33,6 @@ namespace Domain.Logic
         public void Delete(Grid grid)
         {
             this.storage.DeleteGrid(grid);
-        }
-
-        public void Exist(Grid grid)
-        {
-            if (this.storage.Grids.Contains(grid))
-            {
-                throw new ExceptionController(ExceptionMessage.GRID_ALREADY_EXIST);
-            }
         }
         
     }

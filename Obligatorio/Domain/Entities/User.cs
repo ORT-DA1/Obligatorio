@@ -15,7 +15,7 @@ namespace Domain.Entities
 
         public User (){ }
 
-        public User(string username, string password, string name, string surname, DateTime registrationDate, DateTime lastAccess)
+        public User(string username, string password, string name, string surname, DateTime registrationDate, Nullable<DateTime> lastAccess)
         {
             this.Username = username;
             this.Password = password;

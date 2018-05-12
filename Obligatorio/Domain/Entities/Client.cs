@@ -46,10 +46,6 @@ namespace Domain.Entities
         {
             return false;
         }
-        public override bool CanCreateGrid()
-        {
-            return false;
-        }
 
     }
 }

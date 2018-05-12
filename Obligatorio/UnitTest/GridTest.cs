@@ -66,23 +66,22 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void TestDeleteGrid()
-        {
-            Client anotherClient = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
-            Grid anotherGrid = new Grid(GRID_NAME_OK, anotherClient, HEIGHT, WIDTH);
-            GRID_HANDLER.Add(anotherGrid);
-            GRID_HANDLER.Delete(anotherGrid);
-            int expectedResult = 0;
-            int result = this.dataStorage.Grids.Count;
-            Assert.AreEqual(expectedResult, result);
-        }
-
-        [TestMethod]
         public void TestGetGrid()
         {
             GRID_HANDLER.Add(grid);
             Grid resultGrid = GRID_HANDLER.Get(client);
             Assert.AreEqual(grid, resultGrid);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestDeleteGrid()
+        {
+            Client anotherClient = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
+            Grid anotherGrid = new Grid(GRID_NAME_OK, anotherClient, HEIGHT, WIDTH);
+            //GRID_HANDLER.Add(anotherGrid);
+            GRID_HANDLER.Delete(anotherGrid);
+            // Assert.IsFalse(dataStorage.Grids.Contains(anotherGrid));
         }
 
         [TestMethod]

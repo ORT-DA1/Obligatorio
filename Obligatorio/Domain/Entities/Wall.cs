@@ -1,6 +1,4 @@
-﻿using Domain.Exceptions;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 
 namespace Domain.Entities
@@ -14,10 +12,6 @@ namespace Domain.Entities
 
         public Wall(Point startPoint, Point endPoint)
         {
-
-            this.FixWall();
-            this.Validate();
-
             if (startPoint.Y.Equals(endPoint.Y)){
                 if(startPoint.X < endPoint.Y)
                 {
@@ -43,7 +37,7 @@ namespace Domain.Entities
                     this.endUbicationPoint = startPoint;
                 }
             }
-            
+
             this.Path = new List<Point>();
             this.wallPen = new Pen(Color.LightGreen, 7);
 
@@ -98,47 +92,7 @@ namespace Domain.Entities
             }
             return isEqual;
         }
-
-        public void Validate()
-        {
-            this.distintPoints();
-            this.sameXorY();
-        }
-
-        private void sameXorY()
-        {
-            if (isHorizontalWall()) return;
-            if (isVerticalWall()) return;
-            else throw new ExceptionController(ExceptionMessage.INVALID_WALL);
-        }
-
-        private bool isVerticalWall()
-        {
-            return this.startUbicationPoint.X == this.endUbicationPoint.X;
-        }
-
-        private void distintPoints()
-        {
-            if(this.startUbicationPoint.Equals(this.endUbicationPoint))
-                throw new ExceptionController(ExceptionMessage.INVALID_WALL);
-        }
-
-        public void FixWall()
-        {
-            Point startFixedWall = new Point(
-                  ((int)Math.Round((double)this.startUbicationPoint.X / Grid.PixelConvertor)) * Grid.PixelConvertor,
-                  ((int)Math.Round((double)this.startUbicationPoint.Y / Grid.PixelConvertor)) * Grid.PixelConvertor
-              );
-
-            Point endFixedWall = new Point(
-                 ((int)Math.Round((double)this.endUbicationPoint.X / Grid.PixelConvertor)) * Grid.PixelConvertor,
-                 ((int)Math.Round((double)this.endUbicationPoint.Y / Grid.PixelConvertor)) * Grid.PixelConvertor
-              );
-
-            this.startUbicationPoint = startFixedWall;
-            this.endUbicationPoint = endFixedWall;
-        }
-
+        
         public bool SizeGreaterThanMaximum()
         {
             if(isHorizontalWall())

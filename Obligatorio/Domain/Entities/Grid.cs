@@ -141,7 +141,7 @@ namespace Domain.Entities
                     Wall newWall = new Wall(firstPoint, wall.endUbicationPoint);
                     Point secondPoint = newWall.FirstIntersection(anotherWall);
                     if(!secondPoint.IsEmpty)
-                        throw new ExceptionController(ExceptionMessage.INVALID_WALL);
+                        throw new ExceptionController(ExceptionMessage.USER_INVALID_PASSWORD); // cambiar exception
                 }
             }
         }

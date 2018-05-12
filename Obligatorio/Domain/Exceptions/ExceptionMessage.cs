@@ -18,5 +18,6 @@
         public const string GRID_INVALID_WIDTH_UNDER = "El ancho es incorrecto. Debe ser mayor quer 0 metros.";
 
         public const string WALL_ALREADY_EXSIST = "La pared ya existe. Dibuje nuevamente";
+        public const string INVALID_WALL = "La pared es invalida. Dibuje nuevamente";
     }
 }

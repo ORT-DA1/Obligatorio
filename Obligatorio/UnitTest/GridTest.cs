@@ -35,7 +35,7 @@ namespace UnitTest
             this.GRID_HANDLER = new GridHandler();
             this.dataStorage = DataStorage.GetStorageInstance();
             this.client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
-            this.grid = new Grid(GRID_NAME_OK, client, HEIGHT * PIXEL_CONVERTION, WIDTH * PIXEL_CONVERTION);
+            this.grid = new Grid(GRID_NAME_OK, client, HEIGHT, WIDTH);
 
         }
 
@@ -55,8 +55,8 @@ namespace UnitTest
         [TestMethod]
         public void TestCreateGridWithParameters()
         {
-            Assert.IsTrue(grid.Client.Equals(client) && (grid.Height / PIXEL_CONVERTION).Equals(HEIGHT* PIXEL_CONVERTION)
-                && (grid.Width / PIXEL_CONVERTION).Equals(WIDTH* PIXEL_CONVERTION));
+            Assert.IsTrue(grid.Client.Equals(client) && (grid.Height / PIXEL_CONVERTION).Equals(HEIGHT)
+                && (grid.Width / PIXEL_CONVERTION).Equals(WIDTH));
         }
 
         [TestMethod]
@@ -66,30 +66,29 @@ namespace UnitTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionController))]
         public void TestGetGrid()
         {
             GRID_HANDLER.Add(grid);
             Grid resultGrid = GRID_HANDLER.Get(client);
             Assert.AreEqual(grid, resultGrid);
-
         }
 
         [TestMethod]
         [ExpectedException(typeof(ExceptionController))]
         public void TestDeleteGrid()
         {
-            GRID_HANDLER.Add(grid);
-            GRID_HANDLER.Delete(grid);
-            Assert.IsFalse(dataStorage.Grids.Contains(grid));
+            Client anotherClient = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
+            Grid anotherGrid = new Grid(GRID_NAME_OK, anotherClient, HEIGHT, WIDTH);
+            //GRID_HANDLER.Add(anotherGrid);
+            GRID_HANDLER.Delete(anotherGrid);
+            // Assert.IsFalse(dataStorage.Grids.Contains(anotherGrid));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionController))]
         public void TestExistGrid()
         {
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
-            Grid anotherGrid = new Grid(GRID_NAME_OK, client, HEIGHT* PIXEL_CONVERTION, WIDTH* PIXEL_CONVERTION);
+            Grid anotherGrid = new Grid(GRID_NAME_OK, client, HEIGHT, WIDTH);
             GRID_HANDLER.Add(anotherGrid);
         }
 
@@ -182,7 +181,7 @@ namespace UnitTest
         [TestMethod]
         public void TestEqual()
         {
-            Grid anotherGrid = new Grid(GRID_NAME_OK, client, HEIGHT * PIXEL_CONVERTION, WIDTH * PIXEL_CONVERTION);
+            Grid anotherGrid = new Grid(GRID_NAME_OK, client, HEIGHT, WIDTH);
             Assert.AreEqual(grid, anotherGrid);
         }
 

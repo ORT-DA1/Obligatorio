@@ -173,12 +173,42 @@ namespace Domain.Entities
 
         public void RemoveWall(Wall wall)
         {
-
+            WallBeam startWallBeam = getWallBeam(wall.startUbicationPoint);
+            WallBeam endWallBeam = getWallBeam(wall.endUbicationPoint);
+            this.Walls.Remove(wall);
+            RemoveWallBeam(startWallBeam);
+            RemoveWallBeam(endWallBeam);
         }
 
-        public void RemoveWallBeam(Wall wall)
+        private WallBeam getWallBeam(Point startUbicationPoint)
         {
+            return WallBeams.First(wallBeam => wallBeam.UbicationPoint.Equals(startUbicationPoint));
+        }
 
+        public void RemoveWallBeam(WallBeam wallBeam)
+        {
+            List<Wall> useAWallBeam = new List<Wall>();
+            foreach(Wall wall in this.Walls)
+            {
+                if (ContainsPoint(wall.Path, wallBeam.UbicationPoint))
+                {
+                    useAWallBeam.Add(wall);
+                }
+            }
+            if (useAWallBeam.Count.Equals(0))
+            {
+                this.WallBeams.Remove(wallBeam);
+            }
+        }
+
+        private bool ContainsPoint(List<Point> list, Point point)
+        {
+            foreach (Point anotherPoint in list)
+            {
+                if (anotherPoint.Equals(point))
+                    return true;
+            }
+            return false;
         }
 
         public void RemoveOpening(Wall wall)

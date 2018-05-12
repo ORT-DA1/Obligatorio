@@ -121,5 +121,6 @@ namespace Domain.Entities
             }
             return returnPoint = new Point();
         }
+
     }
 }

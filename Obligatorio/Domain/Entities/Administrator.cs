@@ -15,9 +15,13 @@ namespace Domain.Entities
             this.LastAccess = lastAccess;
         }
 
-        public override bool CanDoSomething()
+        public override bool CanCreateGrid()
         {
-            return true;
+            return false;
+        }
+        public override bool CanSeeOwnedGrids()
+        {
+            return false;
         }
     }
 

@@ -37,5 +37,19 @@ namespace Domain.Entities
             }
             return isEqual;
         }
+
+        public override bool CanABMClients()
+        {
+            return false;
+        }
+        public override bool CanABMDesigners()
+        {
+            return false;
+        }
+        public override bool CanCreateGrid()
+        {
+            return false;
+        }
+
     }
 }

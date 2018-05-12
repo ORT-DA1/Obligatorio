@@ -1,6 +1,6 @@
 ﻿namespace Gui
 {
-    partial class WelcomeForm
+    partial class Login
     {
         /// <summary>
         /// Variable del diseñador necesaria.

@@ -34,5 +34,28 @@ namespace Domain.Entities
             }
             return isEqual;
         }
+        
+        public bool SizeGreaterThanMaximum()
+        {
+            if(isHorizontalWall())
+                return (this.startUbicationPoint.X - this.endUbicationPoint.X) > 5;
+            else
+                return (this.startUbicationPoint.Y - this.endUbicationPoint.Y) > 5;
+        }
+
+        public bool isHorizontalWall()
+        {
+            return this.startUbicationPoint.Y == this.endUbicationPoint.Y;
+        }
+        
+        public Point CalculateLocationPoint(int maxMeters)
+        {
+            if (isHorizontalWall())
+                return new Point(this.startUbicationPoint.Y + maxMeters);
+            else
+                return new Point(this.startUbicationPoint.X + maxMeters);
+        }
+
+
     }
 }

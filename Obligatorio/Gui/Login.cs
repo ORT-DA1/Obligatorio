@@ -40,5 +40,10 @@ namespace Gui
         {
             this.Close();
         }
+
+        private void GenerateData(object sender, EventArgs e)
+        {
+            this.dataStorage.Initialize();
+        }
     }
 }

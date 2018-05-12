@@ -46,6 +46,10 @@ namespace Domain.Entities
         {
             return false;
         }
+        public override bool CanABMGrids()
+        {
+            return false;
+        }
 
     }
 }

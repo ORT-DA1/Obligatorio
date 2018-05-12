@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Domain.Entities
 {
-    public class Opening : Drawable
+    public class Opening : Element
     {
         public Point UbicationPoint { get; set; }
         

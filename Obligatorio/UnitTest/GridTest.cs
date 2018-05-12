@@ -23,6 +23,7 @@ namespace UnitTest
         private readonly string ID_OK = "5407935-1";
         private readonly int PHONE_OK = 093535851;
         private readonly string ADDRESS_OK = "Brasil 1744";
+        private readonly string GRID_NAME_OK = "grid name";
 
         public GridTest()
         {
@@ -46,19 +47,17 @@ namespace UnitTest
         [TestMethod]
         public void TestCreateGridWithParameters()
         {
-            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
-            Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
-            Assert.IsTrue(grid.Designer.Equals(designer) && grid.Client.Equals(client) && grid.Height.Equals(HEIGHT)
+            Grid grid = new Grid(GRID_NAME_OK, client, HEIGHT, WIDTH);
+            Assert.IsTrue(grid.Client.Equals(client) && grid.Height.Equals(HEIGHT)
                 && grid.Width.Equals(WIDTH));
             
         }
 
         [TestMethod]
         public void TestAddGrid() {
-            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
-            Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
+            Grid grid = new Grid(GRID_NAME_OK, client, HEIGHT, WIDTH);
             GRID_HANDLER.Add(grid);
             Assert.IsTrue(dataStorage.Grids.Contains(grid));
         }
@@ -67,9 +66,8 @@ namespace UnitTest
         [ExpectedException(typeof(ExceptionController))]
         public void TestGetGrid()
         {
-            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
-            Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
+            Grid grid = new Grid(GRID_NAME_OK, client, HEIGHT, WIDTH);
             GRID_HANDLER.Add(grid);
             Grid resultGrid = GRID_HANDLER.Get(client);
             Assert.AreEqual(grid, resultGrid);
@@ -80,9 +78,8 @@ namespace UnitTest
         [ExpectedException(typeof(ExceptionController))]
         public void TestDeleteGrid()
         {
-            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
-            Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
+            Grid grid = new Grid(GRID_NAME_OK, client, HEIGHT, WIDTH);
             GRID_HANDLER.Add(grid);
             GRID_HANDLER.Delete(grid);
             Assert.IsFalse(dataStorage.Grids.Contains(grid));
@@ -92,9 +89,8 @@ namespace UnitTest
         [ExpectedException(typeof(ExceptionController))]
         public void TestExistGrid()
         {
-            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, DATE_OK, null);
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
-            Grid grid = new Grid(designer, client, HEIGHT, WIDTH);
+            Grid grid = new Grid(GRID_NAME_OK, client, HEIGHT, WIDTH);
             GRID_HANDLER.Add(grid);
             GRID_HANDLER.Exist(grid);
         }

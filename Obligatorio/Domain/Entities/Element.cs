@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    abstract public class Drawable
+    abstract public class Element
     {
         abstract public void Draw(Graphics graphic);
     }

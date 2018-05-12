@@ -40,6 +40,27 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void TestCanABMClients()
+        {
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            Assert.IsFalse(client.CanABMClients());
+        }
+
+        [TestMethod]
+        public void TestCanABMDesigners()
+        {
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            Assert.IsFalse(client.CanABMDesigners());
+        }
+        [TestMethod]
+        public void TestCanCreateGrid()
+        {
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            Assert.IsFalse(client.CanCreateGrid());
+        }
+
+
+        [TestMethod]
         public void TestCreateClientWithoutParameters()
         {
             Client client = new Client();

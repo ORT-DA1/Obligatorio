@@ -6,10 +6,10 @@ using Domain.Exceptions;
 
 namespace Gui
 {
-    public partial class WelcomeForm : Form
+    public partial class Login : Form
     {
         private DataStorage dataStorage;
-        public WelcomeForm()
+        public Login()
         {
             InitializeComponent();
             this.dataStorage = DataStorage.GetStorageInstance();

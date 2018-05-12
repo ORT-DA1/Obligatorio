@@ -24,11 +24,21 @@ namespace Domain.Entities
             this.RegistrationDate = registrationDate;
             this.LastAccess = lastAccess;
         }
-
-        public virtual bool CanDoSomething()
+        public virtual bool CanABMClients()
         {
             return true;
         }
-       
+        public virtual bool CanABMDesigners()
+        {
+            return true;
+        }
+        public virtual bool CanCreateGrid()
+        {
+            return true;
+        }
+        public virtual bool CanSeeOwnedGrids()
+        {
+            return true;
+        }
     }
 }

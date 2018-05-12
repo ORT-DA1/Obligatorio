@@ -16,7 +16,6 @@ namespace Gui
         public MainMenu(User user)
         {
             InitializeComponent();
-            this.titleLbl.Visible = user.CanDoSomething();
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Domain.Entities
 {
-    public class Window : Drawable
+    public class Window : Element
     {
         public override void Draw(Graphics graphic)
         {

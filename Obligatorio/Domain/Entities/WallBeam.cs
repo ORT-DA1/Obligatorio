@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace Domain.Entities
 {
-    public class WallBeam : Drawable
+    public class WallBeam : Element
     {
         public Point UbicationPoint { get; set; }
         public List<Wall> AssociatedWalls;

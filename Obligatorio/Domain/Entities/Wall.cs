@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace Domain.Entities
 {
-    public class Wall : Drawable
+    public class Wall : Element
     {
 
         public Point startUbicationPoint { get; set; }

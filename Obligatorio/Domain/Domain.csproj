@@ -47,7 +47,7 @@
     <Compile Include="Data\DataValidation.cs" />
     <Compile Include="Entities\Designer.cs" />
     <Compile Include="Entities\Door.cs" />
-    <Compile Include="Entities\Drawable.cs" />
+    <Compile Include="Entities\Element.cs" />
     <Compile Include="Entities\Grid.cs" />
     <Compile Include="Entities\Opening.cs" />
     <Compile Include="Entities\Wall.cs" />

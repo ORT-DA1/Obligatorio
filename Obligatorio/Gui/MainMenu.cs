@@ -21,7 +21,7 @@ namespace Gui
 
             this.user = user;
             this.designerConfiguration_btn.Visible = user.CanABMDesigners();
-            this.girdConfiguration_btn.Visible = user.CanCreateGrid();
+            this.girdConfiguration_btn.Visible = user.CanABMGrids();
 
             SetUp();
         }

@@ -36,10 +36,6 @@ namespace Domain.Entities
         {
             return true;
         }
-        public virtual bool CanCreateGrid()
-        {
-            return true;
-        }
         public virtual bool CanSeeOwnedGrids()
         {
             return true;

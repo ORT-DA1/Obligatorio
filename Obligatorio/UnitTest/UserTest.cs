@@ -39,11 +39,6 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void TestCanCreateGrid()
-        {
-            Assert.IsTrue(userTest.CanCreateGrid());
-        }
-        [TestMethod]
         public void TestCanSeeOwnedGrids()
         {
             Assert.IsTrue(this.userTest.CanSeeOwnedGrids());

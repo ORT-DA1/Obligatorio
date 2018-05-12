@@ -92,8 +92,7 @@ namespace UnitTest
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
             Grid grid = new Grid(GRID_NAME_OK, client, HEIGHT, WIDTH);
             GRID_HANDLER.Add(grid);
-            GRID_HANDLER.Exist(grid);
         }
-        
+
     }
 }

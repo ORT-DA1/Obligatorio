@@ -15,7 +15,5 @@
         public const string GRID_INVALID_HEIGHT_UNDER = "La altura es incorrecta. Debe ser mayor quer 0 metros";
         public const string GRID_INVALID_WIDTH_ABOVE = "El ancho es incorrecto. Debe ser menor quer 25 metros" ;
         public const string GRID_INVALID_WIDTH_UNDER = "El ancho es incorrecto. Debe ser mayor quer 0 metros";
-
-        public static string GRID_ALREADY_EXIST { get; internal set; }
     }
 }

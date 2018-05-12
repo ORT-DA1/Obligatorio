@@ -50,6 +50,13 @@ namespace Domain.Entities
         {
             return false;
         }
-
+        public override bool CanVerifyInformation()
+        {
+            if (this.LastAccess == null)
+            {
+                return true;
+            }
+           return false;
+        }
     }
 }

@@ -60,7 +60,7 @@ namespace Domain.Entities
                 {
                     Point point = new Point(this.startUbicationPoint.X + i,this.endUbicationPoint.Y);
                     this.Path.Add(point);
-                    i+= Grid.PixelConvertion;
+                    i+= Grid.PixelConvertor;
                 } 
             }
             else
@@ -69,7 +69,7 @@ namespace Domain.Entities
                 {
                     Point point = new Point(this.startUbicationPoint.X, this.endUbicationPoint.Y + i);
                     this.Path.Add(point);
-                    i += Grid.PixelConvertion;
+                    i += Grid.PixelConvertor;
                 }
             }
         }
@@ -126,7 +126,7 @@ namespace Domain.Entities
                         if(point.X == this.startUbicationPoint.X + i)
                             return returnPoint = new Point(point.X, point.Y);
                     }
-                    i += Grid.PixelConvertion;
+                    i += Grid.PixelConvertor;
                 }
             }
             else
@@ -138,7 +138,7 @@ namespace Domain.Entities
                         if (point.Y == this.startUbicationPoint.Y + i)
                             return returnPoint = new Point(point.X, point.Y);
                     }
-                    i += Grid.PixelConvertion;
+                    i += Grid.PixelConvertor;
                 }
             }
             return returnPoint = new Point();

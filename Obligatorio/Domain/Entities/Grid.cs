@@ -15,7 +15,7 @@ namespace Domain.Entities
         public List<Wall> Walls { get; set; }
         public List<WallBeam> WallBeams { get; set; }
         public List<Opening> Openings { get; set; }
-        public static int PixelConvertion = 25;
+        public static int PixelConvertor = 25;
         public int maxMeters = 5;
         private Pen gridPen;
 
@@ -29,8 +29,8 @@ namespace Domain.Entities
 
             this.GridName = gridName;
             this.Client = client ;
-            this.Height = height * PixelConvertion; 
-            this.Width = width * PixelConvertion;
+            this.Height = height * PixelConvertor; 
+            this.Width = width * PixelConvertor;
 
             this.gridPen = new Pen(Color.Black, 2);
         }
@@ -43,7 +43,7 @@ namespace Domain.Entities
 
         private void DrawX(Graphics graphic)
         {
-            for (int i = PixelConvertion; i < this.Height; i += PixelConvertion)
+            for (int i = PixelConvertor; i < this.Height; i += PixelConvertor)
             {
                 Point startPoint = new Point(0, i);
                 Point endPoint = new Point(this.Width, i);
@@ -55,7 +55,7 @@ namespace Domain.Entities
 
         private void DrawY(Graphics graphic)
         {
-            for (int i = PixelConvertion; i < this.Width; i += PixelConvertion)
+            for (int i = PixelConvertor; i < this.Width; i += PixelConvertor)
             {
 
                 Point startPoint = new Point(i, 0);

@@ -35,6 +35,10 @@
             this.titleLbl = new System.Windows.Forms.Label();
             this.loginBtn = new System.Windows.Forms.Button();
             this.exitBtn = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.generateDataStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.datosDePruebaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // userlbl
@@ -77,11 +81,11 @@
             this.titleLbl.AutoSize = true;
             this.titleLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLbl.ForeColor = System.Drawing.Color.DarkBlue;
-            this.titleLbl.Location = new System.Drawing.Point(16, 26);
+            this.titleLbl.Location = new System.Drawing.Point(6, 39);
             this.titleLbl.Name = "titleLbl";
-            this.titleLbl.Size = new System.Drawing.Size(348, 31);
+            this.titleLbl.Size = new System.Drawing.Size(362, 31);
             this.titleLbl.TabIndex = 5;
-            this.titleLbl.Text = "Welcome to Graphic Master";
+            this.titleLbl.Text = "Bienvenido a Graphic Master";
             // 
             // loginBtn
             // 
@@ -104,7 +108,32 @@
             this.exitBtn.UseVisualStyleBackColor = true;
             this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
-            // WelcomeForm
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.generateDataStrip});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(376, 24);
+            this.menuStrip1.TabIndex = 8;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // generateDataStrip
+            // 
+            this.generateDataStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.datosDePruebaToolStripMenuItem});
+            this.generateDataStrip.Name = "generateDataStrip";
+            this.generateDataStrip.Size = new System.Drawing.Size(60, 20);
+            this.generateDataStrip.Text = "Generar";
+            // 
+            // datosDePruebaToolStripMenuItem
+            // 
+            this.datosDePruebaToolStripMenuItem.Name = "datosDePruebaToolStripMenuItem";
+            this.datosDePruebaToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.datosDePruebaToolStripMenuItem.Text = "Datos de Prueba";
+            this.datosDePruebaToolStripMenuItem.Click += new System.EventHandler(this.GenerateData);
+            // 
+            // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -117,8 +146,12 @@
             this.Controls.Add(this.usernameTxt);
             this.Controls.Add(this.passlbl);
             this.Controls.Add(this.userlbl);
-            this.Name = "WelcomeForm";
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.Name = "Login";
             this.Text = "Form1";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -132,6 +165,9 @@
         private System.Windows.Forms.Label titleLbl;
         private System.Windows.Forms.Button loginBtn;
         private System.Windows.Forms.Button exitBtn;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem generateDataStrip;
+        private System.Windows.Forms.ToolStripMenuItem datosDePruebaToolStripMenuItem;
     }
 }
 

@@ -25,13 +25,38 @@ namespace Domain.Data
             this.Designers = new List<Designer>();
             this.Grids = new List<Grid>();
             this.Administrator = new Administrator("admin", "admin", "Joaquin", "Touris", new DateTime(2018, 05, 05), new DateTime(2018, 05, 05));
-            
-            Initialize();
         }
 
-        private void Initialize()
+        public void Initialize()
         {
             this.Users.Add(Administrator);
+            this.GenerateDesigners();
+            this.GenerateClients();
+        }
+
+        private void GenerateDesigners()
+        {
+            DateTime validDate = new DateTime(2018, 05, 28, 10, 53, 55);
+            Designer firstDesigner = new Designer("donald", "donald123", "Donald", "Trump", validDate, null);
+            Designer secondDesigner = new Designer("slash", "guitarLover1", "Slash", "Jackson", validDate, null);
+
+            this.Designers.Add(firstDesigner);
+            this.Designers.Add(secondDesigner);
+
+            this.Users.Add(firstDesigner);
+            this.Users.Add(secondDesigner);
+        }
+        private void GenerateClients()
+        {
+            DateTime validDate = new DateTime(2018, 05, 28, 10, 53, 55);
+            Client firstClient = new Client("Netsuite", "12345", "Oracle", "Netsuite", "12345678",234234234 , "16 de Abril 1912", validDate, null);
+            Client secondClient = new Client("Lol", "lol123", "League", "of Legends", "54683928", 234234234, "16 de Abril 1912", validDate, null);
+
+            this.Clients.Add(firstClient);
+            this.Clients.Add(secondClient);
+
+            this.Users.Add(firstClient);
+            this.Users.Add(secondClient);
         }
 
         public static DataStorage GetStorageInstance()
@@ -50,6 +75,7 @@ namespace Domain.Data
         {
             this.Clients.Clear();
             this.Designers.Clear();
+            this.Users.Clear();
         }
 
         public void UserExist(string userName, string password)
@@ -84,6 +110,7 @@ namespace Domain.Data
         public void DeleteClient(Client client)
         {
             storageInstance.Clients.Remove(client);
+            storageInstance.Users.Remove(client);
         }
 
         public void ModifyClient(Client clientToModify, Client modifiedClient)
@@ -96,6 +123,9 @@ namespace Domain.Data
             client.Id = modifiedClient.Id;
             client.Phone = modifiedClient.Phone;
             client.Address = modifiedClient.Address;
+
+            this.Users.Remove(clientToModify);
+            this.Users.Add(modifiedClient);
         }
 
         public Client GetClient(Client clientToFind)
@@ -129,11 +159,13 @@ namespace Domain.Data
         public void SaveDesigner(Designer designer)
         {
             this.Designers.Add(designer);
+            this.Users.Add(designer);
         }
 
         public void DeleteDesigner(Designer designer)
         {
             this.Designers.Remove(designer);
+            this.Users.Remove(designer);
         }
          
         public void ModifyDesigner(Designer designerToModify, Designer modifiedDesigner)

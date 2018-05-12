@@ -80,5 +80,10 @@ namespace Gui
             clientHandler.Add(firstClient);
             clientHandler.Add(secondClient);
         }
+
+        private void quit(object sender, FormClosingEventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
+        }
     }
 }

@@ -20,8 +20,9 @@ namespace Gui
             InitializeComponent();
 
             this.user = user;
-            this.designerConfiguration_btn.Visible = user.CanABMDesigners();
-            this.girdConfiguration_btn.Visible = user.CanABMGrids();
+            this.showClientsConfiguration_btn.Visible = user.CanABMClients();
+            this.showDesignerConfiguration_btn.Visible = user.CanABMDesigners();
+            this.showGirdConfiguration_btn.Visible = user.CanABMGrids();
 
             SetUp();
         }
@@ -30,13 +31,17 @@ namespace Gui
         {
             this.mainPicture_box.Visible = true;
 
-            this.createGrid_btn.Visible = false;
-            this.modifyGrid_btn.Visible = false;
-            this.deleteGrid_btn.Visible = false;
-
             this.createDesigner_btn.Visible = false;
             this.modifyDesigner_btn.Visible = false;
             this.deleteDesigners_btn.Visible = false;
+
+            this.createClients_brn.Visible = false;
+            this.modifyClients_btn.Visible = false;
+            this.deleteClients_btn.Visible = false;
+
+            this.createGrid_btn.Visible = false;
+            this.modifyGrid_btn.Visible = false;
+            this.deleteGrid_btn.Visible = false;
 
             this.clearMenu_Btn.Visible = false;
         }
@@ -51,9 +56,16 @@ namespace Gui
         }
 
         //Client
+        private void showClientsConfiguration(object sender, EventArgs e)
+        {
+            interactiveMenu();
+            this.createClients_brn.Visible = true;
+            this.modifyClients_btn.Visible = true;
+            this.deleteClients_btn.Visible = true;
+        }
 
         //Designer
-        private void showGridConfigurationOptions(object sender, EventArgs e)
+        private void showGridConfiguration(object sender, EventArgs e)
         {
             interactiveMenu();
             this.createGrid_btn.Visible = true;
@@ -76,6 +88,7 @@ namespace Gui
         }
 
         private void interactiveMenu() {
+            this.SetUp();
             this.clearMenu_Btn.Visible = true;
         }
 
@@ -84,10 +97,9 @@ namespace Gui
             this.SetUp();
         }
 
-        private void exit(object sender, FormClosingEventArgs e)
+        private void quit(object sender, FormClosingEventArgs e)
         {
             System.Windows.Forms.Application.Exit();
         }
-
     }
 }

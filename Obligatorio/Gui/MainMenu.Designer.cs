@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             this.titleLbl = new System.Windows.Forms.Label();
-            this.designerConfiguration_btn = new System.Windows.Forms.Button();
+            this.showDesignerConfiguration_btn = new System.Windows.Forms.Button();
             this.createGrid_btn = new System.Windows.Forms.Button();
-            this.girdConfiguration_btn = new System.Windows.Forms.Button();
+            this.showGirdConfiguration_btn = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.userOptions_Btn = new System.Windows.Forms.ToolStripMenuItem();
             this.logOut_Btn = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,6 +43,10 @@
             this.createDesigner_btn = new System.Windows.Forms.Button();
             this.modifyDesigner_btn = new System.Windows.Forms.Button();
             this.deleteDesigners_btn = new System.Windows.Forms.Button();
+            this.showClientsConfiguration_btn = new System.Windows.Forms.Button();
+            this.createClients_brn = new System.Windows.Forms.Button();
+            this.modifyClients_btn = new System.Windows.Forms.Button();
+            this.deleteClients_btn = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainPicture_box)).BeginInit();
             this.SuspendLayout();
@@ -57,22 +61,22 @@
             this.titleLbl.TabIndex = 0;
             this.titleLbl.Text = "Menu Principal";
             // 
-            // designerConfiguration_btn
+            // showDesignerConfiguration_btn
             // 
-            this.designerConfiguration_btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.designerConfiguration_btn.Location = new System.Drawing.Point(20, 78);
-            this.designerConfiguration_btn.Name = "designerConfiguration_btn";
-            this.designerConfiguration_btn.Size = new System.Drawing.Size(169, 32);
-            this.designerConfiguration_btn.TabIndex = 1;
-            this.designerConfiguration_btn.Text = "Mantenimiento de Diseñadores";
-            this.designerConfiguration_btn.UseVisualStyleBackColor = true;
-            this.designerConfiguration_btn.Visible = false;
-            this.designerConfiguration_btn.Click += new System.EventHandler(this.showDesignersConfiguration);
+            this.showDesignerConfiguration_btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.showDesignerConfiguration_btn.Location = new System.Drawing.Point(20, 78);
+            this.showDesignerConfiguration_btn.Name = "showDesignerConfiguration_btn";
+            this.showDesignerConfiguration_btn.Size = new System.Drawing.Size(169, 32);
+            this.showDesignerConfiguration_btn.TabIndex = 1;
+            this.showDesignerConfiguration_btn.Text = "Mantenimiento de Diseñadores";
+            this.showDesignerConfiguration_btn.UseVisualStyleBackColor = true;
+            this.showDesignerConfiguration_btn.Visible = false;
+            this.showDesignerConfiguration_btn.Click += new System.EventHandler(this.showDesignersConfiguration);
             // 
             // createGrid_btn
             // 
             this.createGrid_btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.createGrid_btn.Location = new System.Drawing.Point(268, 48);
+            this.createGrid_btn.Location = new System.Drawing.Point(268, 53);
             this.createGrid_btn.Name = "createGrid_btn";
             this.createGrid_btn.Size = new System.Drawing.Size(169, 32);
             this.createGrid_btn.TabIndex = 2;
@@ -81,17 +85,17 @@
             this.createGrid_btn.Visible = false;
             this.createGrid_btn.Click += new System.EventHandler(this.createGrid);
             // 
-            // girdConfiguration_btn
+            // showGirdConfiguration_btn
             // 
-            this.girdConfiguration_btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.girdConfiguration_btn.Location = new System.Drawing.Point(20, 78);
-            this.girdConfiguration_btn.Name = "girdConfiguration_btn";
-            this.girdConfiguration_btn.Size = new System.Drawing.Size(169, 32);
-            this.girdConfiguration_btn.TabIndex = 3;
-            this.girdConfiguration_btn.Text = "Mantenimiento de Planos";
-            this.girdConfiguration_btn.UseVisualStyleBackColor = true;
-            this.girdConfiguration_btn.Visible = false;
-            this.girdConfiguration_btn.Click += new System.EventHandler(this.showGridConfigurationOptions);
+            this.showGirdConfiguration_btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.showGirdConfiguration_btn.Location = new System.Drawing.Point(20, 78);
+            this.showGirdConfiguration_btn.Name = "showGirdConfiguration_btn";
+            this.showGirdConfiguration_btn.Size = new System.Drawing.Size(169, 32);
+            this.showGirdConfiguration_btn.TabIndex = 3;
+            this.showGirdConfiguration_btn.Text = "Mantenimiento de Planos";
+            this.showGirdConfiguration_btn.UseVisualStyleBackColor = true;
+            this.showGirdConfiguration_btn.Visible = false;
+            this.showGirdConfiguration_btn.Click += new System.EventHandler(this.showGridConfiguration);
             // 
             // menuStrip1
             // 
@@ -163,7 +167,7 @@
             // createDesigner_btn
             // 
             this.createDesigner_btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.createDesigner_btn.Location = new System.Drawing.Point(268, 48);
+            this.createDesigner_btn.Location = new System.Drawing.Point(268, 53);
             this.createDesigner_btn.Name = "createDesigner_btn";
             this.createDesigner_btn.Size = new System.Drawing.Size(169, 32);
             this.createDesigner_btn.TabIndex = 9;
@@ -174,7 +178,7 @@
             // modifyDesigner_btn
             // 
             this.modifyDesigner_btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.modifyDesigner_btn.Location = new System.Drawing.Point(268, 112);
+            this.modifyDesigner_btn.Location = new System.Drawing.Point(268, 113);
             this.modifyDesigner_btn.Name = "modifyDesigner_btn";
             this.modifyDesigner_btn.Size = new System.Drawing.Size(169, 34);
             this.modifyDesigner_btn.TabIndex = 10;
@@ -193,28 +197,76 @@
             this.deleteDesigners_btn.UseVisualStyleBackColor = true;
             this.deleteDesigners_btn.Visible = false;
             // 
+            // showClientsConfiguration_btn
+            // 
+            this.showClientsConfiguration_btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.showClientsConfiguration_btn.Location = new System.Drawing.Point(21, 125);
+            this.showClientsConfiguration_btn.Name = "showClientsConfiguration_btn";
+            this.showClientsConfiguration_btn.Size = new System.Drawing.Size(168, 32);
+            this.showClientsConfiguration_btn.TabIndex = 12;
+            this.showClientsConfiguration_btn.Text = "Mantenimiento de Clientes";
+            this.showClientsConfiguration_btn.UseVisualStyleBackColor = true;
+            this.showClientsConfiguration_btn.Visible = false;
+            this.showClientsConfiguration_btn.Click += new System.EventHandler(this.showClientsConfiguration);
+            // 
+            // createClients_brn
+            // 
+            this.createClients_brn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.createClients_brn.Location = new System.Drawing.Point(268, 53);
+            this.createClients_brn.Name = "createClients_brn";
+            this.createClients_brn.Size = new System.Drawing.Size(169, 32);
+            this.createClients_brn.TabIndex = 13;
+            this.createClients_brn.Text = "Crear Clientes";
+            this.createClients_brn.UseVisualStyleBackColor = true;
+            this.createClients_brn.Visible = false;
+            // 
+            // modifyClients_btn
+            // 
+            this.modifyClients_btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.modifyClients_btn.Location = new System.Drawing.Point(268, 113);
+            this.modifyClients_btn.Name = "modifyClients_btn";
+            this.modifyClients_btn.Size = new System.Drawing.Size(169, 34);
+            this.modifyClients_btn.TabIndex = 14;
+            this.modifyClients_btn.Text = "Modificar Clientes";
+            this.modifyClients_btn.UseVisualStyleBackColor = true;
+            this.modifyClients_btn.Visible = false;
+            // 
+            // deleteClients_btn
+            // 
+            this.deleteClients_btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.deleteClients_btn.Location = new System.Drawing.Point(268, 180);
+            this.deleteClients_btn.Name = "deleteClients_btn";
+            this.deleteClients_btn.Size = new System.Drawing.Size(169, 33);
+            this.deleteClients_btn.TabIndex = 15;
+            this.deleteClients_btn.Text = "Eliminar Clientes";
+            this.deleteClients_btn.UseVisualStyleBackColor = true;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(491, 290);
+            this.Controls.Add(this.deleteClients_btn);
+            this.Controls.Add(this.modifyClients_btn);
+            this.Controls.Add(this.createClients_brn);
+            this.Controls.Add(this.showClientsConfiguration_btn);
             this.Controls.Add(this.deleteDesigners_btn);
             this.Controls.Add(this.modifyDesigner_btn);
             this.Controls.Add(this.createDesigner_btn);
             this.Controls.Add(this.deleteGrid_btn);
             this.Controls.Add(this.modifyGrid_btn);
             this.Controls.Add(this.clearMenu_Btn);
-            this.Controls.Add(this.girdConfiguration_btn);
+            this.Controls.Add(this.showGirdConfiguration_btn);
             this.Controls.Add(this.createGrid_btn);
-            this.Controls.Add(this.designerConfiguration_btn);
+            this.Controls.Add(this.showDesignerConfiguration_btn);
             this.Controls.Add(this.titleLbl);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.mainPicture_box);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainMenu";
-            this.Text = "MainMenu";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.exit);
+            this.Text = "Graphic Master";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.quit);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainPicture_box)).EndInit();
@@ -226,9 +278,9 @@
         #endregion
 
         private System.Windows.Forms.Label titleLbl;
-        private System.Windows.Forms.Button designerConfiguration_btn;
+        private System.Windows.Forms.Button showDesignerConfiguration_btn;
         private System.Windows.Forms.Button createGrid_btn;
-        private System.Windows.Forms.Button girdConfiguration_btn;
+        private System.Windows.Forms.Button showGirdConfiguration_btn;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem userOptions_Btn;
         private System.Windows.Forms.ToolStripMenuItem logOut_Btn;
@@ -239,5 +291,9 @@
         private System.Windows.Forms.Button createDesigner_btn;
         private System.Windows.Forms.Button modifyDesigner_btn;
         private System.Windows.Forms.Button deleteDesigners_btn;
+        private System.Windows.Forms.Button showClientsConfiguration_btn;
+        private System.Windows.Forms.Button createClients_brn;
+        private System.Windows.Forms.Button modifyClients_btn;
+        private System.Windows.Forms.Button deleteClients_btn;
     }
 }

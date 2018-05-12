@@ -43,5 +43,10 @@ namespace UnitTest
         {
             Assert.IsTrue(this.userTest.CanSeeOwnedGrids());
         }
+        [TestMethod]
+        public void TestCanVerifyInformation()
+        {
+            Assert.IsTrue(this.userTest.CanVerifyInformation());
+        }
     }
 }

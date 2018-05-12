@@ -32,9 +32,18 @@ namespace Domain.Logic
 
         public void Delete(Grid grid)
         {
+            NotExist(grid);
             this.storage.DeleteGrid(grid);
         }
         
+        public void NotExist(Grid grid)
+        {
+            if (!this.storage.Grids.Contains(grid))
+            {
+                throw new ExceptionController(ExceptionMessage.GRID_INVALID_HEIGHT_ABOVE); // cambiar exception
+            }
+        }
+
     }
 
 }

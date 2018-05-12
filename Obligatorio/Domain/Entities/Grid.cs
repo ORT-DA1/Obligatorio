@@ -71,43 +71,43 @@ namespace Domain.Entities
             return true;
         }
 
-        public void AddWall(Graphics graphic, Wall wall)
-        {
-            this.IsValid(wall);
-            if (wall.SizeGreaterThanMaximum()) //si el largo del wall es > 5 + refactor al nombre
-            {
-                Wall anotherWall = new Wall(wall.startUbicationPoint, wall.CalculateLocationPoint(maxMeters));//creo una nueva pared
-                                                                                                                //le seteo el punto inicial igual a wall
-                                                                                                                //le seteo el punto final en base a X,Y de wall 5 metros despues
-                AddWall(graphic, anotherWall);//llamo recursivo con anotherWall 
-                wall.startUbicationPoint = wall.CalculateLocationPoint(maxMeters); //corro el punto inicial de wall
-                AddWall(graphic, wall);//llamo recursivo con la nueva wall   
-            }
-            if (CutAWall(wall))//verifico si alguna pared la corta
-            {
-                Point intersection = wall.FirstIntersection(wall); //obtengo la interseccion con la primera pared
-                Wall newWall = new Wall(wall.startUbicationPoint, intersection); //Si la corta agrego creo una pared desde el punto inicial hasta donde se corta
-                newWall.Draw(graphic);
-                this.Walls.Add(newWall);
-                AddWallBeam(graphic, newWall.startUbicationPoint);//verifico si tengo que insertar viga en inicio + cortar paredes
-                AddWallBeam(graphic, newWall.endUbicationPoint);//verifico si tengo que insertar viga en final + cortar paredes
-                wall.startUbicationPoint = intersection; // modifico el punto inicial de wall para que sea en donde se corta con la otra pared
-                AddWall(graphic, wall);//llamo recursivo con wall
-            }
-            else
-            {
-                wall.Draw(graphic);
-                this.Walls.Add(wall);
-                AddWallBeam(graphic, wall.startUbicationPoint);//agrego viga inicial
-                AddWallBeam(graphic, wall.endUbicationPoint);//agrego viga final
-            }
+        //public void AddWall(Graphics graphic, Wall wall)
+        //{
+        //    this.IsValid(wall);
+        //    if (wall.SizeGreaterThanMaximum()) //si el largo del wall es > 5 + refactor al nombre
+        //    {
+        //        Wall anotherWall = new Wall(wall.startUbicationPoint, wall.CalculateLocationPoint(maxMeters));//creo una nueva pared
+        //                                                                                                        //le seteo el punto inicial igual a wall
+        //                                                                                                        //le seteo el punto final en base a X,Y de wall 5 metros despues
+        //        AddWall(graphic, anotherWall);//llamo recursivo con anotherWall 
+        //        wall.startUbicationPoint = wall.CalculateLocationPoint(maxMeters); //corro el punto inicial de wall
+        //        AddWall(graphic, wall);//llamo recursivo con la nueva wall   
+        //    }
+        //    if (CutAWall(wall))//verifico si alguna pared la corta
+        //    {
+        //        Point intersection = wall.FirstIntersection(wall); //obtengo la interseccion con la primera pared
+        //        Wall newWall = new Wall(wall.startUbicationPoint, intersection); //Si la corta agrego creo una pared desde el punto inicial hasta donde se corta
+        //        newWall.Draw(graphic);
+        //        this.Walls.Add(newWall);
+        //        AddWallBeam(graphic, newWall.startUbicationPoint);//verifico si tengo que insertar viga en inicio + cortar paredes
+        //        AddWallBeam(graphic, newWall.endUbicationPoint);//verifico si tengo que insertar viga en final + cortar paredes
+        //        wall.startUbicationPoint = intersection; // modifico el punto inicial de wall para que sea en donde se corta con la otra pared
+        //        AddWall(graphic, wall);//llamo recursivo con wall
+        //    }
+        //    else
+        //    {
+        //        wall.Draw(graphic);
+        //        this.Walls.Add(wall);
+        //        AddWallBeam(graphic, wall.startUbicationPoint);//agrego viga inicial
+        //        AddWallBeam(graphic, wall.endUbicationPoint);//agrego viga final
+        //    }
             
-        }
+        //}
 
         private void IsValid(Wall wall)
         {
             this.Exist(wall);
-            this.ContainedIn(wall);
+            //this.ContainedIn(wall);
         }
 
         private void Exist(Wall wall)

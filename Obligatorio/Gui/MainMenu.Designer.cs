@@ -59,6 +59,7 @@
             // 
             // designerConfiguration_btn
             // 
+            this.designerConfiguration_btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.designerConfiguration_btn.Location = new System.Drawing.Point(20, 78);
             this.designerConfiguration_btn.Name = "designerConfiguration_btn";
             this.designerConfiguration_btn.Size = new System.Drawing.Size(169, 32);
@@ -70,6 +71,7 @@
             // 
             // createGrid_btn
             // 
+            this.createGrid_btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.createGrid_btn.Location = new System.Drawing.Point(268, 48);
             this.createGrid_btn.Name = "createGrid_btn";
             this.createGrid_btn.Size = new System.Drawing.Size(169, 32);
@@ -81,7 +83,8 @@
             // 
             // girdConfiguration_btn
             // 
-            this.girdConfiguration_btn.Location = new System.Drawing.Point(20, 98);
+            this.girdConfiguration_btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.girdConfiguration_btn.Location = new System.Drawing.Point(20, 78);
             this.girdConfiguration_btn.Name = "girdConfiguration_btn";
             this.girdConfiguration_btn.Size = new System.Drawing.Size(169, 32);
             this.girdConfiguration_btn.TabIndex = 3;
@@ -118,6 +121,7 @@
             // clearMenu_Btn
             // 
             this.clearMenu_Btn.AutoSize = true;
+            this.clearMenu_Btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.clearMenu_Btn.Location = new System.Drawing.Point(317, 259);
             this.clearMenu_Btn.Name = "clearMenu_Btn";
             this.clearMenu_Btn.Size = new System.Drawing.Size(70, 13);
@@ -136,6 +140,7 @@
             // 
             // modifyGrid_btn
             // 
+            this.modifyGrid_btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.modifyGrid_btn.Location = new System.Drawing.Point(268, 113);
             this.modifyGrid_btn.Name = "modifyGrid_btn";
             this.modifyGrid_btn.Size = new System.Drawing.Size(169, 33);
@@ -146,6 +151,7 @@
             // 
             // deleteGrid_btn
             // 
+            this.deleteGrid_btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deleteGrid_btn.Location = new System.Drawing.Point(268, 180);
             this.deleteGrid_btn.Name = "deleteGrid_btn";
             this.deleteGrid_btn.Size = new System.Drawing.Size(169, 33);
@@ -156,6 +162,7 @@
             // 
             // createDesigner_btn
             // 
+            this.createDesigner_btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.createDesigner_btn.Location = new System.Drawing.Point(268, 48);
             this.createDesigner_btn.Name = "createDesigner_btn";
             this.createDesigner_btn.Size = new System.Drawing.Size(169, 32);
@@ -166,9 +173,10 @@
             // 
             // modifyDesigner_btn
             // 
-            this.modifyDesigner_btn.Location = new System.Drawing.Point(268, 111);
+            this.modifyDesigner_btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.modifyDesigner_btn.Location = new System.Drawing.Point(268, 112);
             this.modifyDesigner_btn.Name = "modifyDesigner_btn";
-            this.modifyDesigner_btn.Size = new System.Drawing.Size(168, 34);
+            this.modifyDesigner_btn.Size = new System.Drawing.Size(169, 34);
             this.modifyDesigner_btn.TabIndex = 10;
             this.modifyDesigner_btn.Text = "Modificar Diseñadores";
             this.modifyDesigner_btn.UseVisualStyleBackColor = true;
@@ -176,9 +184,10 @@
             // 
             // deleteDesigners_btn
             // 
-            this.deleteDesigners_btn.Location = new System.Drawing.Point(270, 181);
+            this.deleteDesigners_btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.deleteDesigners_btn.Location = new System.Drawing.Point(268, 180);
             this.deleteDesigners_btn.Name = "deleteDesigners_btn";
-            this.deleteDesigners_btn.Size = new System.Drawing.Size(167, 32);
+            this.deleteDesigners_btn.Size = new System.Drawing.Size(169, 33);
             this.deleteDesigners_btn.TabIndex = 11;
             this.deleteDesigners_btn.Text = "Eliminar Diseñadores";
             this.deleteDesigners_btn.UseVisualStyleBackColor = true;

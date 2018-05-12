@@ -44,6 +44,7 @@ namespace Gui
         //Administrator
         private void showDesignersConfiguration(object sender, EventArgs e)
         {
+            interactiveMenu();
             this.createDesigner_btn.Visible = true;
             this.modifyDesigner_btn.Visible = true;
             this.deleteDesigners_btn.Visible = true;

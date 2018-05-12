@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace Domain.Entities
 {
@@ -6,6 +8,7 @@ namespace Domain.Entities
     {
         public Point startUbicationPoint { get; set; }
         public Point endUbicationPoint { get; set; }
+        public List<Point> Path { get; set; }
         private Pen wallPen;
 
         public Wall(Point startPoint, Point endPoint)
@@ -13,7 +16,40 @@ namespace Domain.Entities
             this.startUbicationPoint = startPoint;
             this.endUbicationPoint = endPoint;
 
+            this.Path = new List<Point>();
             this.wallPen = new Pen(Color.LightGreen, 7);
+
+            this.createPath();
+        }
+
+        public int getDistance()
+        {
+            if (isHorizontalWall())
+                return this.endUbicationPoint.Y - this.startUbicationPoint.Y;
+            else
+                return this.endUbicationPoint.X - this.startUbicationPoint.X;
+        }
+
+        private void createPath()
+        {
+            if (isHorizontalWall())
+            {
+                for(int i=0;  i<getDistance();)
+                {
+                    Point point = new Point(this.startUbicationPoint.X + i,this.endUbicationPoint.Y);
+                    this.Path.Add(point);
+                    i+= Grid.PixelConvertion;
+                } 
+            }
+            else
+            {
+                for (int i = 0; i < getDistance();)
+                {
+                    Point point = new Point(this.startUbicationPoint.X, this.endUbicationPoint.Y + i);
+                    this.Path.Add(point);
+                    i += Grid.PixelConvertion;
+                }
+            }
         }
 
         public override void Draw(Graphics graphic)
@@ -38,9 +74,9 @@ namespace Domain.Entities
         public bool SizeGreaterThanMaximum()
         {
             if(isHorizontalWall())
-                return (this.startUbicationPoint.X - this.endUbicationPoint.X) > 5;
+                return (this.endUbicationPoint.X - this.startUbicationPoint.X) > 5;
             else
-                return (this.startUbicationPoint.Y - this.endUbicationPoint.Y) > 5;
+                return (this.endUbicationPoint.Y - this.startUbicationPoint.Y) > 5;
         }
 
         public bool isHorizontalWall()
@@ -51,11 +87,39 @@ namespace Domain.Entities
         public Point CalculateLocationPoint(int maxMeters)
         {
             if (isHorizontalWall())
-                return new Point(this.startUbicationPoint.Y + maxMeters);
+                return new Point(this.startUbicationPoint.X + maxMeters, this.endUbicationPoint.Y);
             else
-                return new Point(this.startUbicationPoint.X + maxMeters);
+                return new Point(this.startUbicationPoint.X ,this.startUbicationPoint.Y + maxMeters);
         }
 
-
+        public Point FirstIntersection(Wall wall)
+        {
+            Point returnPoint;
+            if (isHorizontalWall())
+            {
+                for (int i = 1; i < getDistance();)
+                {
+                    foreach (Point point in wall.Path)
+                    {
+                        if(point.X == this.startUbicationPoint.X + i)
+                            return returnPoint = new Point(point.X, point.Y);
+                    }
+                    i += Grid.PixelConvertion;
+                }
+            }
+            else
+            {
+                for (int i = 1; i < getDistance();)
+                {
+                    foreach (Point point in wall.Path)
+                    {
+                        if (point.Y == this.startUbicationPoint.Y + i)
+                            return returnPoint = new Point(point.X, point.Y);
+                    }
+                    i += Grid.PixelConvertion;
+                }
+            }
+            return returnPoint = new Point();
+        }
     }
 }

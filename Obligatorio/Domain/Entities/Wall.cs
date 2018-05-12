@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 
 namespace Domain.Entities
@@ -13,8 +12,31 @@ namespace Domain.Entities
 
         public Wall(Point startPoint, Point endPoint)
         {
-            this.startUbicationPoint = startPoint;
-            this.endUbicationPoint = endPoint;
+            if (startPoint.Y.Equals(endPoint.Y)){
+                if(startPoint.X < endPoint.Y)
+                {
+                    this.startUbicationPoint = startPoint;
+                    this.endUbicationPoint = endPoint;
+                }
+                else
+                {
+                    this.startUbicationPoint = endPoint;
+                    this.endUbicationPoint = startPoint;
+                }
+            }
+            else
+            {
+                if (startPoint.Y > endPoint.Y)
+                {
+                    this.startUbicationPoint = startPoint;
+                    this.endUbicationPoint = endPoint;
+                }
+                else
+                {
+                    this.startUbicationPoint = endPoint;
+                    this.endUbicationPoint = startPoint;
+                }
+            }
 
             this.Path = new List<Point>();
             this.wallPen = new Pen(Color.LightGreen, 7);
@@ -25,9 +47,9 @@ namespace Domain.Entities
         public int getDistance()
         {
             if (isHorizontalWall())
-                return this.endUbicationPoint.Y - this.startUbicationPoint.Y;
+                return this.startUbicationPoint.X - this.endUbicationPoint.X;
             else
-                return this.endUbicationPoint.X - this.startUbicationPoint.X;
+                return this.startUbicationPoint.Y- this.endUbicationPoint.Y;
         }
 
         private void createPath()

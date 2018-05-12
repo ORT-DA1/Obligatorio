@@ -1,7 +1,6 @@
 ﻿using Domain.Exceptions;
 using System.Collections.Generic;
 using System.Drawing;
-using System;
 using System.Linq;
 
 namespace Domain.Entities
@@ -66,11 +65,6 @@ namespace Domain.Entities
             }
         }
 
-        public bool validateWall(Wall wall)
-        {
-            return true;
-        }
-
         public void AddWall(Graphics graphic, Wall wall)
         {
             this.IsValid(wall);
@@ -83,7 +77,7 @@ namespace Domain.Entities
                 wall.startUbicationPoint = wall.CalculateLocationPoint(maxMeters); //corro el punto inicial de wall
                 AddWall(graphic, wall);//llamo recursivo con la nueva wall   
             }
-            if (CutAWall(wall))//verifico si alguna pared la corta
+            if (isCuttingAWall(wall))//verifico si alguna pared la corta
             {
                 Point intersection = wall.FirstIntersection(wall); //obtengo la interseccion con la primera pared
                 Wall newWall = new Wall(wall.startUbicationPoint, intersection); //Si la corta agrego creo una pared desde el punto inicial hasta donde se corta
@@ -104,7 +98,7 @@ namespace Domain.Entities
 
         }
 
-        private bool CutAWall(Wall wall)
+        public bool isCuttingAWall(Wall wall)
         {
             bool isCutting = false;
             foreach (Wall anotherWall in this.Walls)
@@ -161,14 +155,9 @@ namespace Domain.Entities
             };
         }
 
-        private bool ValidWallBeam(Point ubicationPoint)
+        public bool ValidWallBeam(Point ubicationPoint)
         {
-            return (this.WallBeams.First(wallBeam => wallBeam.UbicationPoint.Equals(ubicationPoint))).Equals(0);
-        }
-
-        public void AddOpening(Opening opening)
-        {
-
+            return (!this.WallBeams.Contains(new WallBeam(ubicationPoint)));
         }
 
         public void RemoveWall(Wall wall)
@@ -180,7 +169,7 @@ namespace Domain.Entities
             RemoveWallBeam(endWallBeam);
         }
 
-        private WallBeam getWallBeam(Point startUbicationPoint)
+        public WallBeam getWallBeam(Point startUbicationPoint)
         {
             return WallBeams.First(wallBeam => wallBeam.UbicationPoint.Equals(startUbicationPoint));
         }
@@ -201,7 +190,7 @@ namespace Domain.Entities
             }
         }
 
-        private bool ContainsPoint(List<Point> list, Point point)
+        public bool ContainsPoint(List<Point> list, Point point)
         {
             foreach (Point anotherPoint in list)
             {
@@ -209,6 +198,11 @@ namespace Domain.Entities
                     return true;
             }
             return false;
+        }
+
+        public void AddOpening(Opening opening)
+        {
+
         }
 
         public void RemoveOpening(Wall wall)

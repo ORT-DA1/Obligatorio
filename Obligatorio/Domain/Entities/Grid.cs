@@ -106,7 +106,7 @@ namespace Domain.Entities
             if (gridObject != null && this.GetType().Equals(gridObject.GetType()))
             {
                 Grid grid = (Grid)gridObject;
-                if (this.Designer.Equals(grid.Designer) && (this.Client.Equals(grid.Client)))
+                if ((this.Client.Equals(grid.Client)))
                 {
                     isEqual = true;
                 }

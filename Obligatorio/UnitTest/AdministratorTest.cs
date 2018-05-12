@@ -32,5 +32,10 @@ namespace UnitTest
         {
             Assert.IsFalse(this.storage.Administrator.CanABMGrids());
         }
+        [TestMethod]
+        public void TestCanVerifyInformation()
+        {
+            Assert.IsFalse(this.storage.Administrator.CanVerifyInformation());
+        }
     }
 }

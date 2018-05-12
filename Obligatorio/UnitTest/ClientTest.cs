@@ -53,10 +53,10 @@ namespace UnitTest
             Assert.IsFalse(client.CanABMDesigners());
         }
         [TestMethod]
-        public void TestCanCreateGrid()
+        public void TestCanABMGrids()
         {
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
-            Assert.IsFalse(client.CanCreateGrid());
+            Assert.IsFalse(client.CanABMGrids());
         }
 
 

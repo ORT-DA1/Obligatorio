@@ -32,7 +32,7 @@ namespace Domain.Entities
         {
             return true;
         }
-        public virtual bool CanCreateGrid()
+        public virtual bool CanABMGrids()
         {
             return true;
         }

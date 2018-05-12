@@ -31,6 +31,26 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void TestCanABMClients()
+        {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
+            Assert.IsFalse(designer.CanABMClients());
+        }
+
+        [TestMethod]
+        public void TestCanABMDesigners()
+        {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
+            Assert.IsFalse(designer.CanABMDesigners());
+        }
+        [TestMethod]
+        public void TestCanSeeOwnedGrids()
+        {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
+            Assert.IsFalse(designer.CanSeeOwnedGrids());
+        }
+
+        [TestMethod]
         public void TestAddDesigner()
         {
             Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
@@ -113,37 +133,37 @@ namespace UnitTest
             return new Designer(username, password, name, surname, registrationDate, null);
         }
 
-        //[TestMethod]
-        //[ExpectedException(typeof(Exception))]
-        //public void TestCreateDesignerWithUsernameInvalid()
-        //{
-        //    Designer designer = CreateDesigner("", PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK);
-        //    DesignerHandler.AddDesigner(designer);
-        //}
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestCreateDesignerWithUsernameInvalid()
+        {
+            Designer designer = CreateDesigner("", PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK);
+            DESIGNER_HANDLER.Add(designer);
+        }
 
-        //[TestMethod]
-        //[ExpectedException(typeof(Exception))]
-        //public void TestCreateDesignerWithPasswordInvalid()
-        //{
-        //    Designer designer = CreateDesigner(USERNAME_OK, "", NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK);
-        //    DesignerHandler.AddDesigner(designer);
-        //}
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestCreateDesignerWithPasswordInvalid()
+        {
+            Designer designer = CreateDesigner(USERNAME_OK, "", NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK);
+            DESIGNER_HANDLER.Add(designer);
+        }
 
-        //[TestMethod]
-        //[ExpectedException(typeof(Exception))]
-        //public void TestCreateDesignerWithNameInvalid()
-        //{
-        //    Designer designer = CreateDesigner(USERNAME_OK, PASSWORD_OK, "", SURNAME_OK, REGISTRATIONDATE_OK);
-        //    DesignerHandler.AddDesigner(designer);
-        //}
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestCreateDesignerWithNameInvalid()
+        {
+            Designer designer = CreateDesigner(USERNAME_OK, PASSWORD_OK, "", SURNAME_OK, REGISTRATIONDATE_OK);
+            DESIGNER_HANDLER.Add(designer);
+        }
 
-        //[TestMethod]
-        //[ExpectedException(typeof(Exception))]
-        //public void TestCreateDesignerWithSurnameInvalid()
-        //{
-        //    Designer designer = CreateDesigner(USERNAME_OK, PASSWORD_OK, NAME_OK, "", REGISTRATIONDATE_OK);
-        //    DesignerHandler.AddDesigner(designer);
-        //}
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestCreateDesignerWithSurnameInvalid()
+        {
+            Designer designer = CreateDesigner(USERNAME_OK, PASSWORD_OK, NAME_OK, "", REGISTRATIONDATE_OK);
+            DESIGNER_HANDLER.Add(designer);
+        }
 
     }
 }

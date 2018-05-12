@@ -33,10 +33,11 @@ namespace UnitTest
             Assert.IsTrue(this.userTest.CanABMDesigners());
         }
         [TestMethod]
-        public void TestCanCreateGrid()
+        public void TestCanABMGrids()
         {
-            Assert.IsTrue(userTest.CanCreateGrid());
+            Assert.IsTrue(this.userTest.CanABMGrids());
         }
+
         [TestMethod]
         public void TestCanSeeOwnedGrids()
         {

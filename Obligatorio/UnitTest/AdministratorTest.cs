@@ -28,9 +28,9 @@ namespace UnitTest
             Assert.IsFalse(this.storage.Administrator.CanSeeOwnedGrids());
         }
         [TestMethod]
-        public void TestCanCreateGrid()
+        public void TestCanABMGrids()
         {
-            Assert.IsFalse(this.storage.Administrator.CanCreateGrid());
+            Assert.IsFalse(this.storage.Administrator.CanABMGrids());
         }
     }
 }

@@ -119,7 +119,7 @@ namespace UnitTest
         public void TestValidWallBeamTrue()
         {
             Point point = new Point(0, 1);
-            bool result = grid.ValidWallBeam(point);
+            bool result = grid.FreePosition(point);
             Assert.IsTrue(result);
         }
 
@@ -131,7 +131,7 @@ namespace UnitTest
             grid.WallBeams.Add(wallBeam);
             WallBeam anotherWallBeam = new WallBeam(point);
             bool expectedResult = false;
-            bool result = grid.ValidWallBeam(point);
+            bool result = grid.FreePosition(point);
             Assert.AreEqual(result, expectedResult);
         }
 
@@ -184,6 +184,41 @@ namespace UnitTest
             Grid anotherGrid = new Grid(GRID_NAME_OK, client, HEIGHT, WIDTH);
             Assert.AreEqual(grid, anotherGrid);
         }
+        
+        [TestMethod]
+        public void TestRemoveWindow()
+        {
+            Point point = new Point(1, 0);
+            Window window = new Window(point);
+            grid.Windows.Add(window);
+            grid.RemoveWindow(window);
+            int expectedResult = 0;
+            int result = grid.Windows.Count;
+            Assert.AreEqual(expectedResult, result);
+        }
 
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestOnTheWall()
+        {
+            Point point = new Point(1, 0);
+            Point anotherPoint = new Point(1, 5);
+            Point newPoint = new Point(1, 3);
+            Wall wall = new Wall(point, anotherPoint);
+            grid.Walls.Add(wall);
+            grid.OnTheWall(newPoint);
+        }
+
+        [TestMethod]
+        public void TestRemoveDoor()
+        {
+            Point point = new Point(0, 1);
+            Door door = new Door(point);
+            grid.Doors.Add(door);
+            grid.RemoveDoor(door);
+            int expectedResult = 0;
+            int result = grid.Doors.Count;
+            Assert.AreEqual(expectedResult, result);
+        }  
     }
 }

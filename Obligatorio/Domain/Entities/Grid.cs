@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System;
 
 namespace Domain.Entities
 {
@@ -14,7 +15,8 @@ namespace Domain.Entities
         public int Width { get; set; }
         public List<Wall> Walls { get; set; }
         public List<WallBeam> WallBeams { get; set; }
-        public List<Opening> Openings { get; set; }
+        public List<Window> Windows { get; set; }
+        public List<Door> Doors { get; set; }
         public static int PixelConvertor = 25;
         public int maxMeters = 5;
         private Pen gridPen;
@@ -25,7 +27,8 @@ namespace Domain.Entities
         {
             this.Walls = new List<Wall>();
             this.WallBeams = new List<WallBeam>();
-            this.Openings = new List<Opening>();
+            this.Windows = new List<Window>();
+            this.Doors = new List<Door>();
 
             this.GridName = gridName;
             this.Client = client ;
@@ -148,16 +151,19 @@ namespace Domain.Entities
 
         public void AddWallBeam(Graphics graphic, Point ubicationPoint)
         {
-            if (ValidWallBeam(ubicationPoint))
+            if (FreePosition(ubicationPoint))
             {
                 WallBeam wallBeam = new WallBeam(ubicationPoint);
+                this.WallBeams.Add(wallBeam);
                 wallBeam.Draw(graphic);
             };
         }
 
-        public bool ValidWallBeam(Point ubicationPoint)
+        public bool FreePosition(Point ubicationPoint)
         {
-            return (!this.WallBeams.Contains(new WallBeam(ubicationPoint)));
+            return (!this.WallBeams.Contains(new WallBeam(ubicationPoint))
+                && !this.Windows.Contains(new Window(ubicationPoint))
+                && !this.Doors.Contains(new Door(ubicationPoint)));
         }
 
         public void RemoveWall(Wall wall)
@@ -200,14 +206,50 @@ namespace Domain.Entities
             return false;
         }
 
-        public void AddOpening(Opening opening)
+        public void AddWindow(Graphics graphic, Point ubicationPoint)
         {
-
+            OnTheWall(ubicationPoint);
+            if (FreePosition(ubicationPoint))
+            {
+                Window window = new Window(ubicationPoint);
+                this.Windows.Add(new Window(ubicationPoint));
+                window.Draw(graphic);
+            }
         }
 
-        public void RemoveOpening(Wall wall)
+        public void RemoveWindow(Window window)
         {
+            this.Windows.Remove(window);
+        }
 
+        public void AddDoor(Graphics graphic, Point ubicationPoint)
+        {
+            OnTheWall(ubicationPoint);
+            if (FreePosition(ubicationPoint))
+            {
+                Door door = new Door(ubicationPoint);
+                this.Doors.Add(new Door(ubicationPoint));
+                door.Draw(graphic);
+            }
+        }
+
+        public void OnTheWall(Point ubicationPoint)
+        {
+            int matchPoints = 0;
+            foreach (Wall wall in Walls)
+            {
+                foreach(Point point in wall.Path)
+                {
+                    if (point.Equals(ubicationPoint))
+                        matchPoints++;
+                }
+            }
+            if(matchPoints == 0) throw new ExceptionController(ExceptionMessage.POINT_OUT_OF_WALL);
+        }
+
+        public void RemoveDoor(Door door)
+        {
+            this.Doors.Remove(door);
         }
 
         public override bool Equals(object gridObject)

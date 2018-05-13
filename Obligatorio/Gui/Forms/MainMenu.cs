@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Domain.Entities;
 using Gui.UserControls.ABMClientScreen;
@@ -15,27 +9,27 @@ namespace Gui.Forms
 {
     public partial class MainMenu : Form
     {
+        
         private User user;
-        private List<UserControl> userControllerList;
+        List<MenuNode> menuNodeList = new List<MenuNode>();
         public MainMenu(User user)
         {
             InitializeComponent();
 
             this.user = user;
-            this.userControllerList = new List<UserControl>();
-            this.showClientsConfiguration_btn.Visible = user.CanABMClients();
             this.showDesignerConfiguration_btn.Visible = user.CanABMDesigners();
             this.showGirdConfiguration_btn.Visible = user.CanABMGrids();
 
 
             this.mainPicture_box.Visible = true;
 
+
             SetUp();
         }
 
         private void SetUp()
         {
-            
+            this.CreateMenu();
             if (user.CanABMClients())
             {
                 IncludeClientABMControlsToClist();  
@@ -45,15 +39,46 @@ namespace Gui.Forms
                 IncludeDesignerABMControlsToClist();
             }
         }
+
+        private void CreateMenu()
+        {
+            MenuStrip menuStrip = this.leftMenuStrip;
+            foreach (MenuNode node in menuNodeList)
+            {
+                ToolStripMenuItem stripMenuItem = new ToolStripMenuItem(node.Title);
+                foreach (UserControl action in node.UserActions)
+                {
+                    ToolStripMenuItem stripMenuChildItem = new ToolStripMenuItem();
+                    stripMenuChildItem.Tag = action;
+                    stripMenuChildItem.Text = node.Action;
+                    action.Click += acccion_Click;
+                    stripMenuItem.DropDownItems.Add(stripMenuChildItem);
+
+                }
+                menuStrip.Items.Add(stripMenuItem);
+                ToolStripSeparator separator = new ToolStripSeparator();
+                menuStrip.Items.Add(separator);
+                Controls.Add(menuStrip);
+            }
+        }
+
+        void acccion_Click(object sender, EventArgs e)
+        {
+            //panelContenido.Controls.Clear();
+            //ToolStripMenuItem item = (ToolStripMenuItem)sender;
+            //IActionHandler accion = (IActionHandler)item.Tag;
+            //UserControl control = accion.GetControl();
+            ////UserControl control = item.Tag
+            //panelContenido.Controls.Add(control);
+        }
+
+
         private void IncludeClientABMControlsToClist()
         {
-
             ABMClientScreenAdd ClientScreenAdd = new ABMClientScreenAdd();
             ABMClientScreenModify ClientScreenModify = new ABMClientScreenModify();
             ABMClientScreenDelete ClientScreenDelete = new ABMClientScreenDelete();
-            this.userControllerList.Add(ClientScreenAdd);
-            this.userControllerList.Add(ClientScreenModify);
-            this.userControllerList.Add(ClientScreenDelete);
+            MenuNode clientABMNode = new MenuNode("","");
         }
         private void IncludeDesignerABMControlsToClist()
         {

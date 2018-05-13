@@ -219,6 +219,127 @@ namespace UnitTest
             int expectedResult = 0;
             int result = grid.Doors.Count;
             Assert.AreEqual(expectedResult, result);
-        }  
+        }
+        
+        [TestMethod]
+        public void TestMetersWallCount()
+        {
+            int expectedResult = 0;
+            foreach (Wall wall in this.grid.Walls)
+            {
+                foreach (Point point in wall.Path)
+                {
+                    expectedResult++;
+                }
+                expectedResult -= 1;
+            }
+            int result = grid.MetersWallCount();
+            Assert.AreEqual(result, expectedResult);
+        }
+
+        [TestMethod]
+        public void TestWallBeamsCount()
+        {
+            int expectedResult = this.grid.WallBeams.Count;
+            int result = this.grid.WallBeamsCount();
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void TestWindowsCount()
+        {
+            int expectedResult = this.grid.Windows.Count;
+            int result = this.grid.WindowsCount();
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void TestDoorsCount()
+        {
+            int expectedResult = this.grid.Doors.Count;
+            int result = this.grid.DoorsCount();
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void TestAmountCostWall()
+        {
+            int costResult = this.grid.MetersWallCount() * this.grid.CostPriceWallBeam.Item1;
+            int expectedCostResult = this.grid.AmountCostWallBeam();
+            Assert.AreEqual(costResult, expectedCostResult);
+        }
+
+        [TestMethod]
+        public void TestAmountPriceWall()
+        {
+            int costResult = this.grid.MetersWallCount() * this.grid.CostPriceWallBeam.Item2;
+            int expectedCostResult = this.grid.AmountPriceWallBeam();
+            Assert.AreEqual(costResult, expectedCostResult);
+        }
+
+        [TestMethod]
+        public void TestAmountCostWallBeam()
+        {
+            int costResult = this.grid.WallBeamsCount() * this.grid.CostPriceWallBeam.Item1;
+            int expectedCostResult = this.grid.AmountCostWallBeam();
+            Assert.AreEqual(costResult, expectedCostResult);
+        }
+
+        [TestMethod]
+        public void TestAmountPriceWallBeam()
+        {
+            int costResult = this.grid.WallBeamsCount() * this.grid.CostPriceWallBeam.Item2;
+            int expectedCostResult = this.grid.AmountPriceWallBeam();
+            Assert.AreEqual(costResult, expectedCostResult);
+        }
+
+        [TestMethod]
+        public void TestAmountCostWindow()
+        {
+            int costResult = this.grid.WindowsCount() * this.grid.CostPriceWindow.Item1;
+            int expectedCostResult = this.grid.AmountCostWindow();
+            Assert.AreEqual(costResult, expectedCostResult);
+
+        }
+
+        [TestMethod]
+        public void TestAmountPriceWindow()
+        {
+            int costResult = this.grid.WindowsCount() * this.grid.CostPriceWallBeam.Item2;
+            int expectedCostResult = this.grid.AmountPriceWindow();
+            Assert.AreEqual(costResult, expectedCostResult);
+        }
+
+        [TestMethod]
+        public void TestAmountCostDoor()
+        {
+            int costResult = this.grid.DoorsCount() * this.grid.CostPriceDoor.Item1;
+            int expectedCostResult = this.grid.AmountCostDoor();
+            Assert.AreEqual(costResult, expectedCostResult);
+        }
+
+        [TestMethod]
+        public void TestAmountPriceDoor()
+        {
+            int costResult = this.grid.DoorsCount() * this.grid.CostPriceDoor.Item2;
+            int expectedCostResult = this.grid.AmountCostDoor();
+            Assert.AreEqual(costResult, expectedCostResult);
+        }
+
+        [TestMethod]
+        public void TestTotalCost()
+        {
+            int expectedResult = grid.AmountCostWall() + grid.AmountCostWallBeam() + grid.AmountCostWindow() + grid.AmountPriceDoor();
+            int result = grid.totalCost();
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void TestTotalPrice()
+        {
+            int expectedResult = grid.AmountPriceWall() + grid.AmountPriceWallBeam() + grid.AmountPriceWindow() + grid.AmountPriceDoor();
+            int result = grid.totalPrice();
+            Assert.AreEqual(expectedResult, result);
+        }
     }
 }

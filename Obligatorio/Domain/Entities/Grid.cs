@@ -18,8 +18,13 @@ namespace Domain.Entities
         public List<Window> Windows { get; set; }
         public List<Door> Doors { get; set; }
         public static int PixelConvertor = 25;
-        public int maxMeters = 5;
+        public int MaxMeters = 5;
         private Pen gridPen;
+
+        public Tuple<int, int> CostPriceMeterWall { get; set; }
+        public Tuple<int, int> CostPriceWallBeam { get; set; }
+        public Tuple<int, int> CostPriceWindow { get; set; }
+        public Tuple<int, int> CostPriceDoor { get; set; }
 
         public Grid() { }
 
@@ -34,6 +39,11 @@ namespace Domain.Entities
             this.Client = client ;
             this.Height = height * PixelConvertor; 
             this.Width = width * PixelConvertor;
+
+            this.CostPriceMeterWall = new Tuple<int,int>(50, 100);
+            this.CostPriceWallBeam = new Tuple<int, int>(50, 100);
+            this.CostPriceWindow = new Tuple<int, int>(50, 75);
+            this.CostPriceDoor = new Tuple<int, int>(50, 100);
 
             this.gridPen = new Pen(Color.Black, 2);
         }
@@ -73,11 +83,11 @@ namespace Domain.Entities
             this.IsValid(wall);
             if (wall.SizeGreaterThanMaximum()) //si el largo del wall es > 5 + refactor al nombre
             {
-                Wall anotherWall = new Wall(wall.startUbicationPoint, wall.CalculateLocationPoint(maxMeters));//creo una nueva pared
+                Wall anotherWall = new Wall(wall.startUbicationPoint, wall.CalculateLocationPoint(MaxMeters));//creo una nueva pared
                                                                                                               //le seteo el punto inicial igual a wall
                                                                                                               //le seteo el punto final en base a X,Y de wall 5 metros despues
                 AddWall(graphic, anotherWall);//llamo recursivo con anotherWall 
-                wall.startUbicationPoint = wall.CalculateLocationPoint(maxMeters); //corro el punto inicial de wall
+                wall.startUbicationPoint = wall.CalculateLocationPoint(MaxMeters); //corro el punto inicial de wall
                 AddWall(graphic, wall);//llamo recursivo con la nueva wall   
             }
             if (isCuttingAWall(wall))//verifico si alguna pared la corta
@@ -265,6 +275,85 @@ namespace Domain.Entities
 
             }
             return isEqual;
+        }
+
+        public int MetersWallCount()
+        {
+            int amountMeters = 0;
+            foreach(Wall wall in Walls)
+            {
+                foreach(Point point in wall.Path)
+                {
+                    amountMeters++;
+                }
+                amountMeters -= 1;
+            }
+            return amountMeters;
+        }
+
+        public int WallBeamsCount()
+        {
+            return this.WallBeams.Count();
+        }
+
+        public int WindowsCount()
+        {
+            return this.Windows.Count();
+        }
+
+        public int DoorsCount()
+        {
+            return this.Doors.Count();
+        }
+
+        public int AmountCostWall()
+        {
+            return MetersWallCount() * CostPriceMeterWall.Item1;
+        }
+
+        public int AmountPriceWall()
+        {
+            return MetersWallCount() * CostPriceMeterWall.Item2;
+        }
+
+        public int AmountCostWallBeam()
+        {
+            return WallBeamsCount() * CostPriceWallBeam.Item1;
+        }
+
+        public int AmountPriceWallBeam()
+        {
+            return WallBeamsCount() * CostPriceWallBeam.Item2;
+        }
+
+        public int AmountCostWindow()
+        {
+            return WindowsCount() * CostPriceWindow.Item1;
+        }
+
+        public int AmountPriceWindow()
+        {
+            return WindowsCount() * CostPriceWindow.Item2;
+        }
+
+        public int AmountCostDoor()
+        {
+            return DoorsCount() * CostPriceDoor.Item1;
+        }
+
+        public int AmountPriceDoor()
+        {
+            return DoorsCount() * CostPriceDoor.Item2;
+        }
+
+        public int totalCost()
+        {
+            return AmountCostWall() + AmountCostWallBeam() + AmountCostWindow() + AmountPriceDoor(); 
+        }
+
+        public int totalPrice()
+        {
+            return AmountPriceWall() + AmountPriceWallBeam() + AmountPriceWindow() + AmountPriceDoor();
         }
 
     }

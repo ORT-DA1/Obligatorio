@@ -5,7 +5,7 @@ using Domain.Data;
 using Domain.Exceptions;
 using Domain.Logic;
 
-namespace Gui
+namespace Gui.Forms
 {
     public partial class Login : Form
     {

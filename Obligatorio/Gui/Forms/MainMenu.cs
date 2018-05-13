@@ -11,7 +11,7 @@ using Domain.Entities;
 using Gui.UserControls.ABMClientScreen;
 
 
-namespace Gui
+namespace Gui.Forms
 {
     public partial class MainMenu : Form
     {
@@ -47,14 +47,13 @@ namespace Gui
         }
         private void IncludeClientABMControlsToClist()
         {
-            
-            
-            UserControl AddClientScreen = new AddClientScreen();
-            UserControl ModifyClientScreen = new ModifyClientScreen();
-            UserControl DeleteClientScreen = new DeleteClientScreen();
-            this.userControllerList.Add(AddClientScreen);
-            this.userControllerList.Add(ModifyClientScreen);
-            this.userControllerList.Add(DeleteClientScreen);
+
+            ABMClientScreenAdd ClientScreenAdd = new ABMClientScreenAdd();
+            ABMClientScreenModify ClientScreenModify = new ABMClientScreenModify();
+            ABMClientScreenDelete ClientScreenDelete = new ABMClientScreenDelete();
+            this.userControllerList.Add(ClientScreenAdd);
+            this.userControllerList.Add(ClientScreenModify);
+            this.userControllerList.Add(ClientScreenDelete);
         }
         private void IncludeDesignerABMControlsToClist()
         {

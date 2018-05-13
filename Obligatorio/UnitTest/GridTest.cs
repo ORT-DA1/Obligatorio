@@ -341,5 +341,17 @@ namespace UnitTest
             int result = grid.totalPrice();
             Assert.AreEqual(expectedResult, result);
         }
+
+        [TestMethod]
+        public void modifyCostAndPrice()
+        {
+            Tuple<int, int> meterWall = new Tuple<int, int>(1,2);
+            Tuple< int, int> wallBeam = new Tuple<int, int>(1, 2); 
+            Tuple<int, int> window = new Tuple<int, int>(1, 2);
+            Tuple< int, int> door = new Tuple<int, int>(1, 2);
+            grid.modifyCostAndPrice(meterWall, wallBeam, window, door);
+            Assert.IsTrue(meterWall.Equals(grid.CostPriceMeterWall) && wallBeam.Equals(grid.CostPriceWallBeam)
+                && window.Equals(grid.CostPriceWindow) && door.Equals(grid.CostPriceDoor));
+        }
     }
 }

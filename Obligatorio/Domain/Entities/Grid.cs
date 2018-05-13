@@ -48,6 +48,14 @@ namespace Domain.Entities
             this.gridPen = new Pen(Color.Black, 2);
         }
 
+        public void modifyCostAndPrice(Tuple<int, int> meterWall, Tuple<int, int> wallBeam, Tuple<int, int> window, Tuple<int, int> door)
+        {
+            this.CostPriceMeterWall = meterWall;
+            this.CostPriceWallBeam = wallBeam;
+            this.CostPriceWindow = window;
+            this.CostPriceDoor = door;
+        }
+
         public void DrawGrid(Graphics graphic)
         {
             this.DrawX(graphic);

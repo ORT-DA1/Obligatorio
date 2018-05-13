@@ -45,7 +45,7 @@
             // 
             this.userlbl.AutoSize = true;
             this.userlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userlbl.Location = new System.Drawing.Point(42, 111);
+            this.userlbl.Location = new System.Drawing.Point(49, 111);
             this.userlbl.Name = "userlbl";
             this.userlbl.Size = new System.Drawing.Size(77, 15);
             this.userlbl.TabIndex = 1;
@@ -55,7 +55,7 @@
             // 
             this.passlbl.AutoSize = true;
             this.passlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passlbl.Location = new System.Drawing.Point(42, 162);
+            this.passlbl.Location = new System.Drawing.Point(49, 162);
             this.passlbl.Name = "passlbl";
             this.passlbl.Size = new System.Drawing.Size(73, 15);
             this.passlbl.TabIndex = 2;
@@ -63,14 +63,14 @@
             // 
             // usernameTxt
             // 
-            this.usernameTxt.Location = new System.Drawing.Point(132, 110);
+            this.usernameTxt.Location = new System.Drawing.Point(139, 110);
             this.usernameTxt.Name = "usernameTxt";
             this.usernameTxt.Size = new System.Drawing.Size(135, 20);
             this.usernameTxt.TabIndex = 3;
             // 
             // passwordTxt
             // 
-            this.passwordTxt.Location = new System.Drawing.Point(132, 161);
+            this.passwordTxt.Location = new System.Drawing.Point(139, 161);
             this.passwordTxt.Name = "passwordTxt";
             this.passwordTxt.PasswordChar = '*';
             this.passwordTxt.Size = new System.Drawing.Size(135, 20);
@@ -90,7 +90,8 @@
             // loginBtn
             // 
             this.loginBtn.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.loginBtn.Location = new System.Drawing.Point(57, 222);
+            this.loginBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.loginBtn.Location = new System.Drawing.Point(80, 222);
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(99, 29);
             this.loginBtn.TabIndex = 6;
@@ -100,7 +101,8 @@
             // 
             // exitBtn
             // 
-            this.exitBtn.Location = new System.Drawing.Point(206, 222);
+            this.exitBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.exitBtn.Location = new System.Drawing.Point(224, 222);
             this.exitBtn.Name = "exitBtn";
             this.exitBtn.Size = new System.Drawing.Size(99, 29);
             this.exitBtn.TabIndex = 7;
@@ -149,7 +151,8 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Login";
-            this.Text = "Form1";
+            this.Text = "Graphic Master";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.quit);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

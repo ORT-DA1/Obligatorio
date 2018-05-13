@@ -23,6 +23,10 @@ namespace Domain.Entities
         {
             return false;
         }
+        public override bool CanVerifyInformation()
+        {
+            return false;
+        }
     }
 
     

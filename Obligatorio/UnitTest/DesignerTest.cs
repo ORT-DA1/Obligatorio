@@ -30,6 +30,12 @@ namespace UnitTest
             this.dataStorage.EmptyStorage();
         }
 
+        public Designer CreateDesigner(string username, string password, string name, string surname, DateTime registrationDate)
+        {
+            return new Designer(username, password, name, surname, registrationDate, null);
+        }
+
+
         [TestMethod]
         public void TestCanABMClients()
         {
@@ -48,6 +54,12 @@ namespace UnitTest
         {
             Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
             Assert.IsFalse(designer.CanSeeOwnedGrids());
+        }
+        [TestMethod]
+        public void TestCanVerifyInformation()
+        {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
+            Assert.IsFalse(designer.CanVerifyInformation());
         }
 
         [TestMethod]
@@ -126,11 +138,6 @@ namespace UnitTest
             Assert.IsTrue(designer.Username.Equals(USERNAME_OK) && designer.Password.Equals(PASSWORD_OK)
                 && designer.Name.Equals(NAME_OK) && designer.Surname.Equals(SURNAME_OK)
                 && designer.RegistrationDate.Equals(REGISTRATIONDATE_OK));
-        }
-
-        public Designer CreateDesigner(string username, string password, string name, string surname, DateTime registrationDate)
-        {
-            return new Designer(username, password, name, surname, registrationDate, null);
         }
 
         [TestMethod]

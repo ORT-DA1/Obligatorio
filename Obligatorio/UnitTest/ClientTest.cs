@@ -22,6 +22,7 @@ namespace UnitTest
         private readonly string SURNAME_OK = "Touris";
         private readonly string CI_OK = "45688334";
         private readonly DateTime REGISTRATIONDATE_OK = new DateTime(2018, 05, 28, 10, 53, 55);
+        private readonly DateTime LASTACCESS_OK = DateTime.Now;
         private readonly int PHONE_OK = 093535858;
         private readonly string ADDRESS_OK = "Cuareim 1818";
         private readonly IUserHandler<Client> CLIENT_HANDLER;
@@ -58,7 +59,18 @@ namespace UnitTest
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
             Assert.IsFalse(client.CanABMGrids());
         }
-
+        [TestMethod]
+        public void TestCanVerifyInformation()
+        {
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            Assert.IsTrue(client.CanVerifyInformation());
+        }
+        [TestMethod]
+        public void TestCanVerifyInformationWithLastAccessNotNull()
+        {
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, LASTACCESS_OK);
+            Assert.IsFalse(client.CanVerifyInformation());
+        }
 
         [TestMethod]
         public void TestCreateClientWithoutParameters()

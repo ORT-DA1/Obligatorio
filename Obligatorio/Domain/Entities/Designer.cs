@@ -26,7 +26,6 @@ namespace Domain.Entities
                 {
                     isEqual = true;
                 }
-
             }
             return isEqual;
         }
@@ -42,7 +41,9 @@ namespace Domain.Entities
         {
             return false;
         }
+        public override bool CanVerifyInformation()
+        {
+            return false;
+        }
     }
-
-
 }

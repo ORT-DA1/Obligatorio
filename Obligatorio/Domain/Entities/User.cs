@@ -40,5 +40,9 @@ namespace Domain.Entities
         {
             return true;
         }
+        public virtual bool CanVerifyInformation()
+        {
+            return true;
+        }
     }
 }

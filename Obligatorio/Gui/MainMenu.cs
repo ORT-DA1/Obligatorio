@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Domain.Entities;
+using Gui.UserControls.ABMClientScreen;
 
 
 namespace Gui
@@ -15,36 +16,51 @@ namespace Gui
     public partial class MainMenu : Form
     {
         private User user;
+        private List<UserControl> userControllerList;
         public MainMenu(User user)
         {
             InitializeComponent();
 
             this.user = user;
+            this.userControllerList = new List<UserControl>();
             this.showClientsConfiguration_btn.Visible = user.CanABMClients();
             this.showDesignerConfiguration_btn.Visible = user.CanABMDesigners();
             this.showGirdConfiguration_btn.Visible = user.CanABMGrids();
+
+
+            this.mainPicture_box.Visible = true;
 
             SetUp();
         }
 
         private void SetUp()
         {
-            this.mainPicture_box.Visible = true;
-
-            this.createDesigner_btn.Visible = false;
-            this.modifyDesigner_btn.Visible = false;
-            this.deleteDesigners_btn.Visible = false;
-
-            this.createClients_brn.Visible = false;
-            this.modifyClients_btn.Visible = false;
-            this.deleteClients_btn.Visible = false;
-
-            this.createGrid_btn.Visible = false;
-            this.modifyGrid_btn.Visible = false;
-            this.deleteGrid_btn.Visible = false;
-
-            this.clearMenu_Btn.Visible = false;
+            
+            if (user.CanABMClients())
+            {
+                IncludeClientABMControlsToClist();  
+            }
+            if (user.CanABMDesigners())
+            {
+                IncludeDesignerABMControlsToClist();
+            }
         }
+        private void IncludeClientABMControlsToClist()
+        {
+            
+            
+            UserControl AddClientScreen = new AddClientScreen();
+            UserControl ModifyClientScreen = new ModifyClientScreen();
+            UserControl DeleteClientScreen = new DeleteClientScreen();
+            this.userControllerList.Add(AddClientScreen);
+            this.userControllerList.Add(ModifyClientScreen);
+            this.userControllerList.Add(DeleteClientScreen);
+        }
+        private void IncludeDesignerABMControlsToClist()
+        {
+
+        }
+
 
         //Administrator
         private void showDesignersConfiguration(object sender, EventArgs e)

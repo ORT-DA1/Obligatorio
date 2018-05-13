@@ -46,46 +46,75 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionModel.cs" />
-    <Compile Include="CreateGridForm.cs">
+    <Compile Include="Forms\CreateGridForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateGridForm.Designer.cs">
+    <Compile Include="Forms\CreateGridForm.Designer.cs">
       <DependentUpon>CreateGridForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GridForm.cs">
+    <Compile Include="Forms\GridForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GridForm.Designer.cs">
+    <Compile Include="Forms\GridForm.Designer.cs">
       <DependentUpon>GridForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainMenu.cs">
+    <Compile Include="Forms\MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainMenu.Designer.cs">
+    <Compile Include="Forms\MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs">
+    <Compile Include="Forms\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
+    <Compile Include="Forms\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControls\ABMClientScreen\ABMClientScreen.Add.cs">
+    <Compile Include="UserControls\ABMClientScreen\ABMClientScreenAdd.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\ABMClientScreen\ABMClientScreen.Add.Designer.cs">
-      <DependentUpon>ABMClientScreen.Add.cs</DependentUpon>
+    <Compile Include="UserControls\ABMClientScreen\ABMClientScreenAdd.Designer.cs">
+      <DependentUpon>ABMClientScreenAdd.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CreateGridForm.resx">
+    <Compile Include="UserControls\ABMClientScreen\ABMClientScreenDelete.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ABMClientScreen\ABMClientScreenDelete.Designer.cs">
+      <DependentUpon>ABMClientScreenDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ABMClientScreen\ABMClientScreenModify.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ABMClientScreen\ABMClientScreenModify.Designer.cs">
+      <DependentUpon>ABMClientScreenModify.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ABMDesignerScreen\ABMDesignerScreenAdd.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ABMDesignerScreen\ABMDesignerScreenAdd.Designer.cs">
+      <DependentUpon>ABMDesignerScreenAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ABMDesignerScreen\ABMDesignerScreenDelete.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ABMDesignerScreen\ABMDesignerScreenDelete.Designer.cs">
+      <DependentUpon>ABMDesignerScreenDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ABMDesignerScreen\ABMDesignerScreenModify.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ABMDesignerScreen\ABMDesignerScreenModify.Designer.cs">
+      <DependentUpon>ABMDesignerScreenModify.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\CreateGridForm.resx">
       <DependentUpon>CreateGridForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GridForm.resx">
+    <EmbeddedResource Include="Forms\GridForm.resx">
       <DependentUpon>GridForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainMenu.resx">
+    <EmbeddedResource Include="Forms\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -97,11 +126,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Login.resx">
+    <EmbeddedResource Include="Forms\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ABMClientScreen\ABMClientScreen.Add.resx">
-      <DependentUpon>ABMClientScreen.Add.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -123,11 +149,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Main Menu image.jpg" />
+    <Content Include="Resources\Main_menu_image.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserControls\ABMDesignerScreen\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

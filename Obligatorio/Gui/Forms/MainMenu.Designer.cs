@@ -1,4 +1,4 @@
-﻿namespace Gui
+﻿namespace Gui.Forms
 {
     partial class MainMenu
     {

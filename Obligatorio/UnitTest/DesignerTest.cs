@@ -30,6 +30,12 @@ namespace UnitTest
             this.dataStorage.EmptyStorage();
         }
 
+        public Designer CreateDesigner(string username, string password, string name, string surname, DateTime registrationDate)
+        {
+            return new Designer(username, password, name, surname, registrationDate, null);
+        }
+
+
         [TestMethod]
         public void TestCanABMClients()
         {
@@ -132,11 +138,6 @@ namespace UnitTest
             Assert.IsTrue(designer.Username.Equals(USERNAME_OK) && designer.Password.Equals(PASSWORD_OK)
                 && designer.Name.Equals(NAME_OK) && designer.Surname.Equals(SURNAME_OK)
                 && designer.RegistrationDate.Equals(REGISTRATIONDATE_OK));
-        }
-
-        public Designer CreateDesigner(string username, string password, string name, string surname, DateTime registrationDate)
-        {
-            return new Designer(username, password, name, surname, registrationDate, null);
         }
 
         [TestMethod]

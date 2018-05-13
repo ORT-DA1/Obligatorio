@@ -39,8 +39,6 @@ namespace Domain.Data
             return storageInstance;
         }
 
-
-
         public void EmptyStorage()
         {
             this.Clients.Clear();

@@ -50,6 +50,12 @@ namespace UnitTest
             Assert.IsFalse(designer.CanABMDesigners());
         }
         [TestMethod]
+        public void TestCanABMGrids()
+        {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
+            Assert.IsFalse(designer.CanABMGrids());
+        }
+        [TestMethod]
         public void TestCanSeeOwnedGrids()
         {
             Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);

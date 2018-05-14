@@ -8,15 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Gui.UserControls.ABMClientScreen
+namespace Gui.UserControls.ABMGridScreen
 {
-    public partial class ABMClientScreenAdd : UserControl
+    public partial class ABMGridScreenDelete : UserControl
     {
-        public ABMClientScreenAdd()
+        public ABMGridScreenDelete()
         {
             InitializeComponent();
-            this.AccessibleName = "Agregar";
-            this.AccessibleDescription = "Agregar Cliente";
         }
     }
 }

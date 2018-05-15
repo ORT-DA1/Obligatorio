@@ -15,6 +15,8 @@ namespace Gui.UserControls.ABMGridScreen
         public ABMGridScreenModify()
         {
             InitializeComponent();
+            this.AccessibleName = "Modificar";
+            this.AccessibleDescription = "Modificar Plano";
         }
     }
 }

@@ -15,6 +15,8 @@ namespace Gui.UserControls.ABMGridScreen
         public ABMGridScreenDelete()
         {
             InitializeComponent();
+            this.AccessibleName = "Borrar";
+            this.AccessibleDescription = "Borrar Plano";
         }
     }
 }

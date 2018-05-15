@@ -15,6 +15,8 @@ namespace Gui.UserControls.ABMGridScreen
         public ABMGridScreenAdd()
         {
             InitializeComponent();
+            this.AccessibleName = "Crear";
+            this.AccessibleDescription = "Crear Plano";
         }
     }
 }

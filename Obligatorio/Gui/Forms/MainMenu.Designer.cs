@@ -30,60 +30,111 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             this.titleLbl = new System.Windows.Forms.Label();
-            this.mainPicture_box = new System.Windows.Forms.PictureBox();
             this.leftMenuStrip = new System.Windows.Forms.MenuStrip();
-            ((System.ComponentModel.ISupportInitialize)(this.mainPicture_box)).BeginInit();
+            this.options = new System.Windows.Forms.ToolStripMenuItem();
+            this.MainPanel = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.controlPanel = new System.Windows.Forms.Panel();
+            this.cerrarSesionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.leftMenuStrip.SuspendLayout();
+            this.MainPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // titleLbl
             // 
             this.titleLbl.AutoSize = true;
-            this.titleLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLbl.Location = new System.Drawing.Point(262, 48);
+            this.titleLbl.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLbl.Location = new System.Drawing.Point(131, 31);
             this.titleLbl.Name = "titleLbl";
-            this.titleLbl.Size = new System.Drawing.Size(112, 20);
+            this.titleLbl.Size = new System.Drawing.Size(205, 35);
             this.titleLbl.TabIndex = 0;
-            this.titleLbl.Text = "Menu Principal";
-            // 
-            // mainPicture_box
-            // 
-            this.mainPicture_box.Image = ((System.Drawing.Image)(resources.GetObject("mainPicture_box.Image")));
-            this.mainPicture_box.Location = new System.Drawing.Point(210, 93);
-            this.mainPicture_box.Name = "mainPicture_box";
-            this.mainPicture_box.Size = new System.Drawing.Size(238, 215);
-            this.mainPicture_box.TabIndex = 6;
-            this.mainPicture_box.TabStop = false;
+            this.titleLbl.Text = "Graphic Master";
             // 
             // leftMenuStrip
             // 
+            this.leftMenuStrip.AutoSize = false;
+            this.leftMenuStrip.BackColor = System.Drawing.Color.SlateGray;
+            this.leftMenuStrip.Dock = System.Windows.Forms.DockStyle.Left;
+            this.leftMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.leftMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.options});
             this.leftMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.leftMenuStrip.Name = "leftMenuStrip";
-            this.leftMenuStrip.Size = new System.Drawing.Size(642, 24);
+            this.leftMenuStrip.Size = new System.Drawing.Size(118, 447);
             this.leftMenuStrip.TabIndex = 16;
             this.leftMenuStrip.Text = "Left Menu Strip";
+            // 
+            // options
+            // 
+            this.options.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cerrarSesionToolStripMenuItem});
+            this.options.Name = "options";
+            this.options.Size = new System.Drawing.Size(111, 19);
+            this.options.Text = "Menu";
+            // 
+            // MainPanel
+            // 
+            this.MainPanel.Controls.Add(this.pictureBox1);
+            this.MainPanel.Controls.Add(this.titleLbl);
+            this.MainPanel.Location = new System.Drawing.Point(113, 0);
+            this.MainPanel.Name = "MainPanel";
+            this.MainPanel.Size = new System.Drawing.Size(581, 116);
+            this.MainPanel.TabIndex = 17;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(424, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(156, 122);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // controlPanel
+            // 
+            this.controlPanel.BackColor = System.Drawing.Color.LightBlue;
+            this.controlPanel.Location = new System.Drawing.Point(113, 113);
+            this.controlPanel.Name = "controlPanel";
+            this.controlPanel.Size = new System.Drawing.Size(581, 333);
+            this.controlPanel.TabIndex = 18;
+            // 
+            // cerrarSesionToolStripMenuItem
+            // 
+            this.cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
+            this.cerrarSesionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cerrarSesionToolStripMenuItem.Text = "Cerrar Sesion";
+            this.cerrarSesionToolStripMenuItem.Click += new System.EventHandler(this.logOut);
             // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(642, 386);
-            this.Controls.Add(this.titleLbl);
+            this.BackColor = System.Drawing.Color.MintCream;
+            this.ClientSize = new System.Drawing.Size(697, 447);
+            this.Controls.Add(this.controlPanel);
+            this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.leftMenuStrip);
-            this.Controls.Add(this.mainPicture_box);
             this.Name = "MainMenu";
             this.Text = "Graphic Master";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.quit);
-            ((System.ComponentModel.ISupportInitialize)(this.mainPicture_box)).EndInit();
+            this.leftMenuStrip.ResumeLayout(false);
+            this.leftMenuStrip.PerformLayout();
+            this.MainPanel.ResumeLayout(false);
+            this.MainPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Label titleLbl;
-        private System.Windows.Forms.PictureBox mainPicture_box;
         private System.Windows.Forms.MenuStrip leftMenuStrip;
+        private System.Windows.Forms.Panel MainPanel;
+        private System.Windows.Forms.Panel controlPanel;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem options;
+        private System.Windows.Forms.ToolStripMenuItem cerrarSesionToolStripMenuItem;
     }
 }

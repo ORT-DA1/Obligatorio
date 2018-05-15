@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using Domain.Entities;
 using Gui.UserControls.ABMClientScreen;
 using Gui.UserControls.ABMDesignerScreen;
+using Gui.UserControls.ABMGridScreen;
+using Gui.Interface;
 
 
 namespace Gui.Forms
@@ -42,6 +44,8 @@ namespace Gui.Forms
         private void CreateMenu()
         {
             MenuStrip leftMenu = this.leftMenuStrip;
+            ToolStripSeparator firstSeparator = new ToolStripSeparator();
+            leftMenu.Items.Add(firstSeparator);
             foreach (MenuNode node in menuNodeList)
             {
                 ToolStripMenuItem stripMenuItem = new ToolStripMenuItem(node.Title);
@@ -50,13 +54,13 @@ namespace Gui.Forms
                     ToolStripMenuItem stripMenuChildItem = new ToolStripMenuItem();
                     stripMenuChildItem.Tag = action;
                     stripMenuChildItem.Text = action.AccessibleName;
-                    action.Click += acccion_Click;
+                    stripMenuChildItem.Click += updateControlPanel;
                     stripMenuItem.DropDownItems.Add(stripMenuChildItem);
 
                 }
                 leftMenu.Items.Add(stripMenuItem);
-                ToolStripSeparator separator = new ToolStripSeparator();
-                leftMenu.Items.Add(separator);
+                ToolStripSeparator itemSeparator = new ToolStripSeparator();
+                leftMenu.Items.Add(itemSeparator);
                 Controls.Add(leftMenu);
             }
         }
@@ -67,8 +71,8 @@ namespace Gui.Forms
             ABMClientScreenAdd clientScreenAdd = new ABMClientScreenAdd();
             ABMClientScreenModify clientScreenModify = new ABMClientScreenModify();
             ABMClientScreenDelete clientScreenDelete = new ABMClientScreenDelete();
-            MenuNode clientABMNode = new MenuNode("Mantenimiento de Clientes");
 
+            MenuNode clientABMNode = new MenuNode("Clientes");
             clientABMNode.UserActions.Add(clientScreenAdd);
             clientABMNode.UserActions.Add(clientScreenModify);
             clientABMNode.UserActions.Add(clientScreenDelete);
@@ -80,9 +84,9 @@ namespace Gui.Forms
         {
             ABMDesignerScreenAdd designerScreenAdd= new ABMDesignerScreenAdd();
             ABMDesignerScreenModify designerScreenModify = new ABMDesignerScreenModify();
-            ABMClientScreenDelete designerScreenDelete = new ABMClientScreenDelete();
-            MenuNode designerABMNode = new MenuNode("Mantenimiento de Disenadores");
+            ABMDesignerScreenDelete designerScreenDelete = new ABMDesignerScreenDelete();
 
+            MenuNode designerABMNode = new MenuNode("Diseñadores");
             designerABMNode.UserActions.Add(designerScreenAdd);
             designerABMNode.UserActions.Add(designerScreenModify);
             designerABMNode.UserActions.Add(designerScreenDelete);
@@ -92,18 +96,27 @@ namespace Gui.Forms
 
         private void IncludeGridABMControlsToListo()
         {
-           
+            ABMGridScreenAdd gridScreenAdd = new ABMGridScreenAdd();
+            ABMGridScreenModify gridScreenModify = new ABMGridScreenModify();
+            ABMGridScreenDelete gridScreenDelete = new ABMGridScreenDelete();
+
+            MenuNode gridABMNode = new MenuNode("Planos");
+            gridABMNode.UserActions.Add(gridScreenAdd);
+            gridABMNode.UserActions.Add(gridScreenModify);
+            gridABMNode.UserActions.Add(gridScreenDelete);
+
+            this.menuNodeList.Add(gridABMNode);
         }
 
         //Globals
-        void acccion_Click(object sender, EventArgs e)
+        void updateControlPanel(object sender, EventArgs e)
         {
-            //panelContenido.Controls.Clear();
-            //ToolStripMenuItem item = (ToolStripMenuItem)sender;
-            //IActionHandler accion = (IActionHandler)item.Tag;
-            //UserControl control = accion.GetControl();
-            ////UserControl control = item.Tag
-            //panelContenido.Controls.Add(control);
+            controlPanel.Controls.Clear();
+            ToolStripMenuItem menuNode = (ToolStripMenuItem)sender;
+            IController controller = (IController)menuNode.Tag;
+            UserControl controlToShow = controller.GetUserController();
+            
+            controlPanel.Controls.Add(controlToShow);
         }
         private void logOut(object sender, EventArgs e)
         {

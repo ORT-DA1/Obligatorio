@@ -35,10 +35,21 @@ namespace Domain.Data
 
         public static void ValidatePhone(string phone)
         {
-            if (!isValidID(phone))
+            if (!IsValidPhone(phone))
             {
                 throw new ExceptionController(ExceptionMessage.USER_INVALID_PHONE);
             }
+        }
+
+        private static bool IsValidPhone(string phone)
+        {
+            Regex expression = new Regex(VALID_NUMBERS);
+            if (string.IsNullOrEmpty(phone) || !(expression.IsMatch(phone)))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public static void ValidateNameAndSurname(string name, string surname)

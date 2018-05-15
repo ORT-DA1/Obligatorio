@@ -7,16 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Gui.Interface;
 
 namespace Gui.UserControls.ABMClientScreen
 {
-    public partial class ABMClientScreenAdd : UserControl
+    public partial class ABMClientScreenAdd : UserControl, IController
     {
         public ABMClientScreenAdd()
         {
             InitializeComponent();
             this.AccessibleName = "Agregar";
-            this.AccessibleDescription = "Agregar Cliente";
+            this.client_title.Text = "Agregar Cliente";
+        }
+
+        public UserControl GetUserController()
+        {
+            return this;
         }
     }
 }

@@ -53,7 +53,7 @@ namespace UnitTest
         public void TestCanABMGrids()
         {
             Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
-            Assert.IsFalse(designer.CanABMGrids());
+            Assert.IsTrue(designer.CanABMGrids());
         }
         [TestMethod]
         public void TestCanSeeOwnedGrids()

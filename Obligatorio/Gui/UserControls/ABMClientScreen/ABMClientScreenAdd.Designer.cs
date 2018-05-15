@@ -77,6 +77,7 @@
             // 
             this.passwordTxt.Location = new System.Drawing.Point(117, 128);
             this.passwordTxt.Name = "passwordTxt";
+            this.passwordTxt.PasswordChar = '*';
             this.passwordTxt.Size = new System.Drawing.Size(119, 20);
             this.passwordTxt.TabIndex = 2;
             // 
@@ -177,6 +178,7 @@
             this.addClient_btn.TabIndex = 11;
             this.addClient_btn.Text = "Guardar";
             this.addClient_btn.UseVisualStyleBackColor = true;
+            this.addClient_btn.Click += new System.EventHandler(this.addClient);
             // 
             // clearForm_btn
             // 

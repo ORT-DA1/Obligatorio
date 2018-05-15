@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Gui.Interface;
 using Domain.Exceptions;
@@ -28,10 +21,12 @@ namespace Gui.UserControls.ABMClientScreen
                 LoadClients();
                 return this;
             }
-            catch (ExceptionController)
+            catch (ExceptionController Exception)
             {
-                throw new ExceptionController(ExceptionMessage.GRID_INVALID_HEIGHT_ABOVE); //Agregar Exception
+                String message = Exception.Message;
+                MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            return null;
         }
 
         private void LoadClients()

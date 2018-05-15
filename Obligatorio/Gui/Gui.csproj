@@ -70,6 +70,7 @@
     <Compile Include="Forms\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interface\IController.cs" />
     <Compile Include="MenuNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,6 +110,24 @@
     <Compile Include="UserControls\ABMDesignerScreen\ABMDesignerScreenModify.Designer.cs">
       <DependentUpon>ABMDesignerScreenModify.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ABMGridScreen\ABMGridScreenAdd.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ABMGridScreen\ABMGridScreenAdd.Designer.cs">
+      <DependentUpon>ABMGridScreenAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ABMGridScreen\ABMGridScreenDelete.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ABMGridScreen\ABMGridScreenDelete.Designer.cs">
+      <DependentUpon>ABMGridScreenDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ABMGridScreen\ABMGridScreenModify.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ABMGridScreen\ABMGridScreenModify.Designer.cs">
+      <DependentUpon>ABMGridScreenModify.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\CreateGridForm.resx">
       <DependentUpon>CreateGridForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,6 +149,9 @@
     <EmbeddedResource Include="Forms\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ABMClientScreen\ABMClientScreenAdd.resx">
+      <DependentUpon>ABMClientScreenAdd.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -149,10 +171,10 @@
       <Name>Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\Main_menu_image.jpg" />
-  </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\MainLogo.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

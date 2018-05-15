@@ -14,6 +14,7 @@ namespace Gui.Forms
         {
             InitializeComponent();
             this.dataStorage = DataStorage.GetStorageInstance();
+            this.ControlBox = false;
         }
 
         private void loginBtn_Click(object sender, EventArgs e)
@@ -40,6 +41,8 @@ namespace Gui.Forms
             if (user.CanVerifyInformation())
             {   
                 MessageBox.Show("Bievenido por primera vez a Graphic Master!" + "\n" + "Porfavor, verifique sus datos antes de continuar.", "Bienvenido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
             }
             else
             {

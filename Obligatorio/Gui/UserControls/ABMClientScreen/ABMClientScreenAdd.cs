@@ -33,8 +33,8 @@ namespace Gui.UserControls.ABMClientScreen
             }
             catch (ExceptionController Exception)
             {
-                String msgError = Exception.Message;
-                MessageBox.Show(msgError, "Error en datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                String message = Exception.Message;
+                MessageBox.Show(message, "Error en datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private Client fetchValues()
@@ -49,6 +49,17 @@ namespace Gui.UserControls.ABMClientScreen
             DateTime registrationDate = DateTime.Now;
 
             return new Client(username, password, name, surname, id, phone, address ,registrationDate, null);
+        }
+
+        private void clearForm(object sender, EventArgs e)
+        {
+            this.usernameTxt.Clear();
+            this.passwordTxt.Clear();
+            this.nameTxt.Clear();
+            this.surnameTxt.Clear();
+            this.idTxt.Clear();
+            this.phoneTxt.Clear();
+            this.addressTxt.Clear();
         }
     }
 }

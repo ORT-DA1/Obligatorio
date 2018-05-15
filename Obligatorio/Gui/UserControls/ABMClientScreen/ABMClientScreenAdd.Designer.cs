@@ -172,6 +172,7 @@
             // 
             // addClient_btn
             // 
+            this.addClient_btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addClient_btn.Location = new System.Drawing.Point(150, 277);
             this.addClient_btn.Name = "addClient_btn";
             this.addClient_btn.Size = new System.Drawing.Size(119, 27);
@@ -182,12 +183,14 @@
             // 
             // clearForm_btn
             // 
+            this.clearForm_btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.clearForm_btn.Location = new System.Drawing.Point(328, 277);
             this.clearForm_btn.Name = "clearForm_btn";
             this.clearForm_btn.Size = new System.Drawing.Size(119, 27);
             this.clearForm_btn.TabIndex = 12;
-            this.clearForm_btn.Text = "Limpiar";
+            this.clearForm_btn.Text = "Limpiar Formulario";
             this.clearForm_btn.UseVisualStyleBackColor = true;
+            this.clearForm_btn.Click += new System.EventHandler(this.clearForm);
             // 
             // ABMClientScreenAdd
             // 

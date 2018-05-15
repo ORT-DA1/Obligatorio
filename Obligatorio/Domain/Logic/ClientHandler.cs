@@ -35,8 +35,8 @@ namespace Domain.Logic
             DataValidation.ValidatePassword(client.Password);
             DataValidation.ValidateNameAndSurname(client.Name, client.Surname);
             DataValidation.ValidateID(client.Id);
-            DataValidation.ValidateAddress(client.Address);
             DataValidation.ValidatePhone(client.Phone);
+            DataValidation.ValidateAddress(client.Address);
         }
         public void Delete(Client client)
         {

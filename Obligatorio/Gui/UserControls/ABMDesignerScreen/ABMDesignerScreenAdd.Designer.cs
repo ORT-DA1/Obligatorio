@@ -28,10 +28,148 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.clearForm_btn = new System.Windows.Forms.Button();
+            this.addClient_btn = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.surnameTxt = new System.Windows.Forms.TextBox();
+            this.nameTxt = new System.Windows.Forms.TextBox();
+            this.passwordTxt = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.usernameTxt = new System.Windows.Forms.TextBox();
+            this.titleTxt = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // clearForm_btn
+            // 
+            this.clearForm_btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.clearForm_btn.Location = new System.Drawing.Point(297, 273);
+            this.clearForm_btn.Name = "clearForm_btn";
+            this.clearForm_btn.Size = new System.Drawing.Size(119, 27);
+            this.clearForm_btn.TabIndex = 28;
+            this.clearForm_btn.Text = "Limpiar Formulario";
+            this.clearForm_btn.UseVisualStyleBackColor = true;
+            // 
+            // addClient_btn
+            // 
+            this.addClient_btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addClient_btn.Location = new System.Drawing.Point(119, 273);
+            this.addClient_btn.Name = "addClient_btn";
+            this.addClient_btn.Size = new System.Drawing.Size(119, 27);
+            this.addClient_btn.TabIndex = 27;
+            this.addClient_btn.Text = "Guardar";
+            this.addClient_btn.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(159, 219);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 13);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "Apellido:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(159, 175);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(47, 13);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "Nombre:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(142, 127);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(64, 13);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Contraseña:";
+            // 
+            // surnameTxt
+            // 
+            this.surnameTxt.Location = new System.Drawing.Point(215, 216);
+            this.surnameTxt.Name = "surnameTxt";
+            this.surnameTxt.Size = new System.Drawing.Size(119, 20);
+            this.surnameTxt.TabIndex = 4;
+            // 
+            // nameTxt
+            // 
+            this.nameTxt.Location = new System.Drawing.Point(215, 172);
+            this.nameTxt.Name = "nameTxt";
+            this.nameTxt.Size = new System.Drawing.Size(119, 20);
+            this.nameTxt.TabIndex = 3;
+            // 
+            // passwordTxt
+            // 
+            this.passwordTxt.Location = new System.Drawing.Point(215, 124);
+            this.passwordTxt.Name = "passwordTxt";
+            this.passwordTxt.PasswordChar = '*';
+            this.passwordTxt.Size = new System.Drawing.Size(119, 20);
+            this.passwordTxt.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(148, 83);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Username:";
+            // 
+            // usernameTxt
+            // 
+            this.usernameTxt.Location = new System.Drawing.Point(215, 80);
+            this.usernameTxt.Name = "usernameTxt";
+            this.usernameTxt.Size = new System.Drawing.Size(119, 20);
+            this.usernameTxt.TabIndex = 1;
+            // 
+            // titleTxt
+            // 
+            this.titleTxt.AutoSize = true;
+            this.titleTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleTxt.Location = new System.Drawing.Point(53, 27);
+            this.titleTxt.Name = "titleTxt";
+            this.titleTxt.Size = new System.Drawing.Size(38, 20);
+            this.titleTxt.TabIndex = 29;
+            this.titleTxt.Text = "Title";
+            // 
+            // ABMDesignerScreenAdd
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.titleTxt);
+            this.Controls.Add(this.clearForm_btn);
+            this.Controls.Add(this.addClient_btn);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.surnameTxt);
+            this.Controls.Add(this.nameTxt);
+            this.Controls.Add(this.passwordTxt);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.usernameTxt);
+            this.Name = "ABMDesignerScreenAdd";
+            this.Size = new System.Drawing.Size(513, 371);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button clearForm_btn;
+        private System.Windows.Forms.Button addClient_btn;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox surnameTxt;
+        private System.Windows.Forms.TextBox nameTxt;
+        private System.Windows.Forms.TextBox passwordTxt;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox usernameTxt;
+        private System.Windows.Forms.Label titleTxt;
     }
 }

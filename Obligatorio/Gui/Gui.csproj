@@ -152,6 +152,9 @@
     <EmbeddedResource Include="UserControls\ABMClientScreen\ABMClientScreenAdd.resx">
       <DependentUpon>ABMClientScreenAdd.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ABMDesignerScreen\ABMDesignerScreenAdd.resx">
+      <DependentUpon>ABMDesignerScreenAdd.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -15,5 +15,6 @@ namespace Domain.Interface
         void Modify(User user, User anotherUser);
         void Exist(User user);
         void Validate(User user);
+        List<User> GetList();
     }
 }

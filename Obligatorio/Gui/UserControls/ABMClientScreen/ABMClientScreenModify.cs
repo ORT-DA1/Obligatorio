@@ -15,6 +15,8 @@ namespace Gui.UserControls.ABMClientScreen
         public ABMClientScreenModify()
         {
             InitializeComponent();
+            this.AccessibleName = "Modificar";
+            //this.AccessibleDescription = "Modificar Cliente";
         }
     }
 }

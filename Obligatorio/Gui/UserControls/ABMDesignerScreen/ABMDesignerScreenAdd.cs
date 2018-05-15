@@ -15,6 +15,8 @@ namespace Gui.UserControls.ABMDesignerScreen
         public ABMDesignerScreenAdd()
         {
             InitializeComponent();
+            this.AccessibleName = "Agregar";
+            this.AccessibleDescription = "Agregar Diseñador";
         }
     }
 }

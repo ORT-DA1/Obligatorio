@@ -15,6 +15,8 @@ namespace Gui.UserControls.ABMDesignerScreen
         public ABMDesignerScreenModify()
         {
             InitializeComponent();
+            this.AccessibleName = "Modificar";
+            this.AccessibleDescription = "Modificar Diseñador";
         }
     }
 }

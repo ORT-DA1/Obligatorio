@@ -15,6 +15,8 @@ namespace Gui.UserControls.ABMDesignerScreen
         public ABMDesignerScreenDelete()
         {
             InitializeComponent();
+            this.AccessibleName = "Borrar";
+            this.AccessibleDescription = "Borrar Diseñador";
         }
     }
 }

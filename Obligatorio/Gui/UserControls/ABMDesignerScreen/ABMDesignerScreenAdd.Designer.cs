@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.clearForm_btn = new System.Windows.Forms.Button();
-            this.addClient_btn = new System.Windows.Forms.Button();
+            this.addDesigner_btn = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,25 +40,16 @@
             this.titleTxt = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // clearForm_btn
+            // addDesigner_btn
             // 
-            this.clearForm_btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.clearForm_btn.Location = new System.Drawing.Point(297, 273);
-            this.clearForm_btn.Name = "clearForm_btn";
-            this.clearForm_btn.Size = new System.Drawing.Size(119, 27);
-            this.clearForm_btn.TabIndex = 28;
-            this.clearForm_btn.Text = "Limpiar Formulario";
-            this.clearForm_btn.UseVisualStyleBackColor = true;
-            // 
-            // addClient_btn
-            // 
-            this.addClient_btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addClient_btn.Location = new System.Drawing.Point(119, 273);
-            this.addClient_btn.Name = "addClient_btn";
-            this.addClient_btn.Size = new System.Drawing.Size(119, 27);
-            this.addClient_btn.TabIndex = 27;
-            this.addClient_btn.Text = "Guardar";
-            this.addClient_btn.UseVisualStyleBackColor = true;
+            this.addDesigner_btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addDesigner_btn.Location = new System.Drawing.Point(215, 275);
+            this.addDesigner_btn.Name = "addDesigner_btn";
+            this.addDesigner_btn.Size = new System.Drawing.Size(119, 28);
+            this.addDesigner_btn.TabIndex = 27;
+            this.addDesigner_btn.Text = "Guardar";
+            this.addDesigner_btn.UseVisualStyleBackColor = true;
+            this.addDesigner_btn.Click += new System.EventHandler(this.addDesigner);
             // 
             // label4
             // 
@@ -141,8 +131,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.titleTxt);
-            this.Controls.Add(this.clearForm_btn);
-            this.Controls.Add(this.addClient_btn);
+            this.Controls.Add(this.addDesigner_btn);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -159,9 +148,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button clearForm_btn;
-        private System.Windows.Forms.Button addClient_btn;
+        private System.Windows.Forms.Button addDesigner_btn;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;

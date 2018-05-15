@@ -44,7 +44,6 @@
             this.phoneTxt = new System.Windows.Forms.TextBox();
             this.addressTxt = new System.Windows.Forms.TextBox();
             this.addClient_btn = new System.Windows.Forms.Button();
-            this.clearForm_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // client_title
@@ -69,9 +68,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(65, 87);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 13);
+            this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Usuario:";
+            this.label1.Text = "Username:";
             // 
             // passwordTxt
             // 
@@ -173,7 +172,7 @@
             // addClient_btn
             // 
             this.addClient_btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addClient_btn.Location = new System.Drawing.Point(150, 277);
+            this.addClient_btn.Location = new System.Drawing.Point(239, 277);
             this.addClient_btn.Name = "addClient_btn";
             this.addClient_btn.Size = new System.Drawing.Size(119, 27);
             this.addClient_btn.TabIndex = 11;
@@ -181,22 +180,10 @@
             this.addClient_btn.UseVisualStyleBackColor = true;
             this.addClient_btn.Click += new System.EventHandler(this.addClient);
             // 
-            // clearForm_btn
-            // 
-            this.clearForm_btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.clearForm_btn.Location = new System.Drawing.Point(328, 277);
-            this.clearForm_btn.Name = "clearForm_btn";
-            this.clearForm_btn.Size = new System.Drawing.Size(119, 27);
-            this.clearForm_btn.TabIndex = 12;
-            this.clearForm_btn.Text = "Limpiar Formulario";
-            this.clearForm_btn.UseVisualStyleBackColor = true;
-            this.clearForm_btn.Click += new System.EventHandler(this.clearForm);
-            // 
             // ABMClientScreenAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.clearForm_btn);
             this.Controls.Add(this.addClient_btn);
             this.Controls.Add(this.addressTxt);
             this.Controls.Add(this.phoneTxt);
@@ -238,6 +225,5 @@
         private System.Windows.Forms.TextBox phoneTxt;
         private System.Windows.Forms.TextBox addressTxt;
         private System.Windows.Forms.Button addClient_btn;
-        private System.Windows.Forms.Button clearForm_btn;
     }
 }

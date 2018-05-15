@@ -30,6 +30,7 @@ namespace Gui.UserControls.ABMClientScreen
                 Client newClient = fetchValues();
                 handler.Add(newClient);
                 MessageBox.Show("El cliente " + newClient.Username + " fue ingresado exitosamente al sistema.", "Mensaje de Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ClearForm();
             }
             catch (ExceptionController Exception)
             {
@@ -39,19 +40,21 @@ namespace Gui.UserControls.ABMClientScreen
         }
         private Client fetchValues()
         {
-            string username = this.usernameTxt.Text;
-            string password = this.passwordTxt.Text;
-            string name = this.nameTxt.Text;
-            string surname = this.surnameTxt.Text;
-            string id = this.idTxt.Text;
-            string phone = this.phoneTxt.Text;
-            string address = this.addressTxt.Text;
             DateTime registrationDate = DateTime.Now;
 
-            return new Client(username, password, name, surname, id, phone, address ,registrationDate, null);
+            return new Client(
+                this.usernameTxt.Text, 
+                this.passwordTxt.Text, 
+                this.nameTxt.Text, 
+                this.surnameTxt.Text, 
+                this.idTxt.Text,
+                this.phoneTxt.Text,
+                this.addressTxt.Text,
+                registrationDate,
+                null);
         }
 
-        private void clearForm(object sender, EventArgs e)
+        private void ClearForm()
         {
             this.usernameTxt.Clear();
             this.passwordTxt.Clear();
@@ -61,5 +64,6 @@ namespace Gui.UserControls.ABMClientScreen
             this.phoneTxt.Clear();
             this.addressTxt.Clear();
         }
+
     }
 }

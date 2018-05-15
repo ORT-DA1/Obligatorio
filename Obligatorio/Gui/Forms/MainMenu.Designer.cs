@@ -61,6 +61,7 @@
             this.options});
             this.leftMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.leftMenuStrip.Name = "leftMenuStrip";
+            this.leftMenuStrip.Padding = new System.Windows.Forms.Padding(6, 2, 0, 0);
             this.leftMenuStrip.Size = new System.Drawing.Size(118, 447);
             this.leftMenuStrip.TabIndex = 16;
             this.leftMenuStrip.Text = "Left Menu Strip";
@@ -71,7 +72,7 @@
             this.cerrarSesionToolStripMenuItem});
             this.options.Name = "options";
             this.options.Size = new System.Drawing.Size(111, 19);
-            this.options.Text = "Menu";
+            this.options.Text = "General";
             // 
             // MainPanel
             // 

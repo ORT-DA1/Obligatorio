@@ -41,8 +41,9 @@ namespace Gui.Forms
             if (user.CanVerifyInformation())
             {   
                 MessageBox.Show("Bievenido por primera vez a Graphic Master!" + "\n" + "Porfavor, verifique sus datos antes de continuar.", "Bienvenido", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
+                VerifyInformation verificationForm = new VerifyInformation(user);
+                verificationForm.Show();
+                this.Hide();
             }
             else
             {

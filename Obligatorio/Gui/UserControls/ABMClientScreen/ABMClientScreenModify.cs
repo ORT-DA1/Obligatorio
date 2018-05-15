@@ -11,13 +11,13 @@ namespace Gui.UserControls.ABMClientScreen
         {
             InitializeComponent();
             this.AccessibleName = "Modificar";
-            //this.AccessibleDescription = "Modificar Cliente";
+            this.titleTxt.Text = "Modificar Cliente";
         }
         public UserControl GetUserController()
         {
             try
             {
-                LoadClients();
+                LoadClientsIntoList();
                 return this;
             }
             catch (ExceptionController Exception)
@@ -27,7 +27,7 @@ namespace Gui.UserControls.ABMClientScreen
             }
             return null;
         }
-        private void LoadClients()
+        private void LoadClientsIntoList()
         {
             // Cargar clientes en tabla.
         }

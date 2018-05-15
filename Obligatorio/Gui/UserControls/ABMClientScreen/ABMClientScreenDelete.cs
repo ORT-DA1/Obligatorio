@@ -11,14 +11,14 @@ namespace Gui.UserControls.ABMClientScreen
         {
             InitializeComponent();
             this.AccessibleName = "Borrar";
-            this.AccessibleDescription = "Borrar Cliente";
+            this.titleTxt.Text = "Borrar Cliente";
         }
 
         public UserControl GetUserController()
         {
             try
             {
-                LoadClients();
+                LoadClientsIntoList();
                 return this;
             }
             catch (ExceptionController Exception)
@@ -29,7 +29,7 @@ namespace Gui.UserControls.ABMClientScreen
             return null;
         }
 
-        private void LoadClients()
+        private void LoadClientsIntoList()
         {
             //Poner todos los clientes en una lista.
         }

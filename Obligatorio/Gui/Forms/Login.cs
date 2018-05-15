@@ -88,8 +88,8 @@ namespace Gui.Forms
             ClientHandler clientHandler = new ClientHandler();
 
             DateTime validDate = new DateTime(2018, 05, 28, 10, 53, 55);
-            Client firstClient = new Client("cliente", "cliente", "Oracle", "Netsuite", "12345678", 234234234, "16 de Abril 1912", validDate, null);
-            Client secondClient = new Client("Cliente", "Cliente123", "League", "ofLegends", "54683928", 236234234, "16 de Abril 1912", validDate, null);
+            Client firstClient = new Client("cliente", "cliente", "Oracle", "Netsuite", "12345678", "234234234", "16 de Abril 1912", validDate, null);
+            Client secondClient = new Client("Cliente", "Cliente123", "League", "ofLegends", "54683928", "236234234", "16 de Abril 1912", validDate, null);
             clientHandler.Add(firstClient);
             clientHandler.Add(secondClient);
         }

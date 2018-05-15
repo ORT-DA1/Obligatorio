@@ -33,6 +33,14 @@ namespace Domain.Data
             }
         }
 
+        public static void ValidatePhone(string phone)
+        {
+            if (!isValidID(phone))
+            {
+                throw new ExceptionController(ExceptionMessage.USER_INVALID_PHONE);
+            }
+        }
+
         public static void ValidateNameAndSurname(string name, string surname)
         {
             if (!IsValidString(name))
@@ -45,7 +53,7 @@ namespace Domain.Data
             }
         }
 
-        internal static void ValidateID(string id)
+        public static void ValidateID(string id)
         {
             if (!isValidID(id))
             {

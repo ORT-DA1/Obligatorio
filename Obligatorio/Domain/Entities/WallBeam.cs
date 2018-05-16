@@ -15,7 +15,7 @@ namespace Domain.Entities
 
         public override void Draw(Graphics graphic)
         {
-            Rectangle rectangle = new Rectangle(this.UbicationPoint.X, this.UbicationPoint.Y, 10, 10);
+            Rectangle rectangle = new Rectangle(this.UbicationPoint.X-5, this.UbicationPoint.Y-5, 10, 10);
             float startAngle = 0;
             float sweepAngle = 360;
             graphic.FillPie(wallBeamBrush, rectangle, startAngle, sweepAngle);

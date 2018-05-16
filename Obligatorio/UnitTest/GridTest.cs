@@ -77,11 +77,11 @@ namespace UnitTest
         [ExpectedException(typeof(ExceptionController))]
         public void TestDeleteGrid()
         {
-            Client anotherClient = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
+            Client anotherClient = new Client("testasdas", PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
             Grid anotherGrid = new Grid(GRID_NAME_OK, anotherClient, HEIGHT, WIDTH);
-            //GRID_HANDLER.Add(anotherGrid);
+            GRID_HANDLER.Add(anotherGrid);
             GRID_HANDLER.Delete(anotherGrid);
-            // Assert.IsFalse(dataStorage.Grids.Contains(anotherGrid));
+            Assert.IsFalse(dataStorage.Grids.Contains(anotherGrid));
         }
 
         [TestMethod]
@@ -189,7 +189,8 @@ namespace UnitTest
         public void TestRemoveWindow()
         {
             Point point = new Point(1, 0);
-            Window window = new Window(point);
+            Point anotherPoint = new Point(1, 1);
+            Window window = new Window(point, anotherPoint, "vertical");
             grid.Windows.Add(window);
             grid.RemoveWindow(window);
             int expectedResult = 0;
@@ -213,7 +214,8 @@ namespace UnitTest
         public void TestRemoveDoor()
         {
             Point point = new Point(0, 1);
-            Door door = new Door(point);
+            Point anotherPoint = new Point(1, 1);
+            Door door = new Door(point, anotherPoint, "vertical");
             grid.Doors.Add(door);
             grid.RemoveDoor(door);
             int expectedResult = 0;

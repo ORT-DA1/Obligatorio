@@ -62,6 +62,38 @@ namespace Domain.Entities
             this.DrawY(graphic);
         }
 
+        public void DrawWalls(Graphics graphic)
+        {
+            foreach (Wall wall in Walls)
+            {
+                wall.Draw(graphic);
+            }
+        }
+
+        public void DrawDoors(Graphics graphic)
+        {
+            foreach (Door door in Doors)
+            {
+                door.Draw(graphic);
+            }
+        }
+
+        public void DrawWallBeams(Graphics graphic)
+        {
+            foreach (WallBeam wallBeam in WallBeams)
+            {
+                wallBeam.Draw(graphic);
+            }
+        }
+
+        public void DrawWindows(Graphics graphic)
+        {
+            foreach (Window window in Windows)
+            {
+                window.Draw(graphic);
+            }
+        }
+
         private void DrawX(Graphics graphic)
         {
             for (int i = PixelConvertor; i < this.Height; i += PixelConvertor)
@@ -87,27 +119,29 @@ namespace Domain.Entities
         }
 
         public void AddWall(Graphics graphic, Wall wall)
-        {
+            {
             this.IsValid(wall);
             if (wall.SizeGreaterThanMaximum()) //si el largo del wall es > 5 + refactor al nombre
             {
-                Wall anotherWall = new Wall(wall.startUbicationPoint, wall.CalculateLocationPoint(MaxMeters));//creo una nueva pared
+                Point calculatedPoint = wall.CalculateLocationPoint(MaxMeters);
+                Wall anotherWall = new Wall(wall.startUbicationPoint, calculatedPoint);//creo una nueva pared
                                                                                                               //le seteo el punto inicial igual a wall
                                                                                                               //le seteo el punto final en base a X,Y de wall 5 metros despues
                 AddWall(graphic, anotherWall);//llamo recursivo con anotherWall 
-                wall.startUbicationPoint = wall.CalculateLocationPoint(MaxMeters); //corro el punto inicial de wall
+                wall.startUbicationPoint = calculatedPoint; //corro el punto inicial de wall
                 AddWall(graphic, wall);//llamo recursivo con la nueva wall   
             }
-            if (isCuttingAWall(wall))//verifico si alguna pared la corta
+            else if (isCuttingAWall(wall))//verifico si alguna pared la corta
             {
-                Point intersection = wall.FirstIntersection(wall); //obtengo la interseccion con la primera pared
+                Point intersection = this.FirstIntersection(wall); //obtengo la interseccion con la primera pared
                 Wall newWall = new Wall(wall.startUbicationPoint, intersection); //Si la corta agrego creo una pared desde el punto inicial hasta donde se corta
                 newWall.Draw(graphic);
                 this.Walls.Add(newWall);
                 AddWallBeam(graphic, newWall.startUbicationPoint);//verifico si tengo que insertar viga en inicio + cortar paredes
                 AddWallBeam(graphic, newWall.endUbicationPoint);//verifico si tengo que insertar viga en final + cortar paredes
-                wall.startUbicationPoint = intersection; // modifico el punto inicial de wall para que sea en donde se corta con la otra pared
-                AddWall(graphic, wall);//llamo recursivo con wall
+                //wall.startUbicationPoint = intersection; // modifico el punto inicial de wall para que sea en donde se corta con la otra pared
+                Wall anotherWall = new Wall(intersection, wall.endUbicationPoint);
+                AddWall(graphic, anotherWall);//llamo recursivo con wall
             }
             else
             {
@@ -119,28 +153,58 @@ namespace Domain.Entities
 
         }
 
+        public Wall obtainWallInPoint(Point point)
+        {
+            Wall wall = this.Walls.First(anotherWall => anotherWall.Path.Contains(point));
+            return wall;
+        }
+
+        public string wallSense(Point point)
+        {
+            Wall wall = this.Walls.First(anotherWall => anotherWall.Path.Contains(point));
+            if (wall.isHorizontalWall()) return "horizontal";
+            else return "vertical";
+        }
+
         public bool isCuttingAWall(Wall wall)
         {
-            bool isCutting = false;
-            foreach (Wall anotherWall in this.Walls)
+            foreach(Wall anotherWall in Walls)
             {
-                foreach(Point anotherPoint in anotherWall.Path)
+                if(isPerpendicular(wall, anotherWall))
                 {
-                    foreach(Point point in wall.Path)
+                    foreach(Point anotherPoint in anotherWall.Path)
                     {
-                        if (point.Equals(anotherPoint)){
-                            return true;
+                        foreach(Point point in wall.Path)
+                        {
+                            if (point.Equals(anotherPoint) && !point.Equals(wall.startUbicationPoint)) return true;
                         }
                     }
                 }
             }
-            return isCutting;
+            return false;
         }
 
-        private void IsValid(Wall wall)
+        private bool isPerpendicular(Wall wall, Wall anotherWall)
         {
-            this.Exist(wall);
-            this.ContainedIn(wall);
+            return ((wall.isHorizontalWall() && anotherWall.isVerticalWall()) 
+                || wall.isVerticalWall() && anotherWall.isHorizontalWall());
+        }
+
+        public void IsValid(Wall wall)
+        {
+            if (!wall.startUbicationPoint.Equals(wall.endUbicationPoint))
+            {
+                this.HorizontalOrVertical(wall);
+                this.Exist(wall);
+                this.ContainedIn(wall);
+            }
+        }
+
+        private void HorizontalOrVertical(Wall wall)
+        {
+            if (wall.isHorizontalWall() || wall.isVerticalWall()) {
+            }
+            else throw new ExceptionController(ExceptionMessage.WALL_ALREADY_EXSIST);
         }
 
         private void Exist(Wall wall)
@@ -153,18 +217,48 @@ namespace Domain.Entities
 
         private void ContainedIn(Wall wall)
         {
-            List<Point> intersectionPoints = new List<Point>();
-            foreach(Wall anotherWall in this.Walls)
+            foreach (Wall anotherWall in Walls)
             {
-                Point firstPoint = wall.FirstIntersection(anotherWall);
-                if (!firstPoint.IsEmpty)
+                if (hasTwoPointsInCommon(wall, anotherWall))
                 {
-                    Wall newWall = new Wall(firstPoint, wall.endUbicationPoint);
-                    Point secondPoint = newWall.FirstIntersection(anotherWall);
-                    if(!secondPoint.IsEmpty)
-                        throw new ExceptionController(ExceptionMessage.USER_INVALID_PASSWORD); // cambiar exception
+                    throw new ExceptionController(ExceptionMessage.CONTAINED_WALL);
                 }
             }
+        }
+
+        private bool hasTwoPointsInCommon(Wall wall, Wall anotherWall)
+        {
+            int commonPoints = 0;
+            foreach(Point point in wall.Path)
+            {
+                foreach(Point anotherPoint in anotherWall.Path)
+                {
+                    if (point.Equals(anotherPoint))
+                        commonPoints++;
+                }
+                if (commonPoints > 1) return true;
+                commonPoints = 0;
+            }
+            return commonPoints>0;
+        }
+
+        public Point FirstIntersection(Wall wall)
+        {
+            Point returnPoint = new Point(-1,-1);
+            foreach (Wall anotherWall in Walls) // paredes global
+            {
+                foreach(Point anotherWallPathPoint in anotherWall.Path) //para cada punto de una pared global
+                {
+                    foreach(Point point in wall.Path)
+                    {
+                        if (point.Equals(anotherWallPathPoint) && !point.Equals(wall.startUbicationPoint))
+                        {
+                            return point;
+                        }
+                    }
+                }
+            }
+            return returnPoint;
         }
 
         public void AddWallBeam(Graphics graphic, Point ubicationPoint)
@@ -179,18 +273,43 @@ namespace Domain.Entities
 
         public bool FreePosition(Point ubicationPoint)
         {
+            List<Window> windowList = this.Windows.Where(window => window.StartPoint.Equals(ubicationPoint)).ToList();
+            List<Door> doorList = this.Doors.Where(door => door.StartPoint.Equals(ubicationPoint)).ToList();
             return (!this.WallBeams.Contains(new WallBeam(ubicationPoint))
-                && !this.Windows.Contains(new Window(ubicationPoint))
-                && !this.Doors.Contains(new Door(ubicationPoint)));
+                && windowList.Count == 0 
+                && doorList.Count == 0);
         }
 
         public void RemoveWall(Wall wall)
         {
+            
             WallBeam startWallBeam = getWallBeam(wall.startUbicationPoint);
             WallBeam endWallBeam = getWallBeam(wall.endUbicationPoint);
+            //foreach (Wall anotherWall in this.Walls)
+            //{
+                foreach(Point point in wall.Path)
+                {
+                    if(existWindow(point))
+                        this.Windows.Remove(this.Windows.First(windows => windows.StartPoint.Equals(point)));
+                    //this.Windows.Remove(this.Windows.First(ubicationPoint => ubicationPoint.Equals(point)));
+                    if (existDoor(point))
+                        this.Doors.Remove(this.Doors.First(door => door.StartPoint.Equals(point)));
+                    //this.Doors.Remove(this.Doors.First(ubicationPoint => ubicationPoint.Equals(point)));*/
+                }
+            //}
             this.Walls.Remove(wall);
             RemoveWallBeam(startWallBeam);
             RemoveWallBeam(endWallBeam);
+        }
+
+        private bool existDoor(Point ubicationPoint)
+        {
+            return this.Doors.Contains(new Door(ubicationPoint, ubicationPoint, "vertical"));
+        }
+
+        private bool existWindow(Point ubicationPoint)
+        {
+            return this.Windows.Contains(new Window(ubicationPoint, ubicationPoint, "vertical"));
         }
 
         public WallBeam getWallBeam(Point startUbicationPoint)
@@ -224,13 +343,13 @@ namespace Domain.Entities
             return false;
         }
 
-        public void AddWindow(Graphics graphic, Point ubicationPoint)
+        public void AddWindow(Graphics graphic, Point startPoint, Point endPoint, string sense)
         {
-            OnTheWall(ubicationPoint);
-            if (FreePosition(ubicationPoint))
+            //OnTheWall(startPoint);
+            if (FreePosition(startPoint))
             {
-                Window window = new Window(ubicationPoint);
-                this.Windows.Add(new Window(ubicationPoint));
+                Window window = new Window(startPoint, endPoint, sense);
+                this.Windows.Add(new Window(startPoint, endPoint, sense));
                 window.Draw(graphic);
             }
         }
@@ -240,13 +359,13 @@ namespace Domain.Entities
             this.Windows.Remove(window);
         }
 
-        public void AddDoor(Graphics graphic, Point ubicationPoint)
+        public void AddDoor(Graphics graphic, Point startPoint, Point endPoint, string sense)
         {
-            OnTheWall(ubicationPoint);
-            if (FreePosition(ubicationPoint))
+            OnTheWall(startPoint);
+            if (FreePosition(startPoint))
             {
-                Door door = new Door(ubicationPoint);
-                this.Doors.Add(new Door(ubicationPoint));
+                Door door = new Door(startPoint, endPoint, sense);
+                this.Doors.Add(new Door(startPoint, endPoint, sense));
                 door.Draw(graphic);
             }
         }
@@ -265,9 +384,22 @@ namespace Domain.Entities
             if(matchPoints == 0) throw new ExceptionController(ExceptionMessage.POINT_OUT_OF_WALL);
         }
 
-        public void RemoveDoor(Door door)
+        public void RemoveDoor(Point ubicationPoint)
         {
-            this.Doors.Remove(door);
+            if (existDoor(ubicationPoint))
+            {
+                Door door = this.Doors.First(anotherDoor => anotherDoor.StartPoint.Equals(ubicationPoint));
+                this.Doors.Remove(door);
+            }
+        }
+
+        public void RemoveWindow(Point ubicationPoint)
+        {
+            if (existWindow(ubicationPoint))
+            {
+                Window window = this.Windows.First(anotherWindow => anotherWindow.StartPoint.Equals(ubicationPoint));
+                this.Windows.Remove(window);
+            }
         }
 
         public override bool Equals(object gridObject)
@@ -363,6 +495,14 @@ namespace Domain.Entities
         {
             return AmountPriceWall() + AmountPriceWallBeam() + AmountPriceWindow() + AmountPriceDoor();
         }
-
+        
+        public Point fixPoint(Point point)
+        {
+            Point fixedPoint = new Point(
+               ((int)Math.Round((double)point.X / PixelConvertor)) * PixelConvertor,
+               ((int)Math.Round((double)point.Y / PixelConvertor)) * PixelConvertor
+           );
+            return fixedPoint;
+        }
     }
 }

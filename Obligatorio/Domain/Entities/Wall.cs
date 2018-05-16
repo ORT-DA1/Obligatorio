@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Domain.Entities
@@ -13,7 +14,7 @@ namespace Domain.Entities
         public Wall(Point startPoint, Point endPoint)
         {
             if (startPoint.Y.Equals(endPoint.Y)){
-                if(startPoint.X < endPoint.Y)
+                if(startPoint.X < endPoint.X)
                 {
                     this.startUbicationPoint = startPoint;
                     this.endUbicationPoint = endPoint;
@@ -26,7 +27,7 @@ namespace Domain.Entities
             }
             else
             {
-                if (startPoint.Y > endPoint.Y)
+                if (startPoint.Y < endPoint.Y)
                 {
                     this.startUbicationPoint = startPoint;
                     this.endUbicationPoint = endPoint;
@@ -39,7 +40,7 @@ namespace Domain.Entities
             }
 
             this.Path = new List<Point>();
-            this.wallPen = new Pen(Color.LightGreen, 7);
+            this.wallPen = new Pen(Color.LightGreen, 4);
 
             this.createPath();
         }
@@ -47,27 +48,28 @@ namespace Domain.Entities
         public int getDistance()
         {
             if (isHorizontalWall())
-                return this.startUbicationPoint.X - this.endUbicationPoint.X;
+                return Math.Abs((this.startUbicationPoint.X) - (this.endUbicationPoint.X));
             else
-                return this.startUbicationPoint.Y- this.endUbicationPoint.Y;
+                return Math.Abs((this.startUbicationPoint.Y) - (this.endUbicationPoint.Y));
         }
 
         private void createPath()
         {
+            int max = getDistance();
             if (isHorizontalWall())
             {
-                for(int i=0;  i<getDistance();)
+                for(int i=0;  i<= max;)
                 {
-                    Point point = new Point(this.startUbicationPoint.X + i,this.endUbicationPoint.Y);
+                    Point point = new Point(this.startUbicationPoint.X + i,this.startUbicationPoint.Y);
                     this.Path.Add(point);
                     i+= Grid.PixelConvertor;
                 } 
             }
             else
             {
-                for (int i = 0; i < getDistance();)
+                for (int i = 0; i <= max;)
                 {
-                    Point point = new Point(this.startUbicationPoint.X, this.endUbicationPoint.Y + i);
+                    Point point = new Point(this.startUbicationPoint.X, this.startUbicationPoint.Y + i);
                     this.Path.Add(point);
                     i += Grid.PixelConvertor;
                 }
@@ -76,7 +78,7 @@ namespace Domain.Entities
 
         public override void Draw(Graphics graphic)
         {
-            graphic.DrawLine(this.wallPen, this.startUbicationPoint, this.endUbicationPoint);
+            graphic.DrawLine(this.wallPen, this.startUbicationPoint,    this.endUbicationPoint);
         }
 
         public override bool Equals(object wallObject)
@@ -96,9 +98,9 @@ namespace Domain.Entities
         public bool SizeGreaterThanMaximum()
         {
             if(isHorizontalWall())
-                return (this.endUbicationPoint.X - this.startUbicationPoint.X) > 5;
+                return Math.Abs(this.endUbicationPoint.X /Grid.PixelConvertor - this.startUbicationPoint.X / Grid.PixelConvertor) > (5);
             else
-                return (this.endUbicationPoint.Y - this.startUbicationPoint.Y) > 5;
+                return Math.Abs(this.endUbicationPoint.Y / Grid.PixelConvertor - this.startUbicationPoint.Y / Grid.PixelConvertor) > (5);
         }
 
         public bool isHorizontalWall()
@@ -109,40 +111,14 @@ namespace Domain.Entities
         public Point CalculateLocationPoint(int maxMeters)
         {
             if (isHorizontalWall())
-                return new Point(this.startUbicationPoint.X + maxMeters, this.endUbicationPoint.Y);
+                return new Point(this.startUbicationPoint.X + (maxMeters * Grid.PixelConvertor), this.endUbicationPoint.Y);
             else
-                return new Point(this.startUbicationPoint.X ,this.startUbicationPoint.Y + maxMeters);
+                return new Point(this.startUbicationPoint.X ,this.startUbicationPoint.Y + (maxMeters*Grid.PixelConvertor));
         }
 
-        public Point FirstIntersection(Wall wall)
+        internal bool isVerticalWall()
         {
-            Point returnPoint;
-            if (isHorizontalWall())
-            {
-                for (int i = 1; i < getDistance();)
-                {
-                    foreach (Point point in wall.Path)
-                    {
-                        if(point.X == this.startUbicationPoint.X + i)
-                            return returnPoint = new Point(point.X, point.Y);
-                    }
-                    i += Grid.PixelConvertor;
-                }
-            }
-            else
-            {
-                for (int i = 1; i < getDistance();)
-                {
-                    foreach (Point point in wall.Path)
-                    {
-                        if (point.Y == this.startUbicationPoint.Y + i)
-                            return returnPoint = new Point(point.X, point.Y);
-                    }
-                    i += Grid.PixelConvertor;
-                }
-            }
-            return returnPoint = new Point();
+            return this.startUbicationPoint.X == this.endUbicationPoint.X;
         }
-
     }
 }

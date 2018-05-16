@@ -114,7 +114,7 @@ namespace Gui.UserControls.ABMClientScreen
             catch (ExceptionController Exception)
             {
                 String message = Exception.Message;
-                MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -68,6 +68,18 @@ namespace Domain.Logic
                 throw new ExceptionController(ExceptionMessage.USER_NOT_EXIST);
             }
         }
+        public List<Client> GetList()
+        {
+            List<Client> clientList = storage.Clients;
+            IsNotEmpty(clientList);
+            return clientList;
+        }
+        private void IsNotEmpty(List<Client> clientList)
+        {
+            if (!clientList.Any())
+            {
+                throw new ExceptionController(ExceptionMessage.EMPTY_CLIENTS_LIST);
+            }
+        }
     }
-
 }

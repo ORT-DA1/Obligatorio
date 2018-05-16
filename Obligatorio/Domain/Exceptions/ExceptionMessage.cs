@@ -13,7 +13,9 @@
         public const string USER_ALREADY_EXSIST = "Ese usuario ya existe.";
         public const string USER_INVALID_LOGIN = "El nombre de usuario no coincide con la contraseña.";
 
-
+        public const string EMPTY_CLIENTS_LIST = "No existen Clientes registrados en el sistema";
+        public const string EMPTY_DESIGNERS_LIST = "No existen Diseñadores registrados en el sistema";
+       
         public const string GRID_INVALID_HEIGHT_ABOVE = "La altura es incorrecta. Debe ser menor quer 25 metros.";
         public const string GRID_INVALID_HEIGHT_UNDER = "La altura es incorrecta. Debe ser mayor quer 0 metros.";
         public const string GRID_INVALID_WIDTH_ABOVE = "El ancho es incorrecto. Debe ser menor quer 25 metros.";

@@ -44,5 +44,10 @@ namespace Domain.Entities
         {
             return true;
         }
+        public override string ToString()
+        {
+            string format = "{0} - {1} {2}";
+            return String.Format(format, this.Username, this.Name, this.Surname);
+        }
     }
 }

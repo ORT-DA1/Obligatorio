@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace Gui
+namespace Gui.Forms
 {
     public partial class CreateGridForm : Form
     {

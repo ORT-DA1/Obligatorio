@@ -23,7 +23,7 @@ namespace UnitTest
         private readonly string CI_OK = "45688334";
         private readonly DateTime REGISTRATIONDATE_OK = new DateTime(2018, 05, 28, 10, 53, 55);
         private readonly DateTime LASTACCESS_OK = DateTime.Now;
-        private readonly int PHONE_OK = 093535858;
+        private readonly string PHONE_OK = "093535858";
         private readonly string ADDRESS_OK = "Cuareim 1818";
         private readonly IUserHandler<Client> CLIENT_HANDLER;
         private DataStorage dataStorage;

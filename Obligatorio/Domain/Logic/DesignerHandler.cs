@@ -2,7 +2,8 @@
 using Domain.Entities;
 using Domain.Interface;
 using Domain.Exceptions;
-
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain.Logic
 {
@@ -66,6 +67,19 @@ namespace Domain.Logic
             if (!this.storage.Designers.Contains(designer))
             {
                 throw new ExceptionController(ExceptionMessage.USER_NOT_EXIST);
+            }
+        }
+        public List<Designer> GetList()
+        {
+            List<Designer> designersList = storage.Designers;
+            IsNotEmpty(designersList);
+            return designersList;
+        }
+        private void IsNotEmpty(List<Designer> designersList)
+        {
+            if (!designersList.Any())
+            {
+                throw new ExceptionController(ExceptionMessage.EMPTY_DESIGNERS_LIST);
             }
         }
     }

@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using Domain.Entities;
 
-namespace Gui
+namespace Gui.Forms
 {
     public partial class GridForm : Form
     {

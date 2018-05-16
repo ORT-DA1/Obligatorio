@@ -35,6 +35,7 @@ namespace Domain.Logic
             DataValidation.ValidatePassword(client.Password);
             DataValidation.ValidateNameAndSurname(client.Name, client.Surname);
             DataValidation.ValidateID(client.Id);
+            DataValidation.ValidatePhone(client.Phone);
             DataValidation.ValidateAddress(client.Address);
         }
         public void Delete(Client client)
@@ -67,6 +68,18 @@ namespace Domain.Logic
                 throw new ExceptionController(ExceptionMessage.USER_NOT_EXIST);
             }
         }
+        public List<Client> GetList()
+        {
+            List<Client> clientList = storage.Clients;
+            IsNotEmpty(clientList);
+            return clientList;
+        }
+        private void IsNotEmpty(List<Client> clientList)
+        {
+            if (!clientList.Any())
+            {
+                throw new ExceptionController(ExceptionMessage.EMPTY_CLIENTS_LIST);
+            }
+        }
     }
-
 }

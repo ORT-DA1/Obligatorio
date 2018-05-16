@@ -46,7 +46,7 @@ namespace UnitTest
         [TestMethod]
         public void TestCanVerifyInformation()
         {
-           // Assert.IsTrue(this.userTest.CanVerifyInformation());
+           Assert.IsTrue(this.userTest.CanVerifyInformation());
         }
     }
 }

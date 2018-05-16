@@ -121,40 +121,67 @@ namespace Domain.Entities
         public void AddWall(Graphics graphic, Wall wall)
             {
             this.IsValid(wall);
-            if (isCuttingAWallBeforeMaximum(wall))//verifico si alguna pared la corta antes de los 5metros
+            if (isCuttingAWallBeforeMaximum(wall))
             {
-                Point intersection = this.FirstIntersection(wall); //obtengo la interseccion con la primera pared
-                Wall newWall = new Wall(wall.startUbicationPoint, intersection); //Si la corta agrego creo una pared desde el punto inicial hasta donde se corta
+                Point intersection = this.FirstIntersection(wall);
+                Wall intersectWall = this.FirstIntersectWall(wall);
+                breakWall(intersectWall, intersection);
+                Wall newWall = new Wall(wall.startUbicationPoint, intersection);
+                AddWallBeam(graphic, newWall.startUbicationPoint);
+                AddWallBeam(graphic, newWall.endUbicationPoint);
                 newWall.Draw(graphic);
                 this.Walls.Add(newWall);
-                AddWallBeam(graphic, newWall.startUbicationPoint);//verifico si tengo que insertar viga en inicio + cortar paredes
-                AddWallBeam(graphic, newWall.endUbicationPoint);//verifico si tengo que insertar viga en final + cortar paredes
-                //wall.startUbicationPoint = intersection; // modifico el punto inicial de wall para que sea en donde se corta con la otra pared
+                AddWallBeam(graphic, newWall.startUbicationPoint);
+                AddWallBeam(graphic, newWall.endUbicationPoint);
                 Wall anotherWall = new Wall(intersection, wall.endUbicationPoint);
-                AddWall(graphic, anotherWall);//llamo recursivo con wall
+                AddWall(graphic, anotherWall);
             }
-            else if (wall.SizeGreaterThanMaximum()) //si el largo del wall es > 5 + refactor al nombre
+            else if (wall.SizeGreaterThanMaximum())
             {
                 Point calculatedPoint = wall.CalculateLocationPoint(MaxMeters);
-                Wall anotherWall = new Wall(wall.startUbicationPoint, calculatedPoint);//creo una nueva pared
-                                                                                       //le seteo el punto inicial igual a wall
-                                                                                       //le seteo el punto final en base a X,Y de wall 5 metros despues
+                Wall anotherWall = new Wall(wall.startUbicationPoint, calculatedPoint);
+                AddWallBeam(graphic, anotherWall.startUbicationPoint);
+                AddWallBeam(graphic, anotherWall.endUbicationPoint);
                 this.Walls.Add(anotherWall);
                 anotherWall.Draw(graphic);
-                //AddWall(graphic, anotherWall);//llamo recursivo con anotherWall 
-                //wall.startUbicationPoint = calculatedPoint; //corro el punto inicial de wall
                 Wall newWall = new Wall(calculatedPoint, wall.endUbicationPoint);
-                AddWall(graphic, newWall);//llamo recursivo con la nueva wall   
+                AddWall(graphic, newWall);
             }
             else
             {
                 wall.Draw(graphic);
                 this.Walls.Add(wall);
-                AddWallBeam(graphic, wall.startUbicationPoint);//agrego viga inicial
-                AddWallBeam(graphic, wall.endUbicationPoint);//agrego viga final
-              //  return;
+                AddWallBeam(graphic, wall.startUbicationPoint);
+                AddWallBeam(graphic, wall.endUbicationPoint);
             }
+        }
 
+        private void breakWall(Wall intersectWall, Point intersection)
+        {
+            Wall newWall = new Wall(intersectWall.startUbicationPoint, intersection);
+            Wall anotherNewWall = new Wall(intersection, intersectWall.endUbicationPoint);
+            this.Walls.Remove(intersectWall);
+            this.Walls.Add(newWall);
+            this.Walls.Add(anotherNewWall);
+        }
+
+        private Wall FirstIntersectWall(Wall wall)
+        {
+            Wall returnWall = new Wall(new Point(-1, -1), new Point(-1, -1));
+            foreach (Wall anotherWall in Walls)
+            {
+                foreach (Point anotherWallPathPoint in anotherWall.Path)
+                {
+                    foreach (Point point in wall.Path)
+                    {
+                        if (point.Equals(anotherWallPathPoint) && !point.Equals(wall.startUbicationPoint))
+                        {
+                            return anotherWall;
+                        }
+                    }
+                }
+            }
+            return returnWall;
         }
 
         public Wall obtainWallInPoint(Point point)
@@ -172,16 +199,6 @@ namespace Domain.Entities
 
         public bool isCuttingAWallBeforeMaximum(Wall wall)
         {
-            /*Point intersection = this.FirstIntersection(wall); //obtengo la interseccion con la primera pared
-            if (wall.isHorizontalWall() && (!intersection.Equals(wall.startUbicationPoint)))
-            {
-                return ((Math.Abs(wall.startUbicationPoint.X - intersection.X) / PixelConvertor) <= this.MaxMeters);
-            }
-            else if(!intersection.Equals(wall.startUbicationPoint))
-            {
-                return ((Math.Abs(wall.startUbicationPoint.Y - intersection.Y) / PixelConvertor) <= this.MaxMeters);
-            }
-            return false;*/
             foreach (Wall anotherWall in Walls)
             {
                 if(isPerpendicular(wall, anotherWall))
@@ -271,9 +288,9 @@ namespace Domain.Entities
         public Point FirstIntersection(Wall wall)
         {
             Point returnPoint = new Point(-1,-1);
-            foreach (Wall anotherWall in Walls) // paredes global
+            foreach (Wall anotherWall in Walls)
             {
-                foreach(Point anotherWallPathPoint in anotherWall.Path) //para cada punto de una pared global
+                foreach(Point anotherWallPathPoint in anotherWall.Path)
                 {
                     foreach(Point point in wall.Path)
                     {

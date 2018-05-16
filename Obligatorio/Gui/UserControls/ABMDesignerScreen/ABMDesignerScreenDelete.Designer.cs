@@ -48,7 +48,7 @@
             // 
             this.titleTxt.AutoSize = true;
             this.titleTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleTxt.Location = new System.Drawing.Point(75, 28);
+            this.titleTxt.Location = new System.Drawing.Point(87, 29);
             this.titleTxt.Name = "titleTxt";
             this.titleTxt.Size = new System.Drawing.Size(38, 20);
             this.titleTxt.TabIndex = 4;

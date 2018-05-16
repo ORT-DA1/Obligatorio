@@ -18,8 +18,7 @@ namespace Gui
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Grid grid = new Grid("asd", null, 20, 20);
-            Application.Run(new GridForm(grid));
+            Application.Run(new Login());
         }
     }
 }

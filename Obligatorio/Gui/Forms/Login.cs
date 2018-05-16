@@ -39,19 +39,28 @@ namespace Gui.Forms
         private void LogUser(User user)
         {
             if (user.CanVerifyInformation())
-            {   
-                MessageBox.Show("Bievenido por primera vez a Graphic Master!" + "\n" + "Porfavor, verifique sus datos antes de continuar.", "Bienvenido", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                VerifyInformation verificationForm = new VerifyInformation(user);
-                verificationForm.Show();
-                this.Hide();
+            {
+                FirstLogin(user);
             }
             else
             {
-                MainMenu mainMenu = new MainMenu(user);
-                mainMenu.Show();
-                this.Hide();
-                mainMenu.FormClosing += quit;
+                NormalLogin(user);
             }
+        }
+        private void FirstLogin(User user)
+        {
+            MessageBox.Show("Bievenido por primera vez a Graphic Master!" + "\n" + "Porfavor, verifique sus datos antes de continuar.", "Bienvenido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ClientVerifyInformation verificationForm = new ClientVerifyInformation((Client)user);
+            verificationForm.Show();
+            this.Hide();
+        }
+        private void NormalLogin(User user)
+        {
+            MainMenu mainMenu = new MainMenu(user);
+            user.LastAccess = DateTime.Now;
+            mainMenu.Show();
+            this.Hide();
+            mainMenu.FormClosing += quit;
         }
 
         private void exitBtn_Click(object sender, EventArgs e)
@@ -82,8 +91,8 @@ namespace Gui.Forms
             DesignerHandler designerHandler = new DesignerHandler();
 
             DateTime validDate = new DateTime(2018, 05, 28, 10, 53, 55);
-            Designer firstDesigner = new Designer("donald", "qwe123", "Donald", "Trump", validDate, null);
-            Designer secondDesigner = new Designer("slash", "guitarLover1", "Slash", "Jackson", validDate, null);
+            Designer firstDesigner = new Designer("designer", "designer", "Donald", "Trump", validDate, null);
+            Designer secondDesigner = new Designer("testDesigner", "qwe123", "Slash", "Jackson", validDate, null);
             designerHandler.Add(firstDesigner);
             designerHandler.Add(secondDesigner);
         }
@@ -92,8 +101,8 @@ namespace Gui.Forms
             ClientHandler clientHandler = new ClientHandler();
 
             DateTime validDate = new DateTime(2018, 05, 28, 10, 53, 55);
-            Client firstClient = new Client("cliente", "cliente", "Oracle", "Netsuite", "12345678", "234234234", "16 de Abril 1912", validDate, null);
-            Client secondClient = new Client("Cliente", "Cliente123", "League", "ofLegends", "54683928", "236234234", "16 de Abril 1912", validDate, null);
+            Client firstClient = new Client("client", "client", "Oracle", "Netsuite", "12345678", "234234234", "16 de Abril 1912", validDate, null);
+            Client secondClient = new Client("cliente", "cliente", "League", "ofLegends", "54683928", "236234234", "16 de Abril 1912", validDate, null);
             clientHandler.Add(firstClient);
             clientHandler.Add(secondClient);
         }

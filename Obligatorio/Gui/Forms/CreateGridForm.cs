@@ -21,7 +21,7 @@ namespace Gui.Forms
 
             //
             DateTime registrationDate = new DateTime(1990, 07, 21);
-            Client client = new Client("test", "test", "test", "test", "test", 1203, "test", registrationDate, null);
+            Client client = new Client("test", "test", "test", "test", "test", "1203", "test", registrationDate, null);
 
             Grid grid = new Grid(gridName, client, height, width);
             GridForm gridForm = new GridForm(grid);

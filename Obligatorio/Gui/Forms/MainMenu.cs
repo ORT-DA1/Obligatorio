@@ -19,11 +19,11 @@ namespace Gui.Forms
             InitializeComponent();
             this.user = user;
 
-            SetUpEnvoronment();
+            SetUpEnvironment();
             CreateMenu();
         }
 
-        private void SetUpEnvoronment()
+        private void SetUpEnvironment()
         {
             
             if (user.CanABMClients())

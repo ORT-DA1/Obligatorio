@@ -70,11 +70,11 @@
     <Compile Include="Forms\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\VerifyInformation.cs">
+    <Compile Include="Forms\ClientVerifyInformation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\VerifyInformation.Designer.cs">
-      <DependentUpon>VerifyInformation.cs</DependentUpon>
+    <Compile Include="Forms\ClientVerifyInformation.Designer.cs">
+      <DependentUpon>ClientVerifyInformation.cs</DependentUpon>
     </Compile>
     <Compile Include="Interface\IController.cs" />
     <Compile Include="MenuNode.cs" />
@@ -143,8 +143,8 @@
     <EmbeddedResource Include="Forms\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\VerifyInformation.resx">
-      <DependentUpon>VerifyInformation.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ClientVerifyInformation.resx">
+      <DependentUpon>ClientVerifyInformation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

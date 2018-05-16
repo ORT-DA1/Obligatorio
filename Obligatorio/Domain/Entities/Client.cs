@@ -5,12 +5,12 @@ namespace Domain.Entities
     public class Client : User
     {
         public string Id { get; set; }
-        public int Phone { get; set; }
+        public string Phone { get; set; }
         public string Address { get; set; }
 
         public Client(){ }
 
-        public Client(string username, string password, string name, string surname, string id, int phone, string address, DateTime registrationDate, Nullable<DateTime> lastAccess)
+        public Client(string username, string password, string name, string surname, string id, string phone, string address, DateTime registrationDate, Nullable<DateTime> lastAccess)
         {
             this.Username = username;
             this.Password = password;

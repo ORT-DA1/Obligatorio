@@ -59,7 +59,7 @@ namespace Domain.Data
 
             if (!userFound)
             {
-                throw new ExceptionController(ExceptionMessage.USER_INVALID_PASSWORD);
+                throw new ExceptionController(ExceptionMessage.USER_INVALID_LOGIN);
             }
         }
 

@@ -5,7 +5,7 @@ using Domain.Data;
 using Domain.Exceptions;
 using Domain.Logic;
 
-namespace Gui
+namespace Gui.Forms
 {
     public partial class Login : Form
     {
@@ -14,6 +14,7 @@ namespace Gui
         {
             InitializeComponent();
             this.dataStorage = DataStorage.GetStorageInstance();
+            this.ControlBox = false;
         }
 
         private void loginBtn_Click(object sender, EventArgs e)
@@ -40,6 +41,9 @@ namespace Gui
             if (user.CanVerifyInformation())
             {   
                 MessageBox.Show("Bievenido por primera vez a Graphic Master!" + "\n" + "Porfavor, verifique sus datos antes de continuar.", "Bienvenido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                VerifyInformation verificationForm = new VerifyInformation(user);
+                verificationForm.Show();
+                this.Hide();
             }
             else
             {
@@ -88,8 +92,8 @@ namespace Gui
             ClientHandler clientHandler = new ClientHandler();
 
             DateTime validDate = new DateTime(2018, 05, 28, 10, 53, 55);
-            Client firstClient = new Client("cliente", "cliente", "Oracle", "Netsuite", "12345678", 234234234, "16 de Abril 1912", validDate, null);
-            Client secondClient = new Client("Cliente", "Cliente123", "League", "ofLegends", "54683928", 236234234, "16 de Abril 1912", validDate, null);
+            Client firstClient = new Client("cliente", "cliente", "Oracle", "Netsuite", "12345678", "234234234", "16 de Abril 1912", validDate, null);
+            Client secondClient = new Client("Cliente", "Cliente123", "League", "ofLegends", "54683928", "236234234", "16 de Abril 1912", validDate, null);
             clientHandler.Add(firstClient);
             clientHandler.Add(secondClient);
         }

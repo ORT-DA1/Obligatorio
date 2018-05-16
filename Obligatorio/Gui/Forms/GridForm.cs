@@ -4,7 +4,7 @@ using Domain.Entities;
 using System.Collections.Generic;
 using System;
 
-namespace Gui
+namespace Gui.Forms
 {
     public partial class GridForm : Form
     {

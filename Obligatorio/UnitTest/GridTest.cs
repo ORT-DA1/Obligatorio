@@ -100,7 +100,7 @@ namespace UnitTest
             grid.Walls.Add(wall);
             grid.Walls.Add(anotherWall);
             bool expectedResult = true;
-            bool result = grid.isCuttingAWall(anotherWall);
+            bool result = grid.isCuttingAWallBeforeMaximum(anotherWall);
             Assert.AreEqual(result,expectedResult);
         }
 
@@ -111,7 +111,7 @@ namespace UnitTest
             Wall anotherWall = new Wall(new Point(6, 4), new Point(8, 4));
             grid.Walls.Add(wall);
             bool expectedResult = false;
-            bool result = grid.isCuttingAWall(anotherWall);
+            bool result = grid.isCuttingAWallBeforeMaximum(anotherWall);
             Assert.AreEqual(result,expectedResult);
         }
 

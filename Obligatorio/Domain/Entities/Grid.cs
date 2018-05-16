@@ -121,17 +121,7 @@ namespace Domain.Entities
         public void AddWall(Graphics graphic, Wall wall)
             {
             this.IsValid(wall);
-            if (wall.SizeGreaterThanMaximum()) //si el largo del wall es > 5 + refactor al nombre
-            {
-                Point calculatedPoint = wall.CalculateLocationPoint(MaxMeters);
-                Wall anotherWall = new Wall(wall.startUbicationPoint, calculatedPoint);//creo una nueva pared
-                                                                                                              //le seteo el punto inicial igual a wall
-                                                                                                              //le seteo el punto final en base a X,Y de wall 5 metros despues
-                AddWall(graphic, anotherWall);//llamo recursivo con anotherWall 
-                wall.startUbicationPoint = calculatedPoint; //corro el punto inicial de wall
-                AddWall(graphic, wall);//llamo recursivo con la nueva wall   
-            }
-            else if (isCuttingAWall(wall))//verifico si alguna pared la corta
+            if (isCuttingAWallBeforeMaximum(wall))//verifico si alguna pared la corta antes de los 5metros
             {
                 Point intersection = this.FirstIntersection(wall); //obtengo la interseccion con la primera pared
                 Wall newWall = new Wall(wall.startUbicationPoint, intersection); //Si la corta agrego creo una pared desde el punto inicial hasta donde se corta
@@ -143,12 +133,26 @@ namespace Domain.Entities
                 Wall anotherWall = new Wall(intersection, wall.endUbicationPoint);
                 AddWall(graphic, anotherWall);//llamo recursivo con wall
             }
+            else if (wall.SizeGreaterThanMaximum()) //si el largo del wall es > 5 + refactor al nombre
+            {
+                Point calculatedPoint = wall.CalculateLocationPoint(MaxMeters);
+                Wall anotherWall = new Wall(wall.startUbicationPoint, calculatedPoint);//creo una nueva pared
+                                                                                       //le seteo el punto inicial igual a wall
+                                                                                       //le seteo el punto final en base a X,Y de wall 5 metros despues
+                this.Walls.Add(anotherWall);
+                anotherWall.Draw(graphic);
+                //AddWall(graphic, anotherWall);//llamo recursivo con anotherWall 
+                //wall.startUbicationPoint = calculatedPoint; //corro el punto inicial de wall
+                Wall newWall = new Wall(calculatedPoint, wall.endUbicationPoint);
+                AddWall(graphic, newWall);//llamo recursivo con la nueva wall   
+            }
             else
             {
                 wall.Draw(graphic);
                 this.Walls.Add(wall);
                 AddWallBeam(graphic, wall.startUbicationPoint);//agrego viga inicial
                 AddWallBeam(graphic, wall.endUbicationPoint);//agrego viga final
+              //  return;
             }
 
         }
@@ -166,9 +170,19 @@ namespace Domain.Entities
             else return "vertical";
         }
 
-        public bool isCuttingAWall(Wall wall)
+        public bool isCuttingAWallBeforeMaximum(Wall wall)
         {
-            foreach(Wall anotherWall in Walls)
+            /*Point intersection = this.FirstIntersection(wall); //obtengo la interseccion con la primera pared
+            if (wall.isHorizontalWall() && (!intersection.Equals(wall.startUbicationPoint)))
+            {
+                return ((Math.Abs(wall.startUbicationPoint.X - intersection.X) / PixelConvertor) <= this.MaxMeters);
+            }
+            else if(!intersection.Equals(wall.startUbicationPoint))
+            {
+                return ((Math.Abs(wall.startUbicationPoint.Y - intersection.Y) / PixelConvertor) <= this.MaxMeters);
+            }
+            return false;*/
+            foreach (Wall anotherWall in Walls)
             {
                 if(isPerpendicular(wall, anotherWall))
                 {
@@ -176,7 +190,19 @@ namespace Domain.Entities
                     {
                         foreach(Point point in wall.Path)
                         {
-                            if (point.Equals(anotherPoint) && !point.Equals(wall.startUbicationPoint)) return true;
+                            if (wall.isHorizontalWall())
+                            {
+
+                                if (point.Equals(anotherPoint) && !point.Equals(wall.startUbicationPoint)
+                                && (anotherPoint.X - wall.startUbicationPoint.X) < 125)
+                                    return true;
+                            }
+                            else
+                            {
+                                if (point.Equals(anotherPoint) && !point.Equals(wall.startUbicationPoint) 
+                                    && (anotherPoint.Y - wall.startUbicationPoint.Y) < 125)
+                                    return true;
+                            }
                         }
                     }
                 }
@@ -221,7 +247,7 @@ namespace Domain.Entities
             {
                 if (hasTwoPointsInCommon(wall, anotherWall))
                 {
-                    throw new ExceptionController(ExceptionMessage.CONTAINED_WALL);
+                    throw new ExceptionController(ExceptionMessage.GRID_INVALID_HEIGHT_ABOVE);
                 }
             }
         }

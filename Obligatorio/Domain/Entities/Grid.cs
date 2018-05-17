@@ -25,8 +25,6 @@ namespace Domain.Entities
         public Tuple<int, int> CostPriceWindow { get; set; }
         public Tuple<int, int> CostPriceDoor { get; set; }
 
-        public Grid() { }
-
         public Grid(string gridName, Client client, int height, int width)
         {
             this.Walls = new List<Wall>();
@@ -99,9 +97,7 @@ namespace Domain.Entities
             {
                 Point startPoint = new Point(0, i);
                 Point endPoint = new Point(this.Width, i);
-
                 graphic.DrawLine(gridPen, startPoint, endPoint);
-
             }
         }
 
@@ -109,10 +105,8 @@ namespace Domain.Entities
         {
             for (int i = PixelConvertor; i < this.Width; i += PixelConvertor)
             {
-
                 Point startPoint = new Point(i, 0);
                 Point endPoint = new Point(i, this.Height);
-
                 graphic.DrawLine(gridPen, startPoint, endPoint);
             }
         }
@@ -120,11 +114,9 @@ namespace Domain.Entities
         public void AddWall(Graphics graphic, Wall wall)
         {
             this.IsValid(wall);
-            
             if (IsCuttingAWallBeforeMaximum(wall))
             {
                 AddWallIfCutting(graphic,wall);
-                
             }
             else if (wall.SizeGreaterThanMaximum())
             {
@@ -341,7 +333,7 @@ namespace Domain.Entities
                 WallBeam wallBeam = new WallBeam(ubicationPoint);
                 this.WallBeams.Add(wallBeam);
                 wallBeam.Draw(graphic);
-            };
+            }
         }
 
         public bool FreePosition(Point ubicationPoint)
@@ -355,31 +347,36 @@ namespace Domain.Entities
 
         public void RemoveWall(Wall wall)
         {
-            WallBeam startWallBeam = getWallBeam(wall.startUbicationPoint);
-            WallBeam endWallBeam = getWallBeam(wall.endUbicationPoint);
-            foreach (Point point in wall.Path)
-            {
-                if (existWindow(point))
-                    this.Windows.Remove(this.Windows.First(windows => windows.StartPoint.Equals(point)));
-                if (existDoor(point))
-                    this.Doors.Remove(this.Doors.First(door => door.StartPoint.Equals(point)));
-            }
+            WallBeam startWallBeam = GetWallBeam(wall.startUbicationPoint);
+            WallBeam endWallBeam = GetWallBeam(wall.endUbicationPoint);
+            DeleteElementsInAWall(wall);
             this.Walls.Remove(wall);
             RemoveWallBeam(startWallBeam);
             RemoveWallBeam(endWallBeam);
         }
 
-        private bool existDoor(Point ubicationPoint)
+        private void DeleteElementsInAWall(Wall wall)
+        {
+            foreach (Point point in wall.Path)
+            {
+                if (ExistWindow(point))
+                    this.Windows.Remove(this.Windows.First(windows => windows.StartPoint.Equals(point)));
+                if (ExistDoor(point))
+                    this.Doors.Remove(this.Doors.First(door => door.StartPoint.Equals(point)));
+            }
+        }
+
+        private bool ExistDoor(Point ubicationPoint)
         {
             return this.Doors.Contains(new Door(ubicationPoint, ubicationPoint, "vertical"));
         }
 
-        private bool existWindow(Point ubicationPoint)
+        private bool ExistWindow(Point ubicationPoint)
         {
             return this.Windows.Contains(new Window(ubicationPoint, ubicationPoint, "vertical"));
         }
 
-        public WallBeam getWallBeam(Point startUbicationPoint)
+        public WallBeam GetWallBeam(Point startUbicationPoint)
         {
             return WallBeams.First(wallBeam => wallBeam.UbicationPoint.Equals(startUbicationPoint));
         }
@@ -447,12 +444,13 @@ namespace Domain.Entities
                         matchPoints++;
                 }
             }
-            if (matchPoints == 0) throw new ExceptionController(ExceptionMessage.POINT_OUT_OF_WALL);
+            if (matchPoints == 0)
+                throw new ExceptionController(ExceptionMessage.POINT_OUT_OF_WALL);
         }
 
         public void RemoveDoor(Point ubicationPoint)
         {
-            if (existDoor(ubicationPoint))
+            if (ExistDoor(ubicationPoint))
             {
                 Door door = this.Doors.First(anotherDoor => anotherDoor.StartPoint.Equals(ubicationPoint));
                 this.Doors.Remove(door);
@@ -461,7 +459,7 @@ namespace Domain.Entities
 
         public void RemoveWindow(Point ubicationPoint)
         {
-            if (existWindow(ubicationPoint))
+            if (ExistWindow(ubicationPoint))
             {
                 Window window = this.Windows.First(anotherWindow => anotherWindow.StartPoint.Equals(ubicationPoint));
                 this.Windows.Remove(window);
@@ -478,7 +476,6 @@ namespace Domain.Entities
                 {
                     isEqual = true;
                 }
-
             }
             return isEqual;
         }
@@ -552,17 +549,17 @@ namespace Domain.Entities
             return DoorsCount() * CostPriceDoor.Item2;
         }
 
-        public int totalCost()
+        public int TotalCost()
         {
             return AmountCostWall() + AmountCostWallBeam() + AmountCostWindow() + AmountPriceDoor();
         }
 
-        public int totalPrice()
+        public int TotalPrice()
         {
             return AmountPriceWall() + AmountPriceWallBeam() + AmountPriceWindow() + AmountPriceDoor();
         }
 
-        public Point fixPoint(Point point)
+        public Point FixPoint(Point point)
         {
             Point fixedPoint = new Point(
                ((int)Math.Round((double)point.X / PixelConvertor)) * PixelConvertor,
@@ -570,6 +567,5 @@ namespace Domain.Entities
            );
             return fixedPoint;
         }
-
     }
 }

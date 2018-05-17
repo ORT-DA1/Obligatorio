@@ -106,13 +106,13 @@ namespace Gui.Forms
             else
             {
                 pointArray.Add(coordinates);
-                pointArray[0] = grid.fixPoint(pointArray[0]);
+                pointArray[0] = grid.FixPoint(pointArray[0]);
                 switch (option)
                 {
                     case 1:
                         try
                         {
-                            grid.AddWall(graphic, new Wall(pointArray[0], grid.fixPoint(pointArray[1])));
+                            grid.AddWall(graphic, new Wall(pointArray[0], grid.FixPoint(pointArray[1])));
                             UpdateLines();
                         }
                         catch (ExceptionController Exception)

@@ -154,7 +154,7 @@ namespace UnitTest
             Point point = new Point(0, 1);
             WallBeam wallBeam = new WallBeam(point);
             grid.WallBeams.Add(wallBeam);
-            WallBeam expectedResult = grid.getWallBeam(point);
+            WallBeam expectedResult = grid.GetWallBeam(point);
             Assert.AreEqual(wallBeam, expectedResult); 
         }
 
@@ -336,7 +336,7 @@ namespace UnitTest
         public void TestTotalCost()
         {
             int expectedResult = grid.AmountCostWall() + grid.AmountCostWallBeam() + grid.AmountCostWindow() + grid.AmountPriceDoor();
-            int result = grid.totalCost();
+            int result = grid.TotalCost();
             Assert.AreEqual(expectedResult, result);
         }
 
@@ -344,7 +344,7 @@ namespace UnitTest
         public void TestTotalPrice()
         {
             int expectedResult = grid.AmountPriceWall() + grid.AmountPriceWallBeam() + grid.AmountPriceWindow() + grid.AmountPriceDoor();
-            int result = grid.totalPrice();
+            int result = grid.TotalPrice();
             Assert.AreEqual(expectedResult, result);
         }
 
@@ -401,7 +401,7 @@ namespace UnitTest
         public void TestFixPoint()
         {
             Point point = new Point(26, 26);
-            grid.fixPoint(point);
+            grid.FixPoint(point);
             Point anotherPoint = new Point(25, 25);
             Assert.AreEqual(point, anotherPoint);
         }

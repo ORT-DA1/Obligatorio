@@ -119,7 +119,7 @@ namespace Gui.Forms
         }
         private void quit(object sender, FormClosingEventArgs e)
         {
-            System.Windows.Forms.Application.Exit();
+            Application.Exit();
         }
     }
 }

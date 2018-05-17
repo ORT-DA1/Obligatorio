@@ -11,6 +11,7 @@ using Gui.Interface;
 using Domain.Exceptions;
 using Domain.Logic;
 using Domain.Entities;
+using Gui.Forms;
 
 namespace Gui.UserControls.ABMGridScreen
 {
@@ -54,6 +55,7 @@ namespace Gui.UserControls.ABMGridScreen
             {
                 Grid newGrid = fetchValues();
                 gridHandler.Add(newGrid);
+                Redirect(newGrid);
             }
             catch (ExceptionController Exception)
             {
@@ -63,6 +65,7 @@ namespace Gui.UserControls.ABMGridScreen
         }
         private Grid fetchValues()
         {
+            ValidWidthHeight();
             var selectedClient = (Client)this.clientList.SelectedItem;
             return new Grid(
                 this.gridNameTxt.Text,
@@ -71,5 +74,43 @@ namespace Gui.UserControls.ABMGridScreen
                 int.Parse(this.heightTxt.Text)
              );
         }
+        private void ValidWidthHeight()
+        {
+            int width;
+            int height;
+
+            if (!int.TryParse(this.heightTxt.Text, out height))
+            {
+                throw new ExceptionController(ExceptionMessage.GRID_INVALID_HEIGHT_FORMAT);
+            }
+
+            if (!int.TryParse(this.widthTxt.Text, out width))
+            {
+                throw new ExceptionController(ExceptionMessage.GRID_INVALID_WIDTH_FORMAT);
+            }
+        }
+        private void Redirect(Grid grid)
+        {
+            GridForm gridForm = new GridForm(grid);
+            gridForm.Show();
+            ClearFields();
+            //this.SetVisibleCore(false);
+            //this.ParentForm.Hide();
+            this.Parent.Hide();
+            gridForm.FormClosing += quit;
+        }
+        private void ClearFields()
+        {
+            this.gridNameTxt.Clear();
+            this.clientList.SelectedIndex = -1;
+            this.widthTxt.Clear();
+            this.heightTxt.Clear();
+        }
+
+        private void quit(object sender, EventArgs e)
+        {
+            //this.Parent.Show();
+        }
     }
 }
+

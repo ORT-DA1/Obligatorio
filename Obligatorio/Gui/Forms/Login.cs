@@ -35,7 +35,6 @@ namespace Gui.Forms
             }
 
         }
-
         private void LogUser(User user)
         {
             if (user.CanVerifyInformation())
@@ -62,12 +61,10 @@ namespace Gui.Forms
             this.Hide();
             mainMenu.FormClosing += quit;
         }
-
         private void exitBtn_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
         }
-
         private void GenerateData(object sender, EventArgs e)
         {
             try
@@ -85,7 +82,6 @@ namespace Gui.Forms
                 this.generateDataStrip.Enabled = false;
             }
         }
-
         private void GenerateDesigners()
         {
             DesignerHandler designerHandler = new DesignerHandler();
@@ -106,7 +102,6 @@ namespace Gui.Forms
             clientHandler.Add(firstClient);
             clientHandler.Add(secondClient);
         }
-
         private void quit(object sender, FormClosingEventArgs e)
         {
             this.Show();

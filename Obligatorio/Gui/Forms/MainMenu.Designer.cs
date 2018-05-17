@@ -32,10 +32,10 @@
             this.titleLbl = new System.Windows.Forms.Label();
             this.leftMenuStrip = new System.Windows.Forms.MenuStrip();
             this.options = new System.Windows.Forms.ToolStripMenuItem();
+            this.cerrarSesionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.controlPanel = new System.Windows.Forms.Panel();
-            this.cerrarSesionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.leftMenuStrip.SuspendLayout();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -74,6 +74,13 @@
             this.options.Size = new System.Drawing.Size(111, 19);
             this.options.Text = "General";
             // 
+            // cerrarSesionToolStripMenuItem
+            // 
+            this.cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
+            this.cerrarSesionToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.cerrarSesionToolStripMenuItem.Text = "Cerrar Sesion";
+            this.cerrarSesionToolStripMenuItem.Click += new System.EventHandler(this.logOut);
+            // 
             // MainPanel
             // 
             this.MainPanel.Controls.Add(this.pictureBox1);
@@ -99,13 +106,6 @@
             this.controlPanel.Name = "controlPanel";
             this.controlPanel.Size = new System.Drawing.Size(581, 333);
             this.controlPanel.TabIndex = 18;
-            // 
-            // cerrarSesionToolStripMenuItem
-            // 
-            this.cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
-            this.cerrarSesionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.cerrarSesionToolStripMenuItem.Text = "Cerrar Sesion";
-            this.cerrarSesionToolStripMenuItem.Click += new System.EventHandler(this.logOut);
             // 
             // MainMenu
             // 

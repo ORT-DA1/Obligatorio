@@ -24,7 +24,6 @@ namespace Domain.Data
                 throw new ExceptionController(ExceptionMessage.USER_INVALID_USERNAME);
             }
         }
-
         public static void ValidatePassword(string password)
         {
             if (!IsValidNumberCharacter(password))
@@ -32,7 +31,6 @@ namespace Domain.Data
                 throw new ExceptionController(ExceptionMessage.USER_INVALID_PASSWORD);
             }
         }
-
         public static void ValidatePhone(string phone)
         {
             if (!IsValidPhone(phone))
@@ -40,7 +38,6 @@ namespace Domain.Data
                 throw new ExceptionController(ExceptionMessage.USER_INVALID_PHONE);
             }
         }
-
         private static bool IsValidPhone(string phone)
         {
             Regex expression = new Regex(VALID_NUMBERS);
@@ -51,7 +48,6 @@ namespace Domain.Data
 
             return true;
         }
-
         public static void ValidateNameAndSurname(string name, string surname)
         {
             if (!IsValidString(name))
@@ -63,7 +59,6 @@ namespace Domain.Data
                 throw new ExceptionController(ExceptionMessage.USER_INVALID_SURNAME);
             }
         }
-
         public static void ValidateID(string id)
         {
             if (!IsValidID(id))
@@ -71,7 +66,6 @@ namespace Domain.Data
                 throw new ExceptionController(ExceptionMessage.USER_INVALID_ID);
             }
         }
-
         public static void ValidateAddress(string address)
         {
             if (!IsValidNumberCharacterSpace(address))
@@ -156,6 +150,13 @@ namespace Domain.Data
         private static bool IsValidWidth(int width)
         {
             return (width > MIN_HEIGHT_IN_PIXELS && width <= MAX_WIDTH_IN_PIXELS);
+        }
+        public static void ValidateGridName(string name)
+        {
+            if (!IsValidString(name))
+            {
+                throw new ExceptionController(ExceptionMessage.GRID_INVALID_NAME);
+            }
         }
     }
 }

@@ -116,7 +116,7 @@ namespace Domain.Entities
                 return new Point(this.startUbicationPoint.X ,this.startUbicationPoint.Y + (maxMeters*Grid.PixelConvertor));
         }
 
-        internal bool isVerticalWall()
+        public bool isVerticalWall()
         {
             return this.startUbicationPoint.X == this.endUbicationPoint.X;
         }

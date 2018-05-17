@@ -60,7 +60,7 @@ namespace Domain.Logic
         {
             if (!gridList.Any())
             {
-                //throw new ExceptionController(ExceptionMessage.EMPTY_GRID_LIST);
+                throw new ExceptionController(ExceptionMessage.EMPTY_GRID_LIST);
             }
         }
 

@@ -34,12 +34,17 @@ namespace Gui.UserControls.ABMGridScreen
             catch (ExceptionController Exception)
             {
                 var message = Exception.Message;
-                //MessageBox.Show();
+                MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             return null;
         }
         private void LoadGrids()
         {
+            this.gridList.Items.Clear();
+            foreach (var grid in gridHandler.GetList())
+            {
+                this.gridList.Items.Add(grid);
+            }
         }
     }
 }

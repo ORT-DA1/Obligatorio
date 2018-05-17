@@ -1,6 +1,8 @@
 ﻿using Domain.Data;
 using Domain.Entities;
 using Domain.Exceptions;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain.Logic
 {
@@ -46,6 +48,19 @@ namespace Domain.Logic
             if (!this.storage.Grids.Contains(grid))
             {
                 throw new ExceptionController(ExceptionMessage.GRID_INVALID_HEIGHT_ABOVE); // cambiar exception
+            }
+        }
+        public List<Grid> GetList()
+        {
+            List<Grid> gridList = storage.Grids;
+            IsNotEmpty(gridList);
+            return gridList;
+        }
+        private void IsNotEmpty(List<Grid> gridList)
+        {
+            if (!gridList.Any())
+            {
+                //throw new ExceptionController(ExceptionMessage.EMPTY_GRID_LIST);
             }
         }
 

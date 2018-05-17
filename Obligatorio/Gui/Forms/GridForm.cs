@@ -122,15 +122,15 @@ namespace Gui.Forms
                         }
                         break;
                     case 2:
-                        grid.AddDoor(graphic, pointArray[0], pointArray[1], grid.wallSense(pointArray[0]));
+                        grid.AddDoor(graphic, pointArray[0], pointArray[1], grid.WallSense(pointArray[0]));
                         UpdateLines();
                         break;
                     case 3:
-                        grid.AddWindow(graphic, pointArray[0], pointArray[1], grid.wallSense(pointArray[0]));
+                        grid.AddWindow(graphic, pointArray[0], pointArray[1], grid.WallSense(pointArray[0]));
                         UpdateLines();
                         break;
                     case 4:
-                        grid.RemoveWall(grid.obtainWallInPoint(pointArray[0]));
+                        grid.RemoveWall(grid.ObtainWallInPoint(pointArray[0]));
                         UpdateLines();
                         break;
                     case 5:

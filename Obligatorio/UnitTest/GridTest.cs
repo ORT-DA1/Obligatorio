@@ -100,7 +100,7 @@ namespace UnitTest
             grid.Walls.Add(wall);
             grid.Walls.Add(anotherWall);
             bool expectedResult = true;
-            bool result = grid.isCuttingAWallBeforeMaximum(anotherWall);
+            bool result = grid.IsCuttingAWallBeforeMaximum(anotherWall);
             Assert.AreEqual(result,expectedResult);
         }
 
@@ -111,7 +111,7 @@ namespace UnitTest
             Wall anotherWall = new Wall(new Point(6, 4), new Point(8, 4));
             grid.Walls.Add(wall);
             bool expectedResult = false;
-            bool result = grid.isCuttingAWallBeforeMaximum(anotherWall);
+            bool result = grid.IsCuttingAWallBeforeMaximum(anotherWall);
             Assert.AreEqual(result,expectedResult);
         }
 
@@ -355,7 +355,7 @@ namespace UnitTest
             Tuple< int, int> wallBeam = new Tuple<int, int>(1, 2); 
             Tuple<int, int> window = new Tuple<int, int>(1, 2);
             Tuple< int, int> door = new Tuple<int, int>(1, 2);
-            grid.modifyCostAndPrice(meterWall, wallBeam, window, door);
+            grid.ModifyCostAndPrice(meterWall, wallBeam, window, door);
             Assert.IsTrue(meterWall.Equals(grid.CostPriceMeterWall) && wallBeam.Equals(grid.CostPriceWallBeam)
                 && window.Equals(grid.CostPriceWindow) && door.Equals(grid.CostPriceDoor));
         }
@@ -392,7 +392,7 @@ namespace UnitTest
             Wall wall = new Wall(new Point(0, 25), new Point(0, 100));
             grid.Walls.Add(wall);
             int expectedResult = grid.Walls.Count + 1;
-            grid.breakWall(wall, new Point(0,50));
+            grid.BreakWall(wall, new Point(0,50));
             int result = grid.Walls.Count;
             Assert.AreEqual(expectedResult, result);
         }
@@ -430,7 +430,7 @@ namespace UnitTest
             Wall wall = new Wall(new Point(25, 25), new Point(100, 25));
             Wall anotherWall = new Wall(new Point(50, 0), new Point(50, 100));
             grid.Walls.Add(anotherWall);
-            bool result = grid.isCuttingAWallBeforeMaximum(wall);
+            bool result = grid.IsCuttingAWallBeforeMaximum(wall);
             Assert.IsTrue(result);
         }
 
@@ -439,7 +439,7 @@ namespace UnitTest
         {
             Wall wall = new Wall(new Point(25, 25), new Point(100, 25));
             Wall anotherWall = new Wall(new Point(50, 0), new Point(50, 100));
-            bool result = grid.isPerpendicular(wall,anotherWall);
+            bool result = grid.IsPerpendicular(wall,anotherWall);
             Assert.IsTrue(result);
         }
 
@@ -448,7 +448,7 @@ namespace UnitTest
         {
             Wall wall = new Wall(new Point(25, 25), new Point(100, 25));
             grid.Walls.Add(wall);
-            Wall resultWall = grid.obtainWallInPoint(new Point(25, 25));
+            Wall resultWall = grid.ObtainWallInPoint(new Point(25, 25));
             Assert.AreEqual(wall, resultWall);
         }
     }

@@ -61,7 +61,7 @@
             // 
             // deleteDoorBtn
             // 
-            this.deleteDoorBtn.Location = new System.Drawing.Point(3, 285);
+            this.deleteDoorBtn.Location = new System.Drawing.Point(3, 283);
             this.deleteDoorBtn.Name = "deleteDoorBtn";
             this.deleteDoorBtn.Size = new System.Drawing.Size(264, 50);
             this.deleteDoorBtn.TabIndex = 5;
@@ -70,7 +70,7 @@
             // 
             // deleteWindowBtn
             // 
-            this.deleteWindowBtn.Location = new System.Drawing.Point(3, 235);
+            this.deleteWindowBtn.Location = new System.Drawing.Point(3, 227);
             this.deleteWindowBtn.Name = "deleteWindowBtn";
             this.deleteWindowBtn.Size = new System.Drawing.Size(264, 50);
             this.deleteWindowBtn.TabIndex = 4;
@@ -79,7 +79,7 @@
             // 
             // deleteWallBtn
             // 
-            this.deleteWallBtn.Location = new System.Drawing.Point(3, 180);
+            this.deleteWallBtn.Location = new System.Drawing.Point(3, 171);
             this.deleteWallBtn.Name = "deleteWallBtn";
             this.deleteWallBtn.Size = new System.Drawing.Size(264, 50);
             this.deleteWallBtn.TabIndex = 3;
@@ -88,7 +88,7 @@
             // 
             // doorBtn
             // 
-            this.doorBtn.Location = new System.Drawing.Point(3, 122);
+            this.doorBtn.Location = new System.Drawing.Point(3, 115);
             this.doorBtn.Name = "doorBtn";
             this.doorBtn.Size = new System.Drawing.Size(264, 50);
             this.doorBtn.TabIndex = 2;
@@ -97,7 +97,7 @@
             // 
             // windowBtn
             // 
-            this.windowBtn.Location = new System.Drawing.Point(3, 64);
+            this.windowBtn.Location = new System.Drawing.Point(3, 59);
             this.windowBtn.Name = "windowBtn";
             this.windowBtn.Size = new System.Drawing.Size(264, 50);
             this.windowBtn.TabIndex = 1;
@@ -129,14 +129,14 @@
             // 
             // finishDesignBtn
             // 
-            this.finishDesignBtn.Location = new System.Drawing.Point(3, 341);
+            this.finishDesignBtn.Location = new System.Drawing.Point(3, 339);
             this.finishDesignBtn.Name = "finishDesignBtn";
             this.finishDesignBtn.Size = new System.Drawing.Size(264, 185);
             this.finishDesignBtn.TabIndex = 6;
-            this.finishDesignBtn.Text = "Finalizar Diseño";
+            this.finishDesignBtn.Text = "Finalizar y Guardar Diseño";
             this.finishDesignBtn.UseVisualStyleBackColor = true;
             // 
-            // Grid
+            // GridForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -145,7 +145,7 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.menuPanel);
             this.Controls.Add(this.gridPanel);
-            this.Name = "Grid";
+            this.Name = "GridForm";
             this.Text = "Grid";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

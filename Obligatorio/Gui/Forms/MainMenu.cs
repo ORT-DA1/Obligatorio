@@ -137,7 +137,7 @@ namespace Gui.Forms
 
                 this.menuNodeList.Add(myAccountNode);
             }
-        }
+        } 
         private void OwnedGrids()
         {
             if (user.CanSeeOwnedGrids())

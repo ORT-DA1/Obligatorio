@@ -60,6 +60,8 @@ namespace Gui.Forms
             this.totalConstructionCostlbl.Visible = !canEditGrid;
             this.costLbl.Visible = !canEditGrid;
             this.costLbl.Text = Convert.ToString(this.grid.TotalCost());
+            this.back_btn.Visible = !canEditGrid;
+            this.moneyLbl.Visible = !canEditGrid;
 
         }
 
@@ -112,6 +114,7 @@ namespace Gui.Forms
                     option = 7;
                     string message = "Se han guardado los cambios sobre el plano";
                     MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    option = 0;
                     this.Close();
                     this.parentForm.Show();
                     break;
@@ -125,92 +128,102 @@ namespace Gui.Forms
             MouseEventArgs me = (MouseEventArgs)e;
             Point coordinates = me.Location;
 
-            if (pointArray.Count < 1)
+            if (option != 0)
             {
-                pointArray.Add(coordinates);
-            }
-            else
-            {
-                pointArray.Add(coordinates);
-                pointArray[0] = grid.FixPoint(pointArray[0]);
-                switch (option)
+                if (pointArray.Count < 1)
                 {
-                    case 1:
-                        try
-                        {
-                            grid.AddWall(graphic, new Wall(pointArray[0], grid.FixPoint(pointArray[1])));
-                            UpdateLines();
-                        }
-                        catch (ExceptionController Exception)
-                        {
-                            string message = Exception.Message;
-                            MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        break;
-                    case 2:
-                        try {
-                            grid.AddDoor(graphic, pointArray[0], pointArray[1], grid.WallSense(pointArray[0]));
-                            UpdateLines();
-                        }
-                        catch (ExceptionController Exception)
-                        {
-                            string message = Exception.Message;
-                            MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        break;
-                    case 3:
-                        try
-                        {
-                            grid.AddWindow(graphic, pointArray[0], pointArray[1], grid.WallSense(pointArray[0]));
-                            UpdateLines();
-                        }
-                        catch (ExceptionController Exception)
-                        {
-                            string message = Exception.Message;
-                            MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        break;
-                    case 4:
-                        try
-                        {
-                            grid.RemoveWall(grid.ObtainWallInPoint(pointArray[0]));
-                            UpdateLines();
-                        }
-                        catch (ExceptionController Exception)
-                        {
-                            string message = Exception.Message;
-                            MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        break;
-                    case 5:
-                        try
-                        {
-                            grid.RemoveWindow(pointArray[0]);
-                            UpdateLines();
-                        }
-                        catch (ExceptionController Exception)
-                        {
-                            string message = Exception.Message;
-                            MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        break;
-                    case 6:
-                        try
-                        {
-                            grid.RemoveDoor(pointArray[0]);
-                            UpdateLines();
-                        }
-                        catch (ExceptionController Exception)
-                        {
-                            string message = Exception.Message;
-                            MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        break;
-                    default:
-                        break;
+                    pointArray.Add(coordinates);
+                }
+                else
+                {
+                    pointArray.Add(coordinates);
+                    pointArray[0] = grid.FixPoint(pointArray[0]);
+                    switch (option)
+                    {
+                        case 1:
+                            try
+                            {
+                                grid.AddWall(graphic, new Wall(pointArray[0], grid.FixPoint(pointArray[1])));
+                                UpdateLines();
+                            }
+                            catch (ExceptionController Exception)
+                            {
+                                string message = Exception.Message;
+                                MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            break;
+                        case 2:
+                            try
+                            {
+                                grid.AddDoor(graphic, pointArray[0], pointArray[1], grid.WallSense(pointArray[0]));
+                                UpdateLines();
+                            }
+                            catch (ExceptionController Exception)
+                            {
+                                string message = Exception.Message;
+                                MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            break;
+                        case 3:
+                            try
+                            {
+                                grid.AddWindow(graphic, pointArray[0], pointArray[1], grid.WallSense(pointArray[0]));
+                                UpdateLines();
+                            }
+                            catch (ExceptionController Exception)
+                            {
+                                string message = Exception.Message;
+                                MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            break;
+                        case 4:
+                            try
+                            {
+                                grid.RemoveWall(grid.ObtainWallInPoint(pointArray[0]));
+                                UpdateLines();
+                            }
+                            catch (ExceptionController Exception)
+                            {
+                                string message = Exception.Message;
+                                MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            break;
+                        case 5:
+                            try
+                            {
+                                grid.RemoveWindow(pointArray[0]);
+                                UpdateLines();
+                            }
+                            catch (ExceptionController Exception)
+                            {
+                                string message = Exception.Message;
+                                MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            break;
+                        case 6:
+                            try
+                            {
+                                grid.RemoveDoor(pointArray[0]);
+                                UpdateLines();
+                            }
+                            catch (ExceptionController Exception)
+                            {
+                                string message = Exception.Message;
+                                MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            break;
+                        default:
+                            break;
                     }
-                pointArray.Clear();
+                    pointArray.Clear();
+                }
             }
+        }
+
+        private void back_btn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.parentForm.Show();
         }
     }
 }

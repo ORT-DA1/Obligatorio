@@ -40,7 +40,8 @@
             this.finishDesignBtn = new System.Windows.Forms.Button();
             this.totalConstructionCostlbl = new System.Windows.Forms.Label();
             this.costLbl = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.moneyLbl = new System.Windows.Forms.Label();
+            this.back_btn = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -167,14 +168,24 @@
             this.costLbl.TabIndex = 8;
             this.costLbl.Text = "$$";
             // 
-            // label1
+            // moneyLbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(194, 287);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(19, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "$$";
+            this.moneyLbl.AutoSize = true;
+            this.moneyLbl.Location = new System.Drawing.Point(194, 287);
+            this.moneyLbl.Name = "moneyLbl";
+            this.moneyLbl.Size = new System.Drawing.Size(19, 13);
+            this.moneyLbl.TabIndex = 9;
+            this.moneyLbl.Text = "$$";
+            // 
+            // back_btn
+            // 
+            this.back_btn.Location = new System.Drawing.Point(7, 319);
+            this.back_btn.Name = "back_btn";
+            this.back_btn.Size = new System.Drawing.Size(202, 28);
+            this.back_btn.TabIndex = 10;
+            this.back_btn.Text = "Volver";
+            this.back_btn.UseVisualStyleBackColor = true;
+            this.back_btn.Click += new System.EventHandler(this.back_btn_Click);
             // 
             // GridForm
             // 
@@ -182,7 +193,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(771, 449);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.back_btn);
+            this.Controls.Add(this.moneyLbl);
             this.Controls.Add(this.costLbl);
             this.Controls.Add(this.totalConstructionCostlbl);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -211,6 +223,7 @@
         private System.Windows.Forms.Button finishDesignBtn;
         private System.Windows.Forms.Label totalConstructionCostlbl;
         private System.Windows.Forms.Label costLbl;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label moneyLbl;
+        private System.Windows.Forms.Button back_btn;
     }
 }

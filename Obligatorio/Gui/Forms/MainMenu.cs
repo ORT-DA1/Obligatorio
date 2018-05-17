@@ -142,7 +142,7 @@ namespace Gui.Forms
         {
             if (user.CanSeeOwnedGrids())
             {
-                MyAccountOwnedGrids ownedGrids = new MyAccountOwnedGrids();
+                MyAccountOwnedGrids ownedGrids = new MyAccountOwnedGrids((Client)user);
                 myAccountNode.AddNode(ownedGrids);
 
                 if (!this.menuNodeList.Contains(myAccountNode))

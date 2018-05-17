@@ -30,6 +30,7 @@
         {
             this.titleTxt = new System.Windows.Forms.Label();
             this.ownedGridlist = new System.Windows.Forms.ListBox();
+            this.seeGrid_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // titleTxt
@@ -46,19 +47,31 @@
             // 
             this.ownedGridlist.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ownedGridlist.FormattingEnabled = true;
-            this.ownedGridlist.Location = new System.Drawing.Point(182, 62);
+            this.ownedGridlist.Location = new System.Drawing.Point(181, 55);
             this.ownedGridlist.Name = "ownedGridlist";
-            this.ownedGridlist.Size = new System.Drawing.Size(187, 251);
+            this.ownedGridlist.Size = new System.Drawing.Size(187, 173);
             this.ownedGridlist.TabIndex = 1;
+            // 
+            // seeGrid_btn
+            // 
+            this.seeGrid_btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.seeGrid_btn.Location = new System.Drawing.Point(218, 248);
+            this.seeGrid_btn.Name = "seeGrid_btn";
+            this.seeGrid_btn.Size = new System.Drawing.Size(117, 29);
+            this.seeGrid_btn.TabIndex = 2;
+            this.seeGrid_btn.Text = "Ver Plano";
+            this.seeGrid_btn.UseVisualStyleBackColor = true;
+            this.seeGrid_btn.Click += new System.EventHandler(this.seeGrid);
             // 
             // MyAccountOwnedGrids
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.seeGrid_btn);
             this.Controls.Add(this.ownedGridlist);
             this.Controls.Add(this.titleTxt);
             this.Name = "MyAccountOwnedGrids";
-            this.Size = new System.Drawing.Size(506, 397);
+            this.Size = new System.Drawing.Size(462, 308);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -68,5 +81,6 @@
 
         private System.Windows.Forms.Label titleTxt;
         private System.Windows.Forms.ListBox ownedGridlist;
+        private System.Windows.Forms.Button seeGrid_btn;
     }
 }

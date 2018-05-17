@@ -63,7 +63,7 @@ namespace Gui.UserControls.ABMGridScreen
 
         private void RedirectToModifyGridForm(Grid selectedGrid)
         {
-            GridForm gridForm = new GridForm(selectedGrid, this.ParentForm);
+            GridForm gridForm = new GridForm(selectedGrid, this.ParentForm, true);
             gridForm.Show();
             this.ParentForm.Hide();
         }

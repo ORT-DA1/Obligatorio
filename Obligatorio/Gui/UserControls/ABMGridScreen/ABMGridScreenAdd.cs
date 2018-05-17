@@ -92,7 +92,7 @@ namespace Gui.UserControls.ABMGridScreen
         }
         private void Redirect(Grid grid)
         {
-            GridForm gridForm = new GridForm(grid, this.ParentForm);
+            GridForm gridForm = new GridForm(grid, this.ParentForm, true);
             gridForm.Show();
             ClearFields();
             this.ParentForm.Hide();

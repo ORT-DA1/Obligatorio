@@ -67,6 +67,7 @@ namespace Domain.Logic
                     gridList.Add(grid);
                 }
             }
+            IsNotEmpty(gridList);
             return gridList;
         }
 

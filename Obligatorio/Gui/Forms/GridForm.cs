@@ -19,18 +19,23 @@ namespace Gui.Forms
         public GridForm()
         {
             InitializeComponent();
+            this.ControlBox = false;
         }
 
-        public GridForm(Grid grid, Form parentForm)
+        public GridForm(Grid grid, Form parentForm, bool canEditGrid)
         {
-            this.parentForm = parentForm;
+
             InitializeComponent();
+            this.parentForm = parentForm;
+            this.ControlBox = false;
             this.grid = grid;
             this.pointArray = new List<Point>();
             this.graphic = this.gridPanel.CreateGraphics();
             graphic.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             gridPanel.AutoScroll = true;
             this.Hide();
+
+            SetupEnvironment(canEditGrid);
 
             wallBtn.MouseClick += new MouseEventHandler(changeOption);
             windowBtn.MouseClick += changeOption;
@@ -39,8 +44,24 @@ namespace Gui.Forms
             deleteWindowBtn.MouseClick += changeOption;
             deleteDoorBtn.MouseClick += changeOption;
             finishDesignBtn.MouseClick += changeOption;
-        }
 
+        }
+        
+        private void SetupEnvironment(bool canEditGrid)
+        {
+            this.wallBtn.Visible = canEditGrid;
+            this.windowBtn.Visible = canEditGrid;
+            this.doorBtn.Visible = canEditGrid;
+            this.deleteDoorBtn.Visible = canEditGrid;
+            this.deleteWallBtn.Visible = canEditGrid;
+            this.deleteWindowBtn.Visible = canEditGrid;
+            this.finishDesignBtn.Visible = canEditGrid;
+
+            this.totalConstructionCostlbl.Visible = !canEditGrid;
+            this.costLbl.Visible = !canEditGrid;
+            this.costLbl.Text = Convert.ToString(this.grid.TotalCost());
+
+        }
 
         private void generateLines(object sender, PaintEventArgs e)
         {

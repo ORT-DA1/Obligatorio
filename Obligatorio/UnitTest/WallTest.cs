@@ -28,7 +28,7 @@ namespace UnitTest
         [TestMethod]
         public void TestSizeGreaterThanMaximum()
         {
-            Wall wall = new Wall(new Point(25,0), new Point(50,0));
+            Wall wall = new Wall(new Point(25,0), new Point(300,0));
             bool result = wall.SizeGreaterThanMaximum();
             Assert.IsTrue(result);
         }

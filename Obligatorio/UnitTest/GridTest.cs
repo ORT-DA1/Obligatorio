@@ -61,8 +61,14 @@ namespace UnitTest
 
         [TestMethod]
         public void TestAddGrid() {
-            GRID_HANDLER.Add(grid);
-            Assert.IsTrue(dataStorage.Grids.Contains(grid));
+            int expectedResult = dataStorage.Grids.Count + 1;
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
+            Grid anotherGrid = new Grid(GRID_NAME_OK, client, HEIGHT, WIDTH);
+            GRID_HANDLER.Add(anotherGrid);
+            int result = dataStorage.Grids.Count;
+            Assert.AreEqual(expectedResult, result);
+            //GRID_HANDLER.Add(grid);
+            //Assert.IsTrue(dataStorage.Grids.Contains(grid));
         }
 
         [TestMethod]
@@ -87,21 +93,23 @@ namespace UnitTest
         [TestMethod]
         public void TestExistGrid()
         {
+            int expectedResult = dataStorage.Grids.Count +1;
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
             Grid anotherGrid = new Grid(GRID_NAME_OK, client, HEIGHT, WIDTH);
             GRID_HANDLER.Add(anotherGrid);
+            int result = dataStorage.Grids.Count;
+            Assert.AreEqual(expectedResult, result);
         }
 
         [TestMethod]
         public void TestIsCuttingAWallTrue()
         {
-            Wall wall = new Wall(new Point(0, 1), new Point(0, 5));
-            Wall anotherWall = new Wall(new Point(3, 0), new Point(3, 2));
+            Wall wall = new Wall(new Point(50, 50), new Point(200, 50));
+            Wall anotherWall = new Wall(new Point(50, 75), new Point(50, 200));
             grid.Walls.Add(wall);
             grid.Walls.Add(anotherWall);
-            bool expectedResult = true;
             bool result = grid.IsCuttingAWallBeforeMaximum(anotherWall);
-            Assert.AreEqual(result,expectedResult);
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
@@ -267,70 +275,7 @@ namespace UnitTest
             Assert.AreEqual(expectedResult, result);
         }
 
-        [TestMethod]
-        public void TestAmountCostWall()
-        {
-            int costResult = this.grid.MetersWallCount() * this.grid.CostPriceWallBeam.Item1;
-            int expectedCostResult = this.grid.AmountCostWallBeam();
-            Assert.AreEqual(costResult, expectedCostResult);
-        }
-
-        [TestMethod]
-        public void TestAmountPriceWall()
-        {
-            int costResult = this.grid.MetersWallCount() * this.grid.CostPriceWallBeam.Item2;
-            int expectedCostResult = this.grid.AmountPriceWallBeam();
-            Assert.AreEqual(costResult, expectedCostResult);
-        }
-
-        [TestMethod]
-        public void TestAmountCostWallBeam()
-        {
-            int costResult = this.grid.WallBeamsCount() * this.grid.CostPriceWallBeam.Item1;
-            int expectedCostResult = this.grid.AmountCostWallBeam();
-            Assert.AreEqual(costResult, expectedCostResult);
-        }
-
-        [TestMethod]
-        public void TestAmountPriceWallBeam()
-        {
-            int costResult = this.grid.WallBeamsCount() * this.grid.CostPriceWallBeam.Item2;
-            int expectedCostResult = this.grid.AmountPriceWallBeam();
-            Assert.AreEqual(costResult, expectedCostResult);
-        }
-
-        [TestMethod]
-        public void TestAmountCostWindow()
-        {
-            int costResult = this.grid.WindowsCount() * this.grid.CostPriceWindow.Item1;
-            int expectedCostResult = this.grid.AmountCostWindow();
-            Assert.AreEqual(costResult, expectedCostResult);
-
-        }
-
-        [TestMethod]
-        public void TestAmountPriceWindow()
-        {
-            int costResult = this.grid.WindowsCount() * this.grid.CostPriceWallBeam.Item2;
-            int expectedCostResult = this.grid.AmountPriceWindow();
-            Assert.AreEqual(costResult, expectedCostResult);
-        }
-
-        [TestMethod]
-        public void TestAmountCostDoor()
-        {
-            int costResult = this.grid.DoorsCount() * this.grid.CostPriceDoor.Item1;
-            int expectedCostResult = this.grid.AmountCostDoor();
-            Assert.AreEqual(costResult, expectedCostResult);
-        }
-
-        [TestMethod]
-        public void TestAmountPriceDoor()
-        {
-            int costResult = this.grid.DoorsCount() * this.grid.CostPriceDoor.Item2;
-            int expectedCostResult = this.grid.AmountCostDoor();
-            Assert.AreEqual(costResult, expectedCostResult);
-        }
+        
 
         [TestMethod]
         public void TestTotalCost()
@@ -347,19 +292,7 @@ namespace UnitTest
             int result = grid.TotalPrice();
             Assert.AreEqual(expectedResult, result);
         }
-
-        [TestMethod]
-        public void modifyCostAndPrice()
-        {
-            Tuple<int, int> meterWall = new Tuple<int, int>(1,2);
-            Tuple< int, int> wallBeam = new Tuple<int, int>(1, 2); 
-            Tuple<int, int> window = new Tuple<int, int>(1, 2);
-            Tuple< int, int> door = new Tuple<int, int>(1, 2);
-            grid.ModifyCostAndPrice(meterWall, wallBeam, window, door);
-            Assert.IsTrue(meterWall.Equals(grid.CostPriceMeterWall) && wallBeam.Equals(grid.CostPriceWallBeam)
-                && window.Equals(grid.CostPriceWindow) && door.Equals(grid.CostPriceDoor));
-        }
-
+        
         [TestMethod]
         public void TestContainsPoints() {
             Point point = new Point(0, 25);
@@ -373,8 +306,8 @@ namespace UnitTest
         [ExpectedException(typeof(ExceptionController))]
         public void TestHorizontalOrVertical()
         {
-            Wall wall = new Wall(new Point(0, 25), new Point(0, 100));
-            //GRID_HANDLER.ValidWallOrientation(wall);
+            Wall wall = new Wall(new Point(0, 25), new Point(50, 100));
+            grid.HorizontalOrVertical(wall);
         }
 
         [TestMethod]
@@ -401,9 +334,9 @@ namespace UnitTest
         public void TestFixPoint()
         {
             Point point = new Point(26, 26);
-            grid.FixPoint(point);
+            Point resultPoint = grid.FixPoint(point);
             Point anotherPoint = new Point(25, 25);
-            Assert.AreEqual(point, anotherPoint);
+            Assert.IsTrue(resultPoint.X.Equals(anotherPoint.X) && resultPoint.Y.Equals(anotherPoint.Y));
         }
 
         [TestMethod]

@@ -48,9 +48,10 @@ namespace Domain.Logic
         {
             if (!this.storage.Grids.Contains(grid))
             {
-                throw new ExceptionController(ExceptionMessage.GRID_INVALID_HEIGHT_ABOVE); // cambiar exception
+                throw new ExceptionController(ExceptionMessage.WALL_NOT_EXIST);
             }
         }
+
         public List<Grid> GetList()
         {
             List<Grid> gridList = storage.Grids;
@@ -85,7 +86,6 @@ namespace Domain.Logic
                 throw new ExceptionController(ExceptionMessage.EMPTY_GRID_LIST);
             }
         }
-
     }
 
 }

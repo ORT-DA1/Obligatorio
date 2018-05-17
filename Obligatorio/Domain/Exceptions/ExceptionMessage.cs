@@ -30,5 +30,6 @@
 
         public const string DOOR_NOT_EXIST = "Seleccione una puerta disponible.";
         public const string WINDOW_NOT_EXIST = "Seleccione una ventana disponible.";
+        public const string WALL_NOT_EXIST = "La pared seleccionada no existe.";
     }
 }

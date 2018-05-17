@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace Domain.Entities
 {
@@ -9,16 +10,24 @@ namespace Domain.Entities
         public int direction;
         public string sense;
 
+        public Tuple<int, int> CostPriceDoor { get; set; }
+
         public Door()
         {
         }
 
         public Door(Point startPoint, Point endPoint, string sense)
         {
+            this.CostPriceDoor = new Tuple<int, int>(50, 100);
             this.sense = sense;
             this.direction = 0;
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;
+        }
+
+        public void ModifyCostAndPrice(int Cost, int Price)
+        {
+            this.CostPriceDoor = new Tuple<int, int>(Cost, Price); 
         }
 
         public override void Draw(Graphics graphic)

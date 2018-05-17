@@ -25,6 +25,8 @@ namespace Domain.Entities
         public Tuple<int, int> CostPriceWindow { get; set; }
         public Tuple<int, int> CostPriceDoor { get; set; }
 
+        public Grid() { }
+
         public Grid(string gridName, Client client, int height, int width)
         {
             this.Walls = new List<Wall>();
@@ -210,9 +212,9 @@ namespace Domain.Entities
 
         private bool ThereIsAWallAtThisPoint(Point point)
         {
-            foreach(Wall wall in Walls)
+            foreach (Wall wall in Walls)
             {
-                foreach(Point anotherPoint in wall.Path)
+                foreach (Point anotherPoint in wall.Path)
                 {
                     if (point.Equals(anotherPoint))
                         return true;
@@ -223,11 +225,15 @@ namespace Domain.Entities
 
         public string WallSense(Point point)
         {
-            Wall wall = this.Walls.First(anotherWall => anotherWall.Path.Contains(point));
-            if (wall.isHorizontalWall())
-                return "horizontal";
-            else
-                return "vertical";
+            if (ThereIsAWallAtThisPoint(point))
+            {
+                Wall wall = this.Walls.First(anotherWall => anotherWall.Path.Contains(point));
+                if (wall.isHorizontalWall())
+                    return "horizontal";
+                else
+                    return "vertical";
+            }
+            else throw new ExceptionController(ExceptionMessage.POINT_OUT_OF_WALL);
         }
 
         public bool IsCuttingAWallBeforeMaximum(Wall wall)
@@ -478,6 +484,7 @@ namespace Domain.Entities
                 Door door = this.Doors.First(anotherDoor => anotherDoor.StartPoint.Equals(ubicationPoint));
                 this.Doors.Remove(door);
             }
+            else throw new ExceptionController(ExceptionMessage.DOOR_NOT_EXIST);
         }
 
         public void RemoveWindow(Point ubicationPoint)
@@ -487,6 +494,7 @@ namespace Domain.Entities
                 Window window = this.Windows.First(anotherWindow => anotherWindow.StartPoint.Equals(ubicationPoint));
                 this.Windows.Remove(window);
             }
+            else throw new ExceptionController(ExceptionMessage.WINDOW_NOT_EXIST);
         }
 
         public override bool Equals(object gridObject)

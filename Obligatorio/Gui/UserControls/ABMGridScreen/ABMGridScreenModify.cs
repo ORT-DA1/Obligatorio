@@ -7,16 +7,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Gui.Interface;
+using Domain.Exceptions;
+using Domain.Logic;
+using Domain.Entities;
 
 namespace Gui.UserControls.ABMGridScreen
 {
-    public partial class ABMGridScreenModify : UserControl
+    public partial class ABMGridScreenModify : UserControl, IController
     {
+        private GridHandler gridHandler;
         public ABMGridScreenModify()
         {
             InitializeComponent();
+            this.gridHandler = new GridHandler();
             this.AccessibleName = "Modificar";
-            this.AccessibleDescription = "Modificar Plano";
+            this.titleTxt.Text = "Modificar Plano";
+        }
+        public UserControl GetUserController()
+        {
+            try
+            {
+                LoadGrids();
+                return this;
+            }
+            catch (ExceptionController Exception)
+            {
+                var message = Exception.Message;
+                //MessageBox.Show();
+            }
+            return null;
+        }
+        private void LoadGrids()
+        {
         }
     }
 }

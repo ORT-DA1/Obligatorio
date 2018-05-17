@@ -4,6 +4,7 @@ using Domain.Entities;
 using System.Collections.Generic;
 using System;
 using Domain.Exceptions;
+using Domain.Entities;
 
 namespace Gui.Forms
 {
@@ -14,13 +15,14 @@ namespace Gui.Forms
         private int option=0;
         private List<Point> pointArray;
         private Form parentForm;
+        private Grid selectedGrid;
 
         public GridForm()
         {
             InitializeComponent();
         }
 
-        public GridForm(Domain.Entities.Grid grid, Form parentForm)
+        public GridForm(Grid grid, Form parentForm)
         {
             this.parentForm = parentForm;
             InitializeComponent();
@@ -39,6 +41,7 @@ namespace Gui.Forms
             deleteDoorBtn.MouseClick += changeOption;
             finishDesignBtn.MouseClick += changeOption;
         }
+
 
         private void generateLines(object sender, PaintEventArgs e)
         {

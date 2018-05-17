@@ -37,7 +37,7 @@
             // gridList
             // 
             this.gridList.FormattingEnabled = true;
-            this.gridList.Location = new System.Drawing.Point(134, 84);
+            this.gridList.Location = new System.Drawing.Point(253, 59);
             this.gridList.Name = "gridList";
             this.gridList.Size = new System.Drawing.Size(165, 225);
             this.gridList.TabIndex = 0;
@@ -64,12 +64,13 @@
             // 
             // modifyGrid_btn
             // 
-            this.modifyGrid_btn.Location = new System.Drawing.Point(167, 324);
+            this.modifyGrid_btn.Location = new System.Drawing.Point(282, 290);
             this.modifyGrid_btn.Name = "modifyGrid_btn";
             this.modifyGrid_btn.Size = new System.Drawing.Size(110, 33);
             this.modifyGrid_btn.TabIndex = 3;
             this.modifyGrid_btn.Text = "Modificar Plano";
             this.modifyGrid_btn.UseVisualStyleBackColor = true;
+            this.modifyGrid_btn.Click += new System.EventHandler(this.modifyGrid);
             // 
             // ABMGridScreenModify
             // 
@@ -80,7 +81,7 @@
             this.Controls.Add(this.titleTxt);
             this.Controls.Add(this.gridList);
             this.Name = "ABMGridScreenModify";
-            this.Size = new System.Drawing.Size(411, 373);
+            this.Size = new System.Drawing.Size(481, 373);
             this.ResumeLayout(false);
             this.PerformLayout();
 

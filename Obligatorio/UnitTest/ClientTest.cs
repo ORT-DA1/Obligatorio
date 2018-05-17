@@ -182,6 +182,26 @@ namespace UnitTest
 
         [TestMethod]
         [ExpectedException(typeof(ExceptionController))]
+        public void TestCreateClientWithExistingUsername()
+        {
+            Client client = new Client("ClientTest", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(client);
+            Client anotherClient = new Client("ClientTest", PASSWORD_OK, NAME_OK, SURNAME_OK, "12345712", PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(anotherClient);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestCreateClientWithExistingID()
+        {
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(client);
+            Client anotherClient = new Client("ClientTest", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(anotherClient);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
         public void TestCreateClientWithUsernameInvalid()
         {
             Client client = new Client("", PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);

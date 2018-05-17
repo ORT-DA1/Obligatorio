@@ -29,7 +29,7 @@ namespace Domain.Entities
             if (clientObject != null && this.GetType().Equals(clientObject.GetType()))
             {
                 Client client = (Client)clientObject;
-                if (this.Id.Equals(client.Id))
+                if (this.Id.Equals(client.Id) || this.Username.Equals(client.Username))
                 {
                     isEqual = true;
                 }
@@ -37,7 +37,6 @@ namespace Domain.Entities
             }
             return isEqual;
         }
-
         public override bool CanABMClients()
         {
             return false;

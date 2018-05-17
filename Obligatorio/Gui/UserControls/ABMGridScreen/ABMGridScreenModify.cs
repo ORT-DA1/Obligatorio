@@ -11,6 +11,7 @@ using Gui.Interface;
 using Domain.Exceptions;
 using Domain.Logic;
 using Domain.Entities;
+using Gui.Forms;
 
 namespace Gui.UserControls.ABMGridScreen
 {
@@ -45,6 +46,26 @@ namespace Gui.UserControls.ABMGridScreen
             {
                 this.gridList.Items.Add(grid);
             }
+        }
+
+        private void modifyGrid(object sender, EventArgs e)
+        {
+            var selectedGrid = (Grid)this.gridList.SelectedItem;
+            if (selectedGrid != null)
+            {
+                RedirectToModifyGridForm(selectedGrid);
+            }
+            else
+            {
+                MessageBox.Show("Porfavor seleccione un Plano para Modificar.", "No se selecciono ningun Plano.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void RedirectToModifyGridForm(Grid selectedGrid)
+        {
+            GridForm gridForm = new GridForm(selectedGrid, this.ParentForm);
+            gridForm.Show();
+            this.ParentForm.Hide();
         }
     }
 }

@@ -44,12 +44,12 @@ namespace Gui.UserControls.ABMGridScreen
         }
         private void LoadClients()
         {
+            this.clientList.Items.Clear();
             foreach (var client in clientHandler.GetList())
             {
                 this.clientList.Items.Add(client);
             }
         }
-
         private void createGrid(object sender, EventArgs e)
         {
             try
@@ -96,7 +96,6 @@ namespace Gui.UserControls.ABMGridScreen
             gridForm.Show();
             ClearFields();
             this.ParentForm.Hide();
-            gridForm.FormClosing += quit;
         }
         private void ClearFields()
         {
@@ -104,11 +103,6 @@ namespace Gui.UserControls.ABMGridScreen
             this.clientList.SelectedIndex = -1;
             this.widthTxt.Clear();
             this.heightTxt.Clear();
-        }
-
-        private void quit(object sender, EventArgs e)
-        {
-            //this.Parent.Show();
         }
     }
 }

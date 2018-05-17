@@ -179,7 +179,6 @@
             this.Controls.Add(this.titleTxt);
             this.Name = "ABMGridScreenAdd";
             this.Size = new System.Drawing.Size(539, 352);
-            this.ParentChanged += new System.EventHandler(this.quit);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -25,7 +25,10 @@
         public const string GRID_INVALID_HEIGHT_FORMAT = "El largo del plano no puede ser vacio y debe ser un numero.";
         public const string GRID_INVALID_NAME = "El nombre del plano es incorrecto. No puede ser vacio ni contener numeros o caracteres especiales.";
         public const string WALL_ALREADY_EXSIST = "La pared ya existe. Dibuje nuevamente.";
-        public const string POINT_OUT_OF_WALL = "Inserte la apertura sobre una pared libre.";
+        public const string POINT_OUT_OF_WALL = "Seleccione una pared disponible.";
         public const string WALL_INVALID = "La pared es incorrecta. Dibuje nuevamente.";
+
+        public const string DOOR_NOT_EXIST = "Seleccione una puerta disponible.";
+        public const string WINDOW_NOT_EXIST = "Seleccione una ventana disponible.";
     }
 }

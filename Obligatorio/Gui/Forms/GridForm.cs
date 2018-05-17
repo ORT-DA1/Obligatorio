@@ -163,7 +163,7 @@ namespace Gui.Forms
                     case 5:
                         try
                         {
-                            grid.RemoveDoor(pointArray[0]);
+                            grid.RemoveWindow(pointArray[0]);
                             UpdateLines();
                         }
                         catch (ExceptionController Exception)
@@ -175,7 +175,7 @@ namespace Gui.Forms
                     case 6:
                         try
                         {
-                            grid.RemoveWindow(pointArray[0]);
+                            grid.RemoveDoor(pointArray[0]);
                             UpdateLines();
                         }
                         catch (ExceptionController Exception)

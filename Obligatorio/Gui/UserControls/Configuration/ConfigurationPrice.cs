@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Gui.Interface;
 using Domain.Entities;
+using Domain.Exceptions;
 
 namespace Gui.UserControls.Configuration
 {
@@ -28,29 +29,55 @@ namespace Gui.UserControls.Configuration
 
         private void savePriceConfiguration(object sender, EventArgs e)
         {
-            if (elementList.SelectedItem.ToString().Equals("Pared"))
+            try
             {
-                Wall.CostPriceMeterWall = new Tuple<int, int>(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
+                ValidCostPrice();
+                if (elementList.SelectedItem.ToString().Equals("Pared"))
+                {
+                    Wall.CostPriceMeterWall = new Tuple<int, int>(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
 
+                }
+                else if (elementList.SelectedItem.ToString().Equals("Viga"))
+                {
+                    WallBeam.CostPriceWallBeam = new Tuple<int, int>(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
+
+                }
+                else if (elementList.SelectedItem.ToString().Equals("Ventana"))
+                {
+                    Window.CostPriceWindow = new Tuple<int, int>(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
+
+                }
+                else if (elementList.SelectedItem.ToString().Equals("Puerta"))
+                {
+                    Door.CostPriceDoor = new Tuple<int, int>(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
+
+                }
+
+                ClearFields();
             }
-            else if (elementList.SelectedItem.ToString().Equals("Viga"))
+            catch (ExceptionController Exception)
             {
-                WallBeam.CostPriceWallBeam = new Tuple<int, int>(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
-
+                string message = Exception.Message;
+                MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else if (elementList.SelectedItem.ToString().Equals("Ventana"))
-            {
-                Window.CostPriceWindow = new Tuple<int, int>(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
-
-            }
-            else if (elementList.SelectedItem.ToString().Equals("Puerta"))
-            {
-                Door.CostPriceDoor = new Tuple<int, int>(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
-
-            }
-
-            ClearFields();
         }
+
+        private void ValidCostPrice()
+        {
+            int cost;
+            int price;
+
+            if (!int.TryParse(this.CostTextBox.Text, out cost))
+            {
+                throw new ExceptionController(ExceptionMessage.COST_INVALID);
+            }
+
+            if (!int.TryParse(this.PriceTextBox.Text, out price))
+            {
+                throw new ExceptionController(ExceptionMessage.PRICE_INVALID);
+            }
+        }
+
 
         private void leaveComponent(object sender, EventArgs e)
         {

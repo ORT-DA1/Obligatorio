@@ -170,9 +170,6 @@
     <EmbeddedResource Include="UserControls\ABMGridScreen\ABMGridScreenAdd.resx">
       <DependentUpon>ABMGridScreenAdd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ABMGridScreen\ABMGridScreenModify.resx">
-      <DependentUpon>ABMGridScreenModify.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

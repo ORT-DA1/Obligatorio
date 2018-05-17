@@ -140,9 +140,11 @@ namespace UnitTest
         {
             Wall wall = new Wall(new Point(0, 1), new Point(0, 5));
             grid.Walls.Add(wall);
+            Wall anotherwall = new Wall(new Point(0, 6), new Point(0, 10));
+            grid.Walls.Add(anotherwall);
             grid.Walls.Remove(wall);
             bool resultExpected = true;
-            bool result = grid.Walls.Count.Equals(0);
+            bool result = grid.Walls.Count.Equals(1);
             Assert.AreEqual(resultExpected, result);
         }
 
@@ -161,10 +163,13 @@ namespace UnitTest
         {
             Point point = new Point(0, 1);
             WallBeam wallBeam = new WallBeam(point);
+            Point anotherPoint = new Point(0, 5);
+            WallBeam anotherWallBeam = new WallBeam(anotherPoint);
+            grid.WallBeams.Add(anotherWallBeam);
             grid.WallBeams.Add(wallBeam);
             grid.WallBeams.Remove(wallBeam);
             bool resultExpected = true;
-            bool result = grid.WallBeams.Count.Equals(0);
+            bool result = grid.WallBeams.Count.Equals(1);
             Assert.AreEqual(resultExpected, result);
         }
 
@@ -188,12 +193,14 @@ namespace UnitTest
         [TestMethod]
         public void TestRemoveWindow()
         {
-            Point point = new Point(1, 0);
             Point anotherPoint = new Point(1, 1);
+            Point otherPoint = new Point(100, 0);
+            Window anotherWindow = new Window(otherPoint, anotherPoint, "vertical");
+            Point point = new Point(1, 0);
             Window window = new Window(point, anotherPoint, "vertical");
             grid.Windows.Add(window);
             grid.RemoveWindow(window);
-            int expectedResult = 0;
+            int expectedResult = 1;
             int result = grid.Windows.Count;
             Assert.AreEqual(expectedResult, result);
         }
@@ -214,11 +221,14 @@ namespace UnitTest
         public void TestRemoveDoor()
         {
             Point point = new Point(0, 1);
+            Point otherPoint = new Point(0, 100);
             Point anotherPoint = new Point(1, 1);
+            Door anotherDoor = new Door(otherPoint, anotherPoint, "vertical");
             Door door = new Door(point, anotherPoint, "vertical");
+            grid.Doors.Add(anotherDoor);
             grid.Doors.Add(door);
             grid.RemoveDoor(point);
-            int expectedResult = 0;
+            int expectedResult = 1;
             int result = grid.Doors.Count;
             Assert.AreEqual(expectedResult, result);
         }
@@ -226,15 +236,9 @@ namespace UnitTest
         [TestMethod]
         public void TestMetersWallCount()
         {
-            int expectedResult = 0;
-            foreach (Wall wall in this.grid.Walls)
-            {
-                foreach (Point point in wall.Path)
-                {
-                    expectedResult++;
-                }
-                expectedResult -= 1;
-            }
+            Wall wall = new Wall(new Point(0, 25), new Point(0, 100));
+            grid.Walls.Add(wall);
+            int expectedResult = 3;
             int result = grid.MetersWallCount();
             Assert.AreEqual(result, expectedResult);
         }
@@ -354,6 +358,98 @@ namespace UnitTest
             grid.modifyCostAndPrice(meterWall, wallBeam, window, door);
             Assert.IsTrue(meterWall.Equals(grid.CostPriceMeterWall) && wallBeam.Equals(grid.CostPriceWallBeam)
                 && window.Equals(grid.CostPriceWindow) && door.Equals(grid.CostPriceDoor));
+        }
+
+        [TestMethod]
+        public void TestContainsPoints() {
+            Point point = new Point(0, 25);
+            List<Point> pointList = new List<Point>();
+            pointList.Add(point);
+            bool result = grid.ContainsPoint(pointList, point);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestHorizontalOrVertical()
+        {
+            Wall wall = new Wall(new Point(0, 25), new Point(0, 100));
+            GRID_HANDLER.ValidWallOrientation(wall);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController))]
+        public void TestAlreadyExistWall()
+        {
+            Wall wall = new Wall(new Point(0, 25), new Point(0, 100));
+            grid.Walls.Add(wall);
+            grid.AlreadyExistWall(wall);
+        }
+
+        [TestMethod]
+        public void TestBreakWall()
+        {
+            Wall wall = new Wall(new Point(0, 25), new Point(0, 100));
+            grid.Walls.Add(wall);
+            int expectedResult = grid.Walls.Count + 1;
+            grid.breakWall(wall, new Point(0,50));
+            int result = grid.Walls.Count;
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void TestFixPoint()
+        {
+            Point point = new Point(26, 26);
+            grid.fixPoint(point);
+            Point anotherPoint = new Point(25, 25);
+            Assert.AreEqual(point, anotherPoint);
+        }
+
+        [TestMethod]
+        public void TestGetGridName()
+        {
+            Grid anotherGrid = new Grid("testName", client, 20, 20);
+            string expectedResult = "testName";
+            string result = anotherGrid.GridName;
+            Assert.AreEqual(result, expectedResult);
+        }
+
+        [TestMethod]
+        public void TestHasTwoPointsInCommon()
+        {
+            Wall wall = new Wall(new Point(25, 0), new Point(100, 0));
+            Wall anotherWall = new Wall(new Point(25, 0), new Point(100, 0));
+            bool result = grid.HasTwoPointsInCommon(wall,anotherWall);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestIsCuttingAWallBeforeMaximum()
+        {
+            Wall wall = new Wall(new Point(25, 25), new Point(100, 25));
+            Wall anotherWall = new Wall(new Point(50, 0), new Point(50, 100));
+            grid.Walls.Add(anotherWall);
+            bool result = grid.isCuttingAWallBeforeMaximum(wall);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestIsPerpendicular()
+        {
+            Wall wall = new Wall(new Point(25, 25), new Point(100, 25));
+            Wall anotherWall = new Wall(new Point(50, 0), new Point(50, 100));
+            bool result = grid.isPerpendicular(wall,anotherWall);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestObtainWallInPoint()
+        {
+            Wall wall = new Wall(new Point(25, 25), new Point(100, 25));
+            grid.Walls.Add(wall);
+            Wall resultWall = grid.obtainWallInPoint(new Point(25, 25));
+            Assert.AreEqual(wall, resultWall);
         }
     }
 }

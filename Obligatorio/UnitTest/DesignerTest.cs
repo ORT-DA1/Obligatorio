@@ -65,6 +65,12 @@ namespace UnitTest
         public void TestCanVerifyInformation()
         {
             Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
+            Assert.IsFalse(designer.CanConfigurePrices());
+        }
+        [TestMethod]
+        public void TestCanConfigurePrices()
+        {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
             Assert.IsFalse(designer.CanVerifyInformation());
         }
 

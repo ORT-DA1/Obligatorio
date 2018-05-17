@@ -55,11 +55,18 @@ namespace UnitTest
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
             Assert.IsFalse(client.CanABMGrids());
         }
+
         [TestMethod]
         public void TestCanVerifyInformation()
         {
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
             Assert.IsTrue(client.CanVerifyInformation());
+        }
+        [TestMethod]
+        public void TestCanConfigurePrices()
+        {
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            Assert.IsFalse(client.CanConfigurePrices());
         }
         [TestMethod]
         public void TestCanVerifyInformationWithLastAccessNotNull()

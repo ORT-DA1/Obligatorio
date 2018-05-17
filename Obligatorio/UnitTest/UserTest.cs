@@ -45,6 +45,11 @@ namespace UnitTest
         {
            Assert.IsTrue(this.userTest.CanVerifyInformation());
         }
+        [TestMethod]
+        public void TestCanConfigurePrices()
+        {
+            Assert.IsTrue(this.userTest.CanConfigurePrices());
+        }
 
         [TestMethod]
         public void TestToString()

@@ -37,5 +37,10 @@ namespace UnitTest
         {
             Assert.IsFalse(this.storage.Administrator.CanVerifyInformation());
         }
+        [TestMethod]
+        public void TestCanConfigurePrices()
+        {
+            Assert.IsTrue(this.storage.Administrator.CanConfigurePrices());
+        }
     }
 }

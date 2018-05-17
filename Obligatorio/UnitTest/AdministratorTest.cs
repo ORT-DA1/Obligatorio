@@ -1,14 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Logic;
-using Domain.Interface;
 using Domain.Entities;
 using Domain.Data;
-using Domain.Exceptions;
 
 
 namespace UnitTest
@@ -22,6 +14,14 @@ namespace UnitTest
         {
             this.storage = DataStorage.GetStorageInstance();
         }
+
+        [TestMethod]
+        public void TestCreateAdministratorWithoutParameters()
+        {
+            Administrator administrator = new Administrator();
+            Assert.IsNotNull(administrator);
+        }
+
         [TestMethod]
         public void TestCanSeeOwnedGrids()
         {

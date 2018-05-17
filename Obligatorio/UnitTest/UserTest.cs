@@ -1,9 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Domain.Entities;
 namespace UnitTest
 {
@@ -43,10 +39,26 @@ namespace UnitTest
         {
             Assert.IsTrue(this.userTest.CanSeeOwnedGrids());
         }
+
         [TestMethod]
         public void TestCanVerifyInformation()
         {
            Assert.IsTrue(this.userTest.CanVerifyInformation());
+        }
+
+        [TestMethod]
+        public void TestToString()
+        {
+            string username = "username";
+            string name = "name";
+            string surname = "surname";
+            User user = new User();
+            user.Username = username;
+            user.Name = name;
+            user.Surname = surname;
+            string expectedResult = "username - name surname";
+            string result = user.ToString();
+            Assert.AreEqual(result, expectedResult);
         }
     }
 }

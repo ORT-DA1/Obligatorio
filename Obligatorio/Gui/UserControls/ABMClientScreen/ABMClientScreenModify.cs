@@ -85,7 +85,6 @@ namespace Gui.UserControls.ABMClientScreen
             ClearFields();
             this.modifyClient_btn.Enabled = false;
         }
-
         private void modifyClient(object sender, EventArgs e)
         {
             var selectedClient = (Client)this.clientList.SelectedItem;

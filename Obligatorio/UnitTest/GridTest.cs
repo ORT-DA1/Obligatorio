@@ -14,6 +14,8 @@ namespace UnitTest
     {
         private DataStorage dataStorage;
         private readonly GridHandler GRID_HANDLER;
+        private readonly ClientHandler CLIENT_HANDLER;
+
         private readonly int HEIGHT = 20;
         private readonly int WIDTH = 20;
         private readonly string USERNAME_OK = "pablo";
@@ -21,10 +23,10 @@ namespace UnitTest
         private readonly string NAME_OK = "Pablo";
         private readonly string SURNAME_OK = "Pereira";
         private readonly DateTime DATE_OK = new DateTime(1997, 07, 24);
-        private readonly string ID_OK = "5407935-1";
+        private readonly string ID_OK = "54079351";
         private readonly string PHONE_OK = "093535851";
         private readonly string ADDRESS_OK = "Brasil 1744";
-        private readonly string GRID_NAME_OK = "grid name";
+        private readonly string GRID_NAME_OK = "gridName";
         private readonly int PIXEL_CONVERTION = 25;
         private readonly Client client;
         private readonly Grid grid;
@@ -33,6 +35,7 @@ namespace UnitTest
         public GridTest()
         {
             this.GRID_HANDLER = new GridHandler();
+            this.CLIENT_HANDLER = new ClientHandler();
             this.dataStorage = DataStorage.GetStorageInstance();
             this.client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
             this.grid = new Grid(GRID_NAME_OK, client, HEIGHT, WIDTH);
@@ -61,22 +64,23 @@ namespace UnitTest
 
         [TestMethod]
         public void TestAddGrid() {
-            int expectedResult = dataStorage.Grids.Count + 1;
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
+            CLIENT_HANDLER.Add(client);
             Grid anotherGrid = new Grid(GRID_NAME_OK, client, HEIGHT, WIDTH);
             GRID_HANDLER.Add(anotherGrid);
-            int result = dataStorage.Grids.Count;
-            Assert.AreEqual(expectedResult, result);
-            //GRID_HANDLER.Add(grid);
-            //Assert.IsTrue(dataStorage.Grids.Contains(grid));
+            Assert.IsTrue(dataStorage.Grids.Contains(anotherGrid));
         }
 
         [TestMethod]
-        public void TestGetGrid()
+        public void TestGetClientGrid()
         {
-            GRID_HANDLER.Add(grid);
-            Grid resultGrid = GRID_HANDLER.Get(client);
-            Assert.AreEqual(grid, resultGrid);
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
+            Grid anotherGrid = new Grid(GRID_NAME_OK, client, HEIGHT, WIDTH);
+            CLIENT_HANDLER.Add(client);
+            GRID_HANDLER.Add(anotherGrid);
+            List<Grid> expectedListGrid = new List<Grid>();
+            expectedListGrid.Add(anotherGrid);
+            Assert.IsTrue(expectedListGrid.Contains(anotherGrid));
         }
 
         [TestMethod]
@@ -96,6 +100,7 @@ namespace UnitTest
             int expectedResult = dataStorage.Grids.Count +1;
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, ID_OK, PHONE_OK, ADDRESS_OK, DATE_OK, null);
             Grid anotherGrid = new Grid(GRID_NAME_OK, client, HEIGHT, WIDTH);
+            CLIENT_HANDLER.Add(client);
             GRID_HANDLER.Add(anotherGrid);
             int result = dataStorage.Grids.Count;
             Assert.AreEqual(expectedResult, result);
@@ -104,8 +109,8 @@ namespace UnitTest
         [TestMethod]
         public void TestIsCuttingAWallTrue()
         {
-            Wall wall = new Wall(new Point(50, 50), new Point(200, 50));
-            Wall anotherWall = new Wall(new Point(50, 75), new Point(50, 200));
+            Wall wall = new Wall(new Point(0, 50), new Point(200, 50));
+            Wall anotherWall = new Wall(new Point(25, 0), new Point(25, 200));
             grid.Walls.Add(wall);
             grid.Walls.Add(anotherWall);
             bool result = grid.IsCuttingAWallBeforeMaximum(anotherWall);
@@ -201,16 +206,12 @@ namespace UnitTest
         [TestMethod]
         public void TestRemoveWindow()
         {
-            Point anotherPoint = new Point(1, 1);
-            Point otherPoint = new Point(100, 0);
-            Window anotherWindow = new Window(otherPoint, anotherPoint, "vertical");
-            Point point = new Point(1, 0);
-            Window window = new Window(point, anotherPoint, "vertical");
+            Wall wall = new Wall(new Point(0, 25), new Point(0, 125));
+            grid.Walls.Add(wall);
+            Window window = new Window(new Point (0,100), new Point(0, 100), "vertical");
             grid.Windows.Add(window);
             grid.RemoveWindow(window);
-            int expectedResult = 1;
-            int result = grid.Windows.Count;
-            Assert.AreEqual(expectedResult, result);
+            Assert.IsFalse(grid.Windows.Contains(window));
         }
 
         [TestMethod]

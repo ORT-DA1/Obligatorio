@@ -21,7 +21,7 @@ namespace Domain.Logic
         public void Add(Grid grid)
         {
             Validate(grid);
-            this.storage.SaveGrid(grid);
+            this.storage.SaveGrid(grid); 
         }
 
         private void Validate(Grid grid)

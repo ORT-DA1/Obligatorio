@@ -52,11 +52,11 @@
     <Compile Include="Forms\CreateGridForm.Designer.cs">
       <DependentUpon>CreateGridForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\GridForm.cs">
+    <Compile Include="Forms\Grid.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\GridForm.Designer.cs">
-      <DependentUpon>GridForm.cs</DependentUpon>
+    <Compile Include="Forms\Grid.Designer.cs">
+      <DependentUpon>Grid.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainMenu.cs">
       <SubType>Form</SubType>
@@ -137,8 +137,8 @@
     <EmbeddedResource Include="Forms\CreateGridForm.resx">
       <DependentUpon>CreateGridForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GridForm.resx">
-      <DependentUpon>GridForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Grid.resx">
+      <DependentUpon>Grid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
@@ -175,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ABMDesignerScreen\ABMDesignerScreenModify.resx">
       <DependentUpon>ABMDesignerScreenModify.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ABMGridScreen\ABMGridScreenAdd.resx">
+      <DependentUpon>ABMGridScreenAdd.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

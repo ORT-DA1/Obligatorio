@@ -6,19 +6,19 @@ using System;
 
 namespace Gui.Forms
 {
-    public partial class GridForm : Form
+    public partial class Grid : Form
     {
-        private Grid grid;
+        private Domain.Entities.Grid grid;
         private Graphics graphic;
         private int option=0;
         private List<Point> pointArray;
 
-        public GridForm()
+        public Grid()
         {
             InitializeComponent();
         }
 
-        public GridForm(Grid grid)
+        public Grid(Domain.Entities.Grid grid)
         {
             InitializeComponent();
             this.grid = grid;
@@ -52,8 +52,8 @@ namespace Gui.Forms
         public Point fixPoint(Point point)
         {
             Point fixedPoint = new Point(
-               ((int)Math.Round((double)point.X / Grid.PixelConvertor)) * Grid.PixelConvertor,
-               ((int)Math.Round((double)point.Y / Grid.PixelConvertor)) * Grid.PixelConvertor
+               ((int)Math.Round((double)point.X / Domain.Entities.Grid.PixelConvertor)) * Domain.Entities.Grid.PixelConvertor,
+               ((int)Math.Round((double)point.Y / Domain.Entities.Grid.PixelConvertor)) * Domain.Entities.Grid.PixelConvertor
            );
             return fixedPoint;
         }

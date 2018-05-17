@@ -22,7 +22,7 @@ namespace UnitTest
         private readonly string SURNAME_OK = "Pereira";
         private readonly DateTime DATE_OK = new DateTime(1997, 07, 24);
         private readonly string ID_OK = "5407935-1";
-        private readonly int PHONE_OK = 093535851;
+        private readonly string PHONE_OK = "093535851";
         private readonly string ADDRESS_OK = "Brasil 1744";
         private readonly string GRID_NAME_OK = "grid name";
         private readonly int PIXEL_CONVERTION = 25;
@@ -217,7 +217,7 @@ namespace UnitTest
             Point anotherPoint = new Point(1, 1);
             Door door = new Door(point, anotherPoint, "vertical");
             grid.Doors.Add(door);
-            grid.RemoveDoor(door);
+            grid.RemoveDoor(point);
             int expectedResult = 0;
             int result = grid.Doors.Count;
             Assert.AreEqual(expectedResult, result);

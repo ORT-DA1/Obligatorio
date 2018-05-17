@@ -66,7 +66,7 @@ namespace Domain.Data
 
         public static void ValidateID(string id)
         {
-            if (!isValidID(id))
+            if (!IsValidID(id))
             {
                 throw new ExceptionController(ExceptionMessage.USER_INVALID_ID);
             }
@@ -79,9 +79,7 @@ namespace Domain.Data
                 throw new ExceptionController(ExceptionMessage.USER_INVALID_ADDRESS);
             }
         }
-
-
-        private static bool isValidID(string id)
+        private static bool IsValidID(string id)
         {
             Regex expression = new Regex(VALID_NUMBERS);
             if (string.IsNullOrEmpty(id) || !(expression.IsMatch(id)) || !IsValidIdLength(id))
@@ -91,13 +89,10 @@ namespace Domain.Data
 
             return true;
         }
-
         private static bool IsValidIdLength(string id)
         {
             return id.Length == VALID_USER_ID_LENGTH;
         }
-
-
         private static bool IsValidString(string element)
         {
             Regex expression = new Regex(VALID_CHARACTERS);
@@ -107,8 +102,6 @@ namespace Domain.Data
             }
             return true;
         }
-
-
         private static bool IsValidNumberCharacterSpace(string element)
         {
             Regex expression = new Regex(VALID_NUMBERS_CHARS_AND_SPACE);
@@ -118,7 +111,6 @@ namespace Domain.Data
             }
             return true;
         }
-
         private static bool IsValidNumberCharacter(string element)
         {
             Regex expression = new Regex(VALID_NUMBERS_AND_CHARACTERS);
@@ -128,7 +120,6 @@ namespace Domain.Data
             }
             return true;
         }
-
         public static void ValidateHeight(int height)
         {
             if (!IsValidHeight(height))
@@ -144,12 +135,10 @@ namespace Domain.Data
                 
             }
         }
-
         private static bool IsValidHeight(int height)
         {
             return (height> MIN_HEIGHT_IN_PIXELS && height <= MAX_HEIGHT_IN_PIXELS);
         }
-
         public static void ValidateWidth(int width)
         {
             if (!IsValidWidth(width))
@@ -164,7 +153,6 @@ namespace Domain.Data
                 }
             }
         }
-
         private static bool IsValidWidth(int width)
         {
             return (width > MIN_HEIGHT_IN_PIXELS && width <= MAX_WIDTH_IN_PIXELS);

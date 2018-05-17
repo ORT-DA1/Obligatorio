@@ -25,7 +25,6 @@ namespace Gui.Forms
 
         private void SetUpEnvironment()
         {
-            
             if (user.CanABMClients())
             {
                 IncludeClientABMControlsToList();  
@@ -40,7 +39,6 @@ namespace Gui.Forms
             }
 
         }
-
         private void CreateMenu()
         {
             MenuStrip leftMenu = this.leftMenuStrip;
@@ -64,8 +62,6 @@ namespace Gui.Forms
                 Controls.Add(leftMenu);
             }
         }
-
-
         private void IncludeClientABMControlsToList()
         {
             ABMClientScreenAdd clientScreenAdd = new ABMClientScreenAdd();
@@ -79,7 +75,6 @@ namespace Gui.Forms
 
             this.menuNodeList.Add(clientABMNode);
         }
-
         private void IncludeDesignerABMControlsToList()
         {
             ABMDesignerScreenAdd designerScreenAdd= new ABMDesignerScreenAdd();
@@ -93,7 +88,6 @@ namespace Gui.Forms
 
             this.menuNodeList.Add(designerABMNode);
         }
-
         private void IncludeGridABMControlsToListo()
         {
             ABMGridScreenAdd gridScreenAdd = new ABMGridScreenAdd();
@@ -107,7 +101,6 @@ namespace Gui.Forms
 
             this.menuNodeList.Add(gridABMNode);
         }
-
         //Globals
         void updateControlPanel(object sender, EventArgs e)
         {
@@ -124,7 +117,6 @@ namespace Gui.Forms
             login.Show();
             this.Hide();
         }
-
         private void quit(object sender, FormClosingEventArgs e)
         {
             System.Windows.Forms.Application.Exit();

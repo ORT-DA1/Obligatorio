@@ -128,6 +128,12 @@
     <Compile Include="UserControls\ABMGridScreen\ABMGridScreenModify.Designer.cs">
       <DependentUpon>ABMGridScreenModify.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Configuration\ConfigurationPrice.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Configuration\ConfigurationPrice.Designer.cs">
+      <DependentUpon>ConfigurationPrice.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\GridForm.resx">
       <DependentUpon>GridForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ABMGridScreen\ABMGridScreenModify.resx">
       <DependentUpon>ABMGridScreenModify.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Configuration\ConfigurationPrice.resx">
+      <DependentUpon>ConfigurationPrice.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -43,6 +43,10 @@ namespace Domain.Entities
         {
             return true;
         }
+        public virtual bool CanConfigurePrices()
+        {
+            return true;
+        }
         public override string ToString()
         {
             string format = "{0} - {1} {2}";

@@ -57,5 +57,9 @@ namespace Domain.Entities
             }
            return false;
         }
+        public override bool CanConfigurePrices()
+        {
+            return false;
+        }
     }
 }

@@ -5,6 +5,7 @@ using Domain.Entities;
 using Gui.UserControls.ABMClientScreen;
 using Gui.UserControls.ABMDesignerScreen;
 using Gui.UserControls.ABMGridScreen;
+using Gui.UserControls.Configuration;
 using Gui.Interface;
 
 
@@ -25,19 +26,10 @@ namespace Gui.Forms
 
         private void SetUpEnvironment()
         {
-            if (user.CanABMClients())
-            {
-                IncludeClientABMControlsToList();  
-            }
-            if (user.CanABMDesigners())
-            {
-                IncludeDesignerABMControlsToList();
-            }
-            if (user.CanABMGrids())
-            {
-                IncludeGridABMControlsToListo();
-            }
-
+            ClientABMControls();
+            DesignerABMControls();
+            GridABMControls();
+            PriceConfiguration();
         }
         private void CreateMenu()
         {
@@ -62,44 +54,65 @@ namespace Gui.Forms
                 Controls.Add(leftMenu);
             }
         }
-        private void IncludeClientABMControlsToList()
+        private void ClientABMControls()
         {
-            ABMClientScreenAdd clientScreenAdd = new ABMClientScreenAdd();
-            ABMClientScreenModify clientScreenModify = new ABMClientScreenModify();
-            ABMClientScreenDelete clientScreenDelete = new ABMClientScreenDelete();
+            if (user.CanABMClients())
+            {
+                ABMClientScreenAdd clientScreenAdd = new ABMClientScreenAdd();
+                ABMClientScreenModify clientScreenModify = new ABMClientScreenModify();
+                ABMClientScreenDelete clientScreenDelete = new ABMClientScreenDelete();
 
-            MenuNode clientABMNode = new MenuNode("Clientes");
-            clientABMNode.UserActions.Add(clientScreenAdd);
-            clientABMNode.UserActions.Add(clientScreenModify);
-            clientABMNode.UserActions.Add(clientScreenDelete);
+                MenuNode clientABMNode = new MenuNode("Clientes");
+                clientABMNode.UserActions.Add(clientScreenAdd);
+                clientABMNode.UserActions.Add(clientScreenModify);
+                clientABMNode.UserActions.Add(clientScreenDelete);
 
-            this.menuNodeList.Add(clientABMNode);
+                this.menuNodeList.Add(clientABMNode);
+            }
         }
-        private void IncludeDesignerABMControlsToList()
+        private void DesignerABMControls()
         {
-            ABMDesignerScreenAdd designerScreenAdd= new ABMDesignerScreenAdd();
-            ABMDesignerScreenModify designerScreenModify = new ABMDesignerScreenModify();
-            ABMDesignerScreenDelete designerScreenDelete = new ABMDesignerScreenDelete();
+            if (user.CanABMDesigners())
+            {
+                ABMDesignerScreenAdd designerScreenAdd = new ABMDesignerScreenAdd();
+                ABMDesignerScreenModify designerScreenModify = new ABMDesignerScreenModify();
+                ABMDesignerScreenDelete designerScreenDelete = new ABMDesignerScreenDelete();
 
-            MenuNode designerABMNode = new MenuNode("Diseñadores");
-            designerABMNode.UserActions.Add(designerScreenAdd);
-            designerABMNode.UserActions.Add(designerScreenModify);
-            designerABMNode.UserActions.Add(designerScreenDelete);
+                MenuNode designerABMNode = new MenuNode("Diseñadores");
+                designerABMNode.UserActions.Add(designerScreenAdd);
+                designerABMNode.UserActions.Add(designerScreenModify);
+                designerABMNode.UserActions.Add(designerScreenDelete);
 
-            this.menuNodeList.Add(designerABMNode);
+                this.menuNodeList.Add(designerABMNode);
+            }
         }
-        private void IncludeGridABMControlsToListo()
+        private void GridABMControls()
         {
-            ABMGridScreenAdd gridScreenAdd = new ABMGridScreenAdd();
-            ABMGridScreenModify gridScreenModify = new ABMGridScreenModify();
-            ABMGridScreenDelete gridScreenDelete = new ABMGridScreenDelete();
+            if (user.CanABMGrids())
+            {
+                ABMGridScreenAdd gridScreenAdd = new ABMGridScreenAdd();
+                ABMGridScreenModify gridScreenModify = new ABMGridScreenModify();
+                ABMGridScreenDelete gridScreenDelete = new ABMGridScreenDelete();
 
-            MenuNode gridABMNode = new MenuNode("Planos");
-            gridABMNode.UserActions.Add(gridScreenAdd);
-            gridABMNode.UserActions.Add(gridScreenModify);
-            gridABMNode.UserActions.Add(gridScreenDelete);
+                MenuNode gridABMNode = new MenuNode("Planos");
+                gridABMNode.UserActions.Add(gridScreenAdd);
+                gridABMNode.UserActions.Add(gridScreenModify);
+                gridABMNode.UserActions.Add(gridScreenDelete);
 
-            this.menuNodeList.Add(gridABMNode);
+                this.menuNodeList.Add(gridABMNode);
+            }
+        }
+        private void PriceConfiguration()
+        {
+            if (user.CanConfigurePrices())
+            {
+                ConfigurationPrice priceConfig = new ConfigurationPrice();
+
+                MenuNode configurationNode = new MenuNode("Configuracion");
+                configurationNode.AddNode(priceConfig);
+
+                this.menuNodeList.Add(configurationNode);
+            }
         }
         //Globals
         void updateControlPanel(object sender, EventArgs e)

@@ -40,6 +40,7 @@
             this.finishDesignBtn = new System.Windows.Forms.Button();
             this.totalConstructionCostlbl = new System.Windows.Forms.Label();
             this.costLbl = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -135,7 +136,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(9, 10);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 260);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(203, 261);
             this.flowLayoutPanel1.TabIndex = 6;
             // 
             // finishDesignBtn
@@ -151,7 +152,7 @@
             // totalConstructionCostlbl
             // 
             this.totalConstructionCostlbl.AutoSize = true;
-            this.totalConstructionCostlbl.Location = new System.Drawing.Point(12, 287);
+            this.totalConstructionCostlbl.Location = new System.Drawing.Point(4, 287);
             this.totalConstructionCostlbl.Name = "totalConstructionCostlbl";
             this.totalConstructionCostlbl.Size = new System.Drawing.Size(144, 13);
             this.totalConstructionCostlbl.TabIndex = 7;
@@ -160,11 +161,20 @@
             // costLbl
             // 
             this.costLbl.AutoSize = true;
-            this.costLbl.Location = new System.Drawing.Point(162, 287);
+            this.costLbl.Location = new System.Drawing.Point(155, 287);
             this.costLbl.Name = "costLbl";
             this.costLbl.Size = new System.Drawing.Size(19, 13);
             this.costLbl.TabIndex = 8;
             this.costLbl.Text = "$$";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(194, 287);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(19, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "$$";
             // 
             // GridForm
             // 
@@ -172,6 +182,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(771, 449);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.costLbl);
             this.Controls.Add(this.totalConstructionCostlbl);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -200,5 +211,6 @@
         private System.Windows.Forms.Button finishDesignBtn;
         private System.Windows.Forms.Label totalConstructionCostlbl;
         private System.Windows.Forms.Label costLbl;
+        private System.Windows.Forms.Label label1;
     }
 }

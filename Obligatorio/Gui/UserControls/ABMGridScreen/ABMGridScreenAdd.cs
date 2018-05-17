@@ -19,6 +19,7 @@ namespace Gui.UserControls.ABMGridScreen
     {
         private ClientHandler clientHandler;
         private GridHandler gridHandler;
+
         public ABMGridScreenAdd()
         {
             InitializeComponent();
@@ -91,12 +92,10 @@ namespace Gui.UserControls.ABMGridScreen
         }
         private void Redirect(Grid grid)
         {
-            GridForm gridForm = new GridForm(grid);
+            GridForm gridForm = new GridForm(grid, this.ParentForm);
             gridForm.Show();
             ClearFields();
-            //this.SetVisibleCore(false);
-            //this.ParentForm.Hide();
-            this.Parent.Hide();
+            this.ParentForm.Hide();
             gridForm.FormClosing += quit;
         }
         private void ClearFields()

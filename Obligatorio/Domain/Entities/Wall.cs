@@ -13,8 +13,17 @@ namespace Domain.Entities
 
         public Wall(Point startPoint, Point endPoint)
         {
-            if (startPoint.Y.Equals(endPoint.Y)){
-                if(startPoint.X < endPoint.X)
+            SetRightSense(startPoint,endPoint);
+            this.Path = new List<Point>();
+            this.wallPen = new Pen(Color.LightGreen, 4);
+            this.createPath();
+        }
+
+        public void SetRightSense(Point startPoint, Point endPoint)
+        {
+            if (startPoint.Y.Equals(endPoint.Y))
+            {
+                if (startPoint.X < endPoint.X)
                 {
                     this.startUbicationPoint = startPoint;
                     this.endUbicationPoint = endPoint;
@@ -38,11 +47,6 @@ namespace Domain.Entities
                     this.endUbicationPoint = startPoint;
                 }
             }
-
-            this.Path = new List<Point>();
-            this.wallPen = new Pen(Color.LightGreen, 4);
-
-            this.createPath();
         }
 
         public int getDistance()

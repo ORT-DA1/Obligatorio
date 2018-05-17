@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Domain.Entities;
 using System.Collections.Generic;
 using System;
+using Domain.Exceptions;
 
 namespace Gui.Forms
 {
@@ -12,14 +13,16 @@ namespace Gui.Forms
         private Graphics graphic;
         private int option=0;
         private List<Point> pointArray;
+        private Form parentForm;
 
         public GridForm()
         {
             InitializeComponent();
         }
 
-        public GridForm(Domain.Entities.Grid grid)
+        public GridForm(Domain.Entities.Grid grid, Form parentForm)
         {
+            this.parentForm = parentForm;
             InitializeComponent();
             this.grid = grid;
             this.pointArray = new List<Point>();
@@ -34,6 +37,7 @@ namespace Gui.Forms
             deleteWallBtn.MouseClick += changeOption;
             deleteWindowBtn.MouseClick += changeOption;
             deleteDoorBtn.MouseClick += changeOption;
+            finishDesignBtn.MouseClick += changeOption;
         }
 
         private void generateLines(object sender, PaintEventArgs e)
@@ -81,6 +85,10 @@ namespace Gui.Forms
                 case "deleteDoorBtn":
                     option = 6;
                     break;
+                case "finishDesignBtn":
+                    option = 7;
+                    this.parentForm.Show();
+                    break;
                 default:
                     break;
             }
@@ -102,8 +110,16 @@ namespace Gui.Forms
                 switch (option)
                 {
                     case 1:
-                        grid.AddWall(graphic, new Wall(pointArray[0], grid.fixPoint(pointArray[1])));
-                        UpdateLines();
+                        try
+                        {
+                            grid.AddWall(graphic, new Wall(pointArray[0], grid.fixPoint(pointArray[1])));
+                            UpdateLines();
+                        }
+                        catch (ExceptionController Exception)
+                        {
+                            string message = Exception.Message;
+                            MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                         break;
                     case 2:
                         grid.AddDoor(graphic, pointArray[0], pointArray[1], grid.wallSense(pointArray[0]));

@@ -67,7 +67,7 @@
             this.gridNameTxt.Location = new System.Drawing.Point(246, 49);
             this.gridNameTxt.Name = "gridNameTxt";
             this.gridNameTxt.Size = new System.Drawing.Size(107, 20);
-            this.gridNameTxt.TabIndex = 2;
+            this.gridNameTxt.TabIndex = 1;
             // 
             // label2
             // 
@@ -85,7 +85,7 @@
             this.clientList.Location = new System.Drawing.Point(246, 99);
             this.clientList.Name = "clientList";
             this.clientList.Size = new System.Drawing.Size(200, 21);
-            this.clientList.TabIndex = 4;
+            this.clientList.TabIndex = 2;
             // 
             // label3
             // 
@@ -117,17 +117,17 @@
             // 
             // widthTxt
             // 
-            this.widthTxt.Location = new System.Drawing.Point(229, 213);
+            this.widthTxt.Location = new System.Drawing.Point(362, 213);
             this.widthTxt.Name = "widthTxt";
             this.widthTxt.Size = new System.Drawing.Size(34, 20);
-            this.widthTxt.TabIndex = 8;
+            this.widthTxt.TabIndex = 4;
             // 
             // heightTxt
             // 
-            this.heightTxt.Location = new System.Drawing.Point(362, 213);
+            this.heightTxt.Location = new System.Drawing.Point(229, 213);
             this.heightTxt.Name = "heightTxt";
             this.heightTxt.Size = new System.Drawing.Size(34, 20);
-            this.heightTxt.TabIndex = 9;
+            this.heightTxt.TabIndex = 3;
             // 
             // label6
             // 
@@ -179,6 +179,7 @@
             this.Controls.Add(this.titleTxt);
             this.Name = "ABMGridScreenAdd";
             this.Size = new System.Drawing.Size(539, 352);
+            this.ParentChanged += new System.EventHandler(this.quit);
             this.ResumeLayout(false);
             this.PerformLayout();
 

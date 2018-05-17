@@ -1,6 +1,6 @@
 ﻿namespace Gui.Forms
 {
-    partial class Grid
+    partial class GridForm
     {
         /// <summary>
         /// Required designer variable.

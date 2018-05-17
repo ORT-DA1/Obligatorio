@@ -46,17 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\CreateGridForm.cs">
+    <Compile Include="Forms\GridForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CreateGridForm.Designer.cs">
-      <DependentUpon>CreateGridForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Grid.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Grid.Designer.cs">
-      <DependentUpon>Grid.cs</DependentUpon>
+    <Compile Include="Forms\GridForm.Designer.cs">
+      <DependentUpon>GridForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainMenu.cs">
       <SubType>Form</SubType>
@@ -134,11 +128,8 @@
     <Compile Include="UserControls\ABMGridScreen\ABMGridScreenModify.Designer.cs">
       <DependentUpon>ABMGridScreenModify.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\CreateGridForm.resx">
-      <DependentUpon>CreateGridForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Grid.resx">
-      <DependentUpon>Grid.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\GridForm.resx">
+      <DependentUpon>GridForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>

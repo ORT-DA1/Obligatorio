@@ -6,19 +6,19 @@ using System;
 
 namespace Gui.Forms
 {
-    public partial class Grid : Form
+    public partial class GridForm : Form
     {
         private Domain.Entities.Grid grid;
         private Graphics graphic;
         private int option=0;
         private List<Point> pointArray;
 
-        public Grid()
+        public GridForm()
         {
             InitializeComponent();
         }
 
-        public Grid(Domain.Entities.Grid grid)
+        public GridForm(Domain.Entities.Grid grid)
         {
             InitializeComponent();
             this.grid = grid;

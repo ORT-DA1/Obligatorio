@@ -7,14 +7,17 @@ namespace Domain.Logic
     public class GridHandler
     {
         private DataStorage storage;
+        private ClientHandler clientHandler;
 
         public GridHandler()
         {
             this.storage = DataStorage.GetStorageInstance();
+            this.clientHandler = new ClientHandler();
         }
 
         public Grid Get(Client client)
         {
+            clientHandler.NotExist(client);
             return this.storage.GetGrid(client);
         }
 
@@ -26,6 +29,8 @@ namespace Domain.Logic
 
         private void Validate(Grid grid)
         {
+            DataValidation.ValidateGridName(grid.GridName);
+            clientHandler.NotExist(grid.Client);
             DataValidation.ValidateHeight(grid.Height);
             DataValidation.ValidateWidth(grid.Width);
         }

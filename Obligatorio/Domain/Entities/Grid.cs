@@ -116,7 +116,7 @@ namespace Domain.Entities
             this.IsValid(wall);
             if (IsCuttingAWallBeforeMaximum(wall))
             {
-                AddWallIfCutting(graphic,wall);
+                AddWallIfCutting(graphic, wall);
             }
             else if (wall.SizeGreaterThanMaximum())
             {
@@ -152,14 +152,14 @@ namespace Domain.Entities
         {
             Point intersection = this.FirstIntersection(wall);
             Wall intersectWall = this.FirstIntersectWall(wall);
+            AddWallBeam(graphic, intersectWall.startUbicationPoint);
+            AddWallBeam(graphic, intersectWall.endUbicationPoint);
             BreakWall(intersectWall, intersection);
             Wall newWall = new Wall(wall.startUbicationPoint, intersection);
             AddWallBeam(graphic, newWall.startUbicationPoint);
             AddWallBeam(graphic, newWall.endUbicationPoint);
             newWall.Draw(graphic);
             this.Walls.Add(newWall);
-            AddWallBeam(graphic, newWall.startUbicationPoint);
-            AddWallBeam(graphic, newWall.endUbicationPoint);
             Wall anotherWall = new Wall(intersection, wall.endUbicationPoint);
             AddWall(graphic, anotherWall);
         }
@@ -200,8 +200,25 @@ namespace Domain.Entities
 
         public Wall ObtainWallInPoint(Point point)
         {
-            Wall wall = this.Walls.First(anotherWall => anotherWall.Path.Contains(point));
-            return wall;
+            if (ThereIsAWallAtThisPoint(point))
+            {
+                Wall wall = this.Walls.First(anotherWall => anotherWall.Path.Contains(point));
+                return wall;
+            }
+            else throw new ExceptionController(ExceptionMessage.POINT_OUT_OF_WALL);
+        }
+
+        private bool ThereIsAWallAtThisPoint(Point point)
+        {
+            foreach(Wall wall in Walls)
+            {
+                foreach(Point anotherPoint in wall.Path)
+                {
+                    if (point.Equals(anotherPoint))
+                        return true;
+                }
+            }
+            return false;
         }
 
         public string WallSense(Point point)
@@ -257,11 +274,17 @@ namespace Domain.Entities
 
         public void IsValid(Wall wall)
         {
-            if (!wall.startUbicationPoint.Equals(wall.endUbicationPoint))
+            this.StartPointAndEndPointAreDifferent(wall);
+            this.HorizontalOrVertical(wall);
+            this.AlreadyExistWall(wall);
+            this.ContainedIn(wall);
+        }
+
+        private void StartPointAndEndPointAreDifferent(Wall wall)
+        {
+            if (wall.startUbicationPoint.Equals(wall.endUbicationPoint))
             {
-                this.HorizontalOrVertical(wall);
-                this.AlreadyExistWall(wall);
-                this.ContainedIn(wall);
+                throw new ExceptionController(ExceptionMessage.WALL_INVALID);
             }
         }
 
@@ -311,14 +334,14 @@ namespace Domain.Entities
         public Point FirstIntersection(Wall wall)
         {
             Point returnPoint = new Point(-1, -1);
-            
+
             foreach (Wall anotherWall in Walls)
             {
                 foreach (Point anotherWallPathPoint in anotherWall.Path)
                 {
                     foreach (Point point in wall.Path)
                     {
-                        if(EqualPointButNotAtStart(point, anotherWallPathPoint, wall))
+                        if (EqualPointButNotAtStart(point, anotherWallPathPoint, wall))
                             return point;
                     }
                 }
@@ -557,6 +580,12 @@ namespace Domain.Entities
         public int TotalPrice()
         {
             return AmountPriceWall() + AmountPriceWallBeam() + AmountPriceWindow() + AmountPriceDoor();
+        }
+
+        public override string ToString()
+        {
+            string format = "{0} - {1}";
+            return String.Format(format, this.GridName, this.Client.Username);
         }
 
         public Point FixPoint(Point point)

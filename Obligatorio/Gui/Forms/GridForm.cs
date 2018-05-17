@@ -90,6 +90,7 @@ namespace Gui.Forms
                     break;
                 case "finishDesignBtn":
                     option = 7;
+                    this.Close();
                     this.parentForm.Show();
                     break;
                 default:
@@ -125,24 +126,63 @@ namespace Gui.Forms
                         }
                         break;
                     case 2:
-                        grid.AddDoor(graphic, pointArray[0], pointArray[1], grid.WallSense(pointArray[0]));
-                        UpdateLines();
+                        try {
+                            grid.AddDoor(graphic, pointArray[0], pointArray[1], grid.WallSense(pointArray[0]));
+                            UpdateLines();
+                        }
+                        catch (ExceptionController Exception)
+                        {
+                            string message = Exception.Message;
+                            MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                         break;
                     case 3:
-                        grid.AddWindow(graphic, pointArray[0], pointArray[1], grid.WallSense(pointArray[0]));
-                        UpdateLines();
+                        try
+                        {
+                            grid.AddWindow(graphic, pointArray[0], pointArray[1], grid.WallSense(pointArray[0]));
+                            UpdateLines();
+                        }
+                        catch (ExceptionController Exception)
+                        {
+                            string message = Exception.Message;
+                            MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                         break;
                     case 4:
-                        grid.RemoveWall(grid.ObtainWallInPoint(pointArray[0]));
-                        UpdateLines();
+                        try
+                        {
+                            grid.RemoveWall(grid.ObtainWallInPoint(pointArray[0]));
+                            UpdateLines();
+                        }
+                        catch (ExceptionController Exception)
+                        {
+                            string message = Exception.Message;
+                            MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                         break;
                     case 5:
-                        grid.RemoveDoor(pointArray[0]);
-                        UpdateLines();
+                        try
+                        {
+                            grid.RemoveDoor(pointArray[0]);
+                            UpdateLines();
+                        }
+                        catch (ExceptionController Exception)
+                        {
+                            string message = Exception.Message;
+                            MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                         break;
                     case 6:
-                        grid.RemoveWindow(pointArray[0]);
-                        UpdateLines();
+                        try
+                        {
+                            grid.RemoveWindow(pointArray[0]);
+                            UpdateLines();
+                        }
+                        catch (ExceptionController Exception)
+                        {
+                            string message = Exception.Message;
+                            MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                         break;
                     default:
                         break;

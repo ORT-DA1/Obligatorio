@@ -11,9 +11,9 @@ namespace Domain.Data
         private static readonly string VALID_NUMBERS = "^[0-9]*$";
         private static readonly string VALID_NUMBERS_CHARS_AND_SPACE = "^[0-9a-zA-Z ]*$";
         private static readonly int VALID_USER_ID_LENGTH = 8;
-        public static readonly int MAX_HEIGHT_IN_PIXELS = 1000;
+        public static readonly int MAX_HEIGHT_IN_PIXELS = 2500;
         public static readonly int MIN_HEIGHT_IN_PIXELS = 0;
-        public static readonly int MAX_WIDTH_IN_PIXELS = 1000;
+        public static readonly int MAX_WIDTH_IN_PIXELS = 2500;
         public static readonly int MIN_WIDTH_IN_PIXELS = 0;
 
 

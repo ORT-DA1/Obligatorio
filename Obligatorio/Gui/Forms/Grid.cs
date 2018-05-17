@@ -28,10 +28,12 @@ namespace Gui.Forms
             gridPanel.AutoScroll = true;
             this.Hide();
 
-            paredBtn.MouseClick += new MouseEventHandler(cambiarOpcion);
-            ventanaBtn.MouseClick += cambiarOpcion;
-            puertaBtn.MouseClick += cambiarOpcion;
-            quitarParedBtn.MouseClick += cambiarOpcion;
+            wallBtn.MouseClick += new MouseEventHandler(changeOption);
+            windowBtn.MouseClick += changeOption;
+            doorBtn.MouseClick += changeOption;
+            deleteWallBtn.MouseClick += changeOption;
+            deleteWindowBtn.MouseClick += changeOption;
+            deleteDoorBtn.MouseClick += changeOption;
         }
 
         private void generateLines(object sender, PaintEventArgs e)
@@ -48,7 +50,6 @@ namespace Gui.Forms
             this.gridPanel.Refresh();
         }
 
-
         public Point fixPoint(Point point)
         {
             Point fixedPoint = new Point(
@@ -58,26 +59,26 @@ namespace Gui.Forms
             return fixedPoint;
         }
 
-        private void cambiarOpcion(object sender, System.EventArgs e)
+        private void changeOption(object sender, System.EventArgs e)
         {
             switch ((sender as Button).Name)
             {
-                case "paredBtn":
+                case "wallBtn":
                     option = 1;
                     break;
-                case "ventanaBtn":
+                case "windowBtn":
                     option = 2;
                     break;
-                case "puertaBtn":
+                case "doorBtn":
                     option = 3;
                     break;
-                case "quitarParedBtn":
+                case "deleteWallBtn":
                     option = 4;
                     break;
-                case "quitarPuertaBtn":
+                case "deleteWindowBtn":
                     option = 5;
                     break;
-                case "quitarVentanaBtn":
+                case "deleteDoorBtn":
                     option = 6;
                     break;
                 default:
@@ -114,8 +115,8 @@ namespace Gui.Forms
                         break;
                     case 4:
                         grid.RemoveWall(grid.obtainWallInPoint(pointArray[0]));
-                    UpdateLines();
-                    break;
+                        UpdateLines();
+                        break;
                     case 5:
                         grid.RemoveDoor(pointArray[0]);
                         UpdateLines();

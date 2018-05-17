@@ -245,11 +245,11 @@ namespace Domain.Entities
 
         public void HorizontalOrVertical(Wall wall)
         {
-            GridHandler.ValidWallOrientation(wall);
-            /*if (wall.isHorizontalWall() || wall.isVerticalWall())
+            //GridHandler.ValidWallOrientation(wall);
+            if (wall.isHorizontalWall() || wall.isVerticalWall())
             {
             }
-            else throw new ExceptionController(ExceptionMessage.WALL_ALREADY_EXSIST); // cambiar exception*/
+            else throw new ExceptionController(ExceptionMessage.WALL_ALREADY_EXSIST); // cambiar exception
         }
 
         public void AlreadyExistWall(Wall wall)

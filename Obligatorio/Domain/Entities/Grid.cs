@@ -603,5 +603,6 @@ namespace Domain.Entities
            );
             return fixedPoint;
         }
+
     }
 }

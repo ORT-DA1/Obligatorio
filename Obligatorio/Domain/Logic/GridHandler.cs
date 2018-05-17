@@ -3,6 +3,7 @@ using Domain.Entities;
 using Domain.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Domain.Logic
 {
@@ -56,6 +57,27 @@ namespace Domain.Logic
             IsNotEmpty(gridList);
             return gridList;
         }
+
+        public List<Grid> GetClientGrids(Client client)
+        {
+            List<Grid> gridList = new List<Grid>();
+            foreach(Grid grid in storage.Grids)
+            {
+                if (ClientGrid(client, grid)){
+                    gridList.Add(grid);
+                }
+            }
+            return gridList;
+        }
+
+        private bool ClientGrid(Client client, Grid grid)
+        {
+            if (grid.Client.Equals(client))
+                return true;
+            else
+                return false;
+        }
+
         private void IsNotEmpty(List<Grid> gridList)
         {
             if (!gridList.Any())

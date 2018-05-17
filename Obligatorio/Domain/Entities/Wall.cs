@@ -11,8 +11,11 @@ namespace Domain.Entities
         public List<Point> Path { get; set; }
         private Pen wallPen;
 
+        public Tuple<int, int> CostPriceMeterWall { get; set; }
+
         public Wall(Point startPoint, Point endPoint)
         {
+            this.CostPriceMeterWall = new Tuple<int, int>(50, 100);
             SetRightSense(startPoint,endPoint);
             this.Path = new List<Point>();
             this.wallPen = new Pen(Color.LightGreen, 4);
@@ -78,6 +81,11 @@ namespace Domain.Entities
                     i += Grid.PixelConvertor;
                 }
             }
+        }
+
+        public void ModifyCostAndPrice(int Cost, int Price)
+        {
+            this.CostPriceMeterWall = new Tuple<int, int>(Cost, Price);
         }
 
         public override void Draw(Graphics graphic)

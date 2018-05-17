@@ -4,7 +4,6 @@ using Domain.Entities;
 using System.Collections.Generic;
 using System;
 using Domain.Exceptions;
-using Domain.Entities;
 
 namespace Gui.Forms
 {
@@ -90,6 +89,8 @@ namespace Gui.Forms
                     break;
                 case "finishDesignBtn":
                     option = 7;
+                    string message = "Se han guardado los cambios sobre el plano";
+                    MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                     this.parentForm.Show();
                     break;

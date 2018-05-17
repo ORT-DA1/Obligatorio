@@ -19,12 +19,7 @@ namespace Domain.Entities
         public static int PixelConvertor = 25;
         public int MaxMeters = 5;
         private Pen gridPen;
-
-        public Tuple<int, int> CostPriceMeterWall { get; set; }
-        public Tuple<int, int> CostPriceWallBeam { get; set; }
-        public Tuple<int, int> CostPriceWindow { get; set; }
-        public Tuple<int, int> CostPriceDoor { get; set; }
-
+       
         public Grid() { }
 
         public Grid(string gridName, Client client, int height, int width)
@@ -39,20 +34,7 @@ namespace Domain.Entities
             this.Height = height * PixelConvertor;
             this.Width = width * PixelConvertor;
 
-            this.CostPriceMeterWall = new Tuple<int, int>(50, 100);
-            this.CostPriceWallBeam = new Tuple<int, int>(50, 100);
-            this.CostPriceWindow = new Tuple<int, int>(50, 75);
-            this.CostPriceDoor = new Tuple<int, int>(50, 100);
-
             this.gridPen = new Pen(Color.Black, 2);
-        }
-
-        public void ModifyCostAndPrice(Tuple<int, int> meterWall, Tuple<int, int> wallBeam, Tuple<int, int> window, Tuple<int, int> door)
-        {
-            this.CostPriceMeterWall = meterWall;
-            this.CostPriceWallBeam = wallBeam;
-            this.CostPriceWindow = window;
-            this.CostPriceDoor = door;
         }
 
         public void DrawGrid(Graphics graphic)
@@ -541,47 +523,87 @@ namespace Domain.Entities
 
         public int AmountCostWall()
         {
-            return MetersWallCount() * CostPriceMeterWall.Item1;
+            int result = 0;
+            foreach(Wall wall in Walls)
+            {
+                result += MetersWallCount() * wall.CostPriceMeterWall.Item1;
+            }
+            return result;
         }
 
         public int AmountPriceWall()
         {
-            return MetersWallCount() * CostPriceMeterWall.Item2;
+            int result = 0;
+            foreach (Wall wall in Walls)
+            {
+                result += MetersWallCount() * wall.CostPriceMeterWall.Item2;
+            }
+            return result;
         }
 
         public int AmountCostWallBeam()
         {
-            return WallBeamsCount() * CostPriceWallBeam.Item1;
+            int result = 0;
+            foreach (WallBeam wallBeam in WallBeams)
+            {
+                result += WallBeamsCount() * wallBeam.CostPriceWallBeam.Item1;
+            }
+            return result;
         }
 
         public int AmountPriceWallBeam()
         {
-            return WallBeamsCount() * CostPriceWallBeam.Item2;
+            int result = 0;
+            foreach (WallBeam wallBeam in WallBeams)
+            {
+                result += WallBeamsCount() * wallBeam.CostPriceWallBeam.Item2;
+            }
+            return result;
         }
 
         public int AmountCostWindow()
         {
-            return WindowsCount() * CostPriceWindow.Item1;
+            int result = 0;
+            foreach (Window window in Windows)
+            {
+                result += WindowsCount() * window.CostPriceWindow.Item1;
+            }
+            return result;
         }
 
         public int AmountPriceWindow()
         {
-            return WindowsCount() * CostPriceWindow.Item2;
+            int result = 0;
+            foreach (Window window in Windows)
+            {
+                result += WindowsCount() * window.CostPriceWindow.Item2;
+            }
+            return result;
         }
 
         public int AmountCostDoor()
         {
-            return DoorsCount() * CostPriceDoor.Item1;
+            int result = 0;
+            foreach (Door door in Doors)
+            {
+                result += DoorsCount() * door.CostPriceDoor.Item1;
+            }
+            return result;
         }
 
         public int AmountPriceDoor()
         {
-            return DoorsCount() * CostPriceDoor.Item2;
+            int result = 0;
+            foreach (Door door in Doors)
+            {
+                result += DoorsCount() * door.CostPriceDoor.Item2;
+            }
+            return result;
         }
 
         public int TotalCost()
         {
-            return AmountCostWall() + AmountCostWallBeam() + AmountCostWindow() + AmountPriceDoor();
+            return AmountCostWall() + AmountCostWallBeam() + AmountCostWindow() + AmountCostDoor();
         }
 
         public int TotalPrice()
@@ -603,5 +625,6 @@ namespace Domain.Entities
            );
             return fixedPoint;
         }
+
     }
 }

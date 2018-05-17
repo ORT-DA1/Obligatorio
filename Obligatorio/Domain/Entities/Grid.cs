@@ -526,7 +526,7 @@ namespace Domain.Entities
             int result = 0;
             foreach(Wall wall in Walls)
             {
-                result += MetersWallCount() * wall.CostPriceMeterWall.Item1;
+                result += MetersWallCount() * Wall.CostPriceMeterWall.Item1;
             }
             return result;
         }
@@ -536,7 +536,7 @@ namespace Domain.Entities
             int result = 0;
             foreach (Wall wall in Walls)
             {
-                result += MetersWallCount() * wall.CostPriceMeterWall.Item2;
+                result += MetersWallCount() * Wall.CostPriceMeterWall.Item2;
             }
             return result;
         }
@@ -546,7 +546,7 @@ namespace Domain.Entities
             int result = 0;
             foreach (WallBeam wallBeam in WallBeams)
             {
-                result += WallBeamsCount() * wallBeam.CostPriceWallBeam.Item1;
+                result += WallBeamsCount() * WallBeam.CostPriceWallBeam.Item1;
             }
             return result;
         }
@@ -556,7 +556,7 @@ namespace Domain.Entities
             int result = 0;
             foreach (WallBeam wallBeam in WallBeams)
             {
-                result += WallBeamsCount() * wallBeam.CostPriceWallBeam.Item2;
+                result += WallBeamsCount() * WallBeam.CostPriceWallBeam.Item2;
             }
             return result;
         }
@@ -566,7 +566,7 @@ namespace Domain.Entities
             int result = 0;
             foreach (Window window in Windows)
             {
-                result += WindowsCount() * window.CostPriceWindow.Item1;
+                result += WindowsCount() * Window.CostPriceWindow.Item1;
             }
             return result;
         }
@@ -576,7 +576,7 @@ namespace Domain.Entities
             int result = 0;
             foreach (Window window in Windows)
             {
-                result += WindowsCount() * window.CostPriceWindow.Item2;
+                result += WindowsCount() * Window.CostPriceWindow.Item2;
             }
             return result;
         }
@@ -586,7 +586,7 @@ namespace Domain.Entities
             int result = 0;
             foreach (Door door in Doors)
             {
-                result += DoorsCount() * door.CostPriceDoor.Item1;
+                result += DoorsCount() * Door.CostPriceDoor.Item1;
             }
             return result;
         }
@@ -596,7 +596,7 @@ namespace Domain.Entities
             int result = 0;
             foreach (Door door in Doors)
             {
-                result += DoorsCount() * door.CostPriceDoor.Item2;
+                result += DoorsCount() * Door.CostPriceDoor.Item2;
             }
             return result;
         }

@@ -11,11 +11,10 @@ namespace Domain.Entities
         public List<Point> Path { get; set; }
         private Pen wallPen;
 
-        public Tuple<int, int> CostPriceMeterWall { get; set; }
+        public static Tuple<int, int> CostPriceMeterWall = new Tuple<int, int>(50, 100);
 
         public Wall(Point startPoint, Point endPoint)
         {
-            this.CostPriceMeterWall = new Tuple<int, int>(50, 100);
             SetRightSense(startPoint,endPoint);
             this.Path = new List<Point>();
             this.wallPen = new Pen(Color.LightGreen, 4);
@@ -83,9 +82,9 @@ namespace Domain.Entities
             }
         }
 
-        public void ModifyCostAndPrice(int Cost, int Price)
+        public override void ModifyCostAndPrice(int Cost, int Price)
         {
-            this.CostPriceMeterWall = new Tuple<int, int>(Cost, Price);
+            CostPriceMeterWall = new Tuple<int, int>(Cost, Price);
         }
 
         public override void Draw(Graphics graphic)

@@ -8,18 +8,17 @@ namespace Domain.Entities
         public Point UbicationPoint { get; set; }
         private SolidBrush wallBeamBrush;
 
-        public Tuple<int, int> CostPriceWallBeam { get; set; }
+        public static Tuple<int, int> CostPriceWallBeam = new Tuple<int, int>(50, 100);
 
         public WallBeam(Point ubicationPoint)
         {
-            this.CostPriceWallBeam = new Tuple<int, int>(50, 100);
             this.UbicationPoint = ubicationPoint;
             this.wallBeamBrush = new SolidBrush(Color.Red);
         }
 
-        public void ModifyCostAndPrice(int Cost, int Price)
+        public override void ModifyCostAndPrice(int Cost, int Price)
         {
-            this.CostPriceWallBeam = new Tuple<int, int>(Cost, Price);
+            CostPriceWallBeam = new Tuple<int, int>(Cost, Price);
         }
 
         public override void Draw(Graphics graphic)

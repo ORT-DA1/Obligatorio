@@ -31,12 +31,13 @@
             this.deleteDesigner_btn = new System.Windows.Forms.Button();
             this.titleTxt = new System.Windows.Forms.Label();
             this.designerList = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // deleteDesigner_btn
             // 
             this.deleteDesigner_btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.deleteDesigner_btn.Location = new System.Drawing.Point(250, 277);
+            this.deleteDesigner_btn.Location = new System.Drawing.Point(291, 277);
             this.deleteDesigner_btn.Name = "deleteDesigner_btn";
             this.deleteDesigner_btn.Size = new System.Drawing.Size(94, 28);
             this.deleteDesigner_btn.TabIndex = 5;
@@ -48,7 +49,7 @@
             // 
             this.titleTxt.AutoSize = true;
             this.titleTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleTxt.Location = new System.Drawing.Point(87, 29);
+            this.titleTxt.Location = new System.Drawing.Point(15, 23);
             this.titleTxt.Name = "titleTxt";
             this.titleTxt.Size = new System.Drawing.Size(38, 20);
             this.titleTxt.TabIndex = 4;
@@ -58,15 +59,26 @@
             // 
             this.designerList.Cursor = System.Windows.Forms.Cursors.Hand;
             this.designerList.FormattingEnabled = true;
-            this.designerList.Location = new System.Drawing.Point(206, 63);
+            this.designerList.Location = new System.Drawing.Point(247, 63);
             this.designerList.Name = "designerList";
             this.designerList.Size = new System.Drawing.Size(168, 199);
             this.designerList.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(16, 54);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(208, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Seleccione el Diseñador que desea borrar:";
             // 
             // ABMDesignerScreenDelete
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.deleteDesigner_btn);
             this.Controls.Add(this.titleTxt);
             this.Controls.Add(this.designerList);
@@ -82,5 +94,6 @@
         private System.Windows.Forms.Button deleteDesigner_btn;
         private System.Windows.Forms.Label titleTxt;
         private System.Windows.Forms.ListBox designerList;
+        private System.Windows.Forms.Label label1;
     }
 }

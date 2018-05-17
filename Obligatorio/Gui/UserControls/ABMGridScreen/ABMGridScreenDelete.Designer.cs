@@ -28,10 +28,70 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.deleteGrid_btn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.titleTxt = new System.Windows.Forms.Label();
+            this.gridList = new System.Windows.Forms.ListBox();
+            this.SuspendLayout();
+            // 
+            // deleteGrid_btn
+            // 
+            this.deleteGrid_btn.Location = new System.Drawing.Point(283, 286);
+            this.deleteGrid_btn.Name = "deleteGrid_btn";
+            this.deleteGrid_btn.Size = new System.Drawing.Size(110, 33);
+            this.deleteGrid_btn.TabIndex = 7;
+            this.deleteGrid_btn.Text = "Borrar Plano";
+            this.deleteGrid_btn.UseVisualStyleBackColor = true;
+            this.deleteGrid_btn.Click += new System.EventHandler(this.deleteGrid);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(23, 55);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(187, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Seleccione el Plano que desea borrar:";
+            // 
+            // titleTxt
+            // 
+            this.titleTxt.AutoSize = true;
+            this.titleTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleTxt.Location = new System.Drawing.Point(22, 18);
+            this.titleTxt.Name = "titleTxt";
+            this.titleTxt.Size = new System.Drawing.Size(38, 20);
+            this.titleTxt.TabIndex = 5;
+            this.titleTxt.Text = "Title";
+            // 
+            // gridList
+            // 
+            this.gridList.FormattingEnabled = true;
+            this.gridList.Location = new System.Drawing.Point(254, 55);
+            this.gridList.Name = "gridList";
+            this.gridList.Size = new System.Drawing.Size(165, 225);
+            this.gridList.TabIndex = 4;
+            // 
+            // ABMGridScreenDelete
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.deleteGrid_btn);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.titleTxt);
+            this.Controls.Add(this.gridList);
+            this.Name = "ABMGridScreenDelete";
+            this.Size = new System.Drawing.Size(455, 332);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button deleteGrid_btn;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label titleTxt;
+        private System.Windows.Forms.ListBox gridList;
     }
 }

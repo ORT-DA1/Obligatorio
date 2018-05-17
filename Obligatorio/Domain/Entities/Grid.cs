@@ -178,13 +178,13 @@ namespace Domain.Entities
         private Wall FirstIntersectWall(Wall wall)
         {
             Wall returnWall = new Wall(new Point(-1, -1), new Point(-1, -1));
-            foreach (Wall anotherWall in Walls)
+            foreach (Point point in wall.Path)
             {
-                foreach (Point anotherWallPathPoint in anotherWall.Path)
+                foreach (Wall anotherWall in Walls)
                 {
-                    foreach (Point point in wall.Path)
+                    foreach (Point anotherPoint in anotherWall.Path)
                     {
-                        if (EqualPointButNotAtStart(point, anotherWallPathPoint, wall))
+                        if (EqualPointButNotAtStart(point, anotherPoint, wall))
                             return anotherWall;
                     }
                 }
@@ -340,14 +340,13 @@ namespace Domain.Entities
         public Point FirstIntersection(Wall wall)
         {
             Point returnPoint = new Point(-1, -1);
-
-            foreach (Wall anotherWall in Walls)
+            foreach (Point point in wall.Path)
             {
-                foreach (Point anotherWallPathPoint in anotherWall.Path)
+                foreach (Wall anotherWall in Walls)
                 {
-                    foreach (Point point in wall.Path)
+                    foreach (Point anotherPoint in anotherWall.Path)
                     {
-                        if (EqualPointButNotAtStart(point, anotherWallPathPoint, wall))
+                        if (EqualPointButNotAtStart(point, anotherPoint, wall))
                             return point;
                     }
                 }

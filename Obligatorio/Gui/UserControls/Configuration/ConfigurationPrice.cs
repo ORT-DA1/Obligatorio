@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Gui.Interface;
+using Domain.Entities;
 
 namespace Gui.UserControls.Configuration
 {
@@ -22,6 +23,10 @@ namespace Gui.UserControls.Configuration
         public UserControl GetUserController()
         {
             return this;
+        }
+
+        private void savePriceConfiguration(object sender, EventArgs e)
+        {
         }
     }
 }

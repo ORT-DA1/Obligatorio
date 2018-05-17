@@ -16,6 +16,7 @@ namespace Domain.Data
         public List<Designer> Designers { get; }
         public Administrator Administrator { get; }
         public List<Grid> Grids { get; }
+        public List<Element> DrawableElements { get; }
 
         //Storage Methods
         private DataStorage()
@@ -23,12 +24,17 @@ namespace Domain.Data
             this.Users = new List<User>();
             this.Clients = new List<Client>();
             this.Designers = new List<Designer>();
-            this.Grids = new List<Grid>();
             this.Administrator = new Administrator("admin", "admin", "Joaquin", "Touris", new DateTime(2018, 05, 05), new DateTime(2018, 05, 05));
+            this.Grids = new List<Grid>();
+            this.DrawableElements = new List<Element>();
 
             this.Users.Add(Administrator);
+            SetUp();
         }
-
+        private void SetUp()
+        {
+            //DrawableElements.Add();
+        }
         public static DataStorage GetStorageInstance()
         {
             if (storageInstance == null)

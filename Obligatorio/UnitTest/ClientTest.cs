@@ -69,6 +69,12 @@ namespace UnitTest
             Assert.IsFalse(client.CanConfigurePrices());
         }
         [TestMethod]
+        public void TestCanSeePersonalInformation()
+        {
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            Assert.IsTrue(client.CanSeePersonalInformation());
+        }
+        [TestMethod]
         public void TestCanVerifyInformationWithLastAccessNotNull()
         {
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, LASTACCESS_OK);

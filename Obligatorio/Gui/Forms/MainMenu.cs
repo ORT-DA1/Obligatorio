@@ -6,6 +6,7 @@ using Gui.UserControls.ABMClientScreen;
 using Gui.UserControls.ABMDesignerScreen;
 using Gui.UserControls.ABMGridScreen;
 using Gui.UserControls.Configuration;
+using Gui.UserControls.MyAccount;
 using Gui.Interface;
 
 
@@ -14,6 +15,13 @@ namespace Gui.Forms
     public partial class MainMenu : Form
     {
         private User user;
+        
+        private MenuNode clientABMNode;
+        private MenuNode designerABMNode;
+        private MenuNode gridABMNode;
+        private MenuNode configurationNode;
+        private MenuNode myAccountNode;
+
         List<MenuNode> menuNodeList = new List<MenuNode>();
         public MainMenu(User user)
         {
@@ -26,10 +34,13 @@ namespace Gui.Forms
 
         private void SetUpEnvironment()
         {
+            GenerateMenuNodes();
             ClientABMControls();
             DesignerABMControls();
             GridABMControls();
             PriceConfiguration();
+            PersonalInformation();
+            OwnedGrids();
         }
         private void CreateMenu()
         {
@@ -54,6 +65,14 @@ namespace Gui.Forms
                 Controls.Add(leftMenu);
             }
         }
+        private void GenerateMenuNodes()
+        {
+            this.clientABMNode = new MenuNode("Clientes");
+            this.designerABMNode = new MenuNode("Diseñadores");
+            this.gridABMNode = new MenuNode("Planos");
+            this.configurationNode = new MenuNode("Configuracion");
+            this.myAccountNode = new MenuNode("Mi Cuenta");
+        }
         private void ClientABMControls()
         {
             if (user.CanABMClients())
@@ -62,7 +81,6 @@ namespace Gui.Forms
                 ABMClientScreenModify clientScreenModify = new ABMClientScreenModify();
                 ABMClientScreenDelete clientScreenDelete = new ABMClientScreenDelete();
 
-                MenuNode clientABMNode = new MenuNode("Clientes");
                 clientABMNode.UserActions.Add(clientScreenAdd);
                 clientABMNode.UserActions.Add(clientScreenModify);
                 clientABMNode.UserActions.Add(clientScreenDelete);
@@ -78,7 +96,6 @@ namespace Gui.Forms
                 ABMDesignerScreenModify designerScreenModify = new ABMDesignerScreenModify();
                 ABMDesignerScreenDelete designerScreenDelete = new ABMDesignerScreenDelete();
 
-                MenuNode designerABMNode = new MenuNode("Diseñadores");
                 designerABMNode.UserActions.Add(designerScreenAdd);
                 designerABMNode.UserActions.Add(designerScreenModify);
                 designerABMNode.UserActions.Add(designerScreenDelete);
@@ -94,7 +111,6 @@ namespace Gui.Forms
                 ABMGridScreenModify gridScreenModify = new ABMGridScreenModify();
                 ABMGridScreenDelete gridScreenDelete = new ABMGridScreenDelete();
 
-                MenuNode gridABMNode = new MenuNode("Planos");
                 gridABMNode.UserActions.Add(gridScreenAdd);
                 gridABMNode.UserActions.Add(gridScreenModify);
                 gridABMNode.UserActions.Add(gridScreenDelete);
@@ -107,11 +123,32 @@ namespace Gui.Forms
             if (user.CanConfigurePrices())
             {
                 ConfigurationPrice priceConfig = new ConfigurationPrice();
-
-                MenuNode configurationNode = new MenuNode("Configuracion");
                 configurationNode.AddNode(priceConfig);
 
                 this.menuNodeList.Add(configurationNode);
+            }
+        }
+        private void PersonalInformation()
+        {
+            if (user.CanSeePersonalInformation())
+            {
+                MyAccountPersonalInformation personalInfo = new MyAccountPersonalInformation((Client)user);
+                myAccountNode.AddNode(personalInfo);
+
+                this.menuNodeList.Add(myAccountNode);
+            }
+        }
+        private void OwnedGrids()
+        {
+            if (user.CanSeeOwnedGrids())
+            {
+                MyAccountOwnedGrids ownedGrids = new MyAccountOwnedGrids();
+                myAccountNode.AddNode(ownedGrids);
+
+                if (!this.menuNodeList.Contains(myAccountNode))
+                {
+                    this.menuNodeList.Add(myAccountNode);
+                }
             }
         }
         //Globals

@@ -50,6 +50,13 @@ namespace UnitTest
             Assert.IsFalse(designer.CanABMDesigners());
         }
         [TestMethod]
+        public void TestCanSeePersonalInformation()
+        {
+            Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
+            Assert.IsFalse(designer.CanSeePersonalInformation());
+        }
+
+        [TestMethod]
         public void TestCanABMGrids()
         {
             Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);

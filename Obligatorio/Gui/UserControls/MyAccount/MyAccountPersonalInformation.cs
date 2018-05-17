@@ -1,24 +1,30 @@
 ﻿using System;
 using System.Windows.Forms;
+using Gui.Interface;
 using Domain.Entities;
 using Domain.Logic;
 using Domain.Exceptions;
 
-namespace Gui.Forms
+namespace Gui.UserControls.MyAccount
 {
-    public partial class ClientVerifyInformation : Form
+    public partial class MyAccountPersonalInformation : UserControl, IController
     {
         private Client client;
         private ClientHandler handler;
-        public ClientVerifyInformation(Client user)
+        public MyAccountPersonalInformation(Client client)
         {
             InitializeComponent();
-            this.client = user;
+            this.client = client;
             this.handler = new ClientHandler();
-            this.ControlBox = false;
-            LoadUserData();
+            this.AccessibleName = "Datos Personales";
+            this.titleTxt.Text = "Mis Datos Personales";
         }
-        private void LoadUserData()
+        public UserControl GetUserController()
+        {
+            LoadInformation();
+            return this;
+        }
+        private void LoadInformation()
         {
             this.userNameTxt.Text = client.Username;
             this.passwordTxt.Text = client.Password;
@@ -26,35 +32,29 @@ namespace Gui.Forms
             this.surnameTxt.Text = client.Surname;
             this.idTxt.Text = client.Id;
             this.phoneTxt.Text = client.Phone;
-            this.addressTxt.Text = client.Address;   
+            this.addressTxt.Text = client.Address;
         }
-        private void confirm(object sender, EventArgs e)
+
+        private void modifyAccount(object sender, EventArgs e)
         {
             try
             {
                 Client modifiedClient = fetchValues();
-                ProcessConfirmation(modifiedClient);
+                DialogResult dialogResult = MessageBox.Show("Esta seguro que desea Modificar su Contraseña?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.OK)
+                {
+                    handler.Modify(client, modifiedClient);
+                    MessageBox.Show("Su contraseña ha sido actualizado exitosamente", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (ExceptionController Exception)
             {
-                var message = Exception.Message;
+                String message = Exception.Message;
                 MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-        }
-        private void ProcessConfirmation(Client modifiedClient)
-        {
-            DialogResult dialogResult = MessageBox.Show("Una vez confirmados los datos, muchos de ellos no podran ser modificados mas adelante. Desea Continuar?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-            if (dialogResult == DialogResult.OK)
-            {
-                handler.Modify(client, modifiedClient);
-                Redirect(modifiedClient);
             }
         }
         private Client fetchValues()
         {
-            DateTime lastAccess = DateTime.Now;
-
             return new Client(
                 this.userNameTxt.Text,
                 this.passwordTxt.Text,
@@ -64,13 +64,7 @@ namespace Gui.Forms
                 this.phoneTxt.Text,
                 this.addressTxt.Text,
                 client.RegistrationDate,
-                lastAccess);
-        }
-        private void Redirect(Client modifiedClient)
-        {
-            MainMenu mainMenu = new MainMenu(modifiedClient);
-            mainMenu.Show();
-            this.Hide();
+                client.LastAccess);
         }
     }
 }

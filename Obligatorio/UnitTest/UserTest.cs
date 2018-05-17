@@ -46,6 +46,11 @@ namespace UnitTest
            Assert.IsTrue(this.userTest.CanVerifyInformation());
         }
         [TestMethod]
+        public void TestCanSeePersonalInformation()
+        {
+            Assert.IsTrue(this.userTest.CanSeePersonalInformation());
+        }
+        [TestMethod]
         public void TestCanConfigurePrices()
         {
             Assert.IsTrue(this.userTest.CanConfigurePrices());

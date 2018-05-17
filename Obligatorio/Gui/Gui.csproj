@@ -134,6 +134,18 @@
     <Compile Include="UserControls\Configuration\ConfigurationPrice.Designer.cs">
       <DependentUpon>ConfigurationPrice.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\MyAccount\MyAccountOwnedGrids.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\MyAccount\MyAccountOwnedGrids.Designer.cs">
+      <DependentUpon>MyAccountOwnedGrids.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MyAccount\MyAccountPersonalInformation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\MyAccount\MyAccountPersonalInformation.Designer.cs">
+      <DependentUpon>MyAccountPersonalInformation.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\GridForm.resx">
       <DependentUpon>GridForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -184,6 +196,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Configuration\ConfigurationPrice.resx">
       <DependentUpon>ConfigurationPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\MyAccount\MyAccountOwnedGrids.resx">
+      <DependentUpon>MyAccountOwnedGrids.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\MyAccount\MyAccountPersonalInformation.resx">
+      <DependentUpon>MyAccountPersonalInformation.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

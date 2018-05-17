@@ -49,5 +49,9 @@ namespace Domain.Entities
         {
             return false;
         }
+        public override bool CanSeePersonalInformation()
+        {
+            return false;
+        }
     }
 }

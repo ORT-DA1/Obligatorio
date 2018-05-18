@@ -52,6 +52,8 @@ namespace Gui.UserControls.Configuration
                     Door.CostPriceDoor = new Tuple<int, int>(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
 
                 }
+                
+                MessageBox.Show("Se han actualizado los precios del sistema.", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 ClearFields();
             }

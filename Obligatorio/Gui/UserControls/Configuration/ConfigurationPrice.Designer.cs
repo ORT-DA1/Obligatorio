@@ -39,7 +39,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.priceConfig_btn = new System.Windows.Forms.Button();
-            this.changeLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // titleTxt
@@ -62,7 +61,7 @@
             "Ventana",
             "Puerta"});
             this.elementList.Location = new System.Drawing.Point(324, 86);
-            this.elementList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.elementList.Margin = new System.Windows.Forms.Padding(4);
             this.elementList.Name = "elementList";
             this.elementList.Size = new System.Drawing.Size(187, 24);
             this.elementList.TabIndex = 1;
@@ -91,7 +90,7 @@
             // CostTextBox
             // 
             this.CostTextBox.Location = new System.Drawing.Point(323, 161);
-            this.CostTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CostTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.CostTextBox.Name = "CostTextBox";
             this.CostTextBox.Size = new System.Drawing.Size(44, 22);
             this.CostTextBox.TabIndex = 4;
@@ -119,7 +118,7 @@
             // PriceTextBox
             // 
             this.PriceTextBox.Location = new System.Drawing.Point(483, 161);
-            this.PriceTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PriceTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.PriceTextBox.Name = "PriceTextBox";
             this.PriceTextBox.Size = new System.Drawing.Size(44, 22);
             this.PriceTextBox.TabIndex = 7;
@@ -148,7 +147,7 @@
             // priceConfig_btn
             // 
             this.priceConfig_btn.Location = new System.Drawing.Point(351, 229);
-            this.priceConfig_btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.priceConfig_btn.Margin = new System.Windows.Forms.Padding(4);
             this.priceConfig_btn.Name = "priceConfig_btn";
             this.priceConfig_btn.Size = new System.Drawing.Size(136, 39);
             this.priceConfig_btn.TabIndex = 10;
@@ -156,20 +155,10 @@
             this.priceConfig_btn.UseVisualStyleBackColor = true;
             this.priceConfig_btn.Click += new System.EventHandler(this.savePriceConfiguration);
             // 
-            // changeLbl
-            // 
-            this.changeLbl.AutoSize = true;
-            this.changeLbl.Location = new System.Drawing.Point(85, 229);
-            this.changeLbl.Name = "changeLbl";
-            this.changeLbl.Size = new System.Drawing.Size(46, 17);
-            this.changeLbl.TabIndex = 11;
-            this.changeLbl.Text = "label7";
-            // 
             // ConfigurationPrice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.changeLbl);
             this.Controls.Add(this.priceConfig_btn);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
@@ -181,7 +170,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.elementList);
             this.Controls.Add(this.titleTxt);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ConfigurationPrice";
             this.Size = new System.Drawing.Size(636, 306);
             this.Leave += new System.EventHandler(this.leaveComponent);
@@ -203,6 +192,5 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button priceConfig_btn;
-        private System.Windows.Forms.Label changeLbl;
     }
 }

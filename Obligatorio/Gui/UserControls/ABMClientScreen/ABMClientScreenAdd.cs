@@ -30,7 +30,7 @@ namespace Gui.UserControls.ABMClientScreen
                 Client newClient = fetchValues();
                 handler.Add(newClient);
                 MessageBox.Show("El cliente " + newClient.Username + " fue ingresado exitosamente al sistema.", "Mensaje de Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ClearForm();
+                    ClearForm();
             }
             catch (ExceptionController Exception)
             {

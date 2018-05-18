@@ -241,13 +241,15 @@ namespace Domain.Entities
         {
             if (wall.isHorizontalWall())
             {
-                if (point.Equals(anotherPoint) && !point.Equals(wall.startUbicationPoint)
+                if (point.Equals(anotherPoint) && !point.Equals(wall.startUbicationPoint) 
+                    && !point.Equals(wall.Path.Last())
                 && (anotherPoint.X - wall.startUbicationPoint.X) < 125)
                     return true;
             }
             else
             {
                 if (point.Equals(anotherPoint) && !point.Equals(wall.startUbicationPoint)
+                    && !point.Equals(wall.Path.Last())
                     && (anotherPoint.Y - wall.startUbicationPoint.Y) < 125)
                     return true;
             }

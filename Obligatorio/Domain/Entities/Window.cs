@@ -8,7 +8,9 @@ namespace Domain.Entities
         public Point StartPoint;
         public Point EndPoint;
         public string sense;
-
+        public float width;
+        public float high;
+        
         public static Tuple<int, int> CostPriceWindow = new Tuple<int, int>(50, 75);
 
         public Window()
@@ -22,6 +24,16 @@ namespace Domain.Entities
 
         public Window(Point startPoint, Point endPoint, string sense)
         {
+            this.sense = sense;
+            this.StartPoint = startPoint;
+            this.EndPoint = endPoint;
+        }
+
+        public Window(Point startPoint, Point endPoint, string sense, float width, float high, string name)
+        {
+            this.width = width;
+            this.high = high;
+            this.name = name;
             this.sense = sense;
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;

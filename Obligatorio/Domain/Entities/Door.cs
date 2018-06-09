@@ -26,14 +26,16 @@ namespace Domain.Entities
             this.EndPoint = endPoint;
         }
 
-        public Door(Point startPoint, Point endPoint, string sense, float width, float high)
+        public Door(Point startPoint, Point endPoint, string sense, float width, float high, string name)
         {
+            this.width = width;
+            this.high = high;
+            this.name = name;
             this.sense = sense;
             this.direction = 0;
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;
-            this.width = width;
-            this.high = high;
+            
         }
 
         public override void ModifyCostAndPrice(int Cost, int Price)

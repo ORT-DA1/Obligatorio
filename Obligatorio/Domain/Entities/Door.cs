@@ -9,6 +9,8 @@ namespace Domain.Entities
         public Point EndPoint;
         public int direction;
         public string sense;
+        public float width;
+        public float high;
 
         public static Tuple<int, int> CostPriceDoor = new Tuple<int, int>(50,100);
 
@@ -24,6 +26,16 @@ namespace Domain.Entities
             this.EndPoint = endPoint;
         }
 
+        public Door(Point startPoint, Point endPoint, string sense, float width, float high)
+        {
+            this.sense = sense;
+            this.direction = 0;
+            this.StartPoint = startPoint;
+            this.EndPoint = endPoint;
+            this.width = width;
+            this.high = high;
+        }
+
         public override void ModifyCostAndPrice(int Cost, int Price)
         {
             CostPriceDoor = new Tuple<int, int>(Cost, Price); 
@@ -34,7 +46,7 @@ namespace Domain.Entities
             SolidBrush blueBrush = new SolidBrush(Color.Blue);
             float angle = this.startAngle(StartPoint, EndPoint);
             Point fixedPoint = fixDoorPoint(StartPoint);
-            graphic.FillPie(blueBrush, fixedPoint.X, fixedPoint.Y, 30, 30, angle, 90f);
+            graphic.FillPie(blueBrush, fixedPoint.X, fixedPoint.Y, 15, 15, angle, 90f);
         }
 
         private Point fixDoorPoint(Point startPoint)

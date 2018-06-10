@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Entities;
+using System.Data.Entity;
 
 namespace Persistance
 {
-    public class DBContext
+    public class DBContext : DbContext
     {
+        public DbSet<Designer> Designers { get; set; }
 
         public DBContext()
         {
-
         }
     }
 }

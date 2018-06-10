@@ -31,6 +31,10 @@ namespace Domain.Entities
         {
             return true;
         }
+        public virtual bool CanABMArchitects()
+        {
+            return true;
+        }
         public virtual bool CanABMGrids()
         {
             return true;

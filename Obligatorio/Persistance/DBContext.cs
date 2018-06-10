@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Persistance
 {
-    public class Class1
+    public class DBContext
     {
+
+        public DBContext()
+        {
+
+        }
     }
 }

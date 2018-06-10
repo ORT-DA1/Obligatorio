@@ -44,6 +44,8 @@ namespace Gui.Forms
             deleteWindowBtn.MouseClick += changeOption;
             deleteDoorBtn.MouseClick += changeOption;
             finishDesignBtn.MouseClick += changeOption;
+            addDecorativeColumnBtn.MouseClick += changeOption;
+            deleteDecorativeColumnBtn.MouseClick += changeOption;
 
         }
         
@@ -56,6 +58,8 @@ namespace Gui.Forms
             this.deleteWallBtn.Visible = canEditGrid;
             this.deleteWindowBtn.Visible = canEditGrid;
             this.finishDesignBtn.Visible = canEditGrid;
+            this.addDecorativeColumnBtn.Visible = canEditGrid;
+            this.deleteDecorativeColumnBtn.Visible = canEditGrid;
 
             this.totalConstructionCostlbl.Visible = !canEditGrid;
             this.costLbl.Visible = !canEditGrid;
@@ -72,6 +76,7 @@ namespace Gui.Forms
             this.grid.DrawDoors(this.graphic);
             this.grid.DrawWindows(this.graphic);
             this.grid.DrawWallBeams(this.graphic);
+            this.grid.DrawDecorativeColumns(this.graphic);
         }
 
         public void UpdateLines()
@@ -117,6 +122,12 @@ namespace Gui.Forms
                     option = 0;
                     this.Close();
                     this.parentForm.Show();
+                    break;
+                case "addDecorativeColumnBtn":
+                    option = 8;
+                    break;
+                case "deleteDecorativeColumnBtn":
+                    option = 9;
                     break;
                 default:
                     break;
@@ -212,6 +223,14 @@ namespace Gui.Forms
                                 MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                             break;
+                        case 8:
+                            grid.AddDecorativeColumn(graphic,pointArray[0]);
+                            UpdateLines();
+                            break;
+                        case 9:
+                            grid.RemoveDecorativeColumn(pointArray[0]);
+                            UpdateLines();
+                            break;
                         default:
                             break;
                     }
@@ -225,5 +244,6 @@ namespace Gui.Forms
             this.Close();
             this.parentForm.Show();
         }
+        
     }
 }

@@ -69,6 +69,14 @@ namespace Domain.Entities
             }
         }
 
+        public void DrawDecorativeColumns(Graphics graphic)
+        {
+            foreach (DecorativeColumn decorativeColumn in DecorativeColumns)
+            {
+                decorativeColumn.Draw(graphic);
+            }
+        }
+
         public void DrawWindows(Graphics graphic)
         {
             foreach (Window window in Windows)
@@ -469,9 +477,18 @@ namespace Domain.Entities
             }
         }
 
-        public void RemoveDecorativeColumn(DecorativeColumn decorativeColumn)
+        public void RemoveDecorativeColumn(Point ubicationPoint)
         {
-            this.DecorativeColumns.Remove(decorativeColumn);
+            if (ExistDecorativeColumn(ubicationPoint))
+            {
+                DecorativeColumn decorativeColumn = this.DecorativeColumns.First(anotherDecorativeColumn => anotherDecorativeColumn.UbicationPoint.Equals(ubicationPoint));
+                this.DecorativeColumns.Remove(decorativeColumn);
+            }
+        }
+
+        private bool ExistDecorativeColumn(Point ubicationPoint)
+        {
+            return this.DecorativeColumns.Contains(new DecorativeColumn(ubicationPoint));
         }
 
         public void RemoveWindow(Window window)

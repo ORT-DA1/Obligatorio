@@ -13,13 +13,13 @@ namespace Domain.Entities
         private SolidBrush wallBeamBrush;
         public float width = 0.50f;
         public static float MINIMUM_WIDTH = 0.85f;
-        public static int MINIMUM_WIDTH_IN_PIXELS = 9;
+        public static int MINIMUM_WIDTH_IN_PIXELS = 8;
         public static Tuple<int, int> CostPriceDecorativeColumn = new Tuple<int, int>(25, 50);
 
         public DecorativeColumn(Point ubicationPoint)
         {
             this.UbicationPoint = ubicationPoint;
-            this.wallBeamBrush = new SolidBrush(Color.Violet);
+            this.wallBeamBrush = new SolidBrush(Color.Gold);
         }
 
         public override void ModifyCostAndPrice(int Cost, int Price)
@@ -29,7 +29,7 @@ namespace Domain.Entities
 
         public override void Draw(Graphics graphic)
         {
-            Rectangle rectangle = new Rectangle(this.UbicationPoint.X - 5, this.UbicationPoint.Y - 5, (int)width, (int)width);
+            Rectangle rectangle = new Rectangle(this.UbicationPoint.X - 5, this.UbicationPoint.Y - 5, MINIMUM_WIDTH_IN_PIXELS, MINIMUM_WIDTH_IN_PIXELS);
             float startAngle = 0;
             float sweepAngle = 360;
             graphic.FillPie(wallBeamBrush, rectangle, startAngle, sweepAngle);
@@ -40,8 +40,8 @@ namespace Domain.Entities
             bool isEqual = false;
             if (decorativeColumnObject != null && this.GetType().Equals(decorativeColumnObject.GetType()))
             {
-                WallBeam wallBeam = (WallBeam)decorativeColumnObject;
-                if (this.UbicationPoint.Equals(wallBeam.UbicationPoint))
+                DecorativeColumn decorativeColumn = (DecorativeColumn)decorativeColumnObject;
+                if (this.UbicationPoint.Equals(decorativeColumn.UbicationPoint))
                 {
                     isEqual = true;
                 }

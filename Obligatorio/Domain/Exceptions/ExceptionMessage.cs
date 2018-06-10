@@ -34,5 +34,7 @@
 
         public const string COST_INVALID = "El costo es invalido, ingrese nuevamente.";
         public const string PRICE_INVALID = "El precio es invalido, ingrese nuevamente.";
+
+        public const string DECORATIVE_COLUMN_NOT_EXIST = "Seleccione una columna disponible.";
     }
 }

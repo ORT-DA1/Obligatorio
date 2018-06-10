@@ -107,7 +107,7 @@ namespace Gui.Forms
         {
             if (user.CanABMGrids())
             {
-                ABMGridScreenAdd gridScreenAdd = new ABMGridScreenAdd();
+                CreateElement gridScreenAdd = new CreateElement();
                 ABMGridScreenModify gridScreenModify = new ABMGridScreenModify();
                 ABMGridScreenDelete gridScreenDelete = new ABMGridScreenDelete();
 

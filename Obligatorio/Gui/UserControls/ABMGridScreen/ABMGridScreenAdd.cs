@@ -8,12 +8,12 @@ using Gui.Forms;
 
 namespace Gui.UserControls.ABMGridScreen
 {
-    public partial class ABMGridScreenAdd : UserControl, IController
+    public partial class CreateElement : UserControl, IController
     {
         private ClientHandler clientHandler;
         private GridHandler gridHandler;
 
-        public ABMGridScreenAdd()
+        public CreateElement()
         {
             InitializeComponent();
             this.clientHandler = new ClientHandler();

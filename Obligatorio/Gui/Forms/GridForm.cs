@@ -15,7 +15,6 @@ namespace Gui.Forms
         private int option=0;
         private List<Point> pointArray;
         private Form parentForm;
-        private Grid selectedGrid;
 
         public GridForm()
         {
@@ -253,36 +252,51 @@ namespace Gui.Forms
         {
             if (comboBox1.SelectedIndex == 0)
             {
-                this.grid.GridStrategy = new CompleteLineGrid();
-                this.grid.GridStrategy.DrawGrid(this.graphic, grid.Height, grid.Width);
-                this.grid.DrawWalls(this.graphic);
-                this.grid.DrawDoors(this.graphic);
-                this.grid.DrawWindows(this.graphic);
-                this.grid.DrawWallBeams(this.graphic);
-                this.grid.DrawDecorativeColumns(this.graphic);
+                this.setCompleteLineGrid();
             }
             else if (comboBox1.SelectedIndex == 1)
             {
-                this.grid.GridStrategy = new WithoutVisualGrid();
-                this.grid.GridStrategy.DrawGrid(this.graphic, grid.Height, grid.Width);
-                this.grid.GridStrategy = new DottedLineGrid();
-                this.grid.GridStrategy.DrawGrid(this.graphic, grid.Height, grid.Width);
-                this.grid.DrawWalls(this.graphic);
-                this.grid.DrawDoors(this.graphic);
-                this.grid.DrawWindows(this.graphic);
-                this.grid.DrawWallBeams(this.graphic);
-                this.grid.DrawDecorativeColumns(this.graphic);
+                this.setDottedLineGrid();
             }
             else if (comboBox1.SelectedIndex == 2)
             { 
-                this.grid.GridStrategy = new WithoutVisualGrid();
-                this.grid.GridStrategy.DrawGrid(this.graphic, grid.Height, grid.Width);
-                this.grid.DrawWalls(this.graphic);
-                this.grid.DrawDoors(this.graphic);
-                this.grid.DrawWindows(this.graphic);
-                this.grid.DrawWallBeams(this.graphic);
-                this.grid.DrawDecorativeColumns(this.graphic);
+                this.setWithoutVisualGrid();
             }
+        }
+
+        private void setWithoutVisualGrid()
+        {
+            this.grid.GridStrategy = new WithoutVisualGrid();
+            this.grid.GridStrategy.DrawGrid(this.graphic, grid.Height, grid.Width);
+            this.grid.DrawWalls(this.graphic);
+            this.grid.DrawDoors(this.graphic);
+            this.grid.DrawWindows(this.graphic);
+            this.grid.DrawWallBeams(this.graphic);
+            this.grid.DrawDecorativeColumns(this.graphic);
+        }
+
+        private void setDottedLineGrid()
+        {
+            this.grid.GridStrategy = new WithoutVisualGrid();
+            this.grid.GridStrategy.DrawGrid(this.graphic, grid.Height, grid.Width);
+            this.grid.GridStrategy = new DottedLineGrid();
+            this.grid.GridStrategy.DrawGrid(this.graphic, grid.Height, grid.Width);
+            this.grid.DrawWalls(this.graphic);
+            this.grid.DrawDoors(this.graphic);
+            this.grid.DrawWindows(this.graphic);
+            this.grid.DrawWallBeams(this.graphic);
+            this.grid.DrawDecorativeColumns(this.graphic);
+        }
+
+        private void setCompleteLineGrid()
+        {
+            this.grid.GridStrategy = new CompleteLineGrid();
+            this.grid.GridStrategy.DrawGrid(this.graphic, grid.Height, grid.Width);
+            this.grid.DrawWalls(this.graphic);
+            this.grid.DrawDoors(this.graphic);
+            this.grid.DrawWindows(this.graphic);
+            this.grid.DrawWallBeams(this.graphic);
+            this.grid.DrawDecorativeColumns(this.graphic);
         }
     }
 }

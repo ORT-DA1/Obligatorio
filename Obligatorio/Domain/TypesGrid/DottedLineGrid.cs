@@ -11,7 +11,6 @@ namespace Domain.TypesGrid
     public class DottedLineGrid : GridStrategy
     {
         private Pen gridPen;
-        // Create a custom dash pattern.
         
         public override void DrawGrid(Graphics graphic, int height, int width)
         {

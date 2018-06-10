@@ -134,6 +134,12 @@
     <Compile Include="UserControls\Configuration\ConfigurationPrice.Designer.cs">
       <DependentUpon>ConfigurationPrice.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\CreateOpeningScreen\CreateElement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\CreateOpeningScreen\CreateElement.Designer.cs">
+      <DependentUpon>CreateElement.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\MyAccount\MyAccountOwnedGrids.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -196,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Configuration\ConfigurationPrice.resx">
       <DependentUpon>ConfigurationPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\CreateOpeningScreen\CreateElement.resx">
+      <DependentUpon>CreateElement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\MyAccount\MyAccountOwnedGrids.resx">
       <DependentUpon>MyAccountOwnedGrids.cs</DependentUpon>

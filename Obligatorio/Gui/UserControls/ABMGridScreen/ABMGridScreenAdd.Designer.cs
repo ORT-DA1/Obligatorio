@@ -1,6 +1,6 @@
 ﻿namespace Gui.UserControls.ABMGridScreen
 {
-    partial class ABMGridScreenAdd
+    partial class CreateElement
     {
         /// <summary> 
         /// Variable del diseñador necesaria.

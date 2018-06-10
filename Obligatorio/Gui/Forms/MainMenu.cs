@@ -15,7 +15,8 @@ namespace Gui.Forms
     public partial class MainMenu : Form
     {
         private User user;
-        
+
+        private MenuNode architectABMNode;
         private MenuNode clientABMNode;
         private MenuNode designerABMNode;
         private MenuNode gridABMNode;
@@ -35,6 +36,7 @@ namespace Gui.Forms
         private void SetUpEnvironment()
         {
             GenerateMenuNodes();
+            ArchitectABMControls();
             ClientABMControls();
             DesignerABMControls();
             GridABMControls();
@@ -42,6 +44,8 @@ namespace Gui.Forms
             PersonalInformation();
             OwnedGrids();
         }
+
+
         private void CreateMenu()
         {
             MenuStrip leftMenu = this.leftMenuStrip;
@@ -72,6 +76,13 @@ namespace Gui.Forms
             this.gridABMNode = new MenuNode("Planos");
             this.configurationNode = new MenuNode("Configuracion");
             this.myAccountNode = new MenuNode("Mi Cuenta");
+        }
+        private void ArchitectABMControls()
+        {
+            if (user.CanABMArchitects())
+            {
+                //Implement Controllers
+            }
         }
         private void ClientABMControls()
         {

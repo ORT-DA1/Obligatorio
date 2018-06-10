@@ -37,6 +37,10 @@ namespace Domain.Entities
         {
             return false;
         }
+        public override bool CanABMArchitects()
+        {
+            return false;
+        }
         public override bool CanSeeOwnedGrids()
         {
             return false;

@@ -132,7 +132,7 @@ namespace Domain.Entities
             if (doorObject != null && this.GetType().Equals(doorObject.GetType()))
             {
                 Door door = (Door)doorObject;
-                if ((this.StartPoint.Equals(door.StartPoint)))
+                if ((this.StartPoint.Equals(door.StartPoint)) && this.name.Equals(door.name))
                 {
                     isEqual = true;
                 }

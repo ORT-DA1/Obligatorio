@@ -61,7 +61,7 @@ namespace Domain.Entities
             if (windowObject != null && this.GetType().Equals(windowObject.GetType()))
             {
                 Window window = (Window)windowObject;
-                if ((this.StartPoint.Equals(window.StartPoint)))
+                if ((this.StartPoint.Equals(window.StartPoint)) && this.name.Equals(window.name))
                 {
                     isEqual = true;
                 }

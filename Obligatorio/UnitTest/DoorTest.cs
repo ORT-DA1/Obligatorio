@@ -11,14 +11,16 @@ namespace UnitTest
         private readonly float WIDTH;
         private readonly Point START_POINT;
         private readonly Point END_POINT;
-        private readonly string sense;
+        private readonly string NAME;
+        private readonly string SENSE;
         private readonly int direction;
 
         public DoorTest()
         {
             this.START_POINT = new Point(25,25);
             this.END_POINT = new Point(25, 25);
-            this.sense = "vertical";
+            this.SENSE = "vertical";
+            this.NAME = "defecto";
             this.direction = 0;
             this.WIDTH = 0.85f;
             this.HIGH = 2.20f;
@@ -34,9 +36,9 @@ namespace UnitTest
         [TestMethod]
         public void TestCreateDoorWithAllParametersIncludingWidthAndHigh()
         {
-            Door door = new Door(START_POINT, END_POINT, sense, WIDTH, HIGH);
-            Assert.IsTrue(door.StartPoint.X == START_POINT.X && door.StartPoint.Y == START_POINT.Y && door.sense.Equals(sense)
-                 && door.width == WIDTH && door.high == HIGH);
+            Door door = new Door(START_POINT, END_POINT, SENSE, WIDTH, HIGH, NAME);
+            Assert.IsTrue(door.StartPoint.X == START_POINT.X && door.StartPoint.Y == START_POINT.Y && door.sense.Equals(SENSE)
+                 && door.width == WIDTH && door.high == HIGH && door.name.Equals(NAME));
         }
     }
 }

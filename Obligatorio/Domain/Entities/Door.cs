@@ -9,8 +9,12 @@ namespace Domain.Entities
         public Point EndPoint;
         public int direction;
         public string sense;
-        public float width;
-        public float high;
+        public float width = 0.85f;
+        public float high = 2.20f;
+        public static float MINIMUM_WIDTH = 0.85f;
+        public static int MINIMUM_WIDTH_IN_PIXELS = 15;
+        public static float MAXIMUM_WIDTH = 3.00f;
+        public static float MAXIMUM_HIGH = 2.00f;
 
         public static Tuple<int, int> CostPriceDoor = new Tuple<int, int>(50,100);
 
@@ -48,7 +52,10 @@ namespace Domain.Entities
             SolidBrush blueBrush = new SolidBrush(Color.Blue);
             float angle = this.startAngle(StartPoint, EndPoint);
             Point fixedPoint = fixDoorPoint(StartPoint);
-            graphic.FillPie(blueBrush, fixedPoint.X, fixedPoint.Y, 15, 15, angle, 90f);
+            graphic.FillPie(blueBrush, fixedPoint.X, fixedPoint.Y,
+                width * MINIMUM_WIDTH_IN_PIXELS / MINIMUM_WIDTH, 
+                width * MINIMUM_WIDTH_IN_PIXELS / MINIMUM_WIDTH, 
+                angle, 90f);
         }
 
         private Point fixDoorPoint(Point startPoint)
@@ -56,37 +63,37 @@ namespace Domain.Entities
             if (sense.Equals("vertical")) {
                 if (this.direction.Equals(1))
                 {
-                    return (new Point(startPoint.X - 16, startPoint.Y - 22));
+                    return (new Point(startPoint.X - (MINIMUM_WIDTH_IN_PIXELS * 16 / 30), startPoint.Y - (MINIMUM_WIDTH_IN_PIXELS * 22 / 30)));
                 }
                 else if (this.direction.Equals(2))
                 {
-                    return (new Point(startPoint.X - 16, startPoint.Y - 8));
+                    return (new Point(startPoint.X - (MINIMUM_WIDTH_IN_PIXELS * 16 / 30), startPoint.Y - (MINIMUM_WIDTH_IN_PIXELS * 8 / 30)));
                 }
                 else if (this.direction.Equals(3))
                 {
-                    return (new Point(startPoint.X - 12, startPoint.Y - 8));
+                    return (new Point(startPoint.X - (MINIMUM_WIDTH_IN_PIXELS * 12 / 30), startPoint.Y - (MINIMUM_WIDTH_IN_PIXELS * 8 / 30)));
                 }
                 else
                 {
-                    return (new Point(startPoint.X - 12, startPoint.Y - 22));
+                    return (new Point(startPoint.X - (MINIMUM_WIDTH_IN_PIXELS * 12 / 30), startPoint.Y - (MINIMUM_WIDTH_IN_PIXELS * 22 / 30)));
                 }
             }else
             {
                 if (this.direction.Equals(1))
                 {
-                    return (new Point(startPoint.X - 20, startPoint.Y - 16));
+                    return (new Point(startPoint.X - (MINIMUM_WIDTH_IN_PIXELS * 20 / 30), startPoint.Y - (MINIMUM_WIDTH_IN_PIXELS * 16 / 30)));
                 }
                 else if (this.direction.Equals(2))
                 {
-                    return (new Point(startPoint.X - 20, startPoint.Y - 12));
+                    return (new Point(startPoint.X - (MINIMUM_WIDTH_IN_PIXELS * 20 / 30), startPoint.Y - (MINIMUM_WIDTH_IN_PIXELS * 12 / 30)));
                 }
                 else if (this.direction.Equals(3))
                 {
-                    return (new Point(startPoint.X - 8, startPoint.Y - 12));
+                    return (new Point(startPoint.X - (MINIMUM_WIDTH_IN_PIXELS * 8 / 30), startPoint.Y - (MINIMUM_WIDTH_IN_PIXELS * 12 / 30)));
                 }
                 else
                 {
-                    return (new Point(startPoint.X - 8, startPoint.Y - 16));
+                    return (new Point(startPoint.X - (MINIMUM_WIDTH_IN_PIXELS * 8 / 30), startPoint.Y - (MINIMUM_WIDTH_IN_PIXELS * 16 / 30)));
                 }
             }
         }

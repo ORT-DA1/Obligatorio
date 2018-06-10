@@ -42,6 +42,8 @@
             this.costLbl = new System.Windows.Forms.Label();
             this.moneyLbl = new System.Windows.Forms.Label();
             this.back_btn = new System.Windows.Forms.Button();
+            this.addDecorativeColumnBtn = new System.Windows.Forms.Button();
+            this.deleteDecorativeColumnBtn = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -183,7 +185,7 @@
             // back_btn
             // 
             this.back_btn.Location = new System.Drawing.Point(9, 393);
-            this.back_btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.back_btn.Margin = new System.Windows.Forms.Padding(4);
             this.back_btn.Name = "back_btn";
             this.back_btn.Size = new System.Drawing.Size(269, 34);
             this.back_btn.TabIndex = 10;
@@ -191,12 +193,32 @@
             this.back_btn.UseVisualStyleBackColor = true;
             this.back_btn.Click += new System.EventHandler(this.back_btn_Click);
             // 
+            // addDecorativeColumnBtn
+            // 
+            this.addDecorativeColumnBtn.Location = new System.Drawing.Point(9, 462);
+            this.addDecorativeColumnBtn.Name = "addDecorativeColumnBtn";
+            this.addDecorativeColumnBtn.Size = new System.Drawing.Size(269, 23);
+            this.addDecorativeColumnBtn.TabIndex = 11;
+            this.addDecorativeColumnBtn.Text = "Agregar Pared Decorativa";
+            this.addDecorativeColumnBtn.UseVisualStyleBackColor = true;
+            // 
+            // deleteDecorativeColumnBtn
+            // 
+            this.deleteDecorativeColumnBtn.Location = new System.Drawing.Point(8, 504);
+            this.deleteDecorativeColumnBtn.Name = "deleteDecorativeColumnBtn";
+            this.deleteDecorativeColumnBtn.Size = new System.Drawing.Size(270, 23);
+            this.deleteDecorativeColumnBtn.TabIndex = 12;
+            this.deleteDecorativeColumnBtn.Text = "Quitar Pared Decorativa";
+            this.deleteDecorativeColumnBtn.UseVisualStyleBackColor = true;
+            // 
             // GridForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(1028, 553);
+            this.Controls.Add(this.deleteDecorativeColumnBtn);
+            this.Controls.Add(this.addDecorativeColumnBtn);
             this.Controls.Add(this.back_btn);
             this.Controls.Add(this.moneyLbl);
             this.Controls.Add(this.costLbl);
@@ -229,5 +251,7 @@
         private System.Windows.Forms.Label costLbl;
         private System.Windows.Forms.Label moneyLbl;
         private System.Windows.Forms.Button back_btn;
+        private System.Windows.Forms.Button addDecorativeColumnBtn;
+        private System.Windows.Forms.Button deleteDecorativeColumnBtn;
     }
 }

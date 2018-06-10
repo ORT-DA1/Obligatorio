@@ -44,6 +44,7 @@
             this.back_btn = new System.Windows.Forms.Button();
             this.addDecorativeColumnBtn = new System.Windows.Forms.Button();
             this.deleteDecorativeColumnBtn = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -195,7 +196,7 @@
             // 
             // addDecorativeColumnBtn
             // 
-            this.addDecorativeColumnBtn.Location = new System.Drawing.Point(9, 462);
+            this.addDecorativeColumnBtn.Location = new System.Drawing.Point(8, 489);
             this.addDecorativeColumnBtn.Name = "addDecorativeColumnBtn";
             this.addDecorativeColumnBtn.Size = new System.Drawing.Size(269, 23);
             this.addDecorativeColumnBtn.TabIndex = 11;
@@ -204,12 +205,25 @@
             // 
             // deleteDecorativeColumnBtn
             // 
-            this.deleteDecorativeColumnBtn.Location = new System.Drawing.Point(8, 504);
+            this.deleteDecorativeColumnBtn.Location = new System.Drawing.Point(8, 518);
             this.deleteDecorativeColumnBtn.Name = "deleteDecorativeColumnBtn";
             this.deleteDecorativeColumnBtn.Size = new System.Drawing.Size(270, 23);
             this.deleteDecorativeColumnBtn.TabIndex = 12;
             this.deleteDecorativeColumnBtn.Text = "Quitar Pared Decorativa";
             this.deleteDecorativeColumnBtn.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Grilla de líneas completas",
+            "Grilla de líneas punteadas",
+            "Sin grilla visual"});
+            this.comboBox1.Location = new System.Drawing.Point(10, 459);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(269, 24);
+            this.comboBox1.TabIndex = 13;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // GridForm
             // 
@@ -217,6 +231,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(1028, 553);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.deleteDecorativeColumnBtn);
             this.Controls.Add(this.addDecorativeColumnBtn);
             this.Controls.Add(this.back_btn);
@@ -253,5 +268,6 @@
         private System.Windows.Forms.Button back_btn;
         private System.Windows.Forms.Button addDecorativeColumnBtn;
         private System.Windows.Forms.Button deleteDecorativeColumnBtn;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

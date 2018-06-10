@@ -4,6 +4,7 @@ using Domain.Entities;
 using System.Collections.Generic;
 using System;
 using Domain.Exceptions;
+using Domain.TypesGrid;
 
 namespace Gui.Forms
 {
@@ -67,11 +68,14 @@ namespace Gui.Forms
             this.back_btn.Visible = !canEditGrid;
             this.moneyLbl.Visible = !canEditGrid;
 
+            this.comboBox1.SelectedIndex = 0;
+
         }
 
         private void generateLines(object sender, PaintEventArgs e)
         {
-            this.grid.DrawGrid(this.graphic);
+            comboBox1_SelectedIndexChanged(sender, e);
+            this.grid.GridStrategy.DrawGrid(this.graphic, grid.Height, grid.Width);
             this.grid.DrawWalls(this.graphic);
             this.grid.DrawDoors(this.graphic);
             this.grid.DrawWindows(this.graphic);
@@ -244,6 +248,41 @@ namespace Gui.Forms
             this.Close();
             this.parentForm.Show();
         }
-        
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == 0)
+            {
+                this.grid.GridStrategy = new CompleteLineGrid();
+                this.grid.GridStrategy.DrawGrid(this.graphic, grid.Height, grid.Width);
+                this.grid.DrawWalls(this.graphic);
+                this.grid.DrawDoors(this.graphic);
+                this.grid.DrawWindows(this.graphic);
+                this.grid.DrawWallBeams(this.graphic);
+                this.grid.DrawDecorativeColumns(this.graphic);
+            }
+            else if (comboBox1.SelectedIndex == 1)
+            {
+                this.grid.GridStrategy = new WithoutVisualGrid();
+                this.grid.GridStrategy.DrawGrid(this.graphic, grid.Height, grid.Width);
+                this.grid.GridStrategy = new DottedLineGrid();
+                this.grid.GridStrategy.DrawGrid(this.graphic, grid.Height, grid.Width);
+                this.grid.DrawWalls(this.graphic);
+                this.grid.DrawDoors(this.graphic);
+                this.grid.DrawWindows(this.graphic);
+                this.grid.DrawWallBeams(this.graphic);
+                this.grid.DrawDecorativeColumns(this.graphic);
+            }
+            else if (comboBox1.SelectedIndex == 2)
+            { 
+                this.grid.GridStrategy = new WithoutVisualGrid();
+                this.grid.GridStrategy.DrawGrid(this.graphic, grid.Height, grid.Width);
+                this.grid.DrawWalls(this.graphic);
+                this.grid.DrawDoors(this.graphic);
+                this.grid.DrawWindows(this.graphic);
+                this.grid.DrawWallBeams(this.graphic);
+                this.grid.DrawDecorativeColumns(this.graphic);
+            }
+        }
     }
 }

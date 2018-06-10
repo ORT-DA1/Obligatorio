@@ -34,10 +34,10 @@ namespace Gui.UserControls.CreateOpeningScreen
         private void createElementBtn_MouseClick(object sender, MouseEventArgs e)
         {
             if (this.typeComboBox.SelectedIndex == 0) {
-                createTypeOfDoor(this.nameTextBox, this.widthTextBox, this.highTextBox);
+                //createTypeOfDoor(this.nameTextBox, this.widthTextBox, this.highTextBox);
             }else
             {
-                createTypeOfWindow(this.nameTextBox, this.widthTextBox, this.highTextBox, this.highFromGroundTextBox);
+                //createTypeOfWindow(this.nameTextBox, this.widthTextBox, this.highTextBox, this.highFromGroundTextBox);
             }
         }
     }

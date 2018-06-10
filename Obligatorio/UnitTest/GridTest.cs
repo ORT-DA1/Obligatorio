@@ -217,12 +217,13 @@ namespace UnitTest
         [TestMethod]
         public void TestRemoveDecorativeColumn()
         {
-            DecorativeColumn decorativeColumn = new DecorativeColumn(new Point(0, 25));
+            Point point = new Point(0, 25);
+            DecorativeColumn decorativeColumn = new DecorativeColumn(point);
             grid.DecorativeColumns.Add(decorativeColumn);
             DecorativeColumn anotherDecorativeColumn = new DecorativeColumn(new Point(0, 100));
             grid.DecorativeColumns.Add(decorativeColumn);
             grid.DecorativeColumns.Add(anotherDecorativeColumn);
-            grid.RemoveDecorativeColumn(decorativeColumn);
+            grid.RemoveDecorativeColumn(point);
             Assert.IsFalse(grid.DecorativeColumns.Contains(decorativeColumn));
         }
 

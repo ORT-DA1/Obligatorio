@@ -8,6 +8,7 @@ namespace Domain.Entities
 {
     public class Grid
     {
+        public GridStrategy GridStrategy { get; set; }
         public string GridName { get; set; }
         public Client Client { get; set; }
         public int Height { get; set; }
@@ -19,7 +20,6 @@ namespace Domain.Entities
         public List<Door> Doors { get; set; }
         public static int PixelConvertor = 25;
         public int MaxMeters = 5;
-        private Pen gridPen;
        
         public Grid() { }
 
@@ -35,15 +35,13 @@ namespace Domain.Entities
             this.Client = client;
             this.Height = height * PixelConvertor;
             this.Width = width * PixelConvertor;
-
-            this.gridPen = new Pen(Color.Black, 2);
         }
 
-        public void DrawGrid(Graphics graphic)
+        /*public void DrawGrid(Graphics graphic)
         {
             this.DrawX(graphic);
             this.DrawY(graphic);
-        }
+        }*/
 
         public void DrawWalls(Graphics graphic)
         {
@@ -85,7 +83,7 @@ namespace Domain.Entities
             }
         }
 
-        private void DrawX(Graphics graphic)
+        /*private void DrawX(Graphics graphic)
         {
             for (int i = PixelConvertor; i < this.Height; i += PixelConvertor)
             {
@@ -103,7 +101,7 @@ namespace Domain.Entities
                 Point endPoint = new Point(i, this.Height);
                 graphic.DrawLine(gridPen, startPoint, endPoint);
             }
-        }
+        }*/
 
         public void AddWall(Graphics graphic, Wall wall)
         {

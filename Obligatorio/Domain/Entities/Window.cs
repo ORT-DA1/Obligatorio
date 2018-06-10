@@ -8,6 +8,12 @@ namespace Domain.Entities
         public Point StartPoint;
         public Point EndPoint;
         public string sense;
+        public float width = 0.80f;
+        public float high = 1.00f;
+        public static float MINIMUM_WIDTH = 0.8f;
+        public static int MINIMUM_WIDTH_IN_PIXELS = 10;
+        public static float MAXIMUM_WIDTH = 3.00f;
+        public static float MAXIMUM_HIGH = 1.20f;
 
         public static Tuple<int, int> CostPriceWindow = new Tuple<int, int>(50, 75);
 
@@ -27,15 +33,25 @@ namespace Domain.Entities
             this.EndPoint = endPoint;
         }
 
+        public Window(Point startPoint, Point endPoint, string sense, float width, float high, string name)
+        {
+            this.width = width;
+            this.high = high;
+            this.name = name;
+            this.sense = sense;
+            this.StartPoint = startPoint;
+            this.EndPoint = endPoint;
+        }
+
         public override void Draw(Graphics graphic)
         {
             if (sense.Equals("vertical")) {
                 SolidBrush blueBrush = new SolidBrush(Color.Blue);
-                graphic.FillRectangle(blueBrush, StartPoint.X-4, StartPoint.Y-10, 8, 20);
+                graphic.FillRectangle(blueBrush, StartPoint.X- (MINIMUM_WIDTH_IN_PIXELS* 4/20), StartPoint.Y- (MINIMUM_WIDTH_IN_PIXELS * 10 / 20), 6, MINIMUM_WIDTH_IN_PIXELS/width);
             }
             else{
                 SolidBrush blueBrush = new SolidBrush(Color.Blue);
-                graphic.FillRectangle(blueBrush, StartPoint.X-10, StartPoint.Y-4, 20, 8);
+                graphic.FillRectangle(blueBrush, StartPoint.X- (MINIMUM_WIDTH_IN_PIXELS * 10 / 20), StartPoint.Y- (MINIMUM_WIDTH_IN_PIXELS * 4 / 20), MINIMUM_WIDTH_IN_PIXELS/width, 6);
             }
         }
 
@@ -45,7 +61,7 @@ namespace Domain.Entities
             if (windowObject != null && this.GetType().Equals(windowObject.GetType()))
             {
                 Window window = (Window)windowObject;
-                if ((this.StartPoint.Equals(window.StartPoint)))
+                if ((this.StartPoint.Equals(window.StartPoint)) && this.name.Equals(window.name))
                 {
                     isEqual = true;
                 }

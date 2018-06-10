@@ -14,6 +14,7 @@ namespace Domain.Entities
         public int Width { get; set; }
         public List<Wall> Walls { get; set; }
         public List<WallBeam> WallBeams { get; set; }
+        public List<DecorativeColumn> DecorativeColumns { get; set; }
         public List<Window> Windows { get; set; }
         public List<Door> Doors { get; set; }
         public static int PixelConvertor = 25;
@@ -26,6 +27,7 @@ namespace Domain.Entities
         {
             this.Walls = new List<Wall>();
             this.WallBeams = new List<WallBeam>();
+            this.DecorativeColumns = new List<DecorativeColumn>();
             this.Windows = new List<Window>();
             this.Doors = new List<Door>();
 
@@ -264,10 +266,23 @@ namespace Domain.Entities
 
         public void IsValid(Wall wall)
         {
+            this.NoDecorativeColumnInterrupting(wall);
             this.StartPointAndEndPointAreDifferent(wall);
             this.HorizontalOrVertical(wall);
             this.AlreadyExistWall(wall);
             this.ContainedIn(wall);
+        }
+
+        private void NoDecorativeColumnInterrupting(Wall wall)
+        {
+            foreach (Point point in wall.Path)
+            {
+                foreach (DecorativeColumn decorativeColumn in this.DecorativeColumns)
+                {
+                    if(decorativeColumn.UbicationPoint.X.Equals(point.X) && decorativeColumn.UbicationPoint.Y.Equals(point.Y))
+                        throw new ExceptionController(ExceptionMessage.WALL_INVALID);
+                }
+            }
         }
 
         private void StartPointAndEndPointAreDifferent(Wall wall)
@@ -346,6 +361,31 @@ namespace Domain.Entities
                 this.WallBeams.Add(wallBeam);
                 wallBeam.Draw(graphic);
             }
+        }
+
+        public void AddDecorativeColumn(Graphics graphic, Point ubicationPoint)
+        {
+            if (FreePosition(ubicationPoint))
+            {
+                if (noWallInPosition(ubicationPoint)) { 
+                    DecorativeColumn decorativeColumn = new DecorativeColumn(ubicationPoint);
+                    this.DecorativeColumns.Add(decorativeColumn);
+                    decorativeColumn.Draw(graphic);
+                }
+            }
+        }
+
+        private bool noWallInPosition(Point ubicationPoint)
+        {
+            foreach (Wall wall in this.Walls)
+            {
+                foreach (Point point in wall.Path)
+                {
+                    if (point.Equals(ubicationPoint))
+                        return false;
+                }
+            }
+            return true;
         }
 
         public bool FreePosition(Point ubicationPoint)
@@ -427,6 +467,11 @@ namespace Domain.Entities
                 this.Windows.Add(new Window(startPoint, endPoint, sense));
                 window.Draw(graphic);
             }
+        }
+
+        public void RemoveDecorativeColumn(DecorativeColumn decorativeColumn)
+        {
+            this.DecorativeColumns.Remove(decorativeColumn);
         }
 
         public void RemoveWindow(Window window)

@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AdministratorTest.cs" />
     <Compile Include="ClientTest.cs" />
+    <Compile Include="DecorativeColumnTest.cs" />
     <Compile Include="DesignerTest.cs" />
     <Compile Include="DoorTest.cs" />
     <Compile Include="GridTest.cs" />

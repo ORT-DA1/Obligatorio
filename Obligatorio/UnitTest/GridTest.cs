@@ -215,6 +215,18 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void TestRemoveDecorativeColumn()
+        {
+            DecorativeColumn decorativeColumn = new DecorativeColumn(new Point(0, 25));
+            grid.DecorativeColumns.Add(decorativeColumn);
+            DecorativeColumn anotherDecorativeColumn = new DecorativeColumn(new Point(0, 100));
+            grid.DecorativeColumns.Add(decorativeColumn);
+            grid.DecorativeColumns.Add(anotherDecorativeColumn);
+            grid.RemoveDecorativeColumn(decorativeColumn);
+            Assert.IsFalse(grid.DecorativeColumns.Contains(decorativeColumn));
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ExceptionController))]
         public void TestOnTheWall()
         {

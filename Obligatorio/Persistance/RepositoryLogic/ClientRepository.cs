@@ -20,8 +20,14 @@ namespace Persistance.RepositoryLogic
             context.Clients.Add(client);
         }
 
+        public void ModifyClient(Client clientToModify, Client modifiedClient)
+        {
+            //TODO
+        }
+
         public Client GetClient(Client client)
         {
+            //Funciona con client.Id?
             return context.Clients.Find(client.Id);
         }
     }

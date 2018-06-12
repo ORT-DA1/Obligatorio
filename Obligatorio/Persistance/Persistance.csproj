@@ -50,9 +50,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextDB.cs" />
+    <Compile Include="Interface\IArchitectRepository.cs" />
     <Compile Include="Interface\IClientRepository.cs" />
+    <Compile Include="Interface\IDesignerRepository.cs" />
+    <Compile Include="Interface\IGridRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryLogic\ArchitectRepository.cs" />
     <Compile Include="RepositoryLogic\ClientRepository.cs" />
+    <Compile Include="RepositoryLogic\DesignerRepository.cs" />
+    <Compile Include="RepositoryLogic\GridRepository.cs" />
     <Compile Include="RepositoryLogic\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

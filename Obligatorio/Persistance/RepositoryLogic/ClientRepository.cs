@@ -23,7 +23,7 @@ namespace Persistance.RepositoryLogic
         }
         public void DeleteClient(Client client)
         {
-            //Hay que hacer algo mas? Como puedo hacer borrado logico?
+            //Me conviene hacer borrado logico?
             _context.Clients.Remove(client);
         }
 

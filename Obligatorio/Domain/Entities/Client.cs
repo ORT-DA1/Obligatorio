@@ -4,6 +4,7 @@ namespace Domain.Entities
 {
     public class Client : User
     {
+        //public int ClientId { get; set; }
         public string Id { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }

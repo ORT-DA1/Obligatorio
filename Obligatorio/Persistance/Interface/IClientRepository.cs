@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Domain.Entities;
 
 namespace Persistance.Interface
 {
-    interface IClientRepository
+    public interface IClientRepository
     {
         Client GetClient(Client client);
         void AddClient(Client client);
         void ModifyClient(Client clientToModify, Client ModifiedClient);
         void DeleteClient(Client client);
-        List<Client> GetClients();
+        List<Client> GetAllClients();
     }
 }

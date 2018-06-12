@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistance.RepositoryLogic
 {
@@ -11,7 +7,7 @@ namespace Persistance.RepositoryLogic
         private ClientRepository clientRepository;
         private DesignerRepository designerRepository;
         private UnitOfWork unit;
-        private ContextDB context;
+        private ContextDB _context;
         private bool disposed;
 
 
@@ -27,7 +23,7 @@ namespace Persistance.RepositoryLogic
 
         private UnitOfWork()
         {
-            context = new ContextDB();
+            _context = new ContextDB();
         }
 
         public ClientRepository ClientRepository
@@ -36,9 +32,23 @@ namespace Persistance.RepositoryLogic
             {
                 if (clientRepository == null)
                 {
-                    clientRepository = new ClientRepository(context);
+                    clientRepository = new ClientRepository(_context);
                 }
+
                 return clientRepository;
+            }
+        }
+
+        public DesignerRepository DesignerRepository
+        {
+            get
+            {
+                if (designerRepository == null)
+                {
+                    designerRepository = new DesignerRepository(_context);
+                }
+
+                return designerRepository;
             }
         }
 
@@ -55,7 +65,7 @@ namespace Persistance.RepositoryLogic
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    _context.Dispose();
                 }
             }
             this.disposed = true;

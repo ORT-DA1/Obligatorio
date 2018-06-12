@@ -9,6 +9,7 @@ namespace Persistance.RepositoryLogic
     public class UnitOfWork: IDisposable
     {
         private ClientRepository clientRepository;
+        private DesignerRepository designerRepository;
         private UnitOfWork unit;
         private ContextDB context;
         private bool disposed;
@@ -40,6 +41,7 @@ namespace Persistance.RepositoryLogic
                 return clientRepository;
             }
         }
+
 
         public void Dispose()
         {

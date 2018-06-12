@@ -14,6 +14,7 @@ namespace Persistance
         public DbSet<Architect> Architects { get; set; }
 
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Grid> Grids { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

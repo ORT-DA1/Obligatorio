@@ -5,10 +5,11 @@ namespace Persistance.Interface
 {
     public interface IDesignerRepository
     {
-        Designer GetDesigner(Designer designer);
+      
         void AddDesigner(Designer designer);
         void ModifyDesigner(Designer designerToModify, Designer ModifiedDesigner);
         void DeleteDesigner(Designer designer);
+        Designer GetDesigner(Designer designer);
         List<Designer> GetAllDesigners();
     }
 }

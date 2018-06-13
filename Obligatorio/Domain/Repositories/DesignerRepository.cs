@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Domain.Entities;
-using Persistance.Interface;
+using Domain.Interface;
 
-namespace Persistance.RepositoryLogic
+namespace Domain.Repositories
 {
     public class DesignerRepository: IDesignerRepository
     {

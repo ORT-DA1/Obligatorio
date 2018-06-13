@@ -1,17 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Persistance.Interface;
+using Domain.Interface;
 using Domain.Entities;
+using Domain.Data;
 
-namespace Persistance.RepositoryLogic
+namespace Domain.Repositories
 {
     public class ClientRepository: IClientRepository
     {
-        private ContextDB _context;
-        public ClientRepository(ContextDB context)
-        {
-            this._context = context;
-        }
         public void AddClient(Client client)
         {
             _context.Clients.Add(client);
@@ -29,8 +25,8 @@ namespace Persistance.RepositoryLogic
 
         public Client GetClient(Client client)
         {
-            //Funciona con client.Id?
-            return _context.Clients.Find(client.Id);
+            NotExist(client);
+            return _context.Clients.First(client => client.Equals(clientToFind));
         }
         public List<Client> GetAllClients()
         {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities;
 
-namespace Persistance.Interface
+namespace Domain.Interface
 {
     public interface IGridRepository
     {

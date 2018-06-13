@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Domain.Entities;
 
-namespace Persistance.Interface
+namespace Domain.Interface
 {
     public interface IDesignerRepository
     {

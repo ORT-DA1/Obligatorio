@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using Domain.Entities;
+using Domain.Interface;
 
-namespace Persistance.RepositoryLogic
+namespace Domain.Repositories
 {
-    public class ArchitectRepository
+    public class ArchitectRepository: IArchitectRepository
     {
-        private ContextDB _context;
         public ArchitectRepository(ContextDB context)
         {
             this._context = context;

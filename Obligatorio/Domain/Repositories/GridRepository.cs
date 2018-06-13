@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Persistance.Interface;
 using Domain.Entities;
+using Domain.Interface;
 
-namespace Persistance.RepositoryLogic
+namespace Domain.Repositories
 {
     public class GridRepository: IGridRepository
     {

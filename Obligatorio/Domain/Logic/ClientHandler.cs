@@ -4,27 +4,28 @@ using Domain.Entities;
 using Domain.Data;
 using Domain.Interface;
 using Domain.Exceptions;
+using Domain.Repositories;
 
 namespace Domain.Logic
 {
     public class ClientHandler : IUserHandler<Client>
     {
-        private DataStorage storage;
+        private IClientRepository clientRepository;
         public ClientHandler()
         {
-            this.storage = DataStorage.GetStorageInstance();
+            this.clientRepository = new ClientRepository();
         }
 
         public Client Get(Client client)
         {
             NotExist(client);
-            return this.storage.GetClient(client);
+            return this.clientRepository.GetClient(client);
         }
         public void Add(Client client)
         {
             Validate(client);
             Exist(client);
-            this.storage.SaveClient(client);
+            this.clientRepository.AddClient(client);
         }
         public void Validate(Client client)
         {
@@ -38,7 +39,7 @@ namespace Domain.Logic
         public void Delete(Client client)
         {
             NotExist(client);
-            this.storage.DeleteClient(client);
+            this.clientRepository.DeleteClient(client);
         }
         public void Modify(Client clientToModify, Client modifiedClient)
         {
@@ -48,26 +49,26 @@ namespace Domain.Logic
             {
                 Exist(modifiedClient);
             }
-            this.storage.ModifyClient(clientToModify, modifiedClient);
+            this.clientRepository.ModifyClient(clientToModify, modifiedClient);
         }
 
         public void Exist(Client client)
         {
-            if (this.storage.Clients.Contains(client))
+            if (this.clientRepository.Exist(client))
             {
                 throw new ExceptionController(ExceptionMessage.USER_ALREADY_EXSIST);
             }
         }
         public void NotExist(Client client)
         {
-            if (!this.storage.Clients.Contains(client))
+            if (!this.clientRepository.NotExist(client))
             {
                 throw new ExceptionController(ExceptionMessage.USER_NOT_EXIST);
             }
         }
         public List<Client> GetList()
         {
-            List<Client> clientList = storage.Clients;
+            List<Client> clientList = clientRepository.GetAllClients();
             IsNotEmpty(clientList);
             return clientList;
         }

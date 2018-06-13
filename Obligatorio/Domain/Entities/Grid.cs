@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
+    [Table(name: "Grids")]
     public class Grid
     {
+        public int GridId { get; set; }
         public GridStrategy GridStrategy { get; set; }
         public string GridName { get; set; }
         public Client Client { get; set; }

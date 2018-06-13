@@ -1,18 +1,21 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
+    [Table(name: "Administrators")]
     public class Administrator : User
     {
+        public int AdministratorId { get; set; }
         public Administrator() { }
-        public Administrator(string username, string password, string name, string surname, DateTime registrationDate, DateTime lastAccess)
+        public Administrator(string username, string password, string name, string surname, DateTime registrationDate, Nullable<DateTime> lastAccess)
         {
             this.Username = username;
             this.Password = password;
             this.Name = name;
             this.Surname = surname;
             this.RegistrationDate = registrationDate;
-            this.LastAccess = lastAccess;
+            this.LastAccess = registrationDate;
         }
 
         public override bool CanSeeOwnedGrids()

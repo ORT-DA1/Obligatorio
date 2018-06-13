@@ -1,10 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 
 namespace Domain.Entities
 {
+    [Table(name: "Windows")]
     public class Window : Element
     {
+        public int WindowId { get; set; }
         public Point StartPoint;
         public Point EndPoint;
         public string sense;

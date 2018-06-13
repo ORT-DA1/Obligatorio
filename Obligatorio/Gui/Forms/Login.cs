@@ -87,8 +87,8 @@ namespace Gui.Forms
             DesignerHandler designerHandler = new DesignerHandler();
 
             DateTime validDate = new DateTime(2018, 05, 28, 10, 53, 55);
-            Designer firstDesigner = new Designer("designer", "designer", "Donald", "Trump", validDate, null);
-            Designer secondDesigner = new Designer("testDesigner", "qwe123", "Slash", "Jackson", validDate, null);
+            Designer firstDesigner = new Designer("designer", "designer", "Donald", "Trump", validDate, validDate);
+            Designer secondDesigner = new Designer("testDesigner", "qwe123", "Slash", "Jackson", validDate, validDate);
             designerHandler.Add(firstDesigner);
             designerHandler.Add(secondDesigner);
         }
@@ -97,8 +97,8 @@ namespace Gui.Forms
             ClientHandler clientHandler = new ClientHandler();
 
             DateTime validDate = new DateTime(2018, 05, 28, 10, 53, 55);
-            Client firstClient = new Client("client", "client", "Oracle", "Netsuite", "12345678", "234234234", "16 de Abril 1912", validDate, null);
-            Client secondClient = new Client("cliente", "cliente", "League", "ofLegends", "54683928", "236234234", "16 de Abril 1912", validDate, null);
+            Client firstClient = new Client("client", "client", "Oracle", "Netsuite", "12345678", "234234234", "16 de Abril 1912", validDate, validDate);
+            Client secondClient = new Client("cliente", "cliente", "League", "ofLegends", "54683928", "236234234", "16 de Abril 1912", validDate, validDate);
             clientHandler.Add(firstClient);
             clientHandler.Add(secondClient);
         }

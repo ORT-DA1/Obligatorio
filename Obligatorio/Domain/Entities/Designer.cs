@@ -1,9 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
+    [Table(name: "Designers")]
     public class Designer : User
     {
+        public int DesignerId { get; set; }
         public Designer(){ }
 
         public Designer(string username, string password, string name, string surname, DateTime registrationDate, Nullable<DateTime> lastAccess)
@@ -13,7 +16,7 @@ namespace Domain.Entities
             this.Name = name;
             this.Surname = surname;
             this.RegistrationDate = registrationDate;
-            this.LastAccess = lastAccess;
+            this.LastAccess = registrationDate;
         }
 
         public override bool Equals(object designerObject)

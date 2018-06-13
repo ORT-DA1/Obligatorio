@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 
 namespace Domain.Entities
 {
+    [Table(name: "Walls")]
     public class Wall : Element
     {
+        public int WallId { get; set; }
         public Point startUbicationPoint { get; set; }
         public Point endUbicationPoint { get; set; }
         public List<Point> Path { get; set; }

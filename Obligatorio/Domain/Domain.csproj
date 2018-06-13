@@ -42,6 +42,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseContext.cs" />
+    <Compile Include="Data\ClientRepository.cs" />
     <Compile Include="Entities\Administrator.cs" />
     <Compile Include="Entities\Architect.cs" />
     <Compile Include="Entities\Client.cs" />
@@ -60,6 +64,11 @@
     <Compile Include="Entities\Door.cs" />
     <Compile Include="Entities\Element.cs" />
     <Compile Include="Entities\Grid.cs" />
+    <Compile Include="Migrations\201806131651287_First.cs" />
+    <Compile Include="Migrations\201806131651287_First.Designer.cs">
+      <DependentUpon>201806131651287_First.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="TypesGrid\DottedLineGrid.cs" />
     <Compile Include="TypesGrid\GridStrategy.cs" />
     <Compile Include="Entities\Signature.cs" />
@@ -78,10 +87,16 @@
     <Compile Include="TypesGrid\WithoutVisualGrid.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201806131651287_First.resx">
+      <DependentUpon>201806131651287_First.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

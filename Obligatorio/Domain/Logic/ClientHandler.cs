@@ -31,7 +31,7 @@ namespace Domain.Logic
             DataValidation.ValidateUsername(client.Username);
             DataValidation.ValidatePassword(client.Password);
             DataValidation.ValidateNameAndSurname(client.Name, client.Surname);
-            DataValidation.ValidateID(client.Id);
+            //DataValidation.ValidateID(client.Id);
             DataValidation.ValidatePhone(client.Phone);
             DataValidation.ValidateAddress(client.Address);
         }

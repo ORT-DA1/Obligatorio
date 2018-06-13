@@ -1,11 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
+    [Table(name: "Clients")]
     public class Client : User
     {
-        //public int ClientId { get; set; }
-        public string Id { get; set; }
+        public int ClientId { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
 
@@ -17,11 +18,11 @@ namespace Domain.Entities
             this.Password = password;
             this.Name = name;
             this.Surname = surname;
-            this.Id = id;
+            //this.Id = id;
             this.Phone = phone;
             this.Address = address;
             this.RegistrationDate = registrationDate;
-            this.LastAccess = lastAccess;
+            this.LastAccess = registrationDate;
         }
 
         public override bool Equals(object clientObject)
@@ -30,7 +31,7 @@ namespace Domain.Entities
             if (clientObject != null && this.GetType().Equals(clientObject.GetType()))
             {
                 Client client = (Client)clientObject;
-                if (this.Id.Equals(client.Id) || this.Username.Equals(client.Username))
+                if (/*this.Id.Equals(client.Id) ||*/ this.Username.Equals(client.Username))
                 {
                     isEqual = true;
                 }

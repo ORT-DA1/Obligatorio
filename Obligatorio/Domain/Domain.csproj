@@ -53,7 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseContext.cs" />
-    <Compile Include="Data\ClientRepository.cs" />
     <Compile Include="Entities\Administrator.cs" />
     <Compile Include="Entities\Architect.cs" />
     <Compile Include="Entities\Client.cs" />
@@ -64,11 +63,20 @@
     <Compile Include="Entities\Door.cs" />
     <Compile Include="Entities\Element.cs" />
     <Compile Include="Entities\Grid.cs" />
-    <Compile Include="Migrations\201806131651287_First.cs" />
-    <Compile Include="Migrations\201806131651287_First.Designer.cs">
-      <DependentUpon>201806131651287_First.cs</DependentUpon>
+    <Compile Include="Interface\IArchitectRepository.cs" />
+    <Compile Include="Interface\IClientRepository.cs" />
+    <Compile Include="Interface\IDesignerRepository.cs" />
+    <Compile Include="Interface\IGridRepository.cs" />
+    <Compile Include="Logic\ArchitectHandler.cs" />
+    <Compile Include="Migrations\201806131739195_InitialCreate.cs" />
+    <Compile Include="Migrations\201806131739195_InitialCreate.Designer.cs">
+      <DependentUpon>201806131739195_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Repositories\ArchitectRepository.cs" />
+    <Compile Include="Repositories\ClientRepository.cs" />
+    <Compile Include="Repositories\DesignerRepository.cs" />
+    <Compile Include="Repositories\GridRepository.cs" />
     <Compile Include="TypesGrid\DottedLineGrid.cs" />
     <Compile Include="TypesGrid\GridStrategy.cs" />
     <Compile Include="Entities\Signature.cs" />
@@ -93,8 +101,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201806131651287_First.resx">
-      <DependentUpon>201806131651287_First.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806131739195_InitialCreate.resx">
+      <DependentUpon>201806131739195_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

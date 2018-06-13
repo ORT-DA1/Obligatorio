@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Gui.Forms;
+using Domain.Repositories;
 
 namespace Gui
 {
@@ -16,6 +17,7 @@ namespace Gui
         [STAThread]
         static void Main()
         {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());

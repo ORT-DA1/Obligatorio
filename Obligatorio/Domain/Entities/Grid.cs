@@ -40,12 +40,6 @@ namespace Domain.Entities
             this.Width = width * PixelConvertor;
         }
 
-        /*public void DrawGrid(Graphics graphic)
-        {
-            this.DrawX(graphic);
-            this.DrawY(graphic);
-        }*/
-
         public void DrawWalls(Graphics graphic)
         {
             foreach (Wall wall in Walls)
@@ -85,26 +79,6 @@ namespace Domain.Entities
                 window.Draw(graphic);
             }
         }
-
-        /*private void DrawX(Graphics graphic)
-        {
-            for (int i = PixelConvertor; i < this.Height; i += PixelConvertor)
-            {
-                Point startPoint = new Point(0, i);
-                Point endPoint = new Point(this.Width, i);
-                graphic.DrawLine(gridPen, startPoint, endPoint);
-            }
-        }
-
-        private void DrawY(Graphics graphic)
-        {
-            for (int i = PixelConvertor; i < this.Width; i += PixelConvertor)
-            {
-                Point startPoint = new Point(i, 0);
-                Point endPoint = new Point(i, this.Height);
-                graphic.DrawLine(gridPen, startPoint, endPoint);
-            }
-        }*/
 
         public void AddWall(Graphics graphic, Wall wall)
         {

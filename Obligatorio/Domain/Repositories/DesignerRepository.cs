@@ -2,40 +2,52 @@
 using System.Linq;
 using Domain.Entities;
 using Domain.Interface;
+using System.Data.Entity;
 
 namespace Domain.Repositories
 {
-    public class DesignerRepository: IDesignerRepository
+    public class DesignerRepository : IDesignerRepository
     {
-        private ContextDB _context;
-
-        public DesignerRepository(ContextDB context)
-        {
-            this._context = context;
-        }
         public void AddDesigner(Designer designer)
         {
-            _context.Designers.Add(designer);
+            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            {
+                ctx.Designers.Add(designer);
+                ctx.SaveChanges();
+            }
+        }
+        public void ModifyDesigner(Designer designer)
+        {
+            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            {
+                ctx.Designers.Attach(designer);
+                ctx.Entry(designer).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
         }
 
-        public void ModifyDesigner(Designer designerToModify, Designer ModifiedDesigner)
-        {
-            //TODO
-        }
         public void DeleteDesigner(Designer designer)
         {
-            _context.Designers.Remove(designer);
+            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            {
+                ctx.Designers.Remove(designer);
+            }
         }
 
-        public Designer GetDesigner(Designer designer)
+        public Designer GetDesigner(Designer designerToFind)
         {
-            //Funciona con designer.Id?
-            return _context.Designers.Find(designer.id);
+            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            {
+                return ctx.Designers.First(designer => designer.Equals(designerToFind));
+            }
         }
+
         public List<Designer> GetAllDesigners()
         {
-            return _context.Designers.ToList();
+            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            {
+                return ctx.Designers.ToList();
+            }
         }
-
     }
 }

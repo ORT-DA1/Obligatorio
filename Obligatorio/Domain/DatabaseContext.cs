@@ -8,12 +8,10 @@ namespace Domain
 
     public partial class DatabaseContext : DbContext
     {
-        public DbSet<Administrator> Administrators { get; set; }
         public DbSet<Designer> Designers { get; set; }
         public DbSet<Architect> Architects { get; set; }
         public DbSet<Client> Clients { get; set; }
-        public DbSet<Grid> Grids { get; set; }
-        public DbSet<Signature> Signatures { get; set; }
+        //public DbSet<Grid> Grids { get; set; }
         public DatabaseContext()
             : base("name=DatabaseContext")
         {

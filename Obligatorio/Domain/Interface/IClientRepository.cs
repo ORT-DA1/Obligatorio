@@ -6,10 +6,8 @@ namespace Domain.Interface
     public interface IClientRepository
     {
         void AddClient(Client client);
-        void ModifyClient(Client clientToModify, Client ModifiedClient);
+        void ModifyClient(Client client);
         void DeleteClient(Client client);
-        void ClientExists(Client client);
-        void ClientNotExists(Client client);
         Client GetClient(Client client);
         List<Client> GetAllClients();
     }

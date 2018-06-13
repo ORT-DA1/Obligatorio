@@ -1,34 +1,50 @@
 ﻿using System.Collections.Generic;
 using Domain.Entities;
 using Domain.Interface;
+using System.Data.Entity;
+using System.Linq;
 
 namespace Domain.Repositories
 {
-    public class ArchitectRepository: IArchitectRepository
+    public class ArchitectRepository : IArchitectRepository
     {
-        public ArchitectRepository(ContextDB context)
-        {
-            this._context = context;
-        }
         public void AddArchitect(Architect architect)
         {
-            _context.Architects.Add(architect);
+            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            {
+                ctx.Architects.Add(architect);
+                ctx.SaveChanges();
+            }
         }
-        public void ModifyArchitect(Architect architectToModify, Designer ModifiedArchitect)
+        public void ModifyArchitect(Architect architect)
         {
-            //TODO
+            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            {
+                ctx.Architects.Attach(architect);
+                ctx.Entry(architect).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
         }
         public void DeleteArchitect(Architect architect)
         {
-            _context.Architects.Remove(architect);
+            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            {
+                ctx.Architects.Remove(architect);
+            }
         }
-        public Architect GetArchitect(Architect architect)
+        public Architect GetArchitect(Architect architectToFind)
         {
-            //TODO
+            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            {
+                return ctx.Architects.First(architect => architect.Equals(architectToFind));
+            }
         }
         public List<Architect> GetAllArchitects()
         {
-            //TODO
+            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            {
+                return ctx.Architects.ToList();
+            }
         }
     }
 }

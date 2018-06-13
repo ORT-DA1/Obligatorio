@@ -7,7 +7,7 @@ namespace Domain.Interface
     {
       
         void AddDesigner(Designer designer);
-        void ModifyDesigner(Designer designerToModify, Designer ModifiedDesigner);
+        void ModifyDesigner(Designer designer);
         void DeleteDesigner(Designer designer);
         Designer GetDesigner(Designer designer);
         List<Designer> GetAllDesigners();

@@ -10,6 +10,7 @@ namespace Domain.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "Domain.DatabaseContext";
         }
 
         protected override void Seed(Domain.DatabaseContext context)

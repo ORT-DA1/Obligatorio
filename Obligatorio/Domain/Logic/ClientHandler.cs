@@ -14,10 +14,16 @@ namespace Domain.Logic
         private IClientRepository clientRepository;
         public ClientHandler()
         {
-            //this.clientRepository = new ClientRepository();
+            this.clientRepository = new ClientRepository();
         }
 
-        public void Add(Client user)
+        public void Add(Client client)
+        {
+            Exist(client);
+            this.clientRepository.AddClient(client);
+        }
+
+        public void Modify(Client user, Client anotherUser)
         {
             throw new NotImplementedException();
         }
@@ -27,9 +33,12 @@ namespace Domain.Logic
             throw new NotImplementedException();
         }
 
-        public void Exist(Client user)
+        public void Exist(Client client)
         {
-            throw new NotImplementedException();
+            if (this.clientRepository.ClientExists(client))
+            {
+                throw new ExceptionController(ExceptionMessage.USER_ALREADY_EXSIST);
+            }
         }
 
         public Client Get(Client user)
@@ -42,10 +51,6 @@ namespace Domain.Logic
             throw new NotImplementedException();
         }
 
-        public void Modify(Client user, Client anotherUser)
-        {
-            throw new NotImplementedException();
-        }
 
         /*public Client Get(Client client)
         {
@@ -83,13 +88,6 @@ namespace Domain.Logic
             this.clientRepository.ModifyClient(clientToModify, modifiedClient);
         }*/
 
-        /*public void Exist(Client client)
-        {
-            if (this.clientRepository.Exist(client))
-            {
-                throw new ExceptionController(ExceptionMessage.USER_ALREADY_EXSIST);
-            }
-        }*/
         public void NotExist(Client client)
         {
             /*if (!this.clientRepository.NotExist(client))

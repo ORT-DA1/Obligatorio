@@ -11,44 +11,67 @@ namespace Domain.Repositories
     {
         public void AddClient(Client client)
         {
-            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            using (DatabaseContext _context = new Domain.DatabaseContext())
             {
-                ctx.Clients.Add(client);
-                ctx.SaveChanges();
+                _context.Clients.Add(client);
+                _context.SaveChanges();
             }
         }
 
         public void ModifyClient(Client client)
         {
-            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            using (DatabaseContext _context = new Domain.DatabaseContext())
             {
-                ctx.Clients.Attach(client);
-                ctx.Entry(client).State = EntityState.Modified;
-                ctx.SaveChanges();
+                _context.Clients.Attach(client);
+                _context.Entry(client).State = EntityState.Modified;
+                _context.SaveChanges();
             }
         }
 
         public void DeleteClient(Client client)
         {
-            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            using (DatabaseContext _context = new Domain.DatabaseContext())
             {
-                ctx.Clients.Remove(client);
+                _context.Clients.Attach(client);
+                _context.Clients.Remove(client);
             }
+        }
+        public bool ClientExists(Client client)
+        {
+            
         }
         
         public Client GetClient(Client clientToFind)
         {
-            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            using (DatabaseContext _context = new Domain.DatabaseContext())
             {
-                return ctx.Clients.First(client => client.Equals(clientToFind));
+                return _context.Clients.First(client => client.Equals(clientToFind));
             }
         }
 
         public List<Client> GetAllClients()
         {
-            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            using (DatabaseContext _context = new Domain.DatabaseContext())
             {
-                return ctx.Clients.ToList();
+                return _context.Clients.ToList();
+            }
+        }
+
+        public List<Client> GetAllClients2()
+        {
+            using (DatabaseContext _context = new Domain.DatabaseContext())
+            {
+                var query = from client in _context.Clients where client.Name == "Joahn" select client;
+
+                //En el select, le puedo poner select new {client.Name} y 
+                //me trae todos los clientes con ese nombre y solo el nombre no el obj entero.
+               // Client client = query.SingleOrDefault();
+                return query.ToList();
+                 
+                foreach (Client client2 in query)
+                {
+                    //Aca hago algo con cada client.
+                }
             }
         }
     }

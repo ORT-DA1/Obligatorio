@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace Domain.Entities
 {
-    //[Table(name: "Doors")]
+    [Table(name: "Doors")]
     public class Door : Element
     {
         public int DoorId { get; set; }

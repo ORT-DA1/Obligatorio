@@ -24,7 +24,13 @@ namespace Domain.Entities
         public static int PixelConvertor = 25;
         public int MaxMeters = 5;
        
-        public Grid() { }
+        public Grid() {
+            this.Walls = new List<Wall>();
+            this.WallBeams = new List<WallBeam>();
+            this.DecorativeColumns = new List<DecorativeColumn>();
+            this.Windows = new List<Window>();
+            this.Doors = new List<Door>();
+        }
 
         public Grid(string gridName, Client client, int height, int width)
         {

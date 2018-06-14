@@ -68,9 +68,9 @@
     <Compile Include="Interface\IDesignerRepository.cs" />
     <Compile Include="Interface\IGridRepository.cs" />
     <Compile Include="Logic\ArchitectHandler.cs" />
-    <Compile Include="Migrations\201806131739195_InitialCreate.cs" />
-    <Compile Include="Migrations\201806131739195_InitialCreate.Designer.cs">
-      <DependentUpon>201806131739195_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201806140112177_InitialCreate.cs" />
+    <Compile Include="Migrations\201806140112177_InitialCreate.Designer.cs">
+      <DependentUpon>201806140112177_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\ArchitectRepository.cs" />
@@ -101,8 +101,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201806131739195_InitialCreate.resx">
-      <DependentUpon>201806131739195_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806140112177_InitialCreate.resx">
+      <DependentUpon>201806140112177_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

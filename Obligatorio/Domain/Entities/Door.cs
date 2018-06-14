@@ -1,10 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 
 namespace Domain.Entities
 {
+    [Table(name: "Doors")]
     public class Door : Element
     {
+        public int DoorId { get; set; }
         public Point StartPoint;
         public Point EndPoint;
         public int direction;

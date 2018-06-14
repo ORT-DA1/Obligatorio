@@ -21,7 +21,7 @@ namespace Domain.Entities
             this.Name = name;
             this.Surname = surname;
             this.RegistrationDate = registrationDate;
-            this.LastAccess = lastAccess;
+            this.LastAccess = registrationDate;
         }
         public virtual bool CanABMClients()
         {

@@ -6,7 +6,7 @@ namespace Domain.Interface
     public interface IArchitectRepository
     {
         void AddArchitect(Architect architect);
-        void ModifyArchitect(Architect architectToModify, Designer ModifiedArchitect);
+        void ModifyArchitect(Architect architect);
         void DeleteArchitect(Architect architect);
         Architect GetArchitect(Architect architect);
         List<Architect> GetAllArchitects();

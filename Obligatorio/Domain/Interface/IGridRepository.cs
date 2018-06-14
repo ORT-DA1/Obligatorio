@@ -12,7 +12,7 @@ namespace Domain.Interface
         void AddGrid(Grid grid);
         void ModifyGrid(Grid gridToModify, Grid modifiedGrid);
         void DeleteGrid(Grid grid);
-        Grid GetGrid(Grid grid);
-        List<Grid> GetAllGrids();
+        //Grid GetGrid(Grid grid);
+        //List<Grid> GetAllGrids();
     }
 }

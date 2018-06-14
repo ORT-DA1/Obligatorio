@@ -85,7 +85,7 @@ namespace Domain.Data
             client.Password = modifiedClient.Password;
             client.Name = modifiedClient.Name;
             client.Surname = modifiedClient.Surname;
-            client.Id = modifiedClient.Id;
+            //client.Id = modifiedClient.Id;
             client.Phone = modifiedClient.Phone;
             client.Address = modifiedClient.Address;
 

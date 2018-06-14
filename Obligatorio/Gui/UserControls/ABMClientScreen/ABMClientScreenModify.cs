@@ -50,7 +50,7 @@ namespace Gui.UserControls.ABMClientScreen
             this.passwordTxt.Text = selectedClient.Password;
             this.nameTxt.Text = selectedClient.Name;
             this.surnameTxt.Text = selectedClient.Surname;
-            this.idTxt.Text = selectedClient.Id;
+            //this.idTxt.Text = selectedClient.Id;
             this.phoneTxt.Text = selectedClient.Phone;
             this.addressTxt.Text = selectedClient.Address;
         }

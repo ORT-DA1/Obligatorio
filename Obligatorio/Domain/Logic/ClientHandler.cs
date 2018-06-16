@@ -104,5 +104,15 @@ namespace Domain.Logic
         {
             return this.clientRepository.ClientExistsUserNameAndPassword(username, password);
         }
+    
+        public bool boolExist(Client client)
+        {
+            if (this.clientRepository.ClientExists(client))
+            {
+                return true;
+            }
+            return false;
+        }
     }
+
 }

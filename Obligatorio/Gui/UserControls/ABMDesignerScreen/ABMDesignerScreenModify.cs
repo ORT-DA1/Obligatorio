@@ -17,6 +17,7 @@ namespace Gui.UserControls.ABMDesignerScreen
     public partial class ABMDesignerScreenModify : UserControl, IController
     {
         private DesignerHandler handler;
+        private Designer _selectedDesigner;
         public ABMDesignerScreenModify()
         {
             InitializeComponent();
@@ -27,15 +28,15 @@ namespace Gui.UserControls.ABMDesignerScreen
         }
         private void SetUpEnvironment()
         {
-            var selectedDesigner = (Designer)this.designerList.SelectedItem;
-            if (selectedDesigner == null)
+            _selectedDesigner = (Designer)this.designerList.SelectedItem;
+            if (_selectedDesigner == null)
             {
                 ClearFields();
                 this.modifyDesigner_btn.Enabled = false;
             }
             else
             {
-                LoadDataIntoFields(selectedDesigner);
+                LoadDataIntoFields();
                 this.modifyDesigner_btn.Enabled = true;
             }
         }
@@ -46,12 +47,12 @@ namespace Gui.UserControls.ABMDesignerScreen
             this.nameTxt.Clear();
             this.surnameTxt.Clear();
         }
-        private void LoadDataIntoFields(Designer selectedDesigner)
+        private void LoadDataIntoFields()
         {
-            this.userNameTxt.Text = selectedDesigner.Username;
-            this.passwordTxt.Text = selectedDesigner.Password;
-            this.nameTxt.Text = selectedDesigner.Name;
-            this.surnameTxt.Text = selectedDesigner.Surname;
+            this.userNameTxt.Text = _selectedDesigner.Username;
+            this.passwordTxt.Text = _selectedDesigner.Password;
+            this.nameTxt.Text = _selectedDesigner.Name;
+            this.surnameTxt.Text = _selectedDesigner.Surname;
         }
         public UserControl GetUserController()
         {
@@ -89,21 +90,18 @@ namespace Gui.UserControls.ABMDesignerScreen
 
         private void modifyDesigner(object sender, EventArgs e)
         {
-            var selectedDesigner = (Designer)this.designerList.SelectedItem;
+            this._selectedDesigner = (Designer)this.designerList.SelectedItem;
             try
             {
-                Designer modifiedClient = new Designer(
-                    this.userNameTxt.Text,
-                    this.passwordTxt.Text,
-                    this.nameTxt.Text,
-                    this.surnameTxt.Text,
-                    selectedDesigner.RegistrationDate,
-                    selectedDesigner.LastAccess);
+                //this._selectedDesigner.Username = this.userNameTxt.Text;
+                //this._selectedDesigner.Password = this.passwordTxt.Text;
+                //this._selectedDesigner.Name = this.nameTxt.Text;
+                //this._selectedDesigner.Surname = this.surnameTxt.Text;
 
                 DialogResult dialogResult = MessageBox.Show("Esta seguro que desea Modificar este Diseñador?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.OK)
                 {
-                    handler.Modify(selectedDesigner, modifiedClient);
+                    handler.Modify(_selectedDesigner);
                     MessageBox.Show("El Diseñador ha sido actualizado exitosamente", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadDesignersIntoList();
                     SetUpEnvironment();

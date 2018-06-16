@@ -30,7 +30,7 @@ namespace Gui.UserControls.MyAccount
             this.passwordTxt.Text = client.Password;
             this.nameTxt.Text = client.Name;
             this.surnameTxt.Text = client.Surname;
-            //this.idTxt.Text = client.Id;
+            this.idTxt.Text = client.IdentityCard;
             this.phoneTxt.Text = client.Phone;
             this.addressTxt.Text = client.Address;
         }
@@ -39,11 +39,18 @@ namespace Gui.UserControls.MyAccount
         {
             try
             {
-                Client modifiedClient = fetchValues();
+                this.client.Username = this.userNameTxt.Text;
+                this.client.Password = this.passwordTxt.Text;
+                this.client.Name = this.nameTxt.Text;
+                this.client.Surname = this.surnameTxt.Text;
+                this.client.IdentityCard = this.idTxt.Text;
+                this.client.Phone = this.phoneTxt.Text;
+                this.client.Address = this.addressTxt.Text;
+
                 DialogResult dialogResult = MessageBox.Show("Esta seguro que desea Modificar su Contraseña?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.OK)
                 {
-                    handler.Modify(client, modifiedClient);
+                    handler.Modify(this.client);
                     MessageBox.Show("Su contraseña ha sido actualizado exitosamente", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }

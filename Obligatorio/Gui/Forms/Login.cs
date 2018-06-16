@@ -17,7 +17,6 @@ namespace Gui.Forms
         {
             InitializeComponent();
             this.userRepository = new UserRepository();
-            this.dataStorage = DataStorage.GetStorageInstance();
             this.ControlBox = false;
         }
 

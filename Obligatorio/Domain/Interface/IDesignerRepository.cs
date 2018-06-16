@@ -9,6 +9,7 @@ namespace Domain.Interface
         void AddDesigner(Designer designer);
         void ModifyDesigner(Designer designer);
         void DeleteDesigner(Designer designer);
+        bool DesignerExists(Designer designer);
         Designer GetDesigner(Designer designer);
         List<Designer> GetAllDesigners();
     }

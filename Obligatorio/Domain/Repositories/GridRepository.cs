@@ -5,34 +5,42 @@ using Domain.Interface;
 
 namespace Domain.Repositories
 {
-    public class GridRepository
+    public class GridRepository: IGridRepository
     {
-        //private ContextDB _context;
-
-        public GridRepository(DatabaseContext context)
-        {
-            //this._context = context;
-        }
-
         public void AddGrid(Grid grid)
         {
-            //_context.Grids.Add(grid);
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                _context.Grids.Add(grid);
+                _context.SaveChanges();
+            }
         }
         public void ModifyGrid(Grid gridToModify, Grid modifiedGrid)
         {
             //TODO
+            //Tiene modify?!?!
         }
         public void DeleteGrid(Grid grid)
         {
-            //_context.Grids.Remove(grid);
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                _context.Grids.Attach(grid);
+                _context.Grids.Remove(grid);
+            }
         }
-        /*public Grid GetGrid(Grid grid)
+        public Grid GetGrid(Grid grid)
+        { 
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                return _context.Grids.Where(g => g.GridName ==  grid.GridName).FirstOrDefault();
+            }
+        }
+        public List<Grid> GetAllGrids()
         {
-            return _context.Grids.Find();
-        }*/
-        /*public List<Grid> GetAllGrids()
-        {
-            return _context.Grids.ToList();
-        }*/
+            using(DatabaseContext _context = new DatabaseContext())
+            {
+                return _context.Grids.ToList();
+            }
+        }
     }
 }

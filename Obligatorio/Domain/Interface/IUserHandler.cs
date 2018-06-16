@@ -14,7 +14,7 @@ namespace Domain.Interface
         void Modify(User user);
         void Delete(User user);
         void Exist(User user);
-        void LookForUser(String username, String password);
+        User GetByUsernameAndPassword(String username, String password);
         void Validate(User user);
         List<User> GetList();
     }

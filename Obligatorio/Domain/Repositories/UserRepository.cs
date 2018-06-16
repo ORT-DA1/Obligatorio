@@ -7,6 +7,7 @@ using Domain.Entities;
 using Domain.Interface;
 using Domain.Repositories;
 using Domain.Logic;
+using Domain.Exceptions;
 
 namespace Domain.Repositories
 {
@@ -21,33 +22,29 @@ namespace Domain.Repositories
             this.clientHandler = new ClientHandler();
             this.designerHandler = new DesignerHandler();
         }
-        public void UserExists(String username, String password)
+
+      
+        public User GetUser(String username, String password)
         {
-            this.architectHandler.Ex(username, password);
-            this.clientHandler.LookForUser(username, password);
-            this.designerHandler.LookForUser(username, password);
-        }
-        public User GetUser(String username)
-        {
+            User userToFind = null;
 
-
-
-            User userToFind = new User();
-            if (this.architectHandler.IsArchitect(username))
+            if (userToFind == null)
             {
-                userToFind = this.architectHandler.GetArchitectByUsername(username);
+                userToFind = this.architectHandler.GetByUsernameAndPassword(username, password);
+            }
+            if (userToFind == null)
+            {
+                userToFind = this.clientHandler.GetByUsernameAndPassword(username, password);
+            }
+            if (userToFind == null)
+            {
+                userToFind = this.designerHandler.GetByUsernameAndPassword(username, password);
             }
 
-            if (this.clientHandler.IsClient(username))
+            if (userToFind == null)
             {
-                userToFind = this.clientHandler.GetClientByUsername(username);
+                throw new ExceptionController();
             }
-
-            if (this.designerHandler.IsDesigner(username))
-            {
-                userToFind = this.designerHandler.GetDesignerByUsername(username);
-            }
-            
             return userToFind;
         }
     }

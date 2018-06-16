@@ -73,13 +73,21 @@ namespace Domain.Logic
                 throw new ExceptionController(ExceptionMessage.EMPTY_ARCHITECT_LIST);
             }
         }
-        public bool ExistsUserName(String username)
+        public Architect GetByUsernameAndPassword(String username, String password)
         {
-            if (this.architectRepository.Arc)
+            if (ExistByUsernameAndPasword(username, password))
             {
-
+                return this.architectRepository.GetArchitectByUsername(username);
+            }
+            else
+            {
+                return null;
             }
         }
 
+        private bool ExistByUsernameAndPasword(string username, string password)
+        {
+           return this.architectRepository.ArchitectExistsUserNameAndPassword(username, password);
+        }
     }
 }

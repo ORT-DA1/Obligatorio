@@ -9,7 +9,9 @@ namespace Domain.Interface
         void ModifyArchitect(Architect architect);
         void DeleteArchitect(Architect architect);
         bool ArchitectExists(Architect architect);
+        bool ArchitectExistsUserNameAndPassword(string username, string password);
         Architect GetArchitect(Architect architect);
+        Architect GetArchitectByUsername(string username);
         List<Architect> GetAllArchitects();
     }
 }

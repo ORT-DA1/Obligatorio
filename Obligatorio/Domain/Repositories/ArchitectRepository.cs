@@ -42,14 +42,23 @@ namespace Domain.Repositories
             }
             return architectToFind == null ? true : false;
         }
-        public bool ArchitectExistsUserName(string username)
+        public bool ArchitectExistsUserNameAndPassword(string username, string password)
         {
             Architect architectToFind = null;
             using (DatabaseContext _context = new DatabaseContext())
             {
-                architectToFind = _context.Architects.Where(a => a.Username == username).FirstOrDefault();
+                architectToFind = _context.Architects.Where(a => a.Username == username && a.Password == password).FirstOrDefault();
             }
             return architectToFind == null ? true : false;
+        }
+        public Architect GetArchitectByUsername(string username)
+        {
+            Architect architectToFind;
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                architectToFind = _context.Architects.Where(a => a.Username == username).FirstOrDefault();
+            }
+            return architectToFind;
         }
         public Architect GetArchitect(Architect architectToFind)
         {

@@ -56,5 +56,24 @@ namespace Domain.Repositories
                 return _context.Clients.ToList();
             }
         }
+
+        public bool ClientExistsUserNameAndPassword(string username, string password)
+        {
+            Client clientToFind = null;
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                clientToFind = _context.Clients.Where(a => a.Username == username && a.Password == password).FirstOrDefault();
+            }
+            return clientToFind == null ? true : false;
+        }
+        public Client GetClientByUsername(string username)
+        {
+            Client clientToFind;
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                clientToFind = _context.Clients.Where(a => a.Username == username).FirstOrDefault();
+            }
+            return clientToFind;
+        }
     }
 }

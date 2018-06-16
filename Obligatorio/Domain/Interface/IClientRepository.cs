@@ -9,7 +9,9 @@ namespace Domain.Interface
         void ModifyClient(Client client);
         void DeleteClient(Client client);
         bool ClientExists(Client client);
+        bool ClientExistsUserNameAndPassword(string username, string password);
         Client GetClient(Client client);
+        Client GetClientByUsername(string username);
         List<Client> GetAllClients();
     }
 }

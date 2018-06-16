@@ -87,5 +87,22 @@ namespace Domain.Logic
                 throw new ExceptionController(ExceptionMessage.EMPTY_CLIENTS_LIST);
             }
         }
+
+        public Client GetByUsernameAndPassword(String username, String password)
+        {
+            if (ExistByUsernameAndPasword(username, password))
+            {
+                return this.clientRepository.GetClientByUsername(username);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private bool ExistByUsernameAndPasword(string username, string password)
+        {
+            return this.clientRepository.ClientExistsUserNameAndPassword(username, password);
+        }
     }
 }

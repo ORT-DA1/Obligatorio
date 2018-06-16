@@ -5,7 +5,7 @@ using Domain.Interface;
 using Domain.Entities;
 using Domain.Data;
 using Domain.Exceptions;
-
+using Domain.Repositories;
 
 namespace UnitTest
 {
@@ -23,6 +23,7 @@ namespace UnitTest
         private readonly string ADDRESS_OK = "Cuareim 1818";
         private readonly IUserHandler<Client> CLIENT_HANDLER;
         private DataStorage dataStorage;
+        private readonly ClientRepository PERSISTENCE_HANDLER;
 
         public ClientTest()
         {
@@ -124,8 +125,8 @@ namespace UnitTest
         public void TestClientSetIdentityCard()
         {
             Client client = new Client();
-            client.Id = CI_OK;
-            Assert.AreEqual(client.Id, CI_OK);
+            client.IdentityCard = CI_OK;
+            Assert.AreEqual(client.IdentityCard, CI_OK);
         }
 
         [TestMethod]
@@ -150,7 +151,7 @@ namespace UnitTest
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
 
             Assert.IsTrue(client.Username.Equals(USERNAME_OK) && client.Password.Equals(PASSWORD_OK)
-                && client.Name.Equals(NAME_OK) && client.Surname.Equals(SURNAME_OK) && client.Id.Equals(CI_OK)
+                && client.Name.Equals(NAME_OK) && client.Surname.Equals(SURNAME_OK) && client.IdentityCard.Equals(CI_OK)
                 && client.Phone.Equals(PHONE_OK) && client.Address.Equals(ADDRESS_OK)
                 && client.RegistrationDate.Equals(REGISTRATIONDATE_OK));
         }
@@ -161,8 +162,19 @@ namespace UnitTest
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
             CLIENT_HANDLER.Add(client);
             CLIENT_HANDLER.Delete(client);
-            Assert.IsFalse(dataStorage.Clients.Contains(client));
+
+            Assert.IsFalse();
         }
+
+        [TestMethod]
+        public void TestDeleteClientDB()
+        {
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(client);
+            CLIENT_HANDLER.Delete(client);
+            Assert.IsFalse(PERSISTENCE_HANDLER.);
+        }
+
         [TestMethod]
         public void TestAddClientOk()
         {

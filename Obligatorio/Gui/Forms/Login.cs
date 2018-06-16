@@ -4,15 +4,19 @@ using Domain.Entities;
 using Domain.Data;
 using Domain.Exceptions;
 using Domain.Logic;
+using Domain.Interface;
+using Domain.Repositories;
 
 namespace Gui.Forms
 {
     public partial class Login : Form
     {
         private DataStorage dataStorage;
+        private IUserRepository userRepository;
         public Login()
         {
             InitializeComponent();
+            this.userRepository = new UserRepository();
             this.dataStorage = DataStorage.GetStorageInstance();
             this.ControlBox = false;
         }
@@ -24,8 +28,10 @@ namespace Gui.Forms
 
             try
             {
-                dataStorage.UserExist(userName, password);
-                User user = dataStorage.GetUser(userName);
+                //dataStorage.UserExist(userName, password);
+                this.userRepository.UserExists(userName, password);
+                //User user = dataStorage.GetUser(userName);
+                User user = this.userRepository.GetUser(userName);
                 this.LogUser(user);
             }
             catch (ExceptionController exceptionMessage)

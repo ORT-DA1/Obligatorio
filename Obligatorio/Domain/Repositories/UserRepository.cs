@@ -43,8 +43,9 @@ namespace Domain.Repositories
 
             if (userToFind == null)
             {
-                throw new ExceptionController();
+                throw new ExceptionController(ExceptionMessage.USER_INVALID_LOGIN);
             }
+
             return userToFind;
         }
     }

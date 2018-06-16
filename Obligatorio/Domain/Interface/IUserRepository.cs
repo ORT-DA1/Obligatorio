@@ -9,7 +9,6 @@ namespace Domain.Interface
 {
     public interface IUserRepository
     {
-        void UserExists(String username, String password);
-        User GetUser(String username);
+        User GetUser(String username, String password);
     }
 }

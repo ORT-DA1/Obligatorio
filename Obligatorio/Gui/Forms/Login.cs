@@ -28,10 +28,7 @@ namespace Gui.Forms
 
             try
             {
-                //dataStorage.UserExist(userName, password);
-                this.userRepository.UserExists(userName, password);
-                //User user = dataStorage.GetUser(userName);
-                User user = this.userRepository.GetUser(userName);
+                User user = this.userRepository.GetUser(userName, password);
                 this.LogUser(user);
             }
             catch (ExceptionController exceptionMessage)

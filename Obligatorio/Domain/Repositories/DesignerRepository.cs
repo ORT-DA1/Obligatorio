@@ -10,43 +10,53 @@ namespace Domain.Repositories
     {
         public void AddDesigner(Designer designer)
         {
-            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            using (DatabaseContext _context = new DatabaseContext())
             {
-                ctx.Designers.Add(designer);
-                ctx.SaveChanges();
+                _context.Designers.Add(designer);
+                _context.SaveChanges();
             }
         }
         public void ModifyDesigner(Designer designer)
         {
-            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            using (DatabaseContext _context = new DatabaseContext())
             {
-                ctx.Designers.Attach(designer);
-                ctx.Entry(designer).State = EntityState.Modified;
-                ctx.SaveChanges();
+                _context.Designers.Attach(designer);
+                _context.Entry(designer).State = EntityState.Modified;
+                _context.SaveChanges();
             }
         }
 
         public void DeleteDesigner(Designer designer)
         {
-            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            using (DatabaseContext _context = new DatabaseContext())
             {
-                ctx.Designers.Remove(designer);
+                _context.Designers.Attach(designer);
+                _context.Designers.Remove(designer);
             }
+        }
+        public bool DesignerExists(Designer designer)
+        {
+            Designer designerToFind = null;
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                designerToFind = _context.Designers.Where(d => d.Username == designer.Username).FirstOrDefault();
+            }
+            return !(designerToFind == null);
         }
 
         public Designer GetDesigner(Designer designerToFind)
         {
-            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            using (DatabaseContext _context = new DatabaseContext())
             {
-                return ctx.Designers.First(designer => designer.Equals(designerToFind));
+                return _context.Designers.First(designer => designer.Equals(designerToFind));
             }
         }
 
         public List<Designer> GetAllDesigners()
         {
-            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            using (DatabaseContext _context = new DatabaseContext())
             {
-                return ctx.Designers.ToList();
+                return _context.Designers.ToList();
             }
         }
     }

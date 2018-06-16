@@ -11,8 +11,8 @@ namespace Domain.Interface
     {
         User Get(User user);
         void Add(User user);
+        void Modify(User user);
         void Delete(User user);
-        void Modify(User user, User anotherUser);
         void Exist(User user);
         void Validate(User user);
         List<User> GetList();

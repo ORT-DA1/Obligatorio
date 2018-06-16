@@ -10,40 +10,50 @@ namespace Domain.Repositories
     {
         public void AddArchitect(Architect architect)
         {
-            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            using (DatabaseContext _context = new DatabaseContext())
             {
-                ctx.Architects.Add(architect);
-                ctx.SaveChanges();
+                _context.Architects.Add(architect);
+                _context.SaveChanges();
             }
         }
         public void ModifyArchitect(Architect architect)
         {
-            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            using (DatabaseContext _context = new DatabaseContext())
             {
-                ctx.Architects.Attach(architect);
-                ctx.Entry(architect).State = EntityState.Modified;
-                ctx.SaveChanges();
+                _context.Architects.Attach(architect);
+                _context.Entry(architect).State = EntityState.Modified;
+                _context.SaveChanges();
             }
         }
         public void DeleteArchitect(Architect architect)
         {
-            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            using (DatabaseContext _context = new DatabaseContext())
             {
-                ctx.Architects.Remove(architect);
+                _context.Architects.Attach(architect);
+                _context.Architects.Remove(architect);
             }
+        }
+        public bool ArchitectExists(Architect architect)
+        {
+            Architect architectToFind = null;
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                architectToFind = _context.Architects.Where(a => a.Username == architect.Username).FirstOrDefault();
+            }
+            return architectToFind == null ? true : false;
         }
         public Architect GetArchitect(Architect architectToFind)
         {
-            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            using (DatabaseContext _context = new DatabaseContext())
             {
-                return ctx.Architects.First(architect => architect.Equals(architectToFind));
+                return _context.Architects.First(architect => architect.Equals(architectToFind));
             }
         }
         public List<Architect> GetAllArchitects()
         {
-            using (DatabaseContext ctx = new Domain.DatabaseContext())
+            using (DatabaseContext _context = new DatabaseContext())
             {
-                return ctx.Architects.ToList();
+                return _context.Architects.ToList();
             }
         }
     }

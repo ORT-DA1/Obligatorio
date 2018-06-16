@@ -73,6 +73,13 @@ namespace Domain.Logic
                 throw new ExceptionController(ExceptionMessage.EMPTY_ARCHITECT_LIST);
             }
         }
+        public bool ExistsUserName(String username)
+        {
+            if (this.architectRepository.Arc)
+            {
+
+            }
+        }
 
     }
 }

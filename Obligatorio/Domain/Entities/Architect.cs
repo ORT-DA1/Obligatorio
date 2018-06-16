@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
+    [Table(name: "Architectes")]
     public class Architect: User
     {
+        public int ArchitectId { get; set; }
         public Architect() { }
 
         public Architect(string username, string password, string name, string surname, DateTime registrationDate, Nullable<DateTime> lastAccess)
@@ -17,7 +20,7 @@ namespace Domain.Entities
             this.Name = name;
             this.Surname = surname;
             this.RegistrationDate = registrationDate;
-            this.LastAccess = lastAccess;
+            this.LastAccess = registrationDate;
         }
 
         public override bool Equals(object designerObject)

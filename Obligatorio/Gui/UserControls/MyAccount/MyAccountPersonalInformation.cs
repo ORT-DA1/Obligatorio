@@ -30,7 +30,7 @@ namespace Gui.UserControls.MyAccount
             this.passwordTxt.Text = client.Password;
             this.nameTxt.Text = client.Name;
             this.surnameTxt.Text = client.Surname;
-            this.idTxt.Text = client.Id;
+            //this.idTxt.Text = client.Id;
             this.phoneTxt.Text = client.Phone;
             this.addressTxt.Text = client.Address;
         }

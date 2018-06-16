@@ -42,6 +42,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseContext.cs" />
     <Compile Include="Entities\Administrator.cs" />
     <Compile Include="Entities\Architect.cs" />
     <Compile Include="Entities\Client.cs" />
@@ -60,6 +63,22 @@
     <Compile Include="Entities\Door.cs" />
     <Compile Include="Entities\Element.cs" />
     <Compile Include="Entities\Grid.cs" />
+    <Compile Include="Interface\IArchitectRepository.cs" />
+    <Compile Include="Interface\IClientRepository.cs" />
+    <Compile Include="Interface\IDesignerRepository.cs" />
+    <Compile Include="Interface\IGridRepository.cs" />
+    <Compile Include="Interface\IUserRepository.cs" />
+    <Compile Include="Logic\ArchitectHandler.cs" />
+    <Compile Include="Migrations\201806140112177_InitialCreate.cs" />
+    <Compile Include="Migrations\201806140112177_InitialCreate.Designer.cs">
+      <DependentUpon>201806140112177_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Repositories\ArchitectRepository.cs" />
+    <Compile Include="Repositories\ClientRepository.cs" />
+    <Compile Include="Repositories\DesignerRepository.cs" />
+    <Compile Include="Repositories\GridRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="TypesGrid\DottedLineGrid.cs" />
     <Compile Include="TypesGrid\GridStrategy.cs" />
     <Compile Include="Entities\Signature.cs" />
@@ -78,10 +97,16 @@
     <Compile Include="TypesGrid\WithoutVisualGrid.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201806140112177_InitialCreate.resx">
+      <DependentUpon>201806140112177_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

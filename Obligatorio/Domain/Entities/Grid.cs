@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
+    [Table(name: "Grids")]
     public class Grid
     {
+        public int GridId { get; set; }
         public GridStrategy GridStrategy { get; set; }
         public string GridName { get; set; }
         public Client Client { get; set; }
@@ -21,7 +24,13 @@ namespace Domain.Entities
         public static int PixelConvertor = 25;
         public int MaxMeters = 5;
        
-        public Grid() { }
+        public Grid() {
+            this.Walls = new List<Wall>();
+            this.WallBeams = new List<WallBeam>();
+            this.DecorativeColumns = new List<DecorativeColumn>();
+            this.Windows = new List<Window>();
+            this.Doors = new List<Door>();
+        }
 
         public Grid(string gridName, Client client, int height, int width)
         {
@@ -36,12 +45,6 @@ namespace Domain.Entities
             this.Height = height * PixelConvertor;
             this.Width = width * PixelConvertor;
         }
-
-        /*public void DrawGrid(Graphics graphic)
-        {
-            this.DrawX(graphic);
-            this.DrawY(graphic);
-        }*/
 
         public void DrawWalls(Graphics graphic)
         {
@@ -82,26 +85,6 @@ namespace Domain.Entities
                 window.Draw(graphic);
             }
         }
-
-        /*private void DrawX(Graphics graphic)
-        {
-            for (int i = PixelConvertor; i < this.Height; i += PixelConvertor)
-            {
-                Point startPoint = new Point(0, i);
-                Point endPoint = new Point(this.Width, i);
-                graphic.DrawLine(gridPen, startPoint, endPoint);
-            }
-        }
-
-        private void DrawY(Graphics graphic)
-        {
-            for (int i = PixelConvertor; i < this.Width; i += PixelConvertor)
-            {
-                Point startPoint = new Point(i, 0);
-                Point endPoint = new Point(i, this.Height);
-                graphic.DrawLine(gridPen, startPoint, endPoint);
-            }
-        }*/
 
         public void AddWall(Graphics graphic, Wall wall)
         {

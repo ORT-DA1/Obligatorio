@@ -11,6 +11,7 @@ namespace Gui.UserControls.ABMClientScreen
     public partial class ABMClientScreenModify : UserControl, IController
     {
         private ClientHandler handler;
+        private Client _selectedClient;
         public ABMClientScreenModify()
         {
             InitializeComponent();
@@ -22,15 +23,16 @@ namespace Gui.UserControls.ABMClientScreen
         }
         private void SetUpEnvironment()
         {
-            var selectedClient = (Client)this.clientList.SelectedItem;
-            if (selectedClient == null)
+            this._selectedClient = (Client)this.clientList.SelectedItem;
+            //var selectedClient = (Client)this.clientList.SelectedItem;
+            if (_selectedClient == null)
             {
                 ClearFields();
                 this.modifyClient_btn.Enabled = false;
             }
             else
             {
-                LoadDataIntoFields(selectedClient);
+                LoadDataIntoFields(_selectedClient);
                 this.modifyClient_btn.Enabled = true;
             }
         }
@@ -50,7 +52,7 @@ namespace Gui.UserControls.ABMClientScreen
             this.passwordTxt.Text = selectedClient.Password;
             this.nameTxt.Text = selectedClient.Name;
             this.surnameTxt.Text = selectedClient.Surname;
-            this.idTxt.Text = selectedClient.Id;
+            this.idTxt.Text = selectedClient.IdentityCard;
             this.phoneTxt.Text = selectedClient.Phone;
             this.addressTxt.Text = selectedClient.Address;
         }
@@ -87,24 +89,21 @@ namespace Gui.UserControls.ABMClientScreen
         }
         private void modifyClient(object sender, EventArgs e)
         {
-            var selectedClient = (Client)this.clientList.SelectedItem;
+            _selectedClient = (Client)this.clientList.SelectedItem;
             try
             {
-                Client modifiedClient = new Client(
-                    this.userNameTxt.Text,
-                    this.passwordTxt.Text,
-                    this.nameTxt.Text,
-                    this.surnameTxt.Text,
-                    this.idTxt.Text,
-                    this.phoneTxt.Text,
-                    this.addressTxt.Text,
-                    selectedClient.RegistrationDate,
-                    selectedClient.LastAccess);
+                this._selectedClient.Username = this.userNameTxt.Text;
+                this._selectedClient.Password = this.passwordTxt.Text;
+                this._selectedClient.Name = this.nameTxt.Text;
+                this._selectedClient.Surname = this.surnameTxt.Text;
+                this._selectedClient.IdentityCard = this.idTxt.Text;
+                this._selectedClient.Phone = this.phoneTxt.Text;
+                this._selectedClient.Address = this.addressTxt.Text;
 
                 DialogResult dialogResult = MessageBox.Show("Esta seguro que desea Modificar este Cliente?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.OK)
                 {
-                    handler.Modify(selectedClient, modifiedClient);
+                    handler.Modify(this._selectedClient);
                     MessageBox.Show("El Cliente ha sido actualizado exitosamente", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadClientsIntoList();
                     SetUpEnvironment();

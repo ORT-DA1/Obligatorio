@@ -4,74 +4,63 @@ using Domain.Interface;
 using Domain.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
+using Domain.Interface;
+using Domain.Repositories;
 
 namespace Domain.Logic
 {
     public class DesignerHandler: IUserHandler<Designer>
     {
-        private DataStorage storage;
+        private IDesignerRepository designerRepository;
         public DesignerHandler()
         {
-            this.storage = DataStorage.GetStorageInstance();
-        }
-
+            this.designerRepository = new DesignerRepository();
+        } 
         public Designer Get(Designer designer)
         {
             NotExist(designer);
-            return this.storage.GetDesigner(designer);
+            return this.designerRepository.GetDesigner(designer);
         }
-
         public void Add(Designer designer)
         {
             Validate(designer);
             Exist(designer);
-            this.storage.SaveDesigner(designer);
+            this.designerRepository.AddDesigner(designer);
         }
-
         public void Validate(Designer designer)
         {
             DataValidation.ValidateNameAndSurname(designer.Name, designer.Surname);
             DataValidation.ValidateUsername(designer.Username);
             DataValidation.ValidatePassword(designer.Password);
         }
-
         public void Delete(Designer designer)
         {
             NotExist(designer);
-            this.storage.DeleteDesigner(designer);
+            this.designerRepository.DeleteDesigner(designer);
         }
-
-        public void Modify(Designer designerTomodify, Designer modifiedDesigner)
+        public void Modify(Designer designer)
         {
-            NotExist(designerTomodify);
-            Validate(modifiedDesigner);
-            if (!designerTomodify.Equals(modifiedDesigner))
-            {
-                Exist(modifiedDesigner);
-            }
-            this.storage.ModifyDesigner(designerTomodify, modifiedDesigner);
+            NotExist(designer);
+            Validate(designer);
+            this.designerRepository.ModifyDesigner(designer);
         }
-
-
         public void Exist(Designer designer)
         {
-            if (this.storage.Designers.Contains(designer))
+            if (this.designerRepository.DesignerExists(designer))
             {
                 throw new ExceptionController(ExceptionMessage.USER_ALREADY_EXSIST);
             }
         }
-
-
         public void NotExist(Designer designer)
         {
-            if (!this.storage.Designers.Contains(designer))
+            if (!this.designerRepository.DesignerExists(designer))
             {
                 throw new ExceptionController(ExceptionMessage.USER_NOT_EXIST);
             }
         }
         public List<Designer> GetList()
         {
-            List<Designer> designersList = storage.Designers;
+            List<Designer> designersList = this.designerRepository.GetAllDesigners();
             IsNotEmpty(designersList);
             return designersList;
         }
@@ -81,6 +70,23 @@ namespace Domain.Logic
             {
                 throw new ExceptionController(ExceptionMessage.EMPTY_DESIGNERS_LIST);
             }
+        }
+
+        public Designer GetByUsernameAndPassword(string username, string password)
+        {
+            if (ExistByUsernameAndPasword(username, password))
+            {
+                return this.designerRepository.GetDesignerByUsername(username);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private bool ExistByUsernameAndPasword(string username, string password)
+        {
+            return this.designerRepository.DesignerExistsUserNameAndPassword(username, password);
         }
     }
 }

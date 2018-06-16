@@ -1,10 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 
 namespace Domain.Entities
 {
+    [Table(name: "WallBeams")]
     public class WallBeam : Element
     {
+        public int WallBeamId { get; set; }
         public Point UbicationPoint { get; set; }
         private SolidBrush wallBeamBrush;
 

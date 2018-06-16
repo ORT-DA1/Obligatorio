@@ -4,72 +4,81 @@ using Domain.Entities;
 using Domain.Data;
 using Domain.Interface;
 using Domain.Exceptions;
+using Domain.Repositories;
+using System;
 
 namespace Domain.Logic
 {
     public class ClientHandler : IUserHandler<Client>
     {
-        private DataStorage storage;
+        private IClientRepository clientRepository;
         public ClientHandler()
         {
-            this.storage = DataStorage.GetStorageInstance();
+            this.clientRepository = new ClientRepository();
+        }
+
+        public void Add(Client client)
+        {
+            Validate(client);
+            Exist(client);
+            this.clientRepository.AddClient(client);
+        }
+
+        public void Modify(Client client)
+        {
+            NotExist(client);
+            Validate(client);
+            this.clientRepository.ModifyClient(client);
+        }
+
+        public void Delete(Client client)
+        {
+            NotExist(client);
+            this.clientRepository.DeleteClient(client);
+        }
+
+        public void Exist(Client client)
+        {
+            if (this.clientRepository.ClientExists(client))
+            {
+                throw new ExceptionController(ExceptionMessage.USER_ALREADY_EXSIST);
+            }
         }
 
         public Client Get(Client client)
         {
             NotExist(client);
-            return this.storage.GetClient(client);
+            return this.clientRepository.GetClient(client);
+            
         }
-        public void Add(Client client)
+
+        public List<Client> GetList()
         {
-            Validate(client);
-            Exist(client);
-            this.storage.SaveClient(client);
+            List<Client> clientList = clientRepository.GetAllClients();
+            IsNotEmpty(clientList);
+            return clientList;
         }
+
         public void Validate(Client client)
         {
             DataValidation.ValidateUsername(client.Username);
             DataValidation.ValidatePassword(client.Password);
             DataValidation.ValidateNameAndSurname(client.Name, client.Surname);
-            DataValidation.ValidateID(client.Id);
+            DataValidation.ValidateID(client.IdentityCard);
             DataValidation.ValidatePhone(client.Phone);
             DataValidation.ValidateAddress(client.Address);
         }
-        public void Delete(Client client)
+        public void LookForUser(String username, String password)
         {
-            NotExist(client);
-            this.storage.DeleteClient(client);
-        }
-        public void Modify(Client clientToModify, Client modifiedClient)
-        {
-            NotExist(clientToModify);
-            Validate(modifiedClient);
-            if (!clientToModify.Equals(modifiedClient))
-            {
-                Exist(modifiedClient);
-            }
-            this.storage.ModifyClient(clientToModify, modifiedClient);
+            //TODO
         }
 
-        public void Exist(Client client)
+        public void NotExist(Client client)
         {
-            if (this.storage.Clients.Contains(client))
+            if (!this.clientRepository.ClientExists(client))
             {
                 throw new ExceptionController(ExceptionMessage.USER_ALREADY_EXSIST);
             }
-        }
-        public void NotExist(Client client)
-        {
-            if (!this.storage.Clients.Contains(client))
-            {
-                throw new ExceptionController(ExceptionMessage.USER_NOT_EXIST);
-            }
-        }
-        public List<Client> GetList()
-        {
-            List<Client> clientList = storage.Clients;
-            IsNotEmpty(clientList);
-            return clientList;
         }
         private void IsNotEmpty(List<Client> clientList)
         {
@@ -77,6 +86,23 @@ namespace Domain.Logic
             {
                 throw new ExceptionController(ExceptionMessage.EMPTY_CLIENTS_LIST);
             }
+        }
+
+        public Client GetByUsernameAndPassword(String username, String password)
+        {
+            if (ExistByUsernameAndPasword(username, password))
+            {
+                return this.clientRepository.GetClientByUsername(username);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private bool ExistByUsernameAndPasword(string username, string password)
+        {
+            return this.clientRepository.ClientExistsUserNameAndPassword(username, password);
         }
     }
 }

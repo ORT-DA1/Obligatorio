@@ -16,6 +16,7 @@
         public const string EMPTY_CLIENTS_LIST = "No existen Clientes registrados en el sistema.";
         public const string EMPTY_DESIGNERS_LIST = "No existen Diseñadores registrados en el sistema.";
         public const string EMPTY_GRID_LIST = "No existen Planos creados en el sistema.";
+        public const string EMPTY_ARCHITECT_LIST = "No existen Arquitectos registrados en el sistema.";
 
         public const string GRID_INVALID_HEIGHT_ABOVE = "La altura es incorrecta. Debe ser menor quer 25 metros.";
         public const string GRID_INVALID_HEIGHT_UNDER = "La altura es incorrecta. Debe ser mayor quer 0 metros.";

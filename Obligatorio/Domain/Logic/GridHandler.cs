@@ -3,32 +3,31 @@ using Domain.Entities;
 using Domain.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
+using Domain.Repositories;
+using Domain.Interface;
 
 namespace Domain.Logic
 {
     public class GridHandler
     {
-        private DataStorage storage;
         private ClientHandler clientHandler;
+        private IGridRepository gridRepository;
 
         public GridHandler()
         {
-            this.storage = DataStorage.GetStorageInstance();
             this.clientHandler = new ClientHandler();
+            this.gridRepository = new GridRepository();
         }
-
-        public Grid Get(Client client)
+        public Grid Get(Grid grid)
         {
-            clientHandler.NotExist(client);
-            return this.storage.GetGrid(client);
+            NotExist(grid);
+            return this.gridRepository.GetGrid(grid);
         }
-
         public void Add(Grid grid)
         {
             Validate(grid);
-            this.storage.SaveGrid(grid); 
+            this.gridRepository.AddGrid(grid); 
         }
-
         private void Validate(Grid grid)
         {
             DataValidation.ValidateGridName(grid.GridName);
@@ -36,32 +35,28 @@ namespace Domain.Logic
             DataValidation.ValidateHeight(grid.Height);
             DataValidation.ValidateWidth(grid.Width);
         }
-
         public void Delete(Grid grid)
         {
             NotExist(grid);
-            this.storage.DeleteGrid(grid);
+            this.gridRepository.DeleteGrid(grid);
         }
-        
         public void NotExist(Grid grid)
         {
-            if (!this.storage.Grids.Contains(grid))
-            {
-                throw new ExceptionController(ExceptionMessage.WALL_NOT_EXIST);
-            }
+            //if (this.gridRepository.)
+            //{
+            //    throw new ExceptionController(ExceptionMessage.WALL_NOT_EXIST);
+            //}
         }
-
         public List<Grid> GetList()
         {
-            List<Grid> gridList = storage.Grids;
+            List<Grid> gridList = this.gridRepository.GetAllGrids();
             IsNotEmpty(gridList);
             return gridList;
         }
-
         public List<Grid> GetClientGrids(Client client)
         {
             List<Grid> gridList = new List<Grid>();
-            foreach(Grid grid in storage.Grids)
+            foreach(Grid grid in this.gridRepository.GetAllGrids())
             {
                 if (ClientGrid(client, grid)){
                     gridList.Add(grid);
@@ -70,7 +65,6 @@ namespace Domain.Logic
             IsNotEmpty(gridList);
             return gridList;
         }
-
         private bool ClientGrid(Client client, Grid grid)
         {
             if (grid.Client.Equals(client))
@@ -78,7 +72,6 @@ namespace Domain.Logic
             else
                 return false;
         }
-
         private void IsNotEmpty(List<Grid> gridList)
         {
             if (!gridList.Any())
@@ -87,5 +80,4 @@ namespace Domain.Logic
             }
         }
     }
-
 }

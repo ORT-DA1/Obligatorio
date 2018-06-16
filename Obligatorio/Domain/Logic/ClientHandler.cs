@@ -68,6 +68,10 @@ namespace Domain.Logic
             DataValidation.ValidatePhone(client.Phone);
             DataValidation.ValidateAddress(client.Address);
         }
+        public void LookForUser(String username, String password)
+        {
+            //TODO
+        }
 
         public void NotExist(Client client)
         {

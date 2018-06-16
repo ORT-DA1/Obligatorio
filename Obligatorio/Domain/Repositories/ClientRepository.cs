@@ -16,7 +16,6 @@ namespace Domain.Repositories
                 _context.SaveChanges();
             }
         }
-
         public void ModifyClient(Client client)
         {
             using (DatabaseContext _context = new DatabaseContext())
@@ -26,7 +25,6 @@ namespace Domain.Repositories
                 _context.SaveChanges();
             }
         }
-
         public void DeleteClient(Client client)
         {
             using (DatabaseContext _context = new DatabaseContext())
@@ -44,7 +42,6 @@ namespace Domain.Repositories
             }
             return !(clientToFind == null);
         }
-
         public Client GetClient(Client clientToFind)
         {
             using (DatabaseContext _context = new DatabaseContext())
@@ -52,7 +49,6 @@ namespace Domain.Repositories
                 return _context.Clients.First(client => client.Equals(clientToFind));
             }
         }
-
         public List<Client> GetAllClients()
         {
             using (DatabaseContext _context = new Domain.DatabaseContext())
@@ -60,6 +56,5 @@ namespace Domain.Repositories
                 return _context.Clients.ToList();
             }
         }
-
     }
 }

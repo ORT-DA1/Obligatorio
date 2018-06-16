@@ -71,5 +71,22 @@ namespace Domain.Logic
                 throw new ExceptionController(ExceptionMessage.EMPTY_DESIGNERS_LIST);
             }
         }
+
+        public Designer GetByUsernameAndPassword(string username, string password)
+        {
+            if (ExistByUsernameAndPasword(username, password))
+            {
+                return this.designerRepository.GetDesignerByUsername(username);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private bool ExistByUsernameAndPasword(string username, string password)
+        {
+            return this.designerRepository.DesignerExistsUserNameAndPassword(username, password);
+        }
     }
 }

@@ -59,5 +59,25 @@ namespace Domain.Repositories
                 return _context.Designers.ToList();
             }
         }
+
+        public bool DesignerExistsUserNameAndPassword(string username, string password)
+        {
+            Designer designerToFind = null;
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                designerToFind = _context.Designers.Where(a => a.Username == username && a.Password == password).FirstOrDefault();
+            }
+            return designerToFind == null ? true : false;
+        }
+        public Designer GetDesignerByUsername(string username)
+        {
+            Designer designerToFind;
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                designerToFind = _context.Designers.Where(a => a.Username == username).FirstOrDefault();
+            }
+            return designerToFind;
+        }
+
     }
 }

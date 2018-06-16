@@ -7,12 +7,13 @@ namespace Domain.Entities
     public class Client : User
     {
         public int ClientId { get; set; }
+        public string IdentityCard { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
 
         public Client(){ }
 
-        public Client(string username, string password, string name, string surname, string id, string phone, string address, DateTime registrationDate, Nullable<DateTime> lastAccess)
+        public Client(string username, string password, string name, string surname, string IdentityCard, string phone, string address, DateTime registrationDate, Nullable<DateTime> lastAccess)
         {
             this.Username = username;
             this.Password = password;
@@ -31,7 +32,7 @@ namespace Domain.Entities
             if (clientObject != null && this.GetType().Equals(clientObject.GetType()))
             {
                 Client client = (Client)clientObject;
-                if (/*this.Id.Equals(client.Id) ||*/ this.Username.Equals(client.Username))
+                if (this.IdentityCard.Equals(client.IdentityCard) || this.Username.Equals(client.Username))
                 {
                     isEqual = true;
                 }

@@ -19,18 +19,22 @@ namespace Domain.Logic
 
         public void Add(Client client)
         {
+            Validate(client);
             Exist(client);
             this.clientRepository.AddClient(client);
         }
 
-        public void Modify(Client user, Client anotherUser)
+        public void Modify(Client client)
         {
-            throw new NotImplementedException();
+            NotExist(client);
+            Validate(client);
+            this.clientRepository.ModifyClient(client);
         }
 
-        public void Delete(Client user)
+        public void Delete(Client client)
         {
-            throw new NotImplementedException();
+            NotExist(client);
+            this.clientRepository.DeleteClient(client);
         }
 
         public void Exist(Client client)
@@ -41,66 +45,37 @@ namespace Domain.Logic
             }
         }
 
-        public Client Get(Client user)
+        public Client Get(Client client)
         {
-            throw new NotImplementedException();
+            NotExist(client);
+            return this.clientRepository.GetClient(client);
+            
         }
 
         public List<Client> GetList()
         {
-            throw new NotImplementedException();
+            List<Client> clientList = clientRepository.GetAllClients();
+            IsNotEmpty(clientList);
+            return clientList;
         }
 
-
-        /*public Client Get(Client client)
-        {
-            NotExist(client);
-            return this.clientRepository.GetClient(client);
-        }*/
-        /*public void Add(Client client)
-        {
-            Validate(client);
-            Exist(client);
-            this.clientRepository.AddClient(client);
-        }*/
         public void Validate(Client client)
         {
             DataValidation.ValidateUsername(client.Username);
             DataValidation.ValidatePassword(client.Password);
             DataValidation.ValidateNameAndSurname(client.Name, client.Surname);
-            //DataValidation.ValidateID(client.Id);
+            DataValidation.ValidateID(client.IdentityCard);
             DataValidation.ValidatePhone(client.Phone);
             DataValidation.ValidateAddress(client.Address);
         }
-        /*public void Delete(Client client)
-        {
-            NotExist(client);
-            this.clientRepository.DeleteClient(client);
-        }*/
-        /*public void Modify(Client clientToModify, Client modifiedClient)
-        {
-            NotExist(clientToModify);
-            Validate(modifiedClient);
-            if (!clientToModify.Equals(modifiedClient))
-            {
-                Exist(modifiedClient);
-            }
-            this.clientRepository.ModifyClient(clientToModify, modifiedClient);
-        }*/
 
         public void NotExist(Client client)
         {
-            /*if (!this.clientRepository.NotExist(client))
+            if (!this.clientRepository.ClientExists(client))
             {
-                throw new ExceptionController(ExceptionMessage.USER_NOT_EXIST);
-            }*/
+                throw new ExceptionController(ExceptionMessage.USER_ALREADY_EXSIST);
+            }
         }
-        /*public List<Client> GetList()
-        {
-            List<Client> clientList = clientRepository.GetAllClients();
-            IsNotEmpty(clientList);
-            return clientList;
-        }*/
         private void IsNotEmpty(List<Client> clientList)
         {
             if (!clientList.Any())

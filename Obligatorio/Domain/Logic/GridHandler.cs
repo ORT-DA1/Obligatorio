@@ -3,6 +3,8 @@ using Domain.Entities;
 using Domain.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
+using Domain.Repositories;
+using Domain.Interface;
 
 namespace Domain.Logic
 {
@@ -10,23 +12,25 @@ namespace Domain.Logic
     {
         private DataStorage storage;
         private ClientHandler clientHandler;
+        private IGridRepository gridRepository;
 
         public GridHandler()
         {
             this.storage = DataStorage.GetStorageInstance();
             this.clientHandler = new ClientHandler();
+            this.gridRepository = new GridRepository();
         }
 
         public Grid Get(Client client)
         {
             clientHandler.NotExist(client);
-            return this.storage.GetGrid(client);
+            return this.gridRepository.GetGrid(client);
         }
 
         public void Add(Grid grid)
         {
             Validate(grid);
-            this.storage.SaveGrid(grid); 
+            this.gridRepository.AddGrid(grid); 
         }
 
         private void Validate(Grid grid)

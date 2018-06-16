@@ -5,15 +5,8 @@ using Domain.Interface;
 
 namespace Domain.Repositories
 {
-    public class GridRepository
+    public class GridRepository: IGridRepository
     {
-        //private ContextDB _context;
-
-        public GridRepository(DatabaseContext context)
-        {
-            //this._context = context;
-        }
-
         public void AddGrid(Grid grid)
         {
             //_context.Grids.Add(grid);

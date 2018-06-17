@@ -22,19 +22,16 @@ namespace UnitTest
         private readonly string PHONE_OK = "093535858";
         private readonly string ADDRESS_OK = "Cuareim 1818";
         private readonly IUserHandler<Client> CLIENT_HANDLER;
-        private DataStorage dataStorage;
-        private readonly ClientRepository PERSISTENCE_HANDLER;
 
         public ClientTest()
         {
             this.CLIENT_HANDLER = new ClientHandler();
-            this.dataStorage = DataStorage.GetStorageInstance();
         }
 
         [TestInitialize]
         public void TestCleanUp()
         {
-            dataStorage.EmptyStorage();
+            //dataStorage.EmptyStorage();
         }
 
         [TestMethod]
@@ -162,47 +159,41 @@ namespace UnitTest
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
             CLIENT_HANDLER.Add(client);
             CLIENT_HANDLER.Delete(client);
-
-            Assert.IsFalse();
+            Assert.IsFalse(CLIENT_HANDLER.boolExist(client));
         }
-
-        [TestMethod]
-        public void TestDeleteClientDB()
-        {
-            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
-            CLIENT_HANDLER.Add(client);
-            CLIENT_HANDLER.Delete(client);
-            Assert.IsFalse(PERSISTENCE_HANDLER.);
-        }
-
+        
         [TestMethod]
         public void TestAddClientOk()
         {
             Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
             CLIENT_HANDLER.Add(client);
-            Assert.IsTrue(dataStorage.Clients.Contains(client)); 
+            Assert.IsTrue(CLIENT_HANDLER.boolExist(client)); 
         }
 
         [TestMethod]
         public void TestModifyClientUserNamePassword()
         {
-            Client clientToModify = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
-            CLIENT_HANDLER.Add(clientToModify);
-            Client modifiedClient = new Client("newUsername", "password1234", NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
-            CLIENT_HANDLER.Modify(clientToModify, modifiedClient);
-            Client testClient = CLIENT_HANDLER.Get(modifiedClient);
-            Assert.AreEqual(testClient.Id, modifiedClient.Id);
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(client);
+            Client modifiedClient = CLIENT_HANDLER.GetByUsernameAndPassword(USERNAME_OK, PASSWORD_OK);
+            modifiedClient.Username = "username2";
+            modifiedClient.Password = "password";
+            CLIENT_HANDLER.Modify(modifiedClient);
+            Client clientToVerify = CLIENT_HANDLER.Get(modifiedClient);
+            Assert.IsTrue(clientToVerify.Username.Equals("username2") && clientToVerify.Password.Equals("password"));
         }
 
         [TestMethod]
         public void TestModifyClientNameAndSurnameAndID()
         {
-            Client clientToModify = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
-            CLIENT_HANDLER.Add(clientToModify);
-            Client modifiedClient = new Client(USERNAME_OK, PASSWORD_OK, "Miguel", "Pereira", "23345667", PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
-            CLIENT_HANDLER.Modify(clientToModify, modifiedClient);
-            Client testClient = CLIENT_HANDLER.Get(modifiedClient);
-            Assert.AreEqual(testClient.Id, modifiedClient.Id);
+            Client client = new Client(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, CI_OK, PHONE_OK, ADDRESS_OK, REGISTRATIONDATE_OK, null);
+            CLIENT_HANDLER.Add(client);
+            Client modifiedClient = CLIENT_HANDLER.GetByUsernameAndPassword(USERNAME_OK,PASSWORD_OK);
+            modifiedClient.Name = "Diego";
+            modifiedClient.Surname = "Nov";
+            CLIENT_HANDLER.Modify(modifiedClient);
+            Client clientToVerify = CLIENT_HANDLER.Get(modifiedClient);
+            Assert.IsTrue(clientToVerify.Name.Equals("Diego") && clientToVerify.Surname.Equals("Nov"));
         }
 
         [TestMethod]

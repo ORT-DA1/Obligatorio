@@ -24,7 +24,7 @@ namespace Gui.Forms
             this.passwordTxt.Text = client.Password;
             this.nameTxt.Text = client.Name;
             this.surnameTxt.Text = client.Surname;
-            //this.idTxt.Text = client.Id;
+            this.idTxt.Text = client.IdentityCard;
             this.phoneTxt.Text = client.Phone;
             this.addressTxt.Text = client.Address;   
         }
@@ -32,8 +32,18 @@ namespace Gui.Forms
         {
             try
             {
-                Client modifiedClient = fetchValues();
-                ProcessConfirmation(modifiedClient);
+                DateTime lastAccess = DateTime.Now;
+
+                this.client.Username = this.userNameTxt.Text;
+                this.client.Password = this.passwordTxt.Text;
+                this.client.Name = this.nameTxt.Text;
+                this.client.Surname = this.surnameTxt.Text;
+                this.client.IdentityCard = this.idTxt.Text;
+                this.client.Phone = this.phoneTxt.Text;
+                this.client.Address = this.addressTxt.Text;
+                this.client.LastAccess = lastAccess;
+
+                ProcessConfirmation();
             }
             catch (ExceptionController Exception)
             {
@@ -42,29 +52,14 @@ namespace Gui.Forms
 
             }
         }
-        private void ProcessConfirmation(Client modifiedClient)
+        private void ProcessConfirmation()
         {
             DialogResult dialogResult = MessageBox.Show("Una vez confirmados los datos, muchos de ellos no podran ser modificados mas adelante. Desea Continuar?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.OK)
             {
-                handler.Modify(client, modifiedClient);
-                Redirect(modifiedClient);
+                handler.Modify(this.client);
+                Redirect(this.client);
             }
-        }
-        private Client fetchValues()
-        {
-            DateTime lastAccess = DateTime.Now;
-
-            return new Client(
-                this.userNameTxt.Text,
-                this.passwordTxt.Text,
-                this.nameTxt.Text,
-                this.surnameTxt.Text,
-                this.idTxt.Text,
-                this.phoneTxt.Text,
-                this.addressTxt.Text,
-                client.RegistrationDate,
-                lastAccess);
         }
         private void Redirect(Client modifiedClient)
         {

@@ -64,7 +64,7 @@ namespace Domain.Repositories
             {
                 clientToFind = _context.Clients.Where(a => a.Username == username && a.Password == password).FirstOrDefault();
             }
-            return clientToFind == null ? true : false;
+            return clientToFind == null ? false : true;
         }
         public Client GetClientByUsername(string username)
         {

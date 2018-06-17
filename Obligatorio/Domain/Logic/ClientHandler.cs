@@ -26,7 +26,7 @@ namespace Domain.Logic
 
         public void Modify(Client client)
         {
-            NotExist(client);
+            //NotExist(client);
             Validate(client);
             this.clientRepository.ModifyClient(client);
         }
@@ -67,16 +67,13 @@ namespace Domain.Logic
             DataValidation.ValidateID(client.IdentityCard);
             DataValidation.ValidatePhone(client.Phone);
             DataValidation.ValidateAddress(client.Address);
-        }
-        public void LookForUser(String username, String password)
-        {
-            //TODO
-        }
+        }       
 
         public void NotExist(Client client)
         {
             if (!this.clientRepository.ClientExists(client))
             {
+
                 throw new ExceptionController(ExceptionMessage.USER_ALREADY_EXSIST);
             }
         }

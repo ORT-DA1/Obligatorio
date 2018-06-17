@@ -22,9 +22,10 @@ namespace Domain.TypesGrid
         {
             for (int i = Grid.PixelConvertor; i < height; i += Grid.PixelConvertor)
             {
-                Point startPoint = new Point(0, i);
-                Point endPoint = new Point(width, i);
-                graphic.DrawLine(gridPen, startPoint, endPoint);
+                Entities.Point startPoint = new Entities.Point(0, i);
+                Entities.Point endPoint = new Entities.Point(width, i);
+                graphic.DrawLine(gridPen, new System.Drawing.Point(startPoint.X,startPoint.Y)
+                    , new System.Drawing.Point(endPoint.X,endPoint.Y));
             }
         }
 
@@ -32,9 +33,10 @@ namespace Domain.TypesGrid
         {
             for (int i = Grid.PixelConvertor; i < width; i += Grid.PixelConvertor)
             {
-                Point startPoint = new Point(i, 0);
-                Point endPoint = new Point(i, height);
-                graphic.DrawLine(gridPen, startPoint, endPoint);
+                Entities.Point startPoint = new Entities.Point(i, 0);
+                Entities.Point endPoint = new Entities.Point(i, height);
+                graphic.DrawLine(gridPen, new System.Drawing.Point(startPoint.X,startPoint.Y)
+                    , new System.Drawing.Point(endPoint.X,endPoint.Y));
             }
         }
     }

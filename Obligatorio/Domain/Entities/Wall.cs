@@ -92,7 +92,8 @@ namespace Domain.Entities
 
         public override void Draw(Graphics graphic)
         {
-            graphic.DrawLine(this.wallPen, this.startUbicationPoint,    this.endUbicationPoint);
+            graphic.DrawLine(this.wallPen, new System.Drawing.Point(this.startUbicationPoint.X, this.startUbicationPoint.Y)
+                , new System.Drawing.Point(this.endUbicationPoint.X,this.endUbicationPoint.Y));
         }
 
         public override bool Equals(object wallObject)

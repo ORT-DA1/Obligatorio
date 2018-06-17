@@ -19,6 +19,7 @@ namespace Domain
         public DbSet<Wall> Walls { get; set; }
         public DbSet<WallBeam> WallBeams { get; set; }
         public DbSet<Window> Windows { get; set; }
+        public DbSet<Point> Points { get; set; }
 
         public DatabaseContext()
             : base("name=DatabaseContext")

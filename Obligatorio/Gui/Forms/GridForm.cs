@@ -13,7 +13,7 @@ namespace Gui.Forms
         private Domain.Entities.Grid grid;
         private Graphics graphic;
         private int option=0;
-        private List<Point> pointArray;
+        private List<System.Drawing.Point> pointArray;
         private Form parentForm;
 
         public GridForm()
@@ -29,7 +29,7 @@ namespace Gui.Forms
             this.parentForm = parentForm;
             this.ControlBox = false;
             this.grid = grid;
-            this.pointArray = new List<Point>();
+            this.pointArray = new List<System.Drawing.Point>();
             this.graphic = this.gridPanel.CreateGraphics();
             graphic.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             gridPanel.AutoScroll = true;
@@ -87,9 +87,9 @@ namespace Gui.Forms
             this.gridPanel.Refresh();
         }
 
-        public Point fixPoint(Point point)
+        public Domain.Entities.Point fixPoint(Domain.Entities.Point point)
         {
-            Point fixedPoint = new Point(
+            Domain.Entities.Point fixedPoint = new Domain.Entities.Point(
                ((int)Math.Round((double)point.X / Domain.Entities.Grid.PixelConvertor)) * Domain.Entities.Grid.PixelConvertor,
                ((int)Math.Round((double)point.Y / Domain.Entities.Grid.PixelConvertor)) * Domain.Entities.Grid.PixelConvertor
            );
@@ -140,7 +140,7 @@ namespace Gui.Forms
         private void gridPanel_MouseClick(object sender, MouseEventArgs e)
         {
             MouseEventArgs me = (MouseEventArgs)e;
-            Point coordinates = me.Location;
+            System.Drawing.Point coordinates = me.Location;
 
             if (option != 0)
             {
@@ -157,7 +157,8 @@ namespace Gui.Forms
                         case 1:
                             try
                             {
-                                grid.AddWall(graphic, new Wall(pointArray[0], grid.FixPoint(pointArray[1])));
+                                grid.AddWall(graphic, new Wall(new Domain.Entities.Point(pointArray[0].X,pointArray[0].Y)
+                                    , new Domain.Entities.Point(grid.FixPoint(pointArray[1]).X, grid.FixPoint(pointArray[1]).Y)));
                                 UpdateLines();
                             }
                             catch (ExceptionController Exception)
@@ -169,7 +170,9 @@ namespace Gui.Forms
                         case 2:
                             try
                             {
-                                grid.AddDoor(graphic, pointArray[0], pointArray[1], grid.WallSense(pointArray[0]));
+                                grid.AddDoor(graphic, new Domain.Entities.Point(pointArray[0].X, pointArray[0].Y)
+                                    , new Domain.Entities.Point(pointArray[1].X, pointArray[1].Y)
+                                    , grid.WallSense(new Domain.Entities.Point(pointArray[0].X,pointArray[0].Y)));
                                 UpdateLines();
                             }
                             catch (ExceptionController Exception)
@@ -181,7 +184,9 @@ namespace Gui.Forms
                         case 3:
                             try
                             {
-                                grid.AddWindow(graphic, pointArray[0], pointArray[1], grid.WallSense(pointArray[0]));
+                                grid.AddWindow(graphic, new Domain.Entities.Point(pointArray[0].X, pointArray[0].Y)
+                                    , new Domain.Entities.Point(pointArray[1].X, pointArray[1].Y)
+                                    , grid.WallSense(new Domain.Entities.Point(pointArray[0].X, pointArray[0].Y)));
                                 UpdateLines();
                             }
                             catch (ExceptionController Exception)
@@ -193,7 +198,7 @@ namespace Gui.Forms
                         case 4:
                             try
                             {
-                                grid.RemoveWall(grid.ObtainWallInPoint(pointArray[0]));
+                                grid.RemoveWall(grid.ObtainWallInPoint(new Domain.Entities.Point(pointArray[0].X, pointArray[0].Y)));
                                 UpdateLines();
                             }
                             catch (ExceptionController Exception)
@@ -205,7 +210,7 @@ namespace Gui.Forms
                         case 5:
                             try
                             {
-                                grid.RemoveWindow(pointArray[0]);
+                                grid.RemoveWindow(new Domain.Entities.Point(pointArray[0].X, pointArray[0].Y));
                                 UpdateLines();
                             }
                             catch (ExceptionController Exception)
@@ -217,7 +222,7 @@ namespace Gui.Forms
                         case 6:
                             try
                             {
-                                grid.RemoveDoor(pointArray[0]);
+                                grid.RemoveDoor(new Domain.Entities.Point(pointArray[0].X, pointArray[0].Y));
                                 UpdateLines();
                             }
                             catch (ExceptionController Exception)
@@ -227,11 +232,11 @@ namespace Gui.Forms
                             }
                             break;
                         case 8:
-                            grid.AddDecorativeColumn(graphic,pointArray[0]);
+                            grid.AddDecorativeColumn(graphic,new Domain.Entities.Point(pointArray[0].X, pointArray[0].Y));
                             UpdateLines();
                             break;
                         case 9:
-                            grid.RemoveDecorativeColumn(pointArray[0]);
+                            grid.RemoveDecorativeColumn(new Domain.Entities.Point(pointArray[0].X, pointArray[0].Y));
                             UpdateLines();
                             break;
                         default:

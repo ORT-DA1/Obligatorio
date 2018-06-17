@@ -669,9 +669,9 @@ namespace Domain.Entities
             return String.Format(format, this.GridName, this.Client.Username);
         }
 
-        public Point FixPoint(Point point)
+        public System.Drawing.Point FixPoint(System.Drawing.Point point)
         {
-            Point fixedPoint = new Point(
+            System.Drawing.Point fixedPoint = new System.Drawing.Point(
                ((int)Math.Round((double)point.X / PixelConvertor)) * PixelConvertor,
                ((int)Math.Round((double)point.Y / PixelConvertor)) * PixelConvertor
            );

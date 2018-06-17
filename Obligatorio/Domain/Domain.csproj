@@ -63,6 +63,7 @@
     <Compile Include="Entities\Door.cs" />
     <Compile Include="Entities\Element.cs" />
     <Compile Include="Entities\Grid.cs" />
+    <Compile Include="Entities\Point.cs" />
     <Compile Include="Interface\IArchitectRepository.cs" />
     <Compile Include="Interface\IClientRepository.cs" />
     <Compile Include="Interface\IDecorativeColumnRepository.cs" />

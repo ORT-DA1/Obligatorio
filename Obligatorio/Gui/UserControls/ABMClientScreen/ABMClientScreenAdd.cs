@@ -51,7 +51,7 @@ namespace Gui.UserControls.ABMClientScreen
                 this.phoneTxt.Text,
                 this.addressTxt.Text,
                 registrationDate,
-                registrationDate);
+                null);
         }
 
         private void ClearForm()

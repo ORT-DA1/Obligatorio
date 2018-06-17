@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using Domain.Logic;
 
 namespace Domain.Entities
 {
@@ -23,8 +24,11 @@ namespace Domain.Entities
         public List<Door> Doors { get; set; }
         public static int PixelConvertor = 25;
         public int MaxMeters = 5;
+
+        public GridHandler GRID_HANDLER;
        
         public Grid() {
+
             this.Walls = new List<Wall>();
             this.WallBeams = new List<WallBeam>();
             this.DecorativeColumns = new List<DecorativeColumn>();
@@ -44,6 +48,7 @@ namespace Domain.Entities
             this.Client = client;
             this.Height = height * PixelConvertor;
             this.Width = width * PixelConvertor;
+            this.GRID_HANDLER = new GridHandler();
         }
 
         public void DrawWalls(Graphics graphic)
@@ -106,6 +111,7 @@ namespace Domain.Entities
         private void AddWallNormal(Graphics graphic, Wall wall)
         {
             wall.Draw(graphic);
+            GRID_HANDLER.AddWall(this, wall);
             this.Walls.Add(wall);
             AddWallBeam(graphic, wall.startUbicationPoint);
             AddWallBeam(graphic, wall.endUbicationPoint);
@@ -358,7 +364,8 @@ namespace Domain.Entities
             {
                 if (noWallInPosition(ubicationPoint)) { 
                     DecorativeColumn decorativeColumn = new DecorativeColumn(ubicationPoint);
-                    this.DecorativeColumns.Add(decorativeColumn);
+                    GRID_HANDLER.AddDecorativeColumn(this, decorativeColumn);
+                    //this.DecorativeColumns.Add(decorativeColumn);
                     decorativeColumn.Draw(graphic);
                 }
             }

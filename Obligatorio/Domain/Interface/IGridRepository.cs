@@ -14,5 +14,11 @@ namespace Domain.Interface
         void DeleteGrid(Grid grid);
         Grid GetGrid(Grid grid);
         List<Grid> GetAllGrids();
+        void AddWall(Grid grid, Wall wall);
+        void AddWallBeam(Grid grid, WallBeam wallBeam);
+        void AddWindow(Grid grid, Window window);
+        void AddDoor(Grid grid, Door door);
+        void AddDecorativeColumn(Grid grid, DecorativeColumn decorativeColumn);
+        
     }
 }

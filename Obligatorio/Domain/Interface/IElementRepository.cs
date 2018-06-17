@@ -8,6 +8,6 @@ namespace Domain.Interface
 {
     public interface IElementRepository
     {
-        User GetUser(String username, String password);
+     
     }
 }

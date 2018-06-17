@@ -31,14 +31,15 @@ namespace Domain.Repositories
             {
                 _context.Clients.Attach(client);
                 _context.Clients.Remove(client);
+                _context.SaveChanges();
             }
         }
-        public bool ClientExists(Client client)
+        public bool ClientExists(Client paramClient)
         {
             Client clientToFind = null;
             using (DatabaseContext _context = new DatabaseContext())
             {
-                clientToFind = _context.Clients.Where(c => c.IdentityCard == client.IdentityCard).FirstOrDefault();
+                clientToFind = _context.Clients.Where(c => (c.IdentityCard == paramClient.IdentityCard || c.Username == paramClient.Username) && c.ClientId != paramClient.ClientId).FirstOrDefault();
             }
             return !(clientToFind == null);
         }
@@ -56,7 +57,6 @@ namespace Domain.Repositories
                 return _context.Clients.ToList();
             }
         }
-
         public bool ClientExistsUserNameAndPassword(string username, string password)
         {
             Client clientToFind = null;

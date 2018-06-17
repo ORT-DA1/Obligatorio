@@ -18,7 +18,7 @@ namespace Gui
         [STAThread]
         static void Main()
         {
-            /*using (DatabaseContext context = new DatabaseContext())
+            using (DatabaseContext context = new DatabaseContext())
             {
                 Client c = new Client
                 {
@@ -67,8 +67,8 @@ namespace Gui
                 context.Architects.Add(ar);
 
                 context.SaveChanges();
-            }*/
-
+            }
+                    
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());

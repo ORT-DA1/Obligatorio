@@ -69,6 +69,7 @@
     <Compile Include="Interface\IGridRepository.cs" />
     <Compile Include="Interface\IUserRepository.cs" />
     <Compile Include="Logic\ArchitectHandler.cs" />
+    <Compile Include="Logic\WallBeamHandler.cs" />
     <Compile Include="Repositories\ArchitectRepository.cs" />
     <Compile Include="Repositories\ClientRepository.cs" />
     <Compile Include="Repositories\DesignerRepository.cs" />

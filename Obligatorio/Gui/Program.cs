@@ -20,7 +20,7 @@ namespace Gui
         {
             using (DatabaseContext context = new DatabaseContext())
             {
-                Client c = new Client
+                /*Client c = new Client
                 {
                     Username = "client",
                     Password = "client",
@@ -66,7 +66,7 @@ namespace Gui
                 };
                 context.Architects.Add(ar);
 
-                context.SaveChanges();
+                context.SaveChanges();*/
             }
                     
             Application.EnableVisualStyles();

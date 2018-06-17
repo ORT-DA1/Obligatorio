@@ -1,4 +1,6 @@
-﻿using Domain.Entities;
+﻿
+
+using Domain.Entities;
 using Domain.Interface;
 
 namespace Domain.Logic
@@ -10,6 +12,5 @@ namespace Domain.Logic
         {
             this.wallBeamRepository.AddWallBeam(wallBeam);
         }
-
     }
 }

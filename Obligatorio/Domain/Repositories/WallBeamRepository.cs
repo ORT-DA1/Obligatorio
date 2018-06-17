@@ -12,6 +12,7 @@ namespace Domain.Repositories
                 _context.WallBeams.Add(wallBeam);
                 _context.SaveChanges();
             }
+
         }
     }
 }

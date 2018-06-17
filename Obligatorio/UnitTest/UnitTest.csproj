@@ -51,11 +51,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministratorTest.cs" />
+    <Compile Include="ArchitectTest.cs" />
     <Compile Include="ClientTest.cs" />
     <Compile Include="DecorativeColumnTest.cs" />
     <Compile Include="DesignerTest.cs" />
     <Compile Include="DoorTest.cs" />
     <Compile Include="GridTest.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="SignatureTest.cs" />
     <Compile Include="UserTest.cs" />
     <Compile Include="WallBeamTest.cs" />
     <Compile Include="WallTest.cs" />
@@ -63,6 +68,8 @@
     <Compile Include="WindowTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\UnitTest.csprojResolveAssemblyReference.cache" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +77,27 @@
       <Project>{f63c7c33-b2bf-4696-a4fa-9182dc48ff2e}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Domain.dll" />
+    <Content Include="bin\Debug\Domain.pdb" />
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\EntityFramework.xml" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml" />
+    <Content Include="bin\Debug\UnitTest.dll" />
+    <Content Include="bin\Debug\UnitTest.pdb" />
+    <Content Include="obj\Debug\UnitTest.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\UnitTest.dll" />
+    <Content Include="obj\Debug\UnitTest.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

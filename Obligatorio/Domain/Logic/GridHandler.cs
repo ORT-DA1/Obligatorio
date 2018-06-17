@@ -11,7 +11,7 @@ namespace Domain.Logic
     public class GridHandler
     {
         private ClientHandler clientHandler;
-        private IGridRepository gridRepository;
+        public IGridRepository gridRepository;
 
         public GridHandler()
         {
@@ -28,6 +28,33 @@ namespace Domain.Logic
             Validate(grid);
             this.gridRepository.AddGrid(grid); 
         }
+
+        public void AddWall(Grid grid, Wall wall)
+        {
+
+            this.gridRepository.AddWall(grid,wall);
+        }
+
+        public void AddWallBeam(Grid grid, WallBeam wallBeam)
+        {
+            this.gridRepository.AddWallBeam(grid, wallBeam);
+        }
+
+        public void AddWindow(Grid grid, Window window)
+        {
+            this.gridRepository.AddWindow(grid, window);
+        }
+
+        public void AddDoor(Grid grid, Door door)
+        {
+            this.gridRepository.AddDoor(grid, door);
+        }
+
+        public void AddDecorativeColumn(Grid grid, DecorativeColumn decorativeColumn)
+        {
+            this.gridRepository.AddDecorativeColumn(grid, decorativeColumn);
+        }
+
         private void Validate(Grid grid)
         {
             DataValidation.ValidateGridName(grid.GridName);

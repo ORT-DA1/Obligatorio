@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Domain.Entities;
 using Domain.Interface;
@@ -15,6 +16,66 @@ namespace Domain.Repositories
                 _context.SaveChanges();
             }
         }
+
+        public void AddWall(Grid grid, Wall wall)
+        {
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                var co = (from c in _context.Grids
+                          where c.GridId == grid.GridId
+                          select c).FirstOrDefault();
+                co.Walls.Add(wall);
+                _context.SaveChanges();
+            }
+        }
+        public void AddWallBeam(Grid grid, WallBeam wallBeam)
+        {
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                var co = (from c in _context.Grids
+                          where c.GridId == grid.GridId
+                          select c).FirstOrDefault();
+                co.WallBeams.Add(wallBeam);
+                _context.SaveChanges();
+            }
+        }
+
+        public void AddWindow(Grid grid, Window window)
+        {
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                var co = (from c in _context.Grids
+                          where c.GridId == grid.GridId
+                          select c).FirstOrDefault();
+                co.Windows.Add(window);
+                _context.SaveChanges();
+            }
+        }
+
+        public void AddDoor(Grid grid, Door door)
+        {
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                var co = (from c in _context.Grids
+                          where c.GridId == grid.GridId
+                          select c).FirstOrDefault();
+                co.Doors.Add(door);
+                _context.SaveChanges();
+            }
+        }
+
+        public void AddDecorativeColumn(Grid grid, DecorativeColumn decorativeColumn)
+        {
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                var co = (from c in _context.Grids
+                          where c.GridId == grid.GridId
+                          select c).FirstOrDefault();
+                co.DecorativeColumns.Add(decorativeColumn);
+                _context.SaveChanges();
+            }
+        }
+
         public void ModifyGrid(Grid gridToModify, Grid modifiedGrid)
         {
             //TODO
@@ -42,5 +103,6 @@ namespace Domain.Repositories
                 return _context.Grids.ToList();
             }
         }
+        
     }
 }

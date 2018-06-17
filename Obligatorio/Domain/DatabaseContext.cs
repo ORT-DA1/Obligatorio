@@ -16,7 +16,7 @@ namespace Domain
         public DbSet<DecorativeColumn> DecorativeColumns { get; set; }
         public DbSet<Door> Doors { get; set; }
         public DbSet<Signature> Signatures { get; set; }
-        public DbSet<Wall> Wall { get; set; }
+        public DbSet<Wall> Walls { get; set; }
         public DbSet<WallBeam> WallBeams { get; set; }
         public DbSet<Window> Windows { get; set; }
 

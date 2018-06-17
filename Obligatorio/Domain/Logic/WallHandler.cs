@@ -1,0 +1,20 @@
+﻿using Domain.Entities;
+using Domain.Interface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Domain.Logic
+{
+    public class WallHandler : IElementHandler<Wall>
+    {
+        private IWallRepository wallRepository;
+        public void Add(Wall wall)
+        {
+            this.wallRepository.AddWall(wall);
+        }
+
+    }
+}

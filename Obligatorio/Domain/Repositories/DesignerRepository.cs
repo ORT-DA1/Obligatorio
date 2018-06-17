@@ -67,7 +67,7 @@ namespace Domain.Repositories
             {
                 designerToFind = _context.Designers.Where(a => a.Username == username && a.Password == password).FirstOrDefault();
             }
-            return designerToFind == null ? true : false;
+            return designerToFind == null ? false : true;
         }
         public Designer GetDesignerByUsername(string username)
         {

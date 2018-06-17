@@ -24,11 +24,11 @@ namespace UnitTest
             this.dataStorage = DataStorage.GetStorageInstance();
         }
 
-        [TestInitialize]
+        /*[TestInitialize]
         public void TestCleanUp()
         {
             this.dataStorage.EmptyStorage();
-        }
+        }*/
 
         public Designer CreateDesigner(string username, string password, string name, string surname, DateTime registrationDate)
         {
@@ -86,7 +86,7 @@ namespace UnitTest
         {
             Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
             DESIGNER_HANDLER.Add(designer);
-            Assert.IsTrue(dataStorage.Designers.Contains(designer));
+            Assert.IsTrue(DESIGNER_HANDLER.boolExist(designer));
         }
 
         [TestMethod]
@@ -95,18 +95,21 @@ namespace UnitTest
             Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
             DESIGNER_HANDLER.Add(designer);
             DESIGNER_HANDLER.Delete(designer);
-            Assert.IsFalse(dataStorage.Designers.Contains(designer));
+            Assert.IsFalse(DESIGNER_HANDLER.boolExist(designer));
         }
 
         [TestMethod]
         public void TestModifyDesignerNameAndSurname()
         {
+
             Designer designer = new Designer(USERNAME_OK, PASSWORD_OK, NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
             DESIGNER_HANDLER.Add(designer);
-            Designer modifiedDesigner = new Designer("ModifiedDesigner", "Helloworld123", NAME_OK, SURNAME_OK, REGISTRATIONDATE_OK, null);
-            DESIGNER_HANDLER.Modify(designer, modifiedDesigner);
-            Designer designerTest = DESIGNER_HANDLER.Get(modifiedDesigner);
-            Assert.AreEqual(designerTest.Username, modifiedDesigner.Username);
+            Designer modifiedDesigner = DESIGNER_HANDLER.GetByUsernameAndPassword(USERNAME_OK, PASSWORD_OK);
+            modifiedDesigner.Name = "Diego";
+            modifiedDesigner.Surname = "Nov";
+            DESIGNER_HANDLER.Modify(modifiedDesigner);
+            Designer designerToVerify = DESIGNER_HANDLER.Get(modifiedDesigner);
+            Assert.IsTrue(designerToVerify.Name.Equals("Diego") && designerToVerify.Surname.Equals("Nov"));
         }
 
         [TestMethod]

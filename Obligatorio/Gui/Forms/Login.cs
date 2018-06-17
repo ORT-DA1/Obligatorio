@@ -11,7 +11,6 @@ namespace Gui.Forms
 {
     public partial class Login : Form
     {
-        private DataStorage dataStorage;
         private IUserRepository userRepository;
         public Login()
         {

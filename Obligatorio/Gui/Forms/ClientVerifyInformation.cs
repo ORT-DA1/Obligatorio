@@ -49,7 +49,7 @@ namespace Gui.Forms
             {
                 var message = Exception.Message;
                 MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                LoadUserData();
             }
         }
         private void ProcessConfirmation()

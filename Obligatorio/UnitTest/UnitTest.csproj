@@ -51,11 +51,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministratorTest.cs" />
+    <Compile Include="ArchitectTest.cs" />
     <Compile Include="ClientTest.cs" />
     <Compile Include="DecorativeColumnTest.cs" />
     <Compile Include="DesignerTest.cs" />
     <Compile Include="DoorTest.cs" />
     <Compile Include="GridTest.cs" />
+    <Compile Include="SignatureTest.cs" />
     <Compile Include="UserTest.cs" />
     <Compile Include="WallBeamTest.cs" />
     <Compile Include="WallTest.cs" />

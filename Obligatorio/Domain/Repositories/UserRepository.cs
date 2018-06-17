@@ -16,18 +16,23 @@ namespace Domain.Repositories
         private IUserHandler<Architect> architectHandler;
         private IUserHandler<Client> clientHandler;
         private IUserHandler<Designer> designerHandler;
+        private AdminHandler adminHandler;
         public UserRepository()
         {
             this.architectHandler = new ArchitectHandler();
             this.clientHandler = new ClientHandler();
             this.designerHandler = new DesignerHandler();
+            this.adminHandler = new AdminHandler();
         }
-
       
         public User GetUser(String username, String password)
         {
             User userToFind = null;
 
+            if (userToFind == null)
+            {
+                userToFind = this.adminHandler.GetByUsernameAndPassword(username, password);
+            }
             if (userToFind == null)
             {
                 userToFind = this.architectHandler.GetByUsernameAndPassword(username, password);

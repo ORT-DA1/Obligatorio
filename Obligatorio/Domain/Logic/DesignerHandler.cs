@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Domain.Interface;
 using Domain.Repositories;
+using System;
 
 namespace Domain.Logic
 {
@@ -87,6 +88,15 @@ namespace Domain.Logic
         private bool ExistByUsernameAndPasword(string username, string password)
         {
             return this.designerRepository.DesignerExistsUserNameAndPassword(username, password);
+        }
+
+        public bool boolExist(Designer designer)
+        {
+            if (this.designerRepository.DesignerExists(designer))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

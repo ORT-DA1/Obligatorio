@@ -89,5 +89,14 @@ namespace Domain.Logic
         {
            return this.architectRepository.ArchitectExistsUserNameAndPassword(username, password);
         }
+
+        public bool boolExist(Architect architect)
+        {
+            if (this.architectRepository.ArchitectExists(architect))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

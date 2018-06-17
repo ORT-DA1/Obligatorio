@@ -17,6 +17,6 @@ namespace Domain.Interface
         User GetByUsernameAndPassword(String username, String password);
         void Validate(User user);
         List<User> GetList();
-        bool boolExist(Client client);
+        bool boolExist(User user);
     }
 }

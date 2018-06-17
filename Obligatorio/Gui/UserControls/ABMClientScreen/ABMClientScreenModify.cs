@@ -24,7 +24,6 @@ namespace Gui.UserControls.ABMClientScreen
         private void SetUpEnvironment()
         {
             this._selectedClient = (Client)this.clientList.SelectedItem;
-            //var selectedClient = (Client)this.clientList.SelectedItem;
             if (_selectedClient == null)
             {
                 ClearFields();
@@ -113,6 +112,8 @@ namespace Gui.UserControls.ABMClientScreen
             {
                 String message = Exception.Message;
                 MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LoadClientsIntoList();
+                SetUpEnvironment();
             }
         }
     }

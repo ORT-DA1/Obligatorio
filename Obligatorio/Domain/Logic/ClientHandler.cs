@@ -26,7 +26,7 @@ namespace Domain.Logic
 
         public void Modify(Client client)
         {
-            //NotExist(client);
+            Exist(client);
             Validate(client);
             this.clientRepository.ModifyClient(client);
         }

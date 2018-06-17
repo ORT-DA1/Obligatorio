@@ -76,12 +76,14 @@
     <Compile Include="Interface\IWallBeamRepository.cs" />
     <Compile Include="Interface\IWallRepository.cs" />
     <Compile Include="Interface\IWindowRepository.cs" />
+    <Compile Include="Logic\AdminHandler.cs" />
     <Compile Include="Logic\ArchitectHandler.cs" />
     <Compile Include="Logic\DecorativeColumnHandler.cs" />
     <Compile Include="Logic\DoorHandler.cs" />
     <Compile Include="Logic\WallBeamHandler.cs" />
     <Compile Include="Logic\WallHandler.cs" />
     <Compile Include="Logic\WindowHandler.cs" />
+    <Compile Include="Repositories\AdminRepository.cs" />
     <Compile Include="Repositories\ArchitectRepository.cs" />
     <Compile Include="Repositories\ClientRepository.cs" />
     <Compile Include="Repositories\DecorativeColumnRepository.cs" />

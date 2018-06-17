@@ -83,6 +83,12 @@
     <Compile Include="MenuNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\ABMArchitectScreen\ABMArchitectScreenAdd.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ABMArchitectScreen\ABMArchitectScreenAdd.Designer.cs">
+      <DependentUpon>ABMArchitectScreenAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ABMClientScreen\ABMClientScreenAdd.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -181,6 +187,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ABMArchitectScreen\ABMArchitectScreenAdd.resx">
+      <DependentUpon>ABMArchitectScreenAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ABMClientScreen\ABMClientScreenAdd.resx">
       <DependentUpon>ABMClientScreenAdd.cs</DependentUpon>

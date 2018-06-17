@@ -13,17 +13,17 @@ namespace Domain.Entities
 
         public Client(){ }
 
-        public Client(string username, string password, string name, string surname, string IdentityCard, string phone, string address, DateTime registrationDate, Nullable<DateTime> lastAccess)
+        public Client(string username, string password, string name, string surname, string identityCard, string phone, string address, DateTime registrationDate, Nullable<DateTime> lastAccess)
         {
             this.Username = username;
             this.Password = password;
             this.Name = name;
             this.Surname = surname;
-            //this.Id = id;
+            this.IdentityCard = identityCard;
             this.Phone = phone;
             this.Address = address;
             this.RegistrationDate = registrationDate;
-            this.LastAccess = registrationDate;
+            this.LastAccess = lastAccess;
         }
 
         public override bool Equals(object clientObject)

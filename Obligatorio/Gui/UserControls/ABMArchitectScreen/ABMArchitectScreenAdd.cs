@@ -10,15 +10,17 @@ using System.Windows.Forms;
 using Gui.Interface;
 using Domain.Exceptions;
 using Domain.Entities;
+using Domain.Logic;
 
 namespace Gui.UserControls.ABMArchitectScreen
 {
     public partial class ABMArchitectScreenAdd : UserControl, IController
     {
-        private handler = new ArchitectHandler();
+        private ArchitectHandler handler;
         public ABMArchitectScreenAdd()
         {
             InitializeComponent();
+            this.handler = new ArchitectHandler();
             this.AccessibleName = "Agregar";
             this.titleTxt.Text = "Agregar Arquitecto";
         }

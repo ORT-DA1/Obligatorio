@@ -41,7 +41,7 @@ namespace Gui.UserControls.ABMDesignerScreen
         private Designer fetchValues()
         {
             DateTime registrationDate = DateTime.Now;
-            return new Designer(this.usernameTxt.Text, this.passwordTxt.Text, this.nameTxt.Text, this.surnameTxt.Text, registrationDate, registrationDate);
+            return new Designer(this.usernameTxt.Text, this.passwordTxt.Text, this.nameTxt.Text, this.surnameTxt.Text, registrationDate, null);
         }
 
         private void ClearForm()

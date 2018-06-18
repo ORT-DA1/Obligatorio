@@ -13,14 +13,28 @@ namespace Domain.Logic
         private IDecorativeColumnRepository decorativeColumnRepository;
         public void Add(Grid grid, DecorativeColumn decorativeColumn)
         {
-            this.decorativeColumnRepository.AddDecorativeColumn(grid, decorativeColumn);
+            this.decorativeColumnRepository.Add(grid, decorativeColumn);
         }
 
         public List<DecorativeColumn> GetList(Grid grid)
         {
-            List<DecorativeColumn> decorativeColumnList = decorativeColumnRepository.GetAllDecorativeColumns(grid);
-            //
+            List<DecorativeColumn> decorativeColumnList = decorativeColumnRepository.GetList(grid);
             return decorativeColumnList;
+        }
+
+        public void Remove(Grid grid, DecorativeColumn decorativeColumn)
+        {
+            decorativeColumnRepository.Remove(grid, decorativeColumn);
+        }
+
+        public bool Exist(Grid grid, DecorativeColumn decorativeColumn)
+        {
+            return decorativeColumnRepository.Exist(decorativeColumn); 
+        }
+
+        public int Count(Grid grid)
+        {
+            return decorativeColumnRepository.Count(grid);
         }
     }
 }

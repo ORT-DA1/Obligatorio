@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
 using Domain.Entities;
+using Domain.Logic;
 
 namespace Domain.Interface
 {
     public interface IDecorativeColumnRepository
     {
-        void AddDecorativeColumn(Grid grid, DecorativeColumn decorativeColumn);
-        List<DecorativeColumn> GetAllDecorativeColumns(Grid grid);
+        void Add(Grid grid, DecorativeColumn decorativeColumn);
+        List<DecorativeColumn> GetList(Grid grid);
+        void Remove(Grid grid, DecorativeColumn decorativeColumn);
+        bool Exist(DecorativeColumn decorativeColumn);
+        int Count(Grid grid);
     }
 }

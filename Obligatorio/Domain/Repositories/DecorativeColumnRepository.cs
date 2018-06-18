@@ -21,10 +21,16 @@ namespace Domain.Repositories
         {
             throw new NotImplementedException();
         }
-
-        public bool Exist(DecorativeColumn decorativeColumn)
+        
+        public bool Exist(Grid grid, DecorativeColumn decorativeColumn)
         {
-            throw new NotImplementedException();
+            DecorativeColumn decorativeColumnToFind = null;
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                decorativeColumnToFind = _context.DecorativeColumns.Where(d => (d.GridId == grid.GridId
+                && d.UbicationPoint == decorativeColumn.UbicationPoint)).FirstOrDefault();
+            }
+            return !(decorativeColumnToFind == null);
         }
 
         public List<DecorativeColumn> GetList(Grid grid)
@@ -37,7 +43,12 @@ namespace Domain.Repositories
 
         public void Remove(Grid grid, DecorativeColumn decorativeColumn)
         {
-            throw new NotImplementedException();
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                _context.DecorativeColumns.Attach(decorativeColumn);
+                _context.DecorativeColumns.Remove(decorativeColumn);
+                _context.SaveChanges();
+            }
         }
     }
 }

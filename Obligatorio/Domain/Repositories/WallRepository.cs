@@ -29,9 +29,14 @@ namespace Domain.Repositories
             throw new NotImplementedException();
         }
 
-        public void Remove(Grid grid, Wall intersectWall)
+        public void Remove(Grid grid, Wall wall)
         {
-            throw new NotImplementedException();
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                _context.Walls.Attach(wall);
+                _context.Walls.Remove(wall);
+                _context.SaveChanges();
+            }
         }
     }
 }

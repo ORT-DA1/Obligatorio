@@ -22,9 +22,15 @@ namespace Domain.Repositories
             throw new NotImplementedException();
         }
 
-        public bool Exist(Door door)
+        public bool Exist(Grid grid, Door door)
         {
-            throw new NotImplementedException();
+            Door doorToFind = null;
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                doorToFind = _context.Doors.Where(d => (d.GridId == grid.GridId
+                && d.StartPoint == door.StartPoint)).FirstOrDefault();
+            }
+            return !(doorToFind == null);
         }
 
         public List<Door> GetList(Grid grid)
@@ -37,7 +43,12 @@ namespace Domain.Repositories
 
         public void Remove(Grid grid, Door door)
         {
-            throw new NotImplementedException();
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                _context.Doors.Attach(door);
+                _context.Doors.Remove(door);
+                _context.SaveChanges();
+            }
         }
     }
 }

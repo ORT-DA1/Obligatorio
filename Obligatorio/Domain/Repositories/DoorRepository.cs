@@ -3,14 +3,12 @@ using Domain.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Repositories
 {
     public class DoorRepository : IDoorRepository
     {
-        public void AddDoor(Grid grid, Door door)
+        public void Add(Grid grid, Door door)
         {
             using (DatabaseContext _context = new Domain.DatabaseContext())
             {
@@ -18,12 +16,28 @@ namespace Domain.Repositories
                 _context.SaveChanges();
             }
         }
-        public List<Door> GetAllDoors(Grid grid)
+
+        public int Count(Grid grid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Exist(Door door)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Door> GetList(Grid grid)
         {
             using (DatabaseContext _context = new Domain.DatabaseContext())
             {
                 return _context.DecorativeColumns.Where(d => d.GridId == grid.GridId).ToList();
             }
+        }
+
+        public void Remove(Grid grid, Door door)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -5,7 +5,10 @@ namespace Domain.Interface
 {
     public interface IWallBeamRepository
     {
-        void AddWallBeam(Grid grid, WallBeam wallBeam);
-        List<WallBeam> GetAllWallBeams(Grid grid);
+        void Add(Grid grid, WallBeam wallBeam);
+        int Count(Grid grid);
+        void Remove(Grid grid, WallBeam wallBeam);
+        WallBeam Get(Grid grid, Point startUbicationPoint);
+        List<WallBeam> GetList(Grid grid);
     }
 }

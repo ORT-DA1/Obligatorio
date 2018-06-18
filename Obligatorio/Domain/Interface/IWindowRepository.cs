@@ -5,7 +5,10 @@ namespace Domain.Interface
 {
     public interface IWindowRepository
     {
-        void AddWindow(Grid grid, Window window);
-        List<Window> GetAllWindows(Grid grid);
+        void Add(Grid grid, Window window);
+        List<Window> GetList(Grid grid);
+        int Count(Grid grid);
+        bool Exist(Grid grid, Window window);
+        void Remove(Grid grid, Window window);
     }
 }

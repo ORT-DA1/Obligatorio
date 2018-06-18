@@ -13,14 +13,28 @@ namespace Domain.Logic
         private IWindowRepository windowRepository;
         public void Add(Grid grid, Window window)
         {
-            this.windowRepository.AddWindow(grid, window);
+            this.windowRepository.Add(grid, window);
         }
 
         public List<Window> GetList(Grid grid)
         {
-            List<Window> windowList = windowRepository.GetAllWindows(grid);
-            //
+            List<Window> windowList = windowRepository.GetList(grid);
             return windowList;
+        }
+
+        public void Remove(Grid grid, Window window)
+        {
+            windowRepository.Remove(grid, window);
+        }
+
+        public bool Exist(Grid grid, Window window)
+        {
+            return windowRepository.Exist(grid, window);
+        }
+
+        public int Count(Grid grid)
+        {
+            return windowRepository.Count(grid);
         }
     }
 

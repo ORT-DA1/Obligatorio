@@ -2,12 +2,13 @@
 using Domain.Interface;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Domain.Repositories
 {
     public class WindowRepository : IWindowRepository
     {
-        public void AddWindow(Grid grid, Window window)
+        public void Add(Grid grid, Window window)
         {
             using (DatabaseContext _context = new Domain.DatabaseContext())
             {
@@ -16,7 +17,17 @@ namespace Domain.Repositories
             }
         }
 
-        public List<Window> GetAllWindows(Grid grid)
+        public int Count(Grid grid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Exist(Grid grid, Window window)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Window> GetList(Grid grid)
         {
             using (DatabaseContext _context = new Domain.DatabaseContext())
             {
@@ -24,5 +35,9 @@ namespace Domain.Repositories
             }
         }
 
+        public void Remove(Grid grid, Window window)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

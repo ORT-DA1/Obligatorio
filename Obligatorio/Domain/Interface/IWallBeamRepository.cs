@@ -1,9 +1,11 @@
-﻿using Domain.Entities;
+﻿using System.Collections.Generic;
+using Domain.Entities;
 
 namespace Domain.Interface
 {
     public interface IWallBeamRepository
     {
-        void AddWallBeam(WallBeam wallBeam);
+        void AddWallBeam(Grid grid, WallBeam wallBeam);
+        List<WallBeam> GetAllWallBeams(Grid grid);
     }
 }

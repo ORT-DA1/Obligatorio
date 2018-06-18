@@ -2,6 +2,7 @@
 using Domain.Interface;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace Domain.Repositories
 {
@@ -35,9 +36,25 @@ namespace Domain.Repositories
             }
         }
 
+        public bool Exist(Grid grid, WallBeam wallBeam)
+        {
+            WallBeam wallBeamToFind = null;
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                wallBeamToFind = _context.WallBeams.Where(w => (w.GridId == grid.GridId
+                && w.UbicationPoint == wallBeam.UbicationPoint)).FirstOrDefault();
+            }
+            return !(wallBeamToFind == null);
+        }
+
         public void Remove(Grid grid, WallBeam wallBeam)
         {
-            throw new NotImplementedException();
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                _context.WallBeams.Attach(wallBeam);
+                _context.WallBeams.Remove(wallBeam);
+                _context.SaveChanges();
+            }
         }
     }
 }

@@ -19,21 +19,21 @@ namespace Domain.Entities
         public int Width { get; set; }
         public List<Wall> Walls { get; set; }
         public List<WallBeam> WallBeams { get; set; }
-        public List<DecorativeColumn> DecorativeColumns { get; set; }
+        public virtual IList<DecorativeColumn> DecorativeColumns { get; set; }
         public List<Window> Windows { get; set; }
         public List<Door> Doors { get; set; }
         public static int PixelConvertor = 25;
         public int MaxMeters = 5;
 
         public GridHandler GRID_HANDLER;
-       
-        public Grid() {
+        public WallHandler WALL_HANDLER;
+        public DoorHandler DOOR_HANDLER;
+        public WallBeamHandler WALLBEAM_HANDLER;
+        public WindowHandler WINDOW_HANDLER;
+        public DecorativeColumnHandler DECORATIVECOLUMN_HANDLER;
 
-            this.Walls = new List<Wall>();
-            this.WallBeams = new List<WallBeam>();
-            this.DecorativeColumns = new List<DecorativeColumn>();
-            this.Windows = new List<Window>();
-            this.Doors = new List<Door>();
+        public Grid()
+        {
         }
 
         public Grid(string gridName, Client client, int height, int width)
@@ -53,7 +53,7 @@ namespace Domain.Entities
 
         public void DrawWalls(Graphics graphic)
         {
-            foreach (Wall wall in Walls)
+            foreach (Wall wall in WALL_HANDLER.GetList(this))
             {
                 wall.Draw(graphic);
             }
@@ -61,7 +61,7 @@ namespace Domain.Entities
 
         public void DrawDoors(Graphics graphic)
         {
-            foreach (Door door in Doors)
+            foreach (Door door in DOOR_HANDLER.GetList(this))
             {
                 door.Draw(graphic);
             }
@@ -77,7 +77,7 @@ namespace Domain.Entities
 
         public void DrawDecorativeColumns(Graphics graphic)
         {
-            foreach (DecorativeColumn decorativeColumn in DecorativeColumns)
+            foreach (DecorativeColumn decorativeColumn in DECORATIVECOLUMN_HANDLER.GetList(this))
             {
                 decorativeColumn.Draw(graphic);
             }
@@ -85,7 +85,7 @@ namespace Domain.Entities
 
         public void DrawWindows(Graphics graphic)
         {
-            foreach (Window window in Windows)
+            foreach (Window window in WINDOW_HANDLER.GetList(this))
             {
                 window.Draw(graphic);
             }
@@ -93,7 +93,6 @@ namespace Domain.Entities
 
         public void AddWall(Graphics graphic, Wall wall)
         {
-            this.IsValid(wall);
             if (IsCuttingAWallBeforeMaximum(wall))
             {
                 AddWallIfCutting(graphic, wall);
@@ -111,8 +110,7 @@ namespace Domain.Entities
         private void AddWallNormal(Graphics graphic, Wall wall)
         {
             wall.Draw(graphic);
-            GRID_HANDLER.AddWall(this, wall);
-            this.Walls.Add(wall);
+            WALL_HANDLER.Add(this, wall);
             AddWallBeam(graphic, wall.startUbicationPoint);
             AddWallBeam(graphic, wall.endUbicationPoint);
         }
@@ -123,7 +121,7 @@ namespace Domain.Entities
             Wall anotherWall = new Wall(wall.startUbicationPoint, calculatedPoint);
             AddWallBeam(graphic, anotherWall.startUbicationPoint);
             AddWallBeam(graphic, anotherWall.endUbicationPoint);
-            this.Walls.Add(anotherWall);
+            WALL_HANDLER.Add(this, anotherWall);
             anotherWall.Draw(graphic);
             Wall newWall = new Wall(calculatedPoint, wall.endUbicationPoint);
             AddWall(graphic, newWall);
@@ -140,7 +138,7 @@ namespace Domain.Entities
             AddWallBeam(graphic, newWall.startUbicationPoint);
             AddWallBeam(graphic, newWall.endUbicationPoint);
             newWall.Draw(graphic);
-            this.Walls.Add(newWall);
+            WALL_HANDLER.Add(this, newWall);
             Wall anotherWall = new Wall(intersection, wall.endUbicationPoint);
             AddWall(graphic, anotherWall);
         }
@@ -149,17 +147,18 @@ namespace Domain.Entities
         {
             Wall newWall = new Wall(intersectWall.startUbicationPoint, intersection);
             Wall anotherNewWall = new Wall(intersection, intersectWall.endUbicationPoint);
-            this.Walls.Remove(intersectWall);
-            this.Walls.Add(newWall);
-            this.Walls.Add(anotherNewWall);
+            WALL_HANDLER.Remove(this, intersectWall);
+            WALL_HANDLER.Add(this, newWall);
+            WALL_HANDLER.Add(this, anotherNewWall);
         }
 
+        //-------------------------------------------------------------------------------
         private Wall FirstIntersectWall(Wall wall)
         {
             Wall returnWall = new Wall(new Point(-1, -1), new Point(-1, -1));
             foreach (Point point in wall.Path)
             {
-                foreach (Wall anotherWall in Walls)
+                foreach (Wall anotherWall in WALL_HANDLER.GetList(this))
                 {
                     foreach (Point anotherPoint in anotherWall.Path)
                     {
@@ -238,7 +237,7 @@ namespace Domain.Entities
         {
             if (wall.isHorizontalWall())
             {
-                if (point.Equals(anotherPoint) && !point.Equals(wall.startUbicationPoint) 
+                if (point.Equals(anotherPoint) && !point.Equals(wall.startUbicationPoint)
                     && !point.Equals(wall.Path.Last())
                 && (anotherPoint.X - wall.startUbicationPoint.X) < 125)
                     return true;
@@ -258,78 +257,7 @@ namespace Domain.Entities
             return ((wall.isHorizontalWall() && anotherWall.isVerticalWall())
                 || wall.isVerticalWall() && anotherWall.isHorizontalWall());
         }
-
-        public void IsValid(Wall wall)
-        {
-            this.NoDecorativeColumnInterrupting(wall);
-            this.StartPointAndEndPointAreDifferent(wall);
-            this.HorizontalOrVertical(wall);
-            this.AlreadyExistWall(wall);
-            this.ContainedIn(wall);
-        }
-
-        private void NoDecorativeColumnInterrupting(Wall wall)
-        {
-            foreach (Point point in wall.Path)
-            {
-                foreach (DecorativeColumn decorativeColumn in this.DecorativeColumns)
-                {
-                    if(decorativeColumn.UbicationPoint.X.Equals(point.X) && decorativeColumn.UbicationPoint.Y.Equals(point.Y))
-                        throw new ExceptionController(ExceptionMessage.WALL_INVALID);
-                }
-            }
-        }
-
-        private void StartPointAndEndPointAreDifferent(Wall wall)
-        {
-            if (wall.startUbicationPoint.Equals(wall.endUbicationPoint))
-            {
-                throw new ExceptionController(ExceptionMessage.WALL_INVALID);
-            }
-        }
-
-        public void HorizontalOrVertical(Wall wall)
-        {
-            if (!wall.isHorizontalWall() && !wall.isVerticalWall())
-            {
-                throw new ExceptionController(ExceptionMessage.WALL_INVALID);
-            }
-        }
-
-        public void AlreadyExistWall(Wall wall)
-        {
-            if (this.Walls.Contains(wall))
-            {
-                throw new ExceptionController(ExceptionMessage.WALL_ALREADY_EXSIST);
-            }
-        }
-
-        private void ContainedIn(Wall wall)
-        {
-            foreach (Wall anotherWall in Walls)
-            {
-                if (HasTwoPointsInCommon(wall, anotherWall))
-                {
-                    throw new ExceptionController(ExceptionMessage.WALL_INVALID);
-                }
-            }
-        }
-
-        public bool HasTwoPointsInCommon(Wall wall, Wall anotherWall)
-        {
-            int commonPoints = 0;
-            foreach (Point point in wall.Path)
-            {
-                foreach (Point anotherPoint in anotherWall.Path)
-                {
-                    if (point.Equals(anotherPoint))
-                        commonPoints++;
-                }
-                if (commonPoints > 1)
-                    return true;
-            }
-            return commonPoints > 1;
-        }
+        
 
         public Point FirstIntersection(Wall wall)
         {
@@ -353,7 +281,7 @@ namespace Domain.Entities
             if (FreePosition(ubicationPoint))
             {
                 WallBeam wallBeam = new WallBeam(ubicationPoint);
-                this.WallBeams.Add(wallBeam);
+                WALLBEAM_HANDLER.Add(this, wallBeam);
                 wallBeam.Draw(graphic);
             }
         }
@@ -362,10 +290,10 @@ namespace Domain.Entities
         {
             if (FreePosition(ubicationPoint))
             {
-                if (noWallInPosition(ubicationPoint)) { 
+                if (noWallInPosition(ubicationPoint))
+                {
                     DecorativeColumn decorativeColumn = new DecorativeColumn(ubicationPoint);
-                    GRID_HANDLER.AddDecorativeColumn(this, decorativeColumn);
-                    //this.DecorativeColumns.Add(decorativeColumn);
+                    DECORATIVECOLUMN_HANDLER.Add(this, decorativeColumn);
                     decorativeColumn.Draw(graphic);
                 }
             }
@@ -398,7 +326,7 @@ namespace Domain.Entities
             WallBeam startWallBeam = GetWallBeam(wall.startUbicationPoint);
             WallBeam endWallBeam = GetWallBeam(wall.endUbicationPoint);
             DeleteElementsInAWall(wall);
-            this.Walls.Remove(wall);
+            WALL_HANDLER.Remove(this, wall);
             RemoveWallBeam(startWallBeam);
             RemoveWallBeam(endWallBeam);
         }
@@ -576,7 +504,7 @@ namespace Domain.Entities
         public int AmountCostWall()
         {
             int result = 0;
-            foreach(Wall wall in Walls)
+            foreach (Wall wall in Walls)
             {
                 result += MetersWallCount() * Wall.CostPriceMeterWall.Item1;
             }

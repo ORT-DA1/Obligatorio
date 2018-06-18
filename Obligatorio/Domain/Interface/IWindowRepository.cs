@@ -1,9 +1,11 @@
-﻿using Domain.Entities;
+﻿using System.Collections.Generic;
+using Domain.Entities;
 
 namespace Domain.Interface
 {
     public interface IWindowRepository
     {
-        void AddWindow(Window window);
+        void AddWindow(Grid grid, Window window);
+        List<Window> GetAllWindows(Grid grid);
     }
 }

@@ -24,20 +24,31 @@ namespace Domain.Repositories
 
         public bool Exist(Grid grid, Window window)
         {
-            throw new NotImplementedException();
+            Window windowToFind = null;
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                windowToFind = _context.Windows.Where(w => (w.GridId == grid.GridId
+                && w.StartPoint == window.StartPoint)).FirstOrDefault();
+            }
+            return !(windowToFind == null);
         }
 
         public List<Window> GetList(Grid grid)
         {
             using (DatabaseContext _context = new Domain.DatabaseContext())
             {
-                return _context.Windows.Where(d => d.GridId == grid.GridId).ToList();
+                return _context.Windows.Where(w => w.GridId == grid.GridId).ToList();
             }
         }
 
         public void Remove(Grid grid, Window window)
         {
-            throw new NotImplementedException();
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                _context.Windows.Attach(window);
+                _context.Windows.Remove(window);
+                _context.SaveChanges();
+            }
         }
     }
 }

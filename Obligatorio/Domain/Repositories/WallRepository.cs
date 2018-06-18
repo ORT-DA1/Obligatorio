@@ -2,12 +2,13 @@
 using Domain.Interface;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Domain.Repositories
 {
     public class WallRepository : IWallRepository
     {
-        public void AddWall(Grid grid, Wall wall)
+        public void Add(Grid grid, Wall wall)
         {
             using (DatabaseContext _context = new Domain.DatabaseContext())
             {
@@ -21,6 +22,16 @@ namespace Domain.Repositories
             {
                 return _context.Walls.Where(d => d.GridId == grid.GridId).ToList();
             }
+        }
+
+        public List<Wall> GetList(Grid grid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(Grid grid, Wall intersectWall)
+        {
+            throw new NotImplementedException();
         }
     }
 }

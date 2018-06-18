@@ -23,8 +23,7 @@ namespace Domain.Logic
         public void Add(Grid grid,Wall element)
         {
             IsValid(grid, element);
-            //validaciones
-            this.wallRepository.AddWall(grid, element);
+            wallRepository.Add(grid, element);
         }
 
         public void IsValid(Grid grid, Wall wall)
@@ -100,14 +99,12 @@ namespace Domain.Logic
 
         public List<Wall> GetList(Grid grid)
         {
-            List<Wall> wallList = wallRepository.GetAllWalls(grid);
-            //
-            return wallList;
+            return wallRepository.GetList(grid);
         }
 
-        internal void Remove(Grid grid, Wall intersectWall)
+        public void Remove(Grid grid, Wall intersectWall)
         {
-            throw new NotImplementedException();
+            wallRepository.Remove(grid, intersectWall);
         }
     }
 }

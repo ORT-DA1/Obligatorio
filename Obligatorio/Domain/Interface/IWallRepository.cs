@@ -5,7 +5,8 @@ namespace Domain.Interface
 {
     public interface IWallRepository
     {
-        void AddWall(Grid grid, Wall wall);
-        List<Wall> GetAllWalls(Grid grid);
+        void Add(Grid grid, Wall wall);
+        List<Wall> GetList(Grid grid);
+        void Remove(Grid grid, Wall intersectWall);
     }
 }

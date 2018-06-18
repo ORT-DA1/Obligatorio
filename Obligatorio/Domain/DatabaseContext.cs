@@ -30,6 +30,7 @@ namespace Domain
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Grid>().Ignore(g => g.GridStrategy);
+
         }
     }
 }

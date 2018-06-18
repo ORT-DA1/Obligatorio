@@ -11,7 +11,8 @@ namespace Domain.Entities
         public int WallId { get; set; }
         public Point startUbicationPoint { get; set; }
         public Point endUbicationPoint { get; set; }
-        public List<Point> Path { get; set; }
+        public List<Domain.Entities.Point> Path { get; set; }
+
         private Pen wallPen;
 
         public static Tuple<int, int> CostPriceMeterWall = new Tuple<int, int>(50, 100);

@@ -8,7 +8,7 @@ namespace Domain.Interface
         void Add(Grid grid, WallBeam wallBeam);
         int Count(Grid grid);
         void Remove(Grid grid, WallBeam wallBeam);
-        WallBeam Get(Grid grid, Point startUbicationPoint);
         List<WallBeam> GetList(Grid grid);
+        WallBeam Get(Grid grid, WallBeam wallBeamToFind);
     }
 }

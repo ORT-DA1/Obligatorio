@@ -4,6 +4,7 @@ using Gui.Interface;
 using Domain.Entities;
 using Domain.Logic;
 using Domain.Exceptions;
+using Domain.Repositories;
 
 namespace Gui.UserControls.MyAccount
 {
@@ -39,14 +40,7 @@ namespace Gui.UserControls.MyAccount
         {
             try
             {
-                this.client.Username = this.userNameTxt.Text;
-                this.client.Password = this.passwordTxt.Text;
-                this.client.Name = this.nameTxt.Text;
-                this.client.Surname = this.surnameTxt.Text;
-                this.client.IdentityCard = this.idTxt.Text;
-                this.client.Phone = this.phoneTxt.Text;
-                this.client.Address = this.addressTxt.Text;
-
+                SetFieldValues();
                 DialogResult dialogResult = MessageBox.Show("Esta seguro que desea Modificar su Contraseña?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.OK)
                 {
@@ -60,6 +54,17 @@ namespace Gui.UserControls.MyAccount
                 MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void SetFieldValues()
+        {
+            this.client.Username = this.userNameTxt.Text;
+            this.client.Password = this.passwordTxt.Text;
+            this.client.Name = this.nameTxt.Text;
+            this.client.Surname = this.surnameTxt.Text;
+            this.client.IdentityCard = this.idTxt.Text;
+            this.client.Phone = this.phoneTxt.Text;
+            this.client.Address = this.addressTxt.Text;
+        }
+
         private Client fetchValues()
         {
             return new Client(

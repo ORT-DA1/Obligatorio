@@ -11,17 +11,21 @@ using Domain.Logic;
 using Domain.Entities;
 using Gui.Interface;
 using Domain.Exceptions;
+using Domain.Repositories;
 
 namespace Gui.UserControls.ABMDesignerScreen
 {
     public partial class ABMDesignerScreenModify : UserControl, IController
     {
         private DesignerHandler handler;
+        private UserRepository userRepository;
         private Designer _selectedDesigner;
+       
         public ABMDesignerScreenModify()
         {
             InitializeComponent();
             this.handler = new DesignerHandler();
+            this.userRepository = new UserRepository();
             this.AccessibleName = "Modificar";
             this.titleLbl.Text = "Modificar Diseñador";
             SetUpEnvironment();
@@ -90,13 +94,10 @@ namespace Gui.UserControls.ABMDesignerScreen
 
         private void modifyDesigner(object sender, EventArgs e)
         {
-            this._selectedDesigner = (Designer)this.designerList.SelectedItem;
             try
             {
-                //this._selectedDesigner.Username = this.userNameTxt.Text;
-                //this._selectedDesigner.Password = this.passwordTxt.Text;
-                //this._selectedDesigner.Name = this.nameTxt.Text;
-                //this._selectedDesigner.Surname = this.surnameTxt.Text;
+                ValidateUser();
+                SetFieldValues();
 
                 DialogResult dialogResult = MessageBox.Show("Esta seguro que desea Modificar este Diseñador?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.OK)
@@ -111,7 +112,24 @@ namespace Gui.UserControls.ABMDesignerScreen
             {
                 String message = Exception.Message;
                 MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadDataIntoFields();
+                SetUpEnvironment();
             }
+        }
+        private void ValidateUser()
+        {
+            if (this.userNameTxt.Text != _selectedDesigner.Username)
+            {
+                this.userRepository.UserExist(this.userNameTxt.Text);
+            }
+        }
+
+        private void SetFieldValues()
+        {
+            this._selectedDesigner.Username = this.userNameTxt.Text;
+            this._selectedDesigner.Password = this.passwordTxt.Text;
+            this._selectedDesigner.Name = this.nameTxt.Text;
+            this._selectedDesigner.Surname = this.surnameTxt.Text;
         }
     }
 }

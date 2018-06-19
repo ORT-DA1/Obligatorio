@@ -10,16 +10,17 @@ namespace Domain.Logic
 {
     public class DecorativeColumnHandler : IElementHandler<DecorativeColumn>
     {
+        private GridHandler gridHandler;
         private IDecorativeColumnRepository decorativeColumnRepository;
         public void Add(Grid grid, DecorativeColumn decorativeColumn)
         {
+            decorativeColumn.GridId = gridHandler.Get(grid).GridId;
             this.decorativeColumnRepository.Add(grid, decorativeColumn);
         }
 
         public List<DecorativeColumn> GetList(Grid grid)
         {
-            List<DecorativeColumn> decorativeColumnList = decorativeColumnRepository.GetList(grid);
-            return decorativeColumnList;
+            return decorativeColumnRepository.GetList(grid);
         }
 
         public void Remove(Grid grid, DecorativeColumn decorativeColumn)
@@ -29,7 +30,7 @@ namespace Domain.Logic
 
         public bool Exist(Grid grid, DecorativeColumn decorativeColumn)
         {
-            return decorativeColumnRepository.Exist(decorativeColumn); 
+            return decorativeColumnRepository.Exist(grid, decorativeColumn); 
         }
 
         public int Count(Grid grid)

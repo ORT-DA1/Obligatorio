@@ -29,8 +29,9 @@ namespace Domain.Repositories
         {
             using (DatabaseContext _context = new DatabaseContext())
             {
-                _context.Architects.Attach(architect);
-                _context.Architects.Remove(architect);
+                var architectToDelete = _context.Architects.Where(a => a.Username == architect.Username && a.ArchitectId == architect.ArchitectId).FirstOrDefault();
+                _context.Architects.Remove(architectToDelete);
+                _context.SaveChanges();
             }
         }
         public bool ArchitectExists(Architect architect)

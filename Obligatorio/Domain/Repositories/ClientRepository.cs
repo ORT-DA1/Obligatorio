@@ -29,8 +29,8 @@ namespace Domain.Repositories
         {
             using (DatabaseContext _context = new DatabaseContext())
             {
-                _context.Clients.Attach(client);
-                _context.Clients.Remove(client);
+                var contactToDelete = _context.Clients.Where(c => (c.IdentityCard == client.IdentityCard || c.Username == client.Username) && c.ClientId == client.ClientId).FirstOrDefault();
+                _context.Clients.Remove(contactToDelete);
                 _context.SaveChanges();
             }
         }
@@ -47,7 +47,7 @@ namespace Domain.Repositories
         {
             using (DatabaseContext _context = new DatabaseContext())
             {
-                return _context.Clients.First(client => client.Equals(clientToFind));
+                return _context.Clients.Where(c => (c.IdentityCard == clientToFind.IdentityCard || c.Username == clientToFind.Username) && c.ClientId != clientToFind.ClientId).FirstOrDefault();
             }
         }
         public List<Client> GetAllClients()

@@ -29,8 +29,9 @@ namespace Domain.Repositories
         {
             using (DatabaseContext _context = new DatabaseContext())
             {
-                _context.Designers.Attach(designer);
-                _context.Designers.Remove(designer);
+                var designerToDelete = _context.Designers.Where(d => d.Username == designer.Username && d.DesignerId == designer.DesignerId).FirstOrDefault();
+                _context.Designers.Remove(designerToDelete);
+                _context.SaveChanges();
             }
         }
         public bool DesignerExists(Designer designer)

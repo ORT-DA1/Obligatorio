@@ -11,8 +11,11 @@ namespace Domain.Entities
     [Table(name: "DecorativeColumns")]
     public class DecorativeColumn : Element
     {
+        #region PK and FK
         public int DecorativeColumnId { get; set; }
-        public virtual Grid Grid { get; set; }
+        public int GridId { get; set; }
+        #endregion
+
         public Point UbicationPoint { get; set; }
         private SolidBrush wallBeamBrush;
         public float width { get; set; }

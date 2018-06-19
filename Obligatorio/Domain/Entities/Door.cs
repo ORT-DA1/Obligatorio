@@ -7,8 +7,10 @@ namespace Domain.Entities
     [Table(name: "Doors")]
     public class Door : Element
     {
+        #region PK and FK
         public int DoorId { get; set; }
-        public virtual Grid Grid { get; set; }
+        public int GridId { get; set; }
+        #endregion
 
         public Domain.Entities.Point StartPoint { get; set; }
         public Domain.Entities.Point EndPoint;

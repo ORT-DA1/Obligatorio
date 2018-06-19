@@ -7,8 +7,11 @@ namespace Domain.Entities
     [Table(name: "WallBeams")]
     public class WallBeam : Element
     {
+        #region PK and FK
         public int WallBeamId { get; set; }
-        public virtual Grid Grid { get; set; }
+        public int GridId { get; set; }
+        #endregion
+
         public Point UbicationPoint { get; set; }
 
         private SolidBrush wallBeamBrush;

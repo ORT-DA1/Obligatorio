@@ -7,12 +7,16 @@ namespace Domain.Entities
     [Table(name: "Windows")]
     public class Window : Element
     {
+        #region PK and FK
         public int WindowId { get; set; }
-        public Point StartPoint;
-        public Point EndPoint;
+        public int GridId { get; set; }
+        #endregion
+
+        public Domain.Entities.Point StartPoint { get; set; }
+        public Domain.Entities.Point EndPoint;
         public string sense;
-        public float width = 0.80f;
-        public float high = 1.00f;
+        public float width { get; set; }
+        public float high { get; set; }
         public static float MINIMUM_WIDTH = 0.8f;
         public static int MINIMUM_WIDTH_IN_PIXELS = 10;
         public static float MAXIMUM_WIDTH = 3.00f;
@@ -34,6 +38,8 @@ namespace Domain.Entities
             this.sense = sense;
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;
+            this.width = 0.80f;
+            this.high = 1.00f;
         }
 
         public Window(Point startPoint, Point endPoint, string sense, float width, float high, string name)

@@ -17,11 +17,15 @@ namespace Domain.Entities
         public Client Client { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
-        public List<Wall> Walls { get; set; }
-        public List<WallBeam> WallBeams { get; set; }
-        public virtual IList<DecorativeColumn> DecorativeColumns { get; set; }
-        public List<Window> Windows { get; set; }
-        public List<Door> Doors { get; set; }
+
+        #region navigation
+        public virtual List<Wall> Walls { get; set; }
+        public virtual List<WallBeam> WallBeams { get; set; }
+        public virtual List<DecorativeColumn> DecorativeColumns { get; set; }
+        public virtual List<Window> Windows { get; set; }
+        public virtual List<Door> Doors { get; set; }
+        #endregion
+
         public static int PixelConvertor = 25;
         public int MaxMeters = 5;
 

@@ -8,10 +8,14 @@ namespace Domain.Entities
     [Table(name: "Walls")]
     public class Wall : Element
     {
+        #region PK and FK
         public int WallId { get; set; }
+        public int GridId { get; set; }
+        #endregion
+
         public Point startUbicationPoint { get; set; }
         public Point endUbicationPoint { get; set; }
-        public List<Domain.Entities.Point> Path { get; set; }
+        public virtual List<Domain.Entities.Point> Path { get; set; }
 
         private Pen wallPen;
 

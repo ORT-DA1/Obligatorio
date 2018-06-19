@@ -7,8 +7,13 @@ namespace Domain.Entities
     [Table(name: "WallBeams")]
     public class WallBeam : Element
     {
+        #region PK and FK
         public int WallBeamId { get; set; }
+        public int GridId { get; set; }
+        #endregion
+
         public Point UbicationPoint { get; set; }
+
         private SolidBrush wallBeamBrush;
 
         public static Tuple<int, int> CostPriceWallBeam = new Tuple<int, int>(50, 100);

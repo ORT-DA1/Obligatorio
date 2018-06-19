@@ -7,13 +7,17 @@ namespace Domain.Entities
     [Table(name: "Doors")]
     public class Door : Element
     {
+        #region PK and FK
         public int DoorId { get; set; }
-        public Point StartPoint;
-        public Point EndPoint;
+        public int GridId { get; set; }
+        #endregion
+
+        public Domain.Entities.Point StartPoint { get; set; }
+        public Domain.Entities.Point EndPoint;
         public int direction;
         public string sense;
-        public float width = 0.85f;
-        public float high = 2.20f;
+        public float width { get; set; }
+        public float high { get; set; }
         public static float MINIMUM_WIDTH = 0.85f;
         public static int MINIMUM_WIDTH_IN_PIXELS = 15;
         public static float MAXIMUM_WIDTH = 3.00f;
@@ -31,6 +35,9 @@ namespace Domain.Entities
             this.direction = 0;
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;
+
+            this.width = 0.85f;
+            this.high = 2.20f;
         }
 
         public Door(Point startPoint, Point endPoint, string sense, float width, float high, string name)

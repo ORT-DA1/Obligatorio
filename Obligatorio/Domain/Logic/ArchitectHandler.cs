@@ -32,7 +32,6 @@ namespace Domain.Logic
         }
         public void Delete(Architect architect)
         {
-            NotExist(architect);
             this.architectRepository.DeleteArchitect(architect);
         }
         public void Exist(Architect architect)

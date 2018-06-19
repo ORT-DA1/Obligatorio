@@ -33,7 +33,6 @@ namespace Domain.Logic
 
         public void Delete(Client client)
         {
-            NotExist(client);
             this.clientRepository.DeleteClient(client);
         }
         public void Exist(Client client)

@@ -7,7 +7,6 @@ namespace Domain.Logic
 {
     public class WallBeamHandler : IElementHandler<WallBeam>
     {
-
         private GridHandler gridHandler;
         private IWallBeamRepository wallBeamRepository;
         

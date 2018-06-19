@@ -85,9 +85,11 @@ namespace Gui.Forms
             {
                 ABMArchitectScreenAdd architectScreenAdd = new ABMArchitectScreenAdd();
                 ABMArchitectScreenModify architectScreenModify = new ABMArchitectScreenModify();
+                ABMArchitectScreenDelete architectScreenDelete = new ABMArchitectScreenDelete();
 
                 architectABMNode.UserActions.Add(architectScreenAdd);
                 architectABMNode.UserActions.Add(architectScreenModify);
+                architectABMNode.UserActions.Add(architectScreenDelete);
 
                 this.menuNodeList.Add(architectABMNode);
             }

@@ -7,16 +7,18 @@ namespace Domain.Logic
 {
     public class DoorHandler : IElementHandler<Door>
     {
+
+        private GridHandler gridHandler;
         private IDoorRepository doorRepository;
         public void Add(Grid grid, Door door)
         {
+            door.GridId = gridHandler.Get(grid).GridId;
             this.doorRepository.Add(grid, door);
         }
 
         public List<Door> GetList(Grid grid)
         {
-            List<Door> doorList = doorRepository.GetList(grid);
-            return doorList;
+            return doorRepository.GetList(grid);
         }
 
         public void Remove(Grid grid, Door door)
@@ -26,7 +28,7 @@ namespace Domain.Logic
 
         public bool Exist(Grid grid, Door door)
         {
-            return doorRepository.Exist(door);
+            return doorRepository.Exist(grid, door);
         }
 
         public int Count(Grid grid)

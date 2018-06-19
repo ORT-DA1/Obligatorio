@@ -16,25 +16,32 @@ namespace Domain.Repositories
                 _context.SaveChanges();
             }
         }
-        public List<Wall> GetAllWalls(Grid grid)
-        {
-            using (DatabaseContext _context = new Domain.DatabaseContext())
-            {
-                return _context.Walls.Where(d => d.GridId == grid.GridId).ToList();
-            }
-        }
 
         public List<Wall> GetList(Grid grid)
         {
-            throw new NotImplementedException();
+            List<Wall> wallList = null;
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                wallList = _context.Walls
+                    .Where(w => 
+                    w.GridId == grid.GridId)
+                    .ToList();
+            }
+            return wallList;
         }
 
         public void Remove(Grid grid, Wall wall)
         {
+            Wall wallToDelete = null;
             using (DatabaseContext _context = new DatabaseContext())
             {
-                _context.Walls.Attach(wall);
-                _context.Walls.Remove(wall);
+                wallToDelete = _context.Walls
+                    .Where(d =>
+                    (d.GridId == grid.GridId && d.WallId == wall.WallId))
+                    .FirstOrDefault();
+
+                _context.Walls.Attach(wallToDelete);
+                _context.Walls.Remove(wallToDelete);
                 _context.SaveChanges();
             }
         }

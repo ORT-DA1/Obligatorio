@@ -19,7 +19,7 @@ namespace Domain.Repositories
 
         public int Count(Grid grid)
         {
-            throw new NotImplementedException();
+            return this.GetList(grid).Count;
         }
         
         public bool Exist(Grid grid, DecorativeColumn decorativeColumn)
@@ -35,18 +35,29 @@ namespace Domain.Repositories
 
         public List<DecorativeColumn> GetList(Grid grid)
         {
-            using (DatabaseContext _context = new Domain.DatabaseContext())
+            List<DecorativeColumn> decorativeColumnList = null;
+            using (DatabaseContext _context = new DatabaseContext())
             {
-                return _context.DecorativeColumns.Where(d => d.GridId == grid.GridId).ToList();
+                decorativeColumnList = _context.DecorativeColumns
+                    .Where(w =>
+                    w.GridId == grid.GridId)
+                    .ToList();
             }
+            return decorativeColumnList;
         }
 
         public void Remove(Grid grid, DecorativeColumn decorativeColumn)
         {
+            DecorativeColumn decorativeColumnToDelete = null;
             using (DatabaseContext _context = new DatabaseContext())
             {
-                _context.DecorativeColumns.Attach(decorativeColumn);
-                _context.DecorativeColumns.Remove(decorativeColumn);
+                decorativeColumnToDelete = _context.DecorativeColumns
+                    .Where(d =>
+                    (d.GridId == grid.GridId && d.DecorativeColumnId == decorativeColumn.DecorativeColumnId))
+                    .FirstOrDefault();
+
+                _context.DecorativeColumns.Attach(decorativeColumnToDelete);
+                _context.DecorativeColumns.Remove(decorativeColumnToDelete);
                 _context.SaveChanges();
             }
         }

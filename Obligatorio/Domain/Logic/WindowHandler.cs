@@ -10,16 +10,17 @@ namespace Domain.Logic
 {
     public class WindowHandler : IElementHandler<Window>
     {
+        private GridHandler gridHandler;
         private IWindowRepository windowRepository;
         public void Add(Grid grid, Window window)
         {
+            window.GridId = gridHandler.Get(grid).GridId;
             this.windowRepository.Add(grid, window);
         }
 
         public List<Window> GetList(Grid grid)
         {
-            List<Window> windowList = windowRepository.GetList(grid);
-            return windowList;
+            return windowRepository.GetList(grid);
         }
 
         public void Remove(Grid grid, Window window)

@@ -14,7 +14,6 @@ namespace Domain.Repositories
                 _context.WallBeams.Add(wallBeam);
                 _context.SaveChanges();
             }
-
         }
 
         public int Count(Grid grid)

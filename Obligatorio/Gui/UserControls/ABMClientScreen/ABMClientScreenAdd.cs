@@ -4,15 +4,18 @@ using Gui.Interface;
 using Domain.Logic;
 using Domain.Entities;
 using Domain.Exceptions;
+using Domain.Repositories;
 
 namespace Gui.UserControls.ABMClientScreen
 {
     public partial class ABMClientScreenAdd : UserControl, IController
     {
         private ClientHandler handler;
+        private UserRepository userRepository;
         public ABMClientScreenAdd()
         {
             InitializeComponent();
+            this.userRepository = new UserRepository();
             this.handler = new ClientHandler();
             this.AccessibleName = "Agregar";
             this.client_title.Text = "Agregar Cliente";
@@ -28,6 +31,7 @@ namespace Gui.UserControls.ABMClientScreen
             try
             {
                 Client newClient = fetchValues();
+                userRepository.UserExist(newClient.Username);
                 handler.Add(newClient);
                 MessageBox.Show("El cliente " + newClient.Username + " fue ingresado exitosamente al sistema.", "Mensaje de Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ClearForm();

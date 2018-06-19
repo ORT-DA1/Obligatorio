@@ -5,17 +5,20 @@ using Gui.Interface;
 using Domain.Logic;
 using Domain.Entities;
 using System.Collections.Generic;
+using Domain.Repositories;
 
 namespace Gui.UserControls.ABMClientScreen
 {
     public partial class ABMClientScreenModify : UserControl, IController
     {
         private ClientHandler handler;
+        private UserRepository userRepository;
         private Client _selectedClient;
         public ABMClientScreenModify()
         {
             InitializeComponent();
             this.handler = new ClientHandler();
+            this.userRepository = new UserRepository();
             
             this.AccessibleName = "Modificar";
             this.titleTxt.Text = "Modificar Cliente";
@@ -88,17 +91,10 @@ namespace Gui.UserControls.ABMClientScreen
         }
         private void modifyClient(object sender, EventArgs e)
         {
-            _selectedClient = (Client)this.clientList.SelectedItem;
             try
             {
-                this._selectedClient.Username = this.userNameTxt.Text;
-                this._selectedClient.Password = this.passwordTxt.Text;
-                this._selectedClient.Name = this.nameTxt.Text;
-                this._selectedClient.Surname = this.surnameTxt.Text;
-                this._selectedClient.IdentityCard = this.idTxt.Text;
-                this._selectedClient.Phone = this.phoneTxt.Text;
-                this._selectedClient.Address = this.addressTxt.Text;
-
+                ValidateUser();
+                SetFieldValues();
                 DialogResult dialogResult = MessageBox.Show("Esta seguro que desea Modificar este Cliente?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.OK)
                 {
@@ -115,6 +111,24 @@ namespace Gui.UserControls.ABMClientScreen
                 LoadClientsIntoList();
                 SetUpEnvironment();
             }
+        }
+
+        private void ValidateUser()
+        {
+            if (this.userNameTxt.Text != _selectedClient.Username)
+            {
+                this.userRepository.UserExist(this.userNameTxt.Text);
+            }
+        }
+        private void SetFieldValues()
+        {
+            this._selectedClient.Username = this.userNameTxt.Text;
+            this._selectedClient.Password = this.passwordTxt.Text;
+            this._selectedClient.Name = this.nameTxt.Text;
+            this._selectedClient.Surname = this.surnameTxt.Text;
+            this._selectedClient.IdentityCard = this.idTxt.Text;
+            this._selectedClient.Phone = this.phoneTxt.Text;
+            this._selectedClient.Address = this.addressTxt.Text;
         }
     }
 }

@@ -7,10 +7,12 @@ namespace Domain.Logic
 {
     public class WallBeamHandler : IElementHandler<WallBeam>
     {
+        private GridHandler gridHandler;
         private IWallBeamRepository wallBeamRepository;
         
         public void Add(Grid grid, WallBeam wallBeam)
         {
+            wallBeam.GridId = gridHandler.Get(grid).GridId;
             this.wallBeamRepository.Add(grid, wallBeam);
         }
 
@@ -21,7 +23,8 @@ namespace Domain.Logic
 
         public WallBeam GetWallBeam(Grid grid, Point startUbicationPoint)
         {
-            return wallBeamRepository.Get(grid, startUbicationPoint);
+            WallBeam wallBeamToFind = new WallBeam(startUbicationPoint);
+            return wallBeamRepository.Get(grid, wallBeamToFind);
         }
 
         public void Remove(Grid grid, WallBeam wallBeam)

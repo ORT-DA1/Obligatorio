@@ -19,7 +19,7 @@ namespace Domain.Repositories
 
         public int Count(Grid grid)
         {
-            throw new NotImplementedException();
+            return this.GetList(grid).Count;
         }
 
         public bool Exist(Grid grid, Door door)
@@ -27,26 +27,39 @@ namespace Domain.Repositories
             Door doorToFind = null;
             using (DatabaseContext _context = new DatabaseContext())
             {
-                doorToFind = _context.Doors.Where(d => (d.GridId == grid.GridId
-                && d.StartPoint == door.StartPoint)).FirstOrDefault();
+                doorToFind = _context.Doors
+                    .Where(d => 
+                    (d.GridId == grid.GridId && d.StartPoint == door.StartPoint))
+                    .FirstOrDefault();
             }
             return !(doorToFind == null);
         }
 
         public List<Door> GetList(Grid grid)
         {
-            using (DatabaseContext _context = new Domain.DatabaseContext())
+            List<Door> doorList = null;
+            using (DatabaseContext _context = new DatabaseContext())
             {
-                return _context.DecorativeColumns.Where(d => d.GridId == grid.GridId).ToList();
+                doorList = _context.Doors
+                    .Where(d =>
+                    d.GridId == grid.GridId)
+                    .ToList();
             }
+            return doorList;
         }
 
         public void Remove(Grid grid, Door door)
         {
+            Door doorToDelete = null;
             using (DatabaseContext _context = new DatabaseContext())
             {
-                _context.Doors.Attach(door);
-                _context.Doors.Remove(door);
+                doorToDelete = _context.Doors
+                    .Where(d =>
+                    (d.GridId == grid.GridId && d.DoorId == door.DoorId))
+                    .FirstOrDefault();
+
+                _context.Doors.Attach(doorToDelete);
+                _context.Doors.Remove(doorToDelete);
                 _context.SaveChanges();
             }
         }

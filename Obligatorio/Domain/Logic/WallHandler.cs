@@ -9,6 +9,8 @@ namespace Domain.Logic
 {
     public class WallHandler : IElementHandler<Wall>
     {
+
+        private GridHandler gridHandler;
         private IWallRepository wallRepository;
         private DecorativeColumnHandler DECORATIVE_HANDLER;
 
@@ -20,10 +22,10 @@ namespace Domain.Logic
 
         private DecorativeColumnHandler DECORATIVECOLUMN_HANDLER;
 
-        public void Add(Grid grid,Wall element)
+        public void Add(Grid grid, Wall wall)
         {
-            IsValid(grid, element);
-            wallRepository.Add(grid, element);
+            wall.GridId = gridHandler.Get(grid).GridId;
+            this.wallRepository.Add(grid, wall);
         }
 
         public void IsValid(Grid grid, Wall wall)

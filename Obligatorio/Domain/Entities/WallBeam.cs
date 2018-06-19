@@ -8,7 +8,9 @@ namespace Domain.Entities
     public class WallBeam : Element
     {
         public int WallBeamId { get; set; }
+        public virtual Grid Grid { get; set; }
         public Point UbicationPoint { get; set; }
+
         private SolidBrush wallBeamBrush;
 
         public static Tuple<int, int> CostPriceWallBeam = new Tuple<int, int>(50, 100);

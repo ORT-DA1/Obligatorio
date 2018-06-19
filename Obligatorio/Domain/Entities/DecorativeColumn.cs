@@ -12,9 +12,10 @@ namespace Domain.Entities
     public class DecorativeColumn : Element
     {
         public int DecorativeColumnId { get; set; }
+        public virtual Grid Grid { get; set; }
         public Point UbicationPoint { get; set; }
         private SolidBrush wallBeamBrush;
-        public float width = 0.50f;
+        public float width { get; set; }
         public static float MINIMUM_WIDTH = 0.85f;
         public static int MINIMUM_WIDTH_IN_PIXELS = 8;
         public static Tuple<int, int> CostPriceDecorativeColumn = new Tuple<int, int>(25, 50);
@@ -23,6 +24,7 @@ namespace Domain.Entities
         {
             this.UbicationPoint = ubicationPoint;
             this.wallBeamBrush = new SolidBrush(Color.Gold);
+            this.width = 0.50f;
         }
 
         public override void ModifyCostAndPrice(int Cost, int Price)

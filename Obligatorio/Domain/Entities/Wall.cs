@@ -9,9 +9,10 @@ namespace Domain.Entities
     public class Wall : Element
     {
         public int WallId { get; set; }
+        public virtual Grid Grid { get; set; }
         public Point startUbicationPoint { get; set; }
         public Point endUbicationPoint { get; set; }
-        public List<Domain.Entities.Point> Path { get; set; }
+        public virtual List<Domain.Entities.Point> Path { get; set; }
 
         private Pen wallPen;
 

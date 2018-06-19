@@ -38,7 +38,7 @@ namespace Domain.Repositories
             Architect architectToFind = null;
             using (DatabaseContext _context = new DatabaseContext())
             {
-                architectToFind = _context.Architects.Where(a => a.Username == architect.Username).FirstOrDefault();
+                architectToFind = _context.Architects.Where(a => (a.Username == architect.Username) && (a.ArchitectId != architect.ArchitectId)).FirstOrDefault();
             }
             return architectToFind == null ? false : true;
         }

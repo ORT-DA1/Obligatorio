@@ -9,7 +9,6 @@ namespace Domain.Logic
 {
     public class WallHandler : IElementHandler<Wall>
     {
-
         private GridHandler gridHandler;
         private IWallRepository wallRepository;
         private DecorativeColumnHandler DECORATIVE_HANDLER;

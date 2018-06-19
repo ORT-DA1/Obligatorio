@@ -19,7 +19,7 @@ namespace Domain.Repositories
 
         public int Count(Grid grid)
         {
-            throw new NotImplementedException();
+            return this.GetList(grid).Count;
         }
 
         public bool Exist(Grid grid, Window window)
@@ -35,18 +35,29 @@ namespace Domain.Repositories
 
         public List<Window> GetList(Grid grid)
         {
-            using (DatabaseContext _context = new Domain.DatabaseContext())
+            List<Window> windowList = null;
+            using (DatabaseContext _context = new DatabaseContext())
             {
-                return _context.Windows.Where(w => w.GridId == grid.GridId).ToList();
+                windowList = _context.Windows
+                    .Where(d =>
+                    d.GridId == grid.GridId)
+                    .ToList();
             }
+            return windowList;
         }
 
         public void Remove(Grid grid, Window window)
         {
+            Window windowToDelete = null;
             using (DatabaseContext _context = new DatabaseContext())
             {
-                _context.Windows.Attach(window);
-                _context.Windows.Remove(window);
+                windowToDelete = _context.Windows
+                    .Where(w =>
+                    (w.GridId == grid.GridId && w.WindowId == window.WindowId))
+                    .FirstOrDefault();
+
+                _context.Windows.Attach(windowToDelete);
+                _context.Windows.Remove(windowToDelete);
                 _context.SaveChanges();
             }
         }

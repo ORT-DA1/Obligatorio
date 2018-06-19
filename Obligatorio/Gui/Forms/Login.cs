@@ -66,43 +66,6 @@ namespace Gui.Forms
         {
             System.Windows.Forms.Application.Exit();
         }
-        private void GenerateData(object sender, EventArgs e)
-        {
-            try
-            {
-                this.GenerateDesigners();
-                this.GenerateClients();
-                String infoMessage = "Se autogeneraron Datos de prueba";
-                MessageBox.Show(infoMessage, "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.generateDataStrip.Enabled = false;
-            }
-            catch (ExceptionController)
-            {
-                String msgError = "Los datos ya han sido generados previamente.";
-                MessageBox.Show(msgError, "Error en Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.generateDataStrip.Enabled = false;
-            }
-        }
-        private void GenerateDesigners()
-        {
-            DesignerHandler designerHandler = new DesignerHandler();
-
-            DateTime validDate = new DateTime(2018, 05, 28, 10, 53, 55);
-            Designer firstDesigner = new Designer("designer", "designer", "Donald", "Trump", validDate, validDate);
-            Designer secondDesigner = new Designer("testDesigner", "qwe123", "Slash", "Jackson", validDate, validDate);
-            designerHandler.Add(firstDesigner);
-            designerHandler.Add(secondDesigner);
-        }
-        private void GenerateClients()
-        {
-            ClientHandler clientHandler = new ClientHandler();
-
-            DateTime validDate = new DateTime(2018, 05, 28, 10, 53, 55);
-            Client firstClient = new Client("client", "client", "Oracle", "Netsuite", "12345678", "234234234", "16 de Abril 1912", validDate, validDate);
-            Client secondClient = new Client("cliente", "cliente", "League", "ofLegends", "54683928", "236234234", "16 de Abril 1912", validDate, validDate);
-            clientHandler.Add(firstClient);
-            clientHandler.Add(secondClient);
-        }
         private void quit(object sender, FormClosingEventArgs e)
         {
             this.Show();

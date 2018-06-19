@@ -32,17 +32,7 @@ namespace Gui.Forms
         {
             try
             {
-                DateTime lastAccess = DateTime.Now;
-
-                this.client.Username = this.userNameTxt.Text;
-                this.client.Password = this.passwordTxt.Text;
-                this.client.Name = this.nameTxt.Text;
-                this.client.Surname = this.surnameTxt.Text;
-                this.client.IdentityCard = this.idTxt.Text;
-                this.client.Phone = this.phoneTxt.Text;
-                this.client.Address = this.addressTxt.Text;
-                this.client.LastAccess = lastAccess;
-
+                SetFieldValues();
                 ProcessConfirmation();
             }
             catch (ExceptionController Exception)
@@ -51,6 +41,18 @@ namespace Gui.Forms
                 MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LoadUserData();
             }
+        }
+        private void SetFieldValues()
+        {
+            DateTime lastAccess = DateTime.Now;
+            this.client.Username = this.userNameTxt.Text;
+            this.client.Password = this.passwordTxt.Text;
+            this.client.Name = this.nameTxt.Text;
+            this.client.Surname = this.surnameTxt.Text;
+            this.client.IdentityCard = this.idTxt.Text;
+            this.client.Phone = this.phoneTxt.Text;
+            this.client.Address = this.addressTxt.Text;
+            this.client.LastAccess = lastAccess;
         }
         private void ProcessConfirmation()
         {

@@ -36,9 +36,6 @@
             this.loginBtn = new System.Windows.Forms.Button();
             this.exitBtn = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.generateDataStrip = new System.Windows.Forms.ToolStripMenuItem();
-            this.datosDePruebaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // userlbl
@@ -112,28 +109,11 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.generateDataStrip});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(376, 24);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // generateDataStrip
-            // 
-            this.generateDataStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.datosDePruebaToolStripMenuItem});
-            this.generateDataStrip.Name = "generateDataStrip";
-            this.generateDataStrip.Size = new System.Drawing.Size(60, 20);
-            this.generateDataStrip.Text = "Generar";
-            // 
-            // datosDePruebaToolStripMenuItem
-            // 
-            this.datosDePruebaToolStripMenuItem.Name = "datosDePruebaToolStripMenuItem";
-            this.datosDePruebaToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.datosDePruebaToolStripMenuItem.Text = "Datos de Prueba";
-            this.datosDePruebaToolStripMenuItem.Click += new System.EventHandler(this.GenerateData);
             // 
             // Login
             // 
@@ -153,8 +133,6 @@
             this.Name = "Login";
             this.Text = "Graphic Master";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.quit);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,8 +147,6 @@
         private System.Windows.Forms.Button loginBtn;
         private System.Windows.Forms.Button exitBtn;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem generateDataStrip;
-        private System.Windows.Forms.ToolStripMenuItem datosDePruebaToolStripMenuItem;
     }
 }
 

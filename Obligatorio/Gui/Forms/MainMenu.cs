@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Domain.Entities;
+using Gui.UserControls.ABMArchitectScreen;
 using Gui.UserControls.ABMClientScreen;
 using Gui.UserControls.ABMDesignerScreen;
 using Gui.UserControls.ABMGridScreen;
@@ -71,6 +72,7 @@ namespace Gui.Forms
         }
         private void GenerateMenuNodes()
         {
+            this.architectABMNode = new MenuNode("Arquitectos");
             this.clientABMNode = new MenuNode("Clientes");
             this.designerABMNode = new MenuNode("Diseñadores");
             this.gridABMNode = new MenuNode("Planos");
@@ -81,7 +83,13 @@ namespace Gui.Forms
         {
             if (user.CanABMArchitects())
             {
-                //Implement Controllers
+                ABMArchitectScreenAdd architectScreenAdd = new ABMArchitectScreenAdd();
+                ABMArchitectScreenModify architectScreenModify = new ABMArchitectScreenModify();
+
+                architectABMNode.UserActions.Add(architectScreenAdd);
+                architectABMNode.UserActions.Add(architectScreenModify);
+
+                this.menuNodeList.Add(architectABMNode);
             }
         }
         private void ClientABMControls()

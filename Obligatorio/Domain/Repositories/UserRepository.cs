@@ -53,5 +53,33 @@ namespace Domain.Repositories
 
             return userToFind;
         }
+
+        public void UserExist(String username)
+        {
+            User userToFind = null;
+
+
+            if (userToFind == null)
+            {
+                userToFind = this.adminHandler.GetByUsername(username);
+            }
+            if (userToFind == null)
+            {
+                userToFind = this.architectHandler.GetByUsername(username);
+            }
+            if (userToFind == null)
+            {
+                userToFind = this.clientHandler.GetByUsername(username);
+            }
+            if (userToFind == null)
+            {
+                userToFind = this.designerHandler.GetByUsername(username);
+            }
+
+            if (userToFind != null)
+            {
+                throw new ExceptionController(ExceptionMessage.USER_ALREADY_EXSIST);
+            }
+        } 
     }
 }

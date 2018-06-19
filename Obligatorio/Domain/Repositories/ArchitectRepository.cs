@@ -40,7 +40,7 @@ namespace Domain.Repositories
             {
                 architectToFind = _context.Architects.Where(a => a.Username == architect.Username).FirstOrDefault();
             }
-            return architectToFind == null ? true : false;
+            return architectToFind == null ? false : true;
         }
         public bool ArchitectExistsUserNameAndPassword(string username, string password)
         {
@@ -73,6 +73,15 @@ namespace Domain.Repositories
             {
                 return _context.Architects.ToList();
             }
+        }
+        public Architect UserExists(Architect architect)
+        {
+            Architect architectToFind = null;
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                architectToFind = _context.Architects.Where(a => a.Username == architect.Username && a.ArchitectId != architect.ArchitectId).FirstOrDefault();
+            }
+            return architectToFind;
         }
     }
 }

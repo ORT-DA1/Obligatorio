@@ -89,6 +89,12 @@
     <Compile Include="UserControls\ABMArchitectScreen\ABMArchitectScreenAdd.Designer.cs">
       <DependentUpon>ABMArchitectScreenAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ABMArchitectScreen\ABMArchitectScreenModify.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ABMArchitectScreen\ABMArchitectScreenModify.Designer.cs">
+      <DependentUpon>ABMArchitectScreenModify.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ABMClientScreen\ABMClientScreenAdd.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -190,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ABMArchitectScreen\ABMArchitectScreenAdd.resx">
       <DependentUpon>ABMArchitectScreenAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ABMArchitectScreen\ABMArchitectScreenModify.resx">
+      <DependentUpon>ABMArchitectScreenModify.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ABMClientScreen\ABMClientScreenAdd.resx">
       <DependentUpon>ABMClientScreenAdd.cs</DependentUpon>

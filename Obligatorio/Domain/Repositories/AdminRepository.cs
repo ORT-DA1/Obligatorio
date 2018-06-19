@@ -18,7 +18,6 @@ namespace Domain.Repositories
             }
             return adminToFind == null ? false : true; 
         }
-
         public Administrator GetAdministratorByUsername(string username)
         {
             Administrator adminToFind;

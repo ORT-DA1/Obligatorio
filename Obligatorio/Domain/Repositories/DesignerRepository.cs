@@ -25,7 +25,6 @@ namespace Domain.Repositories
                 _context.SaveChanges();
             }
         }
-
         public void DeleteDesigner(Designer designer)
         {
             using (DatabaseContext _context = new DatabaseContext())
@@ -39,11 +38,10 @@ namespace Domain.Repositories
             Designer designerToFind = null;
             using (DatabaseContext _context = new DatabaseContext())
             {
-                designerToFind = _context.Designers.Where(d => d.Username == designer.Username).FirstOrDefault();
+                designerToFind = _context.Designers.Where(d => d.Username == designer.Username && d.DesignerId != designer.DesignerId).FirstOrDefault();
             }
             return !(designerToFind == null);
         }
-
         public Designer GetDesigner(Designer designerToFind)
         {
             using (DatabaseContext _context = new DatabaseContext())
@@ -51,7 +49,6 @@ namespace Domain.Repositories
                 return _context.Designers.First(designer => designer.Equals(designerToFind));
             }
         }
-
         public List<Designer> GetAllDesigners()
         {
             using (DatabaseContext _context = new DatabaseContext())
@@ -59,7 +56,6 @@ namespace Domain.Repositories
                 return _context.Designers.ToList();
             }
         }
-
         public bool DesignerExistsUserNameAndPassword(string username, string password)
         {
             Designer designerToFind = null;
@@ -78,6 +74,5 @@ namespace Domain.Repositories
             }
             return designerToFind;
         }
-
     }
 }

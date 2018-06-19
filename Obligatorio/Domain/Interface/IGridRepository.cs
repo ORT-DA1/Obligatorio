@@ -19,6 +19,6 @@ namespace Domain.Interface
         void AddWindow(Grid grid, Window window);
         void AddDoor(Grid grid, Door door);
         void AddDecorativeColumn(Grid grid, DecorativeColumn decorativeColumn);
-        
+        Grid ReadGrid(Grid grid);
     }
 }

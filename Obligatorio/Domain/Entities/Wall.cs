@@ -11,7 +11,8 @@ namespace Domain.Entities
         public int WallId { get; set; }
         public Point startUbicationPoint { get; set; }
         public Point endUbicationPoint { get; set; }
-        public List<Point> Path { get; set; }
+        public List<Domain.Entities.Point> Path { get; set; }
+
         private Pen wallPen;
 
         public static Tuple<int, int> CostPriceMeterWall = new Tuple<int, int>(50, 100);
@@ -92,7 +93,8 @@ namespace Domain.Entities
 
         public override void Draw(Graphics graphic)
         {
-            graphic.DrawLine(this.wallPen, this.startUbicationPoint,    this.endUbicationPoint);
+            graphic.DrawLine(this.wallPen, new System.Drawing.Point(this.startUbicationPoint.X, this.startUbicationPoint.Y)
+                , new System.Drawing.Point(this.endUbicationPoint.X,this.endUbicationPoint.Y));
         }
 
         public override bool Equals(object wallObject)

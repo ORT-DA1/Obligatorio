@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Domain.Entities;
 using Domain.Interface;
+using System.Data.Entity;
 
 namespace Domain.Repositories
 {
@@ -103,6 +104,18 @@ namespace Domain.Repositories
                 return _context.Grids.ToList();
             }
         }
-        
+
+        public Grid ReadGrid(Grid grid)
+        {
+            Grid gridToReturn = null;
+            using (DatabaseContext _context = new DatabaseContext())
+            {
+                gridToReturn = (from g in _context.Grids
+                                where g.GridId == grid.GridId
+                                select g).FirstOrDefault();
+                        //select g).Include("DecorativeColumns").FirstOrDefault();
+            }
+            return gridToReturn;
+        }
     }
 }

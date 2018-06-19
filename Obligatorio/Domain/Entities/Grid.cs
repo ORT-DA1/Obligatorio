@@ -19,21 +19,21 @@ namespace Domain.Entities
         public int Width { get; set; }
         public List<Wall> Walls { get; set; }
         public List<WallBeam> WallBeams { get; set; }
-        public List<DecorativeColumn> DecorativeColumns { get; set; }
+        public virtual IList<DecorativeColumn> DecorativeColumns { get; set; }
         public List<Window> Windows { get; set; }
         public List<Door> Doors { get; set; }
         public static int PixelConvertor = 25;
         public int MaxMeters = 5;
 
         public GridHandler GRID_HANDLER;
-       
-        public Grid() {
+        public WallHandler WALL_HANDLER;
+        public DoorHandler DOOR_HANDLER;
+        public WallBeamHandler WALLBEAM_HANDLER;
+        public WindowHandler WINDOW_HANDLER;
+        public DecorativeColumnHandler DECORATIVECOLUMN_HANDLER;
 
-            this.Walls = new List<Wall>();
-            this.WallBeams = new List<WallBeam>();
-            this.DecorativeColumns = new List<DecorativeColumn>();
-            this.Windows = new List<Window>();
-            this.Doors = new List<Door>();
+        public Grid()
+        {
         }
 
         public Grid(string gridName, Client client, int height, int width)
@@ -53,7 +53,7 @@ namespace Domain.Entities
 
         public void DrawWalls(Graphics graphic)
         {
-            foreach (Wall wall in Walls)
+            foreach (Wall wall in WALL_HANDLER.GetList(this))
             {
                 wall.Draw(graphic);
             }
@@ -61,7 +61,7 @@ namespace Domain.Entities
 
         public void DrawDoors(Graphics graphic)
         {
-            foreach (Door door in Doors)
+            foreach (Door door in DOOR_HANDLER.GetList(this))
             {
                 door.Draw(graphic);
             }
@@ -77,7 +77,7 @@ namespace Domain.Entities
 
         public void DrawDecorativeColumns(Graphics graphic)
         {
-            foreach (DecorativeColumn decorativeColumn in DecorativeColumns)
+            foreach (DecorativeColumn decorativeColumn in DECORATIVECOLUMN_HANDLER.GetList(this))
             {
                 decorativeColumn.Draw(graphic);
             }
@@ -85,7 +85,7 @@ namespace Domain.Entities
 
         public void DrawWindows(Graphics graphic)
         {
-            foreach (Window window in Windows)
+            foreach (Window window in WINDOW_HANDLER.GetList(this))
             {
                 window.Draw(graphic);
             }
@@ -93,7 +93,6 @@ namespace Domain.Entities
 
         public void AddWall(Graphics graphic, Wall wall)
         {
-            this.IsValid(wall);
             if (IsCuttingAWallBeforeMaximum(wall))
             {
                 AddWallIfCutting(graphic, wall);
@@ -111,8 +110,7 @@ namespace Domain.Entities
         private void AddWallNormal(Graphics graphic, Wall wall)
         {
             wall.Draw(graphic);
-            GRID_HANDLER.AddWall(this, wall);
-            this.Walls.Add(wall);
+            WALL_HANDLER.Add(this, wall);
             AddWallBeam(graphic, wall.startUbicationPoint);
             AddWallBeam(graphic, wall.endUbicationPoint);
         }
@@ -123,7 +121,7 @@ namespace Domain.Entities
             Wall anotherWall = new Wall(wall.startUbicationPoint, calculatedPoint);
             AddWallBeam(graphic, anotherWall.startUbicationPoint);
             AddWallBeam(graphic, anotherWall.endUbicationPoint);
-            this.Walls.Add(anotherWall);
+            WALL_HANDLER.Add(this, anotherWall);
             anotherWall.Draw(graphic);
             Wall newWall = new Wall(calculatedPoint, wall.endUbicationPoint);
             AddWall(graphic, newWall);
@@ -140,7 +138,7 @@ namespace Domain.Entities
             AddWallBeam(graphic, newWall.startUbicationPoint);
             AddWallBeam(graphic, newWall.endUbicationPoint);
             newWall.Draw(graphic);
-            this.Walls.Add(newWall);
+            WALL_HANDLER.Add(this, newWall);
             Wall anotherWall = new Wall(intersection, wall.endUbicationPoint);
             AddWall(graphic, anotherWall);
         }
@@ -149,17 +147,17 @@ namespace Domain.Entities
         {
             Wall newWall = new Wall(intersectWall.startUbicationPoint, intersection);
             Wall anotherNewWall = new Wall(intersection, intersectWall.endUbicationPoint);
-            this.Walls.Remove(intersectWall);
-            this.Walls.Add(newWall);
-            this.Walls.Add(anotherNewWall);
+            WALL_HANDLER.Remove(this, intersectWall);
+            WALL_HANDLER.Add(this, newWall);
+            WALL_HANDLER.Add(this, anotherNewWall);
         }
-
+        
         private Wall FirstIntersectWall(Wall wall)
         {
             Wall returnWall = new Wall(new Point(-1, -1), new Point(-1, -1));
             foreach (Point point in wall.Path)
             {
-                foreach (Wall anotherWall in Walls)
+                foreach (Wall anotherWall in WALL_HANDLER.GetList(this))
                 {
                     foreach (Point anotherPoint in anotherWall.Path)
                     {
@@ -183,7 +181,7 @@ namespace Domain.Entities
         {
             if (ThereIsAWallAtThisPoint(point))
             {
-                Wall wall = this.Walls.First(anotherWall => anotherWall.Path.Contains(point));
+                Wall wall = WALL_HANDLER.GetList(this).First(anotherWall => anotherWall.Path.Contains(point));
                 return wall;
             }
             else throw new ExceptionController(ExceptionMessage.POINT_OUT_OF_WALL);
@@ -191,7 +189,7 @@ namespace Domain.Entities
 
         private bool ThereIsAWallAtThisPoint(Point point)
         {
-            foreach (Wall wall in Walls)
+            foreach (Wall wall in WALL_HANDLER.GetList(this))
             {
                 foreach (Point anotherPoint in wall.Path)
                 {
@@ -206,7 +204,7 @@ namespace Domain.Entities
         {
             if (ThereIsAWallAtThisPoint(point))
             {
-                Wall wall = this.Walls.First(anotherWall => anotherWall.Path.Contains(point));
+                Wall wall = WALL_HANDLER.GetList(this).First(anotherWall => anotherWall.Path.Contains(point));
                 if (wall.isHorizontalWall())
                     return "horizontal";
                 else
@@ -217,7 +215,7 @@ namespace Domain.Entities
 
         public bool IsCuttingAWallBeforeMaximum(Wall wall)
         {
-            foreach (Wall anotherWall in Walls)
+            foreach (Wall anotherWall in WALL_HANDLER.GetList(this))
             {
                 if (IsPerpendicular(wall, anotherWall))
                 {
@@ -238,7 +236,7 @@ namespace Domain.Entities
         {
             if (wall.isHorizontalWall())
             {
-                if (point.Equals(anotherPoint) && !point.Equals(wall.startUbicationPoint) 
+                if (point.Equals(anotherPoint) && !point.Equals(wall.startUbicationPoint)
                     && !point.Equals(wall.Path.Last())
                 && (anotherPoint.X - wall.startUbicationPoint.X) < 125)
                     return true;
@@ -258,85 +256,13 @@ namespace Domain.Entities
             return ((wall.isHorizontalWall() && anotherWall.isVerticalWall())
                 || wall.isVerticalWall() && anotherWall.isHorizontalWall());
         }
-
-        public void IsValid(Wall wall)
-        {
-            this.NoDecorativeColumnInterrupting(wall);
-            this.StartPointAndEndPointAreDifferent(wall);
-            this.HorizontalOrVertical(wall);
-            this.AlreadyExistWall(wall);
-            this.ContainedIn(wall);
-        }
-
-        private void NoDecorativeColumnInterrupting(Wall wall)
-        {
-            foreach (Point point in wall.Path)
-            {
-                foreach (DecorativeColumn decorativeColumn in this.DecorativeColumns)
-                {
-                    if(decorativeColumn.UbicationPoint.X.Equals(point.X) && decorativeColumn.UbicationPoint.Y.Equals(point.Y))
-                        throw new ExceptionController(ExceptionMessage.WALL_INVALID);
-                }
-            }
-        }
-
-        private void StartPointAndEndPointAreDifferent(Wall wall)
-        {
-            if (wall.startUbicationPoint.Equals(wall.endUbicationPoint))
-            {
-                throw new ExceptionController(ExceptionMessage.WALL_INVALID);
-            }
-        }
-
-        public void HorizontalOrVertical(Wall wall)
-        {
-            if (!wall.isHorizontalWall() && !wall.isVerticalWall())
-            {
-                throw new ExceptionController(ExceptionMessage.WALL_INVALID);
-            }
-        }
-
-        public void AlreadyExistWall(Wall wall)
-        {
-            if (this.Walls.Contains(wall))
-            {
-                throw new ExceptionController(ExceptionMessage.WALL_ALREADY_EXSIST);
-            }
-        }
-
-        private void ContainedIn(Wall wall)
-        {
-            foreach (Wall anotherWall in Walls)
-            {
-                if (HasTwoPointsInCommon(wall, anotherWall))
-                {
-                    throw new ExceptionController(ExceptionMessage.WALL_INVALID);
-                }
-            }
-        }
-
-        public bool HasTwoPointsInCommon(Wall wall, Wall anotherWall)
-        {
-            int commonPoints = 0;
-            foreach (Point point in wall.Path)
-            {
-                foreach (Point anotherPoint in anotherWall.Path)
-                {
-                    if (point.Equals(anotherPoint))
-                        commonPoints++;
-                }
-                if (commonPoints > 1)
-                    return true;
-            }
-            return commonPoints > 1;
-        }
-
+        
         public Point FirstIntersection(Wall wall)
         {
             Point returnPoint = new Point(-1, -1);
             foreach (Point point in wall.Path)
             {
-                foreach (Wall anotherWall in Walls)
+                foreach (Wall anotherWall in WALL_HANDLER.GetList(this))
                 {
                     foreach (Point anotherPoint in anotherWall.Path)
                     {
@@ -353,7 +279,7 @@ namespace Domain.Entities
             if (FreePosition(ubicationPoint))
             {
                 WallBeam wallBeam = new WallBeam(ubicationPoint);
-                this.WallBeams.Add(wallBeam);
+                WALLBEAM_HANDLER.Add(this, wallBeam);
                 wallBeam.Draw(graphic);
             }
         }
@@ -362,10 +288,10 @@ namespace Domain.Entities
         {
             if (FreePosition(ubicationPoint))
             {
-                if (noWallInPosition(ubicationPoint)) { 
+                if (noWallInPosition(ubicationPoint))
+                {
                     DecorativeColumn decorativeColumn = new DecorativeColumn(ubicationPoint);
-                    GRID_HANDLER.AddDecorativeColumn(this, decorativeColumn);
-                    //this.DecorativeColumns.Add(decorativeColumn);
+                    DECORATIVECOLUMN_HANDLER.Add(this, decorativeColumn);
                     decorativeColumn.Draw(graphic);
                 }
             }
@@ -373,7 +299,7 @@ namespace Domain.Entities
 
         private bool noWallInPosition(Point ubicationPoint)
         {
-            foreach (Wall wall in this.Walls)
+            foreach (Wall wall in WALL_HANDLER.GetList(this))
             {
                 foreach (Point point in wall.Path)
                 {
@@ -386,9 +312,9 @@ namespace Domain.Entities
 
         public bool FreePosition(Point ubicationPoint)
         {
-            List<Window> windowList = this.Windows.Where(window => window.StartPoint.Equals(ubicationPoint)).ToList();
-            List<Door> doorList = this.Doors.Where(door => door.StartPoint.Equals(ubicationPoint)).ToList();
-            return (!this.WallBeams.Contains(new WallBeam(ubicationPoint))
+            List<Window> windowList = WINDOW_HANDLER.GetList(this).Where(window => window.StartPoint.Equals(ubicationPoint)).ToList();
+            List<Door> doorList = DOOR_HANDLER.GetList(this).Where(door => door.StartPoint.Equals(ubicationPoint)).ToList();
+            return (!this.WALLBEAM_HANDLER.GetList(this).Contains(new WallBeam(ubicationPoint))
                 && windowList.Count == 0
                 && doorList.Count == 0);
         }
@@ -398,7 +324,7 @@ namespace Domain.Entities
             WallBeam startWallBeam = GetWallBeam(wall.startUbicationPoint);
             WallBeam endWallBeam = GetWallBeam(wall.endUbicationPoint);
             DeleteElementsInAWall(wall);
-            this.Walls.Remove(wall);
+            WALL_HANDLER.Remove(this, wall);
             RemoveWallBeam(startWallBeam);
             RemoveWallBeam(endWallBeam);
         }
@@ -408,31 +334,31 @@ namespace Domain.Entities
             foreach (Point point in wall.Path)
             {
                 if (ExistWindow(point))
-                    this.Windows.Remove(this.Windows.First(windows => windows.StartPoint.Equals(point)));
+                    WINDOW_HANDLER.Remove(this, (WINDOW_HANDLER.GetList(this).First(windows => windows.StartPoint.Equals(point))));
                 if (ExistDoor(point))
-                    this.Doors.Remove(this.Doors.First(door => door.StartPoint.Equals(point)));
+                    DOOR_HANDLER.Remove(this, (DOOR_HANDLER.GetList(this).First(door => door.StartPoint.Equals(point))));
             }
         }
 
         private bool ExistDoor(Point ubicationPoint)
         {
-            return this.Doors.Contains(new Door(ubicationPoint, ubicationPoint, "vertical"));
+            return DOOR_HANDLER.Exist(this, (new Door(ubicationPoint, ubicationPoint, "vertical")));
         }
 
         private bool ExistWindow(Point ubicationPoint)
         {
-            return this.Windows.Contains(new Window(ubicationPoint, ubicationPoint, "vertical"));
+            return WINDOW_HANDLER.Exist(this, (new Window(ubicationPoint, ubicationPoint, "vertical")));
         }
 
         public WallBeam GetWallBeam(Point startUbicationPoint)
         {
-            return WallBeams.First(wallBeam => wallBeam.UbicationPoint.Equals(startUbicationPoint));
+            return WALLBEAM_HANDLER.GetWallBeam(this, startUbicationPoint);
         }
 
         public void RemoveWallBeam(WallBeam wallBeam)
         {
             List<Wall> useAWallBeam = new List<Wall>();
-            foreach (Wall wall in this.Walls)
+            foreach (Wall wall in WALL_HANDLER.GetList(this))
             {
                 if (ContainsPoint(wall.Path, wallBeam.UbicationPoint))
                 {
@@ -441,7 +367,7 @@ namespace Domain.Entities
             }
             if (useAWallBeam.Count.Equals(0))
             {
-                this.WallBeams.Remove(wallBeam);
+                WALLBEAM_HANDLER.Remove(this, wallBeam);
             }
         }
 
@@ -470,18 +396,18 @@ namespace Domain.Entities
             if (ExistDecorativeColumn(ubicationPoint))
             {
                 DecorativeColumn decorativeColumn = this.DecorativeColumns.First(anotherDecorativeColumn => anotherDecorativeColumn.UbicationPoint.Equals(ubicationPoint));
-                this.DecorativeColumns.Remove(decorativeColumn);
+                DECORATIVECOLUMN_HANDLER.Remove(this, decorativeColumn);
             }
         }
 
         private bool ExistDecorativeColumn(Point ubicationPoint)
         {
-            return this.DecorativeColumns.Contains(new DecorativeColumn(ubicationPoint));
+            return DECORATIVECOLUMN_HANDLER.Exist(this, new DecorativeColumn(ubicationPoint));
         }
 
         public void RemoveWindow(Window window)
         {
-            this.Windows.Remove(window);
+            WINDOW_HANDLER.Remove(this, window);
         }
 
         public void AddDoor(Graphics graphic, Point startPoint, Point endPoint, string sense)
@@ -490,7 +416,7 @@ namespace Domain.Entities
             if (FreePosition(startPoint))
             {
                 Door door = new Door(startPoint, endPoint, sense);
-                this.Doors.Add(new Door(startPoint, endPoint, sense));
+                DOOR_HANDLER.Add(this, new Door(startPoint, endPoint, sense));
                 door.Draw(graphic);
             }
         }
@@ -498,7 +424,7 @@ namespace Domain.Entities
         public void OnTheWall(Point ubicationPoint)
         {
             int matchPoints = 0;
-            foreach (Wall wall in Walls)
+            foreach (Wall wall in WALL_HANDLER.GetList(this))
             {
                 foreach (Point point in wall.Path)
                 {
@@ -514,8 +440,8 @@ namespace Domain.Entities
         {
             if (ExistDoor(ubicationPoint))
             {
-                Door door = this.Doors.First(anotherDoor => anotherDoor.StartPoint.Equals(ubicationPoint));
-                this.Doors.Remove(door);
+                Door door = DOOR_HANDLER.GetList(this).First(anotherDoor => anotherDoor.StartPoint.Equals(ubicationPoint));
+                DOOR_HANDLER.Remove(this, door);
             }
             else throw new ExceptionController(ExceptionMessage.DOOR_NOT_EXIST);
         }
@@ -524,8 +450,8 @@ namespace Domain.Entities
         {
             if (ExistWindow(ubicationPoint))
             {
-                Window window = this.Windows.First(anotherWindow => anotherWindow.StartPoint.Equals(ubicationPoint));
-                this.Windows.Remove(window);
+                Window window = WINDOW_HANDLER.GetList(this).First(anotherWindow => anotherWindow.StartPoint.Equals(ubicationPoint));
+                WINDOW_HANDLER.Remove(this, window);
             }
             else throw new ExceptionController(ExceptionMessage.WINDOW_NOT_EXIST);
         }
@@ -547,7 +473,7 @@ namespace Domain.Entities
         public int MetersWallCount()
         {
             int amountMeters = 0;
-            foreach (Wall wall in Walls)
+            foreach (Wall wall in WALL_HANDLER.GetList(this))
             {
                 foreach (Point point in wall.Path)
                 {
@@ -560,23 +486,23 @@ namespace Domain.Entities
 
         public int WallBeamsCount()
         {
-            return this.WallBeams.Count();
+            return WALLBEAM_HANDLER.Count(this);
         }
 
         public int WindowsCount()
         {
-            return this.Windows.Count();
+            return WINDOW_HANDLER.Count(this);
         }
 
         public int DoorsCount()
         {
-            return this.Doors.Count();
+            return DOOR_HANDLER.Count(this);
         }
 
         public int AmountCostWall()
         {
             int result = 0;
-            foreach(Wall wall in Walls)
+            foreach (Wall wall in WALL_HANDLER.GetList(this))
             {
                 result += MetersWallCount() * Wall.CostPriceMeterWall.Item1;
             }
@@ -586,7 +512,7 @@ namespace Domain.Entities
         public int AmountPriceWall()
         {
             int result = 0;
-            foreach (Wall wall in Walls)
+            foreach (Wall wall in WALL_HANDLER.GetList(this))
             {
                 result += MetersWallCount() * Wall.CostPriceMeterWall.Item2;
             }
@@ -596,7 +522,7 @@ namespace Domain.Entities
         public int AmountCostWallBeam()
         {
             int result = 0;
-            foreach (WallBeam wallBeam in WallBeams)
+            foreach (WallBeam wallBeam in WALLBEAM_HANDLER.GetList(this))
             {
                 result += WallBeamsCount() * WallBeam.CostPriceWallBeam.Item1;
             }
@@ -606,7 +532,7 @@ namespace Domain.Entities
         public int AmountPriceWallBeam()
         {
             int result = 0;
-            foreach (WallBeam wallBeam in WallBeams)
+            foreach (WallBeam wallBeam in WALLBEAM_HANDLER.GetList(this))
             {
                 result += WallBeamsCount() * WallBeam.CostPriceWallBeam.Item2;
             }
@@ -616,7 +542,7 @@ namespace Domain.Entities
         public int AmountCostWindow()
         {
             int result = 0;
-            foreach (Window window in Windows)
+            foreach (Window window in WINDOW_HANDLER.GetList(this))
             {
                 result += WindowsCount() * Window.CostPriceWindow.Item1;
             }
@@ -626,7 +552,7 @@ namespace Domain.Entities
         public int AmountPriceWindow()
         {
             int result = 0;
-            foreach (Window window in Windows)
+            foreach (Window window in WINDOW_HANDLER.GetList(this))
             {
                 result += WindowsCount() * Window.CostPriceWindow.Item2;
             }
@@ -636,7 +562,7 @@ namespace Domain.Entities
         public int AmountCostDoor()
         {
             int result = 0;
-            foreach (Door door in Doors)
+            foreach (Door door in DOOR_HANDLER.GetList(this))
             {
                 result += DoorsCount() * Door.CostPriceDoor.Item1;
             }
@@ -646,7 +572,7 @@ namespace Domain.Entities
         public int AmountPriceDoor()
         {
             int result = 0;
-            foreach (Door door in Doors)
+            foreach (Door door in DOOR_HANDLER.GetList(this))
             {
                 result += DoorsCount() * Door.CostPriceDoor.Item2;
             }
@@ -669,9 +595,9 @@ namespace Domain.Entities
             return String.Format(format, this.GridName, this.Client.Username);
         }
 
-        public Point FixPoint(Point point)
+        public System.Drawing.Point FixPoint(System.Drawing.Point point)
         {
-            Point fixedPoint = new Point(
+            System.Drawing.Point fixedPoint = new System.Drawing.Point(
                ((int)Math.Round((double)point.X / PixelConvertor)) * PixelConvertor,
                ((int)Math.Round((double)point.Y / PixelConvertor)) * PixelConvertor
            );

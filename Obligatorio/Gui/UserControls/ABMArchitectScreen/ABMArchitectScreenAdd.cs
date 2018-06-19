@@ -11,16 +11,19 @@ using Gui.Interface;
 using Domain.Exceptions;
 using Domain.Entities;
 using Domain.Logic;
+using Domain.Repositories;
 
 namespace Gui.UserControls.ABMArchitectScreen
 {
     public partial class ABMArchitectScreenAdd : UserControl, IController
     {
         private ArchitectHandler handler;
+        private UserRepository userRepository;
         public ABMArchitectScreenAdd()
         {
             InitializeComponent();
             this.handler = new ArchitectHandler();
+            this.userRepository = new UserRepository();
             this.AccessibleName = "Agregar";
             this.titleTxt.Text = "Agregar Arquitecto";
         }
@@ -35,14 +38,16 @@ namespace Gui.UserControls.ABMArchitectScreen
             try
             {
                 Architect newArchitect = FetchValues();
-                //handler.Add(newDesigner);
-                //MessageBox.Show("El Diseñador " + newDesigner.Username + " fue ingresado exitosamente al sistema.", "Mensaje de Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //ClearForm();
+                userRepository.UserExist(newArchitect.Username);
+                handler.Add(newArchitect);
+                MessageBox.Show("El Arquitecto " + newArchitect.Username + " fue ingresado exitosamente al sistema.", "Mensaje de Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ClearForm();
 
             }
-            catch (ExceptionController message)
+            catch (ExceptionController Exception)
             {
-                throw;
+                String message = Exception.Message;
+                MessageBox.Show(message, "Error en datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -50,6 +55,14 @@ namespace Gui.UserControls.ABMArchitectScreen
         {
             DateTime registrationDate = DateTime.Now;
             return new Architect(this.usernameTxt.Text, this.passwordTxt.Text, this.nameTxt.Text, this.surnameTxt.Text, registrationDate, null);
+        }
+
+        private void ClearForm()
+        {
+            this.usernameTxt.Clear();
+            this.passwordTxt.Clear();
+            this.nameTxt.Clear();
+            this.surnameTxt.Clear();
         }
     }
 }

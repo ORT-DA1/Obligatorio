@@ -26,7 +26,7 @@ namespace Domain.Logic
         }
         public void Modify(Architect architect)
         {
-            NotExist(architect);
+            Exist(architect);
             Validate(architect);
             this.architectRepository.ModifyArchitect(architect);
         }
@@ -97,6 +97,10 @@ namespace Domain.Logic
                 return true;
             }
             return false;
+        }
+        public Architect GetByUsername(String username)
+        {
+            return  this.architectRepository.GetArchitectByUsername(username);
         }
     }
 }

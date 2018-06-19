@@ -15,6 +15,7 @@ namespace Domain.Interface
         void Delete(User user);
         void Exist(User user);
         User GetByUsernameAndPassword(String username, String password);
+        User GetByUsername(String username);
         void Validate(User user);
         List<User> GetList();
         bool boolExist(User user);

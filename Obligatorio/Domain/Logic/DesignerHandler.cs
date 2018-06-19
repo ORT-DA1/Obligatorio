@@ -72,7 +72,6 @@ namespace Domain.Logic
                 throw new ExceptionController(ExceptionMessage.EMPTY_DESIGNERS_LIST);
             }
         }
-
         public Designer GetByUsernameAndPassword(string username, string password)
         {
             if (ExistByUsernameAndPasword(username, password))
@@ -84,12 +83,10 @@ namespace Domain.Logic
                 return null;
             }
         }
-
         private bool ExistByUsernameAndPasword(string username, string password)
         {
             return this.designerRepository.DesignerExistsUserNameAndPassword(username, password);
         }
-
         public bool boolExist(Designer designer)
         {
             if (this.designerRepository.DesignerExists(designer))
@@ -97,6 +94,10 @@ namespace Domain.Logic
                 return true;
             }
             return false;
+        }
+        public Designer GetByUsername(String username)
+        {
+            return this.designerRepository.GetDesignerByUsername(username);
         }
     }
 }

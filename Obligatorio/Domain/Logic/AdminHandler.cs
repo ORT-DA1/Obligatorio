@@ -15,7 +15,6 @@ namespace Domain.Logic
         {
             this.adminRepository = new AdminRepository();
         }
-
         public  Administrator GetByUsernameAndPassword(string username, string password)
         {
             if (ExistByUsernameAndPasword(username, password))
@@ -30,6 +29,10 @@ namespace Domain.Logic
         private bool ExistByUsernameAndPasword(String username, String password)
         {
             return this.adminRepository.AdministratorExistsUserNameAndPassword(username, password);
+        }
+        public Administrator GetByUsername(String username)
+        {
+            return this.adminRepository.GetAdministratorByUsername(username);
         }
     }
 }

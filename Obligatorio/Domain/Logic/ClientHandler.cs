@@ -36,7 +36,6 @@ namespace Domain.Logic
             NotExist(client);
             this.clientRepository.DeleteClient(client);
         }
-
         public void Exist(Client client)
         {
             if (this.clientRepository.ClientExists(client))
@@ -44,21 +43,18 @@ namespace Domain.Logic
                 throw new ExceptionController(ExceptionMessage.USER_ALREADY_EXSIST);
             }
         }
-
         public Client Get(Client client)
         {
             NotExist(client);
             return this.clientRepository.GetClient(client);
             
         }
-
         public List<Client> GetList()
         {
             List<Client> clientList = clientRepository.GetAllClients();
             IsNotEmpty(clientList);
             return clientList;
         }
-
         public void Validate(Client client)
         {
             DataValidation.ValidateUsername(client.Username);
@@ -68,7 +64,6 @@ namespace Domain.Logic
             DataValidation.ValidatePhone(client.Phone);
             DataValidation.ValidateAddress(client.Address);
         }       
-
         public void NotExist(Client client)
         {
             if (!this.clientRepository.ClientExists(client))
@@ -84,7 +79,6 @@ namespace Domain.Logic
                 throw new ExceptionController(ExceptionMessage.EMPTY_CLIENTS_LIST);
             }
         }
-
         public Client GetByUsernameAndPassword(String username, String password)
         {
             if (ExistByUsernameAndPasword(username, password))
@@ -96,19 +90,17 @@ namespace Domain.Logic
                 return null;
             }
         }
-
         private bool ExistByUsernameAndPasword(string username, string password)
         {
             return this.clientRepository.ClientExistsUserNameAndPassword(username, password);
         }
-    
+        public Client GetByUsername(String username)
+        {
+            return this.clientRepository.GetClientByUsername(username);
+        }
         public bool boolExist(Client client)
         {
-            if (this.clientRepository.ClientExists(client))
-            {
-                return true;
-            }
-            return false;
+            return this.clientRepository.ClientExists(client) ? true : false;
         }
     }
 

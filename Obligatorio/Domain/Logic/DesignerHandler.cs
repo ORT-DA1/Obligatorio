@@ -36,7 +36,6 @@ namespace Domain.Logic
         }
         public void Delete(Designer designer)
         {
-            NotExist(designer);
             this.designerRepository.DeleteDesigner(designer);
         }
         public void Modify(Designer designer)

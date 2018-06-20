@@ -8,7 +8,7 @@ namespace Domain.Interface
         void Add(Grid grid, Window window);
         List<Window> GetList(Grid grid);
         int Count(Grid grid);
-        bool Exist(Grid grid, Window window);
+        bool Exist(Grid grid, Point ubicationPoint);
         void Remove(Grid grid, Window window);
     }
 }

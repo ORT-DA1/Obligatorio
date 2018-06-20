@@ -19,6 +19,7 @@ namespace Domain.Repositories
         {
             try
             {
+                _context.Grids.Attach(grid);
                 wallBeam.Grid = grid;
                 _context.WallBeams.Add(wallBeam);
                 _context.SaveChanges();
@@ -33,14 +34,16 @@ namespace Domain.Repositories
             return this.GetList(grid).Count;
         }
 
-        public WallBeam Get(Grid grid, WallBeam wallBeam)
+        public WallBeam Get(Grid grid, Point ubicationPoint)
         {
-            WallBeam wallBeamToFind = null;
-            wallBeamToFind = _context.WallBeams
+            _context.Points.Attach(ubicationPoint);
+
+            return _context.WallBeams
                 .Where(w =>
-                (w.Grid.GridId == grid.GridId && w.UbicationPoint == wallBeam.UbicationPoint))
+                (w.Grid.GridId == grid.GridId 
+                && w.UbicationPoint.X == ubicationPoint.X 
+                && w.UbicationPoint.Y == ubicationPoint.Y))
                 .FirstOrDefault();
-            return wallBeamToFind;
         }
 
         public List<WallBeam> GetList(Grid grid)

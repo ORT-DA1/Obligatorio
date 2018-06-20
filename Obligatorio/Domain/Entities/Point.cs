@@ -26,5 +26,19 @@ namespace Domain.Entities
         }
         #endregion
 
+        public override bool Equals(object pointObject)
+        {
+            bool isEqual = false;
+            if (pointObject != null && this.GetType().Equals(pointObject.GetType()))
+            {
+                Point point = (Point)pointObject;
+                if (this.X.Equals(point.X) && this.Y.Equals(point.Y))
+                {
+                    isEqual = true;
+                }
+
+            }
+            return isEqual;
+        }
     }
 }

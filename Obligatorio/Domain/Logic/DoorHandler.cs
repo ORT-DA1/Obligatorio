@@ -20,7 +20,6 @@ namespace Domain.Logic
 
         public void Add(Grid grid, Door door)
         {
-            door.Grid.GridId = gridHandler.Get(grid).GridId;
             this.doorRepository.Add(grid, door);
         }
 

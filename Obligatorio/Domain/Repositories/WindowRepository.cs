@@ -15,6 +15,7 @@ namespace Domain.Repositories
         }
         public void Add(Grid grid, Window window)
         {
+            _context.Grids.Attach(grid);
             window.Grid = grid;
             _context.Windows.Add(window);
             _context.SaveChanges();
@@ -25,11 +26,14 @@ namespace Domain.Repositories
             return this.GetList(grid).Count;
         }
 
-        public bool Exist(Grid grid, Window window)
+        public bool Exist(Grid grid, Point ubicationPoint)
         {
             Window windowToFind = null;
-            windowToFind = _context.Windows.Where(w => (w.Grid.GridId == grid.GridId
-            && w.StartPoint == window.StartPoint)).FirstOrDefault();
+            windowToFind = _context.Windows
+                .Where(w => (w.Grid.GridId == grid.GridId 
+                && w.StartPoint.X == ubicationPoint.X)
+                && w.StartPoint.Y == ubicationPoint.Y)
+                .FirstOrDefault();
 
             return !(windowToFind == null);
         }

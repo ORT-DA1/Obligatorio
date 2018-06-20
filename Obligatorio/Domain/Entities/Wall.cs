@@ -22,7 +22,8 @@ namespace Domain.Entities
         public static Tuple<int, int> CostPriceMeterWall = new Tuple<int, int>(50, 100);
 
         #region Constructors
-        public Wall() {
+        public Wall()
+        {
 
             this.Path = new List<Point>();
             this.wallPen = new Pen(Color.LightGreen, 4);
@@ -30,7 +31,7 @@ namespace Domain.Entities
 
         public Wall(Point startPoint, Point endPoint)
         {
-            SetRightSense(startPoint,endPoint);
+            SetRightSense(startPoint, endPoint);
             this.Path = new List<Point>();
             this.wallPen = new Pen(Color.LightGreen, 4);
             this.createPath();
@@ -81,12 +82,12 @@ namespace Domain.Entities
             int max = getDistance();
             if (isHorizontalWall())
             {
-                for(int i=0;  i<= max;)
+                for (int i = 0; i <= max;)
                 {
-                    Point point = new Point(this.startUbicationPoint.X + i,this.startUbicationPoint.Y);
+                    Point point = new Point(this.startUbicationPoint.X + i, this.startUbicationPoint.Y);
                     this.Path.Add(point);
-                    i+= Grid.PixelConvertor;
-                } 
+                    i += Grid.PixelConvertor;
+                }
             }
             else
             {
@@ -107,7 +108,7 @@ namespace Domain.Entities
         public override void Draw(Graphics graphic)
         {
             graphic.DrawLine(this.wallPen, new System.Drawing.Point(this.startUbicationPoint.X, this.startUbicationPoint.Y)
-                , new System.Drawing.Point(this.endUbicationPoint.X,this.endUbicationPoint.Y));
+                , new System.Drawing.Point(this.endUbicationPoint.X, this.endUbicationPoint.Y));
         }
 
         public override bool Equals(object wallObject)
@@ -116,18 +117,21 @@ namespace Domain.Entities
             if (wallObject != null && this.GetType().Equals(wallObject.GetType()))
             {
                 Wall wall = (Wall)wallObject;
-                if (this.startUbicationPoint.Equals(wall.startUbicationPoint) && (this.endUbicationPoint.Equals(wall.endUbicationPoint)))
+                if (wall.startUbicationPoint != null && wall.endUbicationPoint != null)
                 {
-                    isEqual = true;
+                    if (this.startUbicationPoint.Equals(wall.startUbicationPoint) && (this.endUbicationPoint.Equals(wall.endUbicationPoint)))
+                    {
+                        isEqual = true;
+                    }
                 }
             }
             return isEqual;
         }
-        
+
         public bool SizeGreaterThanMaximum()
         {
-            if(isHorizontalWall())
-                return Math.Abs(this.endUbicationPoint.X /Grid.PixelConvertor - this.startUbicationPoint.X / Grid.PixelConvertor) > (5);
+            if (isHorizontalWall())
+                return Math.Abs(this.endUbicationPoint.X / Grid.PixelConvertor - this.startUbicationPoint.X / Grid.PixelConvertor) > (5);
             else
                 return Math.Abs(this.endUbicationPoint.Y / Grid.PixelConvertor - this.startUbicationPoint.Y / Grid.PixelConvertor) > (5);
         }
@@ -136,13 +140,13 @@ namespace Domain.Entities
         {
             return this.startUbicationPoint.Y == this.endUbicationPoint.Y;
         }
-        
+
         public Point CalculateLocationPoint(int maxMeters)
         {
             if (isHorizontalWall())
                 return new Point(this.startUbicationPoint.X + (maxMeters * Grid.PixelConvertor), this.endUbicationPoint.Y);
             else
-                return new Point(this.startUbicationPoint.X ,this.startUbicationPoint.Y + (maxMeters*Grid.PixelConvertor));
+                return new Point(this.startUbicationPoint.X, this.startUbicationPoint.Y + (maxMeters * Grid.PixelConvertor));
         }
 
         public bool isVerticalWall()

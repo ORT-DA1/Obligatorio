@@ -161,7 +161,7 @@ namespace Domain.Entities
         {
             Wall newWall = new Wall(intersectWall.startUbicationPoint, intersection);
             Wall anotherNewWall = new Wall(intersection, intersectWall.endUbicationPoint);
-            WALL_HANDLER.Remove(this, intersectWall);
+            //WALL_HANDLER.Remove(this, intersectWall);
             WALL_HANDLER.Add(this, newWall);
             WALL_HANDLER.Add(this, anotherNewWall);
         }

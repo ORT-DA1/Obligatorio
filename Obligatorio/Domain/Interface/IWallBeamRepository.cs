@@ -9,6 +9,6 @@ namespace Domain.Interface
         int Count(Grid grid);
         void Remove(Grid grid, WallBeam wallBeam);
         List<WallBeam> GetList(Grid grid);
-        WallBeam Get(Grid grid, WallBeam wallBeamToFind);
+        WallBeam Get(Grid grid, Point point);
     }
 }

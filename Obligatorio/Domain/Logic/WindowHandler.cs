@@ -22,7 +22,6 @@ namespace Domain.Logic
 
         public void Add(Grid grid, Window window)
         {
-            window.Grid.GridId = gridHandler.Get(grid).GridId;
             this.windowRepository.Add(grid, window);
         }
 
@@ -38,7 +37,7 @@ namespace Domain.Logic
 
         public bool Exist(Grid grid, Window window)
         {
-            return windowRepository.Exist(grid, window);
+            return windowRepository.Exist(grid, window.StartPoint);
         }
 
         public int Count(Grid grid)

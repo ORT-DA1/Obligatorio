@@ -22,7 +22,6 @@ namespace Domain.Logic
 
         public void Add(Grid grid, DecorativeColumn decorativeColumn)
         {
-            decorativeColumn.Grid.GridId = gridHandler.Get(grid).GridId;
             this.decorativeColumnRepository.Add(grid, decorativeColumn);
         }
 

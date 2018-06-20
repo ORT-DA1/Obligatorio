@@ -11,7 +11,7 @@ namespace Domain.Repositories
     public class WallRepository : IWallRepository
     {
         public DatabaseContext _context;
-        
+
         public WallRepository(GridRepository gridRepository)
         {
             this._context = gridRepository._context;
@@ -39,8 +39,8 @@ namespace Domain.Repositories
         {
             Wall wallToDelete = null;
             wallToDelete = _context.Walls
-                .Where(d =>
-                (d.Grid.GridId == grid.GridId && d.WallId == wall.WallId))
+                .Where(w =>
+                (w.WallId == wall.WallId))
                 .FirstOrDefault();
 
             _context.Walls.Remove(wallToDelete);
@@ -49,22 +49,58 @@ namespace Domain.Repositories
 
         public List<Point> GetWallPath(Wall wall)
         {
-            try
-            {
-                List<Point> pathList = null;
-                using (DatabaseContext _context = new DatabaseContext())
-                {
-                    /*_context.Walls.Attach(wall);
-                    pathList = _context.Points
-                        .Where(p => p.Wall.WallId == wall.WallId)
-                        .ToList();*/
-                }
-                return pathList;
+            try{
+                return CalculatePath(wall);
+                
+                /*_context.Walls.Attach(wall);
+                pathList = _context.Points
+                    .Where(p => p.Wall.WallId == wall.WallId)
+                    .ToList();*/
+                    
             }
             catch (Exception e)
             {
                 return null;
             }
         }
+
+        public List<Point> CalculatePath(Wall wall)
+        {
+            int max = getDistance(wall);
+            List<Point> Path = new List<Point>();
+            if (isHorizontalWall(wall))
+            {
+                for (int i = 0; i <= max;)
+                {
+                    Point point = new Point(wall.startUbicationPoint.X + i, wall.startUbicationPoint.Y);
+                    Path.Add(point);
+                    i += Grid.PixelConvertor;
+                }
+            }
+            else
+            {
+                for (int i = 0; i <= max;)
+                {
+                    Point point = new Point(wall.startUbicationPoint.X, wall.startUbicationPoint.Y + i);
+                    Path.Add(point);
+                    i += Grid.PixelConvertor;
+                }
+            }
+            return Path;
+        }
+
+        public int getDistance(Wall wall)
+        {
+            if (isHorizontalWall(wall))
+                return Math.Abs((wall.startUbicationPoint.X) - (wall.endUbicationPoint.X));
+            else
+                return Math.Abs((wall.startUbicationPoint.Y) - (wall.endUbicationPoint.Y));
+        }
+
+        public bool isHorizontalWall(Wall wall)
+        {
+            return wall.startUbicationPoint.Y == wall.endUbicationPoint.Y;
+        }
+
     }
 }

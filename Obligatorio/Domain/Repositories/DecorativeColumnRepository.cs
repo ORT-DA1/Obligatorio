@@ -15,6 +15,7 @@ namespace Domain.Repositories
         }
         public void Add(Grid grid, DecorativeColumn decorativeColumn)
         {
+            _context.Grids.Attach(grid);
             decorativeColumn.Grid = grid;
             _context.DecorativeColumns.Add(decorativeColumn);
             _context.SaveChanges();

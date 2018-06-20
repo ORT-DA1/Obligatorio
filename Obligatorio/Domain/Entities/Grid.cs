@@ -17,9 +17,9 @@ namespace Domain.Entities
         public string GridName { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
-        
+
         public GridRepository gridRepository;
-        
+
         #region navigation
         public virtual Client Client { get; set; }
         public virtual List<Wall> Walls { get; set; }
@@ -68,7 +68,7 @@ namespace Domain.Entities
         public void DrawWalls(Graphics graphic)
         {
             foreach (Wall wall in WALL_HANDLER.GetList(this))
-            { 
+            {
                 wall.Draw(graphic);
             }
         }
@@ -123,7 +123,6 @@ namespace Domain.Entities
 
         private void AddWallNormal(Graphics graphic, Wall wall)
         {
-            wall.Draw(graphic);
             WALL_HANDLER.Add(this, wall);
             AddWallBeam(graphic, wall.startUbicationPoint);
             AddWallBeam(graphic, wall.endUbicationPoint);
@@ -136,7 +135,6 @@ namespace Domain.Entities
             AddWallBeam(graphic, anotherWall.startUbicationPoint);
             AddWallBeam(graphic, anotherWall.endUbicationPoint);
             WALL_HANDLER.Add(this, anotherWall);
-            anotherWall.Draw(graphic);
             Wall newWall = new Wall(calculatedPoint, wall.endUbicationPoint);
             AddWall(graphic, newWall);
         }
@@ -151,7 +149,6 @@ namespace Domain.Entities
             Wall newWall = new Wall(wall.startUbicationPoint, intersection);
             AddWallBeam(graphic, newWall.startUbicationPoint);
             AddWallBeam(graphic, newWall.endUbicationPoint);
-            newWall.Draw(graphic);
             WALL_HANDLER.Add(this, newWall);
             Wall anotherWall = new Wall(intersection, wall.endUbicationPoint);
             AddWall(graphic, anotherWall);
@@ -161,11 +158,10 @@ namespace Domain.Entities
         {
             Wall newWall = new Wall(intersectWall.startUbicationPoint, intersection);
             Wall anotherNewWall = new Wall(intersection, intersectWall.endUbicationPoint);
-            //WALL_HANDLER.Remove(this, intersectWall);
             WALL_HANDLER.Add(this, newWall);
             WALL_HANDLER.Add(this, anotherNewWall);
         }
-        
+
         private Wall FirstIntersectWall(Wall wall)
         {
             Wall returnWall = new Wall(new Point(-1, -1), new Point(-1, -1));
@@ -269,7 +265,7 @@ namespace Domain.Entities
             return ((wall.isHorizontalWall() && anotherWall.isVerticalWall())
                 || wall.isVerticalWall() && anotherWall.isHorizontalWall());
         }
-        
+
         public Point FirstIntersection(Wall wall)
         {
             Point returnPoint = new Point(-1, -1);
@@ -301,12 +297,10 @@ namespace Domain.Entities
         {
             if (FreePosition(ubicationPoint))
             {
-                if (noWallInPosition(ubicationPoint))
-                {
-                    DecorativeColumn decorativeColumn = new DecorativeColumn(ubicationPoint);
-                    DECORATIVECOLUMN_HANDLER.Add(this, decorativeColumn);
-                    decorativeColumn.Draw(graphic);
-                }
+                DecorativeColumn decorativeColumn = new DecorativeColumn(ubicationPoint);
+                DECORATIVECOLUMN_HANDLER.Add(this, decorativeColumn);
+                decorativeColumn.Draw(graphic);
+
             }
         }
 

@@ -27,6 +27,7 @@ namespace Domain.Entities
         public virtual List<DecorativeColumn> DecorativeColumns { get; set; }
         public virtual List<Window> Windows { get; set; }
         public virtual List<Door> Doors { get; set; }
+        public virtual List<Signature> Signatures { get; set; }
         #endregion
 
         public static int PixelConvertor = 25;

@@ -8,8 +8,11 @@ namespace Domain.Repositories
 {
     public class WindowRepository : IWindowRepository
     {
-        DatabaseContext _context = new DatabaseContext();
-
+        public DatabaseContext _context;
+        public WindowRepository(GridRepository gridRepository)
+        {
+            this._context = gridRepository._context;
+        }
         public void Add(Grid grid, Window window)
         {
             window.Grid = grid;

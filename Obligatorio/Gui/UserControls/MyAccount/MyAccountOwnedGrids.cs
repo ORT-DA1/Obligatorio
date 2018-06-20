@@ -57,7 +57,7 @@ namespace Gui.UserControls.MyAccount
 
         private void RedirectToGridForm(Grid selectedGrid)
         {
-            GridForm gridForm = new GridForm(selectedGrid, this.ParentForm, false);
+            GridForm gridForm = new GridForm(selectedGrid, this.ParentForm, false, new Domain.Repositories.GridRepository());
             gridForm.Show();
             this.ParentForm.Hide();
         }

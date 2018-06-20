@@ -8,7 +8,11 @@ namespace Domain.Repositories
 {
     public class DecorativeColumnRepository : IDecorativeColumnRepository
     {
-        DatabaseContext _context = new DatabaseContext();
+        public DatabaseContext _context;
+        public DecorativeColumnRepository(GridRepository gridRepository)
+        {
+            this._context = gridRepository._context;
+        }
         public void Add(Grid grid, DecorativeColumn decorativeColumn)
         {
             decorativeColumn.Grid = grid;

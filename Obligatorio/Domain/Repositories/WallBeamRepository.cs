@@ -8,7 +8,13 @@ namespace Domain.Repositories
 {
     public class WallBeamRepository : IWallBeamRepository
     {
-        DatabaseContext _context = new Domain.DatabaseContext();
+        public DatabaseContext _context;
+
+        public WallBeamRepository(GridRepository gridRepository)
+        {
+            this._context = gridRepository._context;
+        }
+
         public void Add(Grid grid, WallBeam wallBeam)
         {
             try

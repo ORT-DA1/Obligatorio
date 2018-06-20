@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System;
 using Domain.Exceptions;
 using Domain.TypesGrid;
+using Domain.Repositories;
 
 namespace Gui.Forms
 {
@@ -15,17 +16,19 @@ namespace Gui.Forms
         private int option=0;
         private List<System.Drawing.Point> pointArray;
         private Form parentForm;
+        private GridRepository gridRepository;
 
         public GridForm()
         {
             InitializeComponent();
             this.ControlBox = false;
+            this.gridRepository = new GridRepository();
         }
 
-        public GridForm(Grid grid, Form parentForm, bool canEditGrid)
+        public GridForm(Grid grid, Form parentForm, bool canEditGrid, GridRepository gridRepository)
         {
-
             InitializeComponent();
+            this.gridRepository = gridRepository;
             this.parentForm = parentForm;
             this.ControlBox = false;
             this.grid = grid;

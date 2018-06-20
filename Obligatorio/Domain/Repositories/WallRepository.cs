@@ -10,8 +10,12 @@ namespace Domain.Repositories
 {
     public class WallRepository : IWallRepository
     {
-        DatabaseContext _context = new Domain.DatabaseContext();
-
+        public DatabaseContext _context;
+        
+        public WallRepository(GridRepository gridRepository)
+        {
+            this._context = gridRepository._context;
+        }
         public void Add(Grid grid, Wall wall)
         {
             _context.Walls.Add(wall);

@@ -12,6 +12,7 @@ using Domain.Exceptions;
 using Domain.Logic;
 using Domain.Entities;
 using Gui.Forms;
+using Domain.Repositories;
 
 namespace Gui.UserControls.ABMGridScreen
 {
@@ -63,7 +64,7 @@ namespace Gui.UserControls.ABMGridScreen
 
         private void RedirectToModifyGridForm(Grid selectedGrid)
         {
-            GridForm gridForm = new GridForm(selectedGrid, this.ParentForm, true);
+            GridForm gridForm = new GridForm(selectedGrid, this.ParentForm, true, new GridRepository());
             gridForm.Show();
             this.ParentForm.Hide();
         }

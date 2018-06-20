@@ -8,7 +8,11 @@ namespace Domain.Repositories
 {
     public class DoorRepository : IDoorRepository
     {
-        DatabaseContext _context = new DatabaseContext();
+        public DatabaseContext _context;
+        public DoorRepository(GridRepository gridRepository)
+        {
+            this._context = gridRepository._context;
+        }
         public void Add(Grid grid, Door door)
         {
             door.Grid = grid;

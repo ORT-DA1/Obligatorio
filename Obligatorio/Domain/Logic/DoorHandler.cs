@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Domain.Entities;
 using Domain.Interface;
+using Domain.Repositories;
 
 namespace Domain.Logic
 {
@@ -10,9 +11,16 @@ namespace Domain.Logic
 
         private GridHandler gridHandler;
         private IDoorRepository doorRepository;
+
+        public DoorHandler()
+        {
+            this.gridHandler = new GridHandler();
+            this.doorRepository = new DoorRepository();
+        }
+
         public void Add(Grid grid, Door door)
         {
-            door.GridId = gridHandler.Get(grid).GridId;
+            door.Grid.GridId = gridHandler.Get(grid).GridId;
             this.doorRepository.Add(grid, door);
         }
 

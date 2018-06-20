@@ -13,6 +13,7 @@ namespace Domain.Repositories
         {
             using (DatabaseContext _context = new DatabaseContext())
             {
+                _context.Clients.Attach(grid.Client);
                 _context.Grids.Add(grid);
                 _context.SaveChanges();
             }
@@ -94,7 +95,7 @@ namespace Domain.Repositories
         { 
             using (DatabaseContext _context = new DatabaseContext())
             {
-                return _context.Grids.Where(g => g.GridName ==  grid.GridName).FirstOrDefault();
+                return _context.Grids.Where(g => g.GridName ==  grid.GridName && grid.GridId == g.GridId).FirstOrDefault();
             }
         }
         public List<Grid> GetAllGrids()

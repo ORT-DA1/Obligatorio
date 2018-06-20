@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,8 +12,17 @@ namespace Domain.Repositories
         {
             using (DatabaseContext _context = new Domain.DatabaseContext())
             {
-                _context.WallBeams.Add(wallBeam);
-                _context.SaveChanges();
+                try
+                {
+                    _context.Grids.Attach(grid);
+                    wallBeam.Grid = grid;
+                    _context.WallBeams.Add(wallBeam);
+                    _context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+
+                }
             }
         }
 
@@ -28,7 +38,7 @@ namespace Domain.Repositories
             {
                 wallBeamToFind = _context.WallBeams
                     .Where(w =>
-                    (w.GridId == grid.GridId && w.UbicationPoint == wallBeam.UbicationPoint))
+                    (w.Grid.GridId == grid.GridId && w.UbicationPoint == wallBeam.UbicationPoint))
                     .FirstOrDefault();
             }
             return wallBeamToFind;
@@ -36,15 +46,21 @@ namespace Domain.Repositories
 
         public List<WallBeam> GetList(Grid grid)
         {
-            List<WallBeam> wallBeamList = null;
-            using (DatabaseContext _context = new DatabaseContext())
+            try
             {
-                wallBeamList = _context.WallBeams
-                    .Where(w => 
-                    w.GridId == grid.GridId)
-                    .ToList();
+                List<WallBeam> wallBeamList = null;
+                using (DatabaseContext _context = new DatabaseContext())
+                {
+                    wallBeamList = _context.WallBeams
+                        .Where(w => w.Grid.GridId == grid.GridId)
+                        .ToList();
+                }
+                return wallBeamList;
             }
-            return wallBeamList;
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public bool Exist(Grid grid, WallBeam wallBeam)
@@ -53,8 +69,8 @@ namespace Domain.Repositories
             using (DatabaseContext _context = new DatabaseContext())
             {
                 wallBeamToFind = _context.WallBeams
-                    .Where(w => 
-                    (w.GridId == grid.GridId && w.UbicationPoint == wallBeam.UbicationPoint))
+                    .Where(w =>
+                    (w.Grid.GridId == grid.GridId && w.UbicationPoint == wallBeam.UbicationPoint))
                     .FirstOrDefault();
             }
             return !(wallBeamToFind == null);
@@ -66,10 +82,10 @@ namespace Domain.Repositories
             using (DatabaseContext _context = new DatabaseContext())
             {
                 wallBeamToDelete = _context.WallBeams
-                    .Where(w => 
-                    (w.GridId == grid.GridId && w.WallBeamId == wallBeam.WallBeamId))
+                    .Where(w =>
+                    (w.Grid.GridId == grid.GridId && w.WallBeamId == wallBeam.WallBeamId))
                     .FirstOrDefault();
-                
+
                 _context.WallBeams.Attach(wallBeamToDelete);
                 _context.WallBeams.Remove(wallBeamToDelete);
                 _context.SaveChanges();

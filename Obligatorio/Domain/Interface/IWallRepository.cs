@@ -8,5 +8,6 @@ namespace Domain.Interface
         void Add(Grid grid, Wall wall);
         List<Wall> GetList(Grid grid);
         void Remove(Grid grid, Wall intersectWall);
+        List<Point> GetWallPath(Wall wall);
     }
 }

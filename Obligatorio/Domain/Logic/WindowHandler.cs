@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interface;
+using Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,16 @@ namespace Domain.Logic
     {
         private GridHandler gridHandler;
         private IWindowRepository windowRepository;
+
+        public WindowHandler()
+        {
+            this.gridHandler = new GridHandler();
+            this.windowRepository = new WindowRepository();
+        }
+
         public void Add(Grid grid, Window window)
         {
-            window.GridId = gridHandler.Get(grid).GridId;
+            window.Grid.GridId = gridHandler.Get(grid).GridId;
             this.windowRepository.Add(grid, window);
         }
 

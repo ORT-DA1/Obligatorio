@@ -11,20 +11,24 @@ namespace Domain.Logic
     {
         private GridHandler gridHandler;
         private IWallRepository wallRepository;
-        private DecorativeColumnHandler DECORATIVE_HANDLER;
+        private DecorativeColumnHandler DECORATIVECOLUMN_HANDLER;
 
         public WallHandler()
         {
+            this.gridHandler = new GridHandler();
             this.wallRepository = new WallRepository();
-            this.DECORATIVE_HANDLER = new DecorativeColumnHandler();
+            this.DECORATIVECOLUMN_HANDLER = new DecorativeColumnHandler();
         }
 
-        private DecorativeColumnHandler DECORATIVECOLUMN_HANDLER;
 
         public void Add(Grid grid, Wall wall)
         {
-            wall.GridId = gridHandler.Get(grid).GridId;
+            try { 
+            wall.Grid = gridHandler.Get(grid);
             this.wallRepository.Add(grid, wall);
+            }catch(Exception e) { 
+            
+            }
         }
 
         public void IsValid(Grid grid, Wall wall)
@@ -106,6 +110,11 @@ namespace Domain.Logic
         public void Remove(Grid grid, Wall intersectWall)
         {
             wallRepository.Remove(grid, intersectWall);
+        }
+
+        public List<Point> GetWallPath(Wall wall)
+        {
+            return wallRepository.GetWallPath(wall);
         }
     }
 }

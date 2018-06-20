@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Domain.Entities;
 using Domain.Interface;
+using Domain.Repositories;
 
 namespace Domain.Logic
 {
@@ -9,10 +10,16 @@ namespace Domain.Logic
     {
         private GridHandler gridHandler;
         private IWallBeamRepository wallBeamRepository;
-        
+
+        public WallBeamHandler()
+        {
+            this.gridHandler = new GridHandler();
+            this.wallBeamRepository = new WallBeamRepository();
+        }
+
         public void Add(Grid grid, WallBeam wallBeam)
         {
-            wallBeam.GridId = gridHandler.Get(grid).GridId;
+            //wallBeam.Grid = gridHandler.Get(grid);
             this.wallBeamRepository.Add(grid, wallBeam);
         }
 

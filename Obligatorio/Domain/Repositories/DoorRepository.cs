@@ -12,6 +12,8 @@ namespace Domain.Repositories
         {
             using (DatabaseContext _context = new Domain.DatabaseContext())
             {
+                _context.Grids.Attach(grid);
+                door.Grid = grid;
                 _context.Doors.Add(door);
                 _context.SaveChanges();
             }
@@ -29,7 +31,7 @@ namespace Domain.Repositories
             {
                 doorToFind = _context.Doors
                     .Where(d => 
-                    (d.GridId == grid.GridId && d.StartPoint == door.StartPoint))
+                    (d.Grid.GridId == grid.GridId && d.StartPoint == door.StartPoint))
                     .FirstOrDefault();
             }
             return !(doorToFind == null);
@@ -37,15 +39,21 @@ namespace Domain.Repositories
 
         public List<Door> GetList(Grid grid)
         {
-            List<Door> doorList = null;
-            using (DatabaseContext _context = new DatabaseContext())
+            try
             {
-                doorList = _context.Doors
-                    .Where(d =>
-                    d.GridId == grid.GridId)
-                    .ToList();
+                List<Door> doorList = null;
+                using (DatabaseContext _context = new DatabaseContext())
+                {
+                    doorList = _context.Doors
+                        .Where(d => d.Grid.GridId == grid.GridId)
+                        .ToList();
+                }
+                return doorList;
             }
-            return doorList;
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public void Remove(Grid grid, Door door)
@@ -55,7 +63,7 @@ namespace Domain.Repositories
             {
                 doorToDelete = _context.Doors
                     .Where(d =>
-                    (d.GridId == grid.GridId && d.DoorId == door.DoorId))
+                    (d.Grid.GridId == grid.GridId && d.DoorId == door.DoorId))
                     .FirstOrDefault();
 
                 _context.Doors.Attach(doorToDelete);

@@ -12,6 +12,8 @@ namespace Domain.Repositories
         {
             using (DatabaseContext _context = new Domain.DatabaseContext())
             {
+                _context.Grids.Attach(grid);
+                window.Grid = grid;
                 _context.Windows.Add(window);
                 _context.SaveChanges();
             }
@@ -27,7 +29,7 @@ namespace Domain.Repositories
             Window windowToFind = null;
             using (DatabaseContext _context = new DatabaseContext())
             {
-                windowToFind = _context.Windows.Where(w => (w.GridId == grid.GridId
+                windowToFind = _context.Windows.Where(w => (w.Grid.GridId == grid.GridId
                 && w.StartPoint == window.StartPoint)).FirstOrDefault();
             }
             return !(windowToFind == null);
@@ -35,15 +37,21 @@ namespace Domain.Repositories
 
         public List<Window> GetList(Grid grid)
         {
-            List<Window> windowList = null;
-            using (DatabaseContext _context = new DatabaseContext())
+            try
             {
-                windowList = _context.Windows
-                    .Where(d =>
-                    d.GridId == grid.GridId)
-                    .ToList();
+                List<Window> windowList = null;
+                using (DatabaseContext _context = new DatabaseContext())
+                {
+                    windowList = _context.Windows
+                        .Where(w => w.Grid.GridId == grid.GridId)
+                        .ToList();
+                }
+                return windowList;
             }
-            return windowList;
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public void Remove(Grid grid, Window window)
@@ -53,7 +61,7 @@ namespace Domain.Repositories
             {
                 windowToDelete = _context.Windows
                     .Where(w =>
-                    (w.GridId == grid.GridId && w.WindowId == window.WindowId))
+                    (w.Grid.GridId == grid.GridId && w.WindowId == window.WindowId))
                     .FirstOrDefault();
 
                 _context.Windows.Attach(windowToDelete);

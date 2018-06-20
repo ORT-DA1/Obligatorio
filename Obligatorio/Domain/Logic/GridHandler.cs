@@ -10,12 +10,11 @@ namespace Domain.Logic
 {
     public class GridHandler
     {
-        private ClientHandler clientHandler;
         public IGridRepository gridRepository;
-
+        public DatabaseContext _context;
+        
         public GridHandler()
         {
-            this.clientHandler = new ClientHandler();
             this.gridRepository = new GridRepository();
         }
         public Grid Get(Grid grid)

@@ -12,6 +12,8 @@ namespace Domain.Repositories
         {
             using (DatabaseContext _context = new Domain.DatabaseContext())
             {
+                _context.Grids.Attach(grid);
+                decorativeColumn.Grid = grid;
                 _context.DecorativeColumns.Add(decorativeColumn);
                 _context.SaveChanges();
             }
@@ -27,7 +29,7 @@ namespace Domain.Repositories
             DecorativeColumn decorativeColumnToFind = null;
             using (DatabaseContext _context = new DatabaseContext())
             {
-                decorativeColumnToFind = _context.DecorativeColumns.Where(d => (d.GridId == grid.GridId
+                decorativeColumnToFind = _context.DecorativeColumns.Where(d => (d.Grid.GridId == grid.GridId
                 && d.UbicationPoint == decorativeColumn.UbicationPoint)).FirstOrDefault();
             }
             return !(decorativeColumnToFind == null);
@@ -35,15 +37,21 @@ namespace Domain.Repositories
 
         public List<DecorativeColumn> GetList(Grid grid)
         {
-            List<DecorativeColumn> decorativeColumnList = null;
-            using (DatabaseContext _context = new DatabaseContext())
+            try
             {
-                decorativeColumnList = _context.DecorativeColumns
-                    .Where(w =>
-                    w.GridId == grid.GridId)
-                    .ToList();
+                List<DecorativeColumn> decorativeColumnList = null;
+                using (DatabaseContext _context = new DatabaseContext())
+                {
+                    decorativeColumnList = _context.DecorativeColumns
+                        .Where(d => d.Grid.GridId == grid.GridId)
+                        .ToList();
+                }
+                return decorativeColumnList;
             }
-            return decorativeColumnList;
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public void Remove(Grid grid, DecorativeColumn decorativeColumn)
@@ -53,7 +61,7 @@ namespace Domain.Repositories
             {
                 decorativeColumnToDelete = _context.DecorativeColumns
                     .Where(d =>
-                    (d.GridId == grid.GridId && d.DecorativeColumnId == decorativeColumn.DecorativeColumnId))
+                    (d.Grid.GridId == grid.GridId && d.DecorativeColumnId == decorativeColumn.DecorativeColumnId))
                     .FirstOrDefault();
 
                 _context.DecorativeColumns.Attach(decorativeColumnToDelete);

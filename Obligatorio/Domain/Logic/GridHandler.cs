@@ -19,33 +19,31 @@ namespace Domain.Logic
         }
         public Grid Get(Grid grid)
         {
-            NotExist(grid);
+            Exist(grid);
             return this.gridRepository.GetGrid(grid);
         }
-        public void Add(Grid grid)
+        public void Add(Grid grid, Client client)
         {
             Validate(grid);
-            this.gridRepository.AddGrid(grid); 
+            this.gridRepository.AddGrid(grid, client); 
         }
 
         private void Validate(Grid grid)
         {
             DataValidation.ValidateGridName(grid.GridName);
-            //clientHandler.NotExist(grid.Client);
             DataValidation.ValidateHeight(grid.Height);
             DataValidation.ValidateWidth(grid.Width);
         }
         public void Delete(Grid grid)
         {
-            NotExist(grid);
             this.gridRepository.DeleteGrid(grid);
         }
-        public void NotExist(Grid grid)
+        public void Exist(Grid grid)
         {
-            //if (this.gridRepository.)
-            //{
-            //    throw new ExceptionController(ExceptionMessage.WALL_NOT_EXIST);
-            //}
+            if (this.gridRepository.Exist(grid))
+            {
+                throw new ExceptionController(ExceptionMessage.GRID_ALREADY_EXIST_NAME);
+            }
         }
         public List<Grid> GetList()
         {

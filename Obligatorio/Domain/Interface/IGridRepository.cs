@@ -9,7 +9,7 @@ namespace Domain.Interface
 {
     public interface IGridRepository
     {
-        void AddGrid(Grid grid);
+        void AddGrid(Grid grid, Client client);
         void ModifyGrid(Grid gridToModify, Grid modifiedGrid);
         void DeleteGrid(Grid grid);
         Grid GetGrid(Grid grid);
@@ -20,5 +20,6 @@ namespace Domain.Interface
         void AddDoor(Grid grid, Door door);
         void AddDecorativeColumn(Grid grid, DecorativeColumn decorativeColumn);
         Grid ReadGrid(Grid grid);
+        bool Exist(Grid grid);
     }
 }

@@ -39,6 +39,7 @@ namespace Domain.Repositories
         {
             _context.Grids.Attach(grid);
             _context.Walls.Attach(wall);
+            wall.Grid = null;
             _context.Walls.Remove(wall);
             _context.SaveChanges();
         }
@@ -103,5 +104,6 @@ namespace Domain.Repositories
                 && p.Y == ubicationPoint.Y)))
                 .FirstOrDefault();
         }
+        
     }
 }

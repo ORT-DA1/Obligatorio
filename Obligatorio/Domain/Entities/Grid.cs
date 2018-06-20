@@ -14,11 +14,11 @@ namespace Domain.Entities
         public int GridId { get; set; }
         public GridStrategy GridStrategy { get; set; }
         public string GridName { get; set; }
-        public Client Client { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
 
         #region navigation
+        public virtual Client Client { get; set; }
         public virtual List<Wall> Walls { get; set; }
         public virtual List<WallBeam> WallBeams { get; set; }
         public virtual List<DecorativeColumn> DecorativeColumns { get; set; }
@@ -53,12 +53,17 @@ namespace Domain.Entities
             this.Height = height * PixelConvertor;
             this.Width = width * PixelConvertor;
             this.GRID_HANDLER = new GridHandler();
+            this.WALLBEAM_HANDLER = new WallBeamHandler();
+            this.WALL_HANDLER = new WallHandler();
+            this.WINDOW_HANDLER = new WindowHandler();
+            this.DECORATIVECOLUMN_HANDLER = new DecorativeColumnHandler();
+            this.DOOR_HANDLER = new DoorHandler();
         }
 
         public void DrawWalls(Graphics graphic)
         {
             foreach (Wall wall in WALL_HANDLER.GetList(this))
-            {
+            { 
                 wall.Draw(graphic);
             }
         }
@@ -223,9 +228,9 @@ namespace Domain.Entities
             {
                 if (IsPerpendicular(wall, anotherWall))
                 {
-                    foreach (Point anotherPoint in anotherWall.Path)
+                    foreach (Point anotherPoint in WALL_HANDLER.GetWallPath(anotherWall))
                     {
-                        foreach (Point point in wall.Path)
+                        foreach (Point point in WALL_HANDLER.GetWallPath(wall))
                         {
                             if (VerifyCuttingDistance(wall, point, anotherPoint))
                                 return true;

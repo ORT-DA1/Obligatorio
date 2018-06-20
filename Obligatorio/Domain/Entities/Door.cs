@@ -9,7 +9,7 @@ namespace Domain.Entities
     {
         #region PK and FK
         public int DoorId { get; set; }
-        public int GridId { get; set; }
+        public virtual Grid Grid { get; set; }
         #endregion
 
         public Domain.Entities.Point StartPoint { get; set; }
@@ -25,6 +25,7 @@ namespace Domain.Entities
 
         public static Tuple<int, int> CostPriceDoor = new Tuple<int, int>(50,100);
 
+        #region Constructors
         public Door()
         {
         }
@@ -51,7 +52,7 @@ namespace Domain.Entities
             this.EndPoint = endPoint;
             
         }
-
+        #endregion
         public override void ModifyCostAndPrice(int Cost, int Price)
         {
             CostPriceDoor = new Tuple<int, int>(Cost, Price); 

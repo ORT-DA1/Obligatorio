@@ -13,7 +13,7 @@ namespace Domain.Entities
     {
         #region PK and FK
         public int DecorativeColumnId { get; set; }
-        public int GridId { get; set; }
+        public virtual Grid Grid { get; set; }
         #endregion
 
         public Point UbicationPoint { get; set; }
@@ -23,12 +23,18 @@ namespace Domain.Entities
         public static int MINIMUM_WIDTH_IN_PIXELS = 8;
         public static Tuple<int, int> CostPriceDecorativeColumn = new Tuple<int, int>(25, 50);
 
+        #region Constructors
+
+        public DecorativeColumn() { }
+
         public DecorativeColumn(Point ubicationPoint)
         {
             this.UbicationPoint = ubicationPoint;
             this.wallBeamBrush = new SolidBrush(Color.Gold);
             this.width = 0.50f;
         }
+
+        #endregion
 
         public override void ModifyCostAndPrice(int Cost, int Price)
         {

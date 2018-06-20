@@ -10,16 +10,23 @@ namespace Domain.Entities
     {
         #region PK and FK
         public int WallId { get; set; }
-        public int GridId { get; set; }
+        public virtual Grid Grid { get; set; }
         #endregion
 
-        public Point startUbicationPoint { get; set; }
-        public Point endUbicationPoint { get; set; }
+        public virtual Point startUbicationPoint { get; set; }
+        public virtual Point endUbicationPoint { get; set; }
         public virtual List<Domain.Entities.Point> Path { get; set; }
 
         private Pen wallPen;
 
         public static Tuple<int, int> CostPriceMeterWall = new Tuple<int, int>(50, 100);
+
+        #region Constructors
+        public Wall() {
+
+            this.Path = new List<Point>();
+            this.wallPen = new Pen(Color.LightGreen, 4);
+        }
 
         public Wall(Point startPoint, Point endPoint)
         {
@@ -28,6 +35,8 @@ namespace Domain.Entities
             this.wallPen = new Pen(Color.LightGreen, 4);
             this.createPath();
         }
+
+        #endregion
 
         public void SetRightSense(Point startPoint, Point endPoint)
         {

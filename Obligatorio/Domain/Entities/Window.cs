@@ -9,7 +9,7 @@ namespace Domain.Entities
     {
         #region PK and FK
         public int WindowId { get; set; }
-        public int GridId { get; set; }
+        public virtual Grid Grid { get; set; }
         #endregion
 
         public Domain.Entities.Point StartPoint { get; set; }
@@ -24,15 +24,9 @@ namespace Domain.Entities
 
         public static Tuple<int, int> CostPriceWindow = new Tuple<int, int>(50, 75);
 
-        public Window()
-        {
-        }
-
-        public override void ModifyCostAndPrice(int Cost, int Price)
-        {
-            CostPriceWindow = new Tuple<int, int>(Cost, Price);
-        }
-
+        #region Constructors
+        public Window() { }
+        
         public Window(Point startPoint, Point endPoint, string sense)
         {
             this.sense = sense;
@@ -52,6 +46,12 @@ namespace Domain.Entities
             this.EndPoint = endPoint;
         }
 
+        #endregion
+
+        public override void ModifyCostAndPrice(int Cost, int Price)
+        {
+            CostPriceWindow = new Tuple<int, int>(Cost, Price);
+        }
         public override void Draw(Graphics graphic)
         {
             if (sense.Equals("vertical")) {

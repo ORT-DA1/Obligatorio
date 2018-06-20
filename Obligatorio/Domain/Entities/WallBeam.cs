@@ -9,7 +9,7 @@ namespace Domain.Entities
     {
         #region PK and FK
         public int WallBeamId { get; set; }
-        public int GridId { get; set; }
+        public virtual Grid Grid { get; set; }
         #endregion
 
         public Point UbicationPoint { get; set; }
@@ -18,11 +18,14 @@ namespace Domain.Entities
 
         public static Tuple<int, int> CostPriceWallBeam = new Tuple<int, int>(50, 100);
 
+        #region Constructors
+        public WallBeam() { }
         public WallBeam(Point ubicationPoint)
         {
             this.UbicationPoint = ubicationPoint;
             this.wallBeamBrush = new SolidBrush(Color.Red);
         }
+        #endregion
 
         public override void ModifyCostAndPrice(int Cost, int Price)
         {

@@ -39,10 +39,31 @@ namespace Domain
             modelBuilder.Entity<WallBeam>().HasKey(w => w.WallBeamId);
             modelBuilder.Entity<Window>().HasKey(w => w.WindowId);
             modelBuilder.Entity<Door>().HasKey(d => d.DoorId);
+            modelBuilder.Entity<Point>().HasKey(p => p.PointId);
             modelBuilder.Entity<DecorativeColumn>().HasKey(d => d.DecorativeColumnId);
             #endregion
 
             #region modelBuilder Relations
+
+            modelBuilder.Entity<Wall>()
+                .HasRequired(w => w.Grid);
+
+            modelBuilder.Entity<Window>()
+                .HasRequired(w => w.Grid);
+
+
+            modelBuilder.Entity<WallBeam>()
+                .HasRequired(w => w.Grid);
+
+            modelBuilder.Entity<Door>()
+                .HasRequired(d => d.Grid);
+
+            modelBuilder.Entity<DecorativeColumn>()
+                .HasRequired(d => d.Grid);
+
+            modelBuilder.Entity<Grid>()
+                .HasRequired(g => g.Client);
+
 
             #endregion
         }

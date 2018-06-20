@@ -5,6 +5,7 @@ using System.Linq;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using Domain.Logic;
+using Domain.Repositories;
 
 namespace Domain.Entities
 {
@@ -16,7 +17,9 @@ namespace Domain.Entities
         public string GridName { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
-
+        
+        public GridRepository gridRepository;
+        
         #region navigation
         public virtual Client Client { get; set; }
         public virtual List<Wall> Walls { get; set; }
@@ -38,10 +41,12 @@ namespace Domain.Entities
 
         public Grid()
         {
+            this.gridRepository = new GridRepository();
         }
 
         public Grid(string gridName, Client client, int height, int width)
         {
+            this.gridRepository = new GridRepository();
             this.Walls = new List<Wall>();
             this.WallBeams = new List<WallBeam>();
             this.DecorativeColumns = new List<DecorativeColumn>();
@@ -53,11 +58,11 @@ namespace Domain.Entities
             this.Height = height * PixelConvertor;
             this.Width = width * PixelConvertor;
             this.GRID_HANDLER = new GridHandler();
-            this.WALLBEAM_HANDLER = new WallBeamHandler();
-            this.WALL_HANDLER = new WallHandler();
-            this.WINDOW_HANDLER = new WindowHandler();
-            this.DECORATIVECOLUMN_HANDLER = new DecorativeColumnHandler();
-            this.DOOR_HANDLER = new DoorHandler();
+            this.WALLBEAM_HANDLER = new WallBeamHandler(gridRepository);
+            this.WALL_HANDLER = new WallHandler(gridRepository);
+            this.WINDOW_HANDLER = new WindowHandler(gridRepository);
+            this.DECORATIVECOLUMN_HANDLER = new DecorativeColumnHandler(gridRepository);
+            this.DOOR_HANDLER = new DoorHandler(gridRepository);
         }
 
         public void DrawWalls(Graphics graphic)

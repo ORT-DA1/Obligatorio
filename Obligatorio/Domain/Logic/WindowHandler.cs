@@ -14,10 +14,10 @@ namespace Domain.Logic
         private GridHandler gridHandler;
         private IWindowRepository windowRepository;
 
-        public WindowHandler()
+        public WindowHandler(GridRepository gridRepository)
         {
             this.gridHandler = new GridHandler();
-            this.windowRepository = new WindowRepository();
+            this.windowRepository = new WindowRepository(gridRepository);
         }
 
         public void Add(Grid grid, Window window)

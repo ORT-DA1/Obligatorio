@@ -13,21 +13,23 @@ namespace Domain.Logic
         private IWallRepository wallRepository;
         private DecorativeColumnHandler DECORATIVECOLUMN_HANDLER;
 
-        public WallHandler()
+        public WallHandler(GridRepository gridRepository)
         {
             this.gridHandler = new GridHandler();
-            this.wallRepository = new WallRepository();
-            this.DECORATIVECOLUMN_HANDLER = new DecorativeColumnHandler();
+            this.wallRepository = new WallRepository(gridRepository);
+            this.DECORATIVECOLUMN_HANDLER = new DecorativeColumnHandler(gridRepository);
         }
 
 
         public void Add(Grid grid, Wall wall)
         {
-            try { 
-            wall.Grid = gridHandler.Get(grid);
-            this.wallRepository.Add(grid, wall);
-            }catch(Exception e) { 
-            
+            try
+            {
+                this.wallRepository.Add(grid, wall);
+            }
+            catch (Exception e)
+            {
+
             }
         }
 
@@ -51,7 +53,7 @@ namespace Domain.Logic
                 }
             }
         }
-        
+
         private void StartPointAndEndPointAreDifferent(Wall wall)
         {
             if (wall.startUbicationPoint.Equals(wall.endUbicationPoint))

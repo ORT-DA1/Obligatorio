@@ -14,10 +14,10 @@ namespace Domain.Logic
         private GridHandler gridHandler;
         private IDecorativeColumnRepository decorativeColumnRepository;
 
-        public DecorativeColumnHandler()
+        public DecorativeColumnHandler(GridRepository gridRepository)
         {
             this.gridHandler = new GridHandler();
-            this.decorativeColumnRepository = new DecorativeColumnRepository();
+            this.decorativeColumnRepository = new DecorativeColumnRepository(gridRepository);
         }
 
         public void Add(Grid grid, DecorativeColumn decorativeColumn)

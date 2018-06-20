@@ -16,19 +16,16 @@ namespace Gui.Forms
         private int option=0;
         private List<System.Drawing.Point> pointArray;
         private Form parentForm;
-        private GridRepository gridRepository;
 
         public GridForm()
         {
             InitializeComponent();
             this.ControlBox = false;
-            this.gridRepository = new GridRepository();
         }
 
-        public GridForm(Grid grid, Form parentForm, bool canEditGrid, GridRepository gridRepository)
+        public GridForm(Grid grid, Form parentForm, bool canEditGrid)
         {
             InitializeComponent();
-            this.gridRepository = gridRepository;
             this.parentForm = parentForm;
             this.ControlBox = false;
             this.grid = grid;

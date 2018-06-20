@@ -11,10 +11,10 @@ namespace Domain.Logic
         private GridHandler gridHandler;
         private IWallBeamRepository wallBeamRepository;
 
-        public WallBeamHandler()
+        public WallBeamHandler(GridRepository gridRepository)
         {
             this.gridHandler = new GridHandler();
-            this.wallBeamRepository = new WallBeamRepository();
+            this.wallBeamRepository = new WallBeamRepository(gridRepository);
         }
 
         public void Add(Grid grid, WallBeam wallBeam)

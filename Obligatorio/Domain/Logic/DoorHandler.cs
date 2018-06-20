@@ -12,10 +12,10 @@ namespace Domain.Logic
         private GridHandler gridHandler;
         private IDoorRepository doorRepository;
 
-        public DoorHandler()
+        public DoorHandler(GridRepository gridRepository)
         {
             this.gridHandler = new GridHandler();
-            this.doorRepository = new DoorRepository();
+            this.doorRepository = new DoorRepository(gridRepository);
         }
 
         public void Add(Grid grid, Door door)

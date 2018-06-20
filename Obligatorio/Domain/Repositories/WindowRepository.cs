@@ -8,15 +8,13 @@ namespace Domain.Repositories
 {
     public class WindowRepository : IWindowRepository
     {
+        DatabaseContext _context = new DatabaseContext();
+
         public void Add(Grid grid, Window window)
         {
-            using (DatabaseContext _context = new Domain.DatabaseContext())
-            {
-                _context.Grids.Attach(grid);
-                window.Grid = grid;
-                _context.Windows.Add(window);
-                _context.SaveChanges();
-            }
+            window.Grid = grid;
+            _context.Windows.Add(window);
+            _context.SaveChanges();
         }
 
         public int Count(Grid grid)
@@ -27,11 +25,9 @@ namespace Domain.Repositories
         public bool Exist(Grid grid, Window window)
         {
             Window windowToFind = null;
-            using (DatabaseContext _context = new DatabaseContext())
-            {
-                windowToFind = _context.Windows.Where(w => (w.Grid.GridId == grid.GridId
-                && w.StartPoint == window.StartPoint)).FirstOrDefault();
-            }
+            windowToFind = _context.Windows.Where(w => (w.Grid.GridId == grid.GridId
+            && w.StartPoint == window.StartPoint)).FirstOrDefault();
+
             return !(windowToFind == null);
         }
 
@@ -40,12 +36,10 @@ namespace Domain.Repositories
             try
             {
                 List<Window> windowList = null;
-                using (DatabaseContext _context = new DatabaseContext())
-                {
-                    windowList = _context.Windows
-                        .Where(w => w.Grid.GridId == grid.GridId)
-                        .ToList();
-                }
+                windowList = _context.Windows
+                    .Where(w => w.Grid.GridId == grid.GridId)
+                    .ToList();
+
                 return windowList;
             }
             catch (Exception e)
@@ -57,17 +51,14 @@ namespace Domain.Repositories
         public void Remove(Grid grid, Window window)
         {
             Window windowToDelete = null;
-            using (DatabaseContext _context = new DatabaseContext())
-            {
-                windowToDelete = _context.Windows
-                    .Where(w =>
-                    (w.Grid.GridId == grid.GridId && w.WindowId == window.WindowId))
-                    .FirstOrDefault();
+            windowToDelete = _context.Windows
+                .Where(w =>
+                (w.Grid.GridId == grid.GridId && w.WindowId == window.WindowId))
+                .FirstOrDefault();
 
-                _context.Windows.Attach(windowToDelete);
-                _context.Windows.Remove(windowToDelete);
-                _context.SaveChanges();
-            }
+            _context.Windows.Remove(windowToDelete);
+            _context.SaveChanges();
+
         }
     }
 }

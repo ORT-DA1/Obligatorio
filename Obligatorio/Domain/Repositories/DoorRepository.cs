@@ -8,15 +8,12 @@ namespace Domain.Repositories
 {
     public class DoorRepository : IDoorRepository
     {
+        DatabaseContext _context = new DatabaseContext();
         public void Add(Grid grid, Door door)
         {
-            using (DatabaseContext _context = new Domain.DatabaseContext())
-            {
-                _context.Grids.Attach(grid);
-                door.Grid = grid;
-                _context.Doors.Add(door);
-                _context.SaveChanges();
-            }
+            door.Grid = grid;
+            _context.Doors.Add(door);
+            _context.SaveChanges();
         }
 
         public int Count(Grid grid)
@@ -27,13 +24,10 @@ namespace Domain.Repositories
         public bool Exist(Grid grid, Door door)
         {
             Door doorToFind = null;
-            using (DatabaseContext _context = new DatabaseContext())
-            {
-                doorToFind = _context.Doors
-                    .Where(d => 
-                    (d.Grid.GridId == grid.GridId && d.StartPoint == door.StartPoint))
-                    .FirstOrDefault();
-            }
+            doorToFind = _context.Doors
+                .Where(d =>
+                (d.Grid.GridId == grid.GridId && d.StartPoint == door.StartPoint))
+                .FirstOrDefault();
             return !(doorToFind == null);
         }
 
@@ -42,12 +36,10 @@ namespace Domain.Repositories
             try
             {
                 List<Door> doorList = null;
-                using (DatabaseContext _context = new DatabaseContext())
-                {
-                    doorList = _context.Doors
-                        .Where(d => d.Grid.GridId == grid.GridId)
-                        .ToList();
-                }
+                doorList = _context.Doors
+                    .Where(d => d.Grid.GridId == grid.GridId)
+                    .ToList();
+
                 return doorList;
             }
             catch (Exception e)
@@ -59,17 +51,14 @@ namespace Domain.Repositories
         public void Remove(Grid grid, Door door)
         {
             Door doorToDelete = null;
-            using (DatabaseContext _context = new DatabaseContext())
-            {
-                doorToDelete = _context.Doors
-                    .Where(d =>
-                    (d.Grid.GridId == grid.GridId && d.DoorId == door.DoorId))
-                    .FirstOrDefault();
+            doorToDelete = _context.Doors
+                .Where(d =>
+                (d.Grid.GridId == grid.GridId && d.DoorId == door.DoorId))
+                .FirstOrDefault();
+            
+            _context.Doors.Remove(doorToDelete);
+            _context.SaveChanges();
 
-                _context.Doors.Attach(doorToDelete);
-                _context.Doors.Remove(doorToDelete);
-                _context.SaveChanges();
-            }
         }
     }
 }

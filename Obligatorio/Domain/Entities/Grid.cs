@@ -195,8 +195,8 @@ namespace Domain.Entities
         {
             if (ThereIsAWallAtThisPoint(point))
             {
-                Wall wall = WALL_HANDLER.GetList(this).First(anotherWall => anotherWall.Path.Contains(point));
-                return wall;
+                //Wall wall = WALL_HANDLER.GetList(this).First(anotherWall => anotherWall.Path.Contains(point));
+                return WALL_HANDLER.ObtainWallInPoint(this, point);
             }
             else throw new ExceptionController(ExceptionMessage.POINT_OUT_OF_WALL);
         }

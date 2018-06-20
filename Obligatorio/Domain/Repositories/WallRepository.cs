@@ -37,13 +37,9 @@ namespace Domain.Repositories
 
         public void Remove(Grid grid, Wall wall)
         {
-            Wall wallToDelete = null;
-            wallToDelete = _context.Walls
-                .Where(w =>
-                (w.WallId == wall.WallId))
-                .FirstOrDefault();
-
-            _context.Walls.Remove(wallToDelete);
+            _context.Grids.Attach(grid);
+            _context.Walls.Attach(wall);
+            _context.Walls.Remove(wall);
             _context.SaveChanges();
         }
 
@@ -51,12 +47,6 @@ namespace Domain.Repositories
         {
             try{
                 return CalculatePath(wall);
-                
-                /*_context.Walls.Attach(wall);
-                pathList = _context.Points
-                    .Where(p => p.Wall.WallId == wall.WallId)
-                    .ToList();*/
-                    
             }
             catch (Exception e)
             {
@@ -102,5 +92,16 @@ namespace Domain.Repositories
             return wall.startUbicationPoint.Y == wall.endUbicationPoint.Y;
         }
 
+        public Wall ObtainWallInPoint(Grid grid, Point ubicationPoint)
+        {
+            _context.Points.Attach(ubicationPoint);
+
+            return _context.Walls
+                .Where(w =>
+                (w.Grid.GridId == grid.GridId
+                && w.Path.Any(p => p.X == ubicationPoint.X
+                && p.Y == ubicationPoint.Y)))
+                .FirstOrDefault();
+        }
     }
 }

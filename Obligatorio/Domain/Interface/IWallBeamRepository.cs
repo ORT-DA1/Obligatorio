@@ -10,5 +10,7 @@ namespace Domain.Interface
         void Remove(Grid grid, WallBeam wallBeam);
         List<WallBeam> GetList(Grid grid);
         WallBeam Get(Grid grid, Point point);
+
+
     }
 }

@@ -110,13 +110,18 @@ namespace Domain.Logic
         }
 
         public void Remove(Grid grid, Wall intersectWall)
-        {
+        { 
             wallRepository.Remove(grid, intersectWall);
         }
 
         public List<Point> GetWallPath(Wall wall)
         {
             return wallRepository.GetWallPath(wall);
+        }
+
+        public Wall ObtainWallInPoint(Grid grid, Point point)
+        {
+            return wallRepository.ObtainWallInPoint(grid, point);
         }
     }
 }

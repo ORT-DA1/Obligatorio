@@ -26,13 +26,15 @@ namespace Domain.Repositories
             return this.GetList(grid).Count;
         }
 
-        public bool Exist(Grid grid, Door door)
+        public bool Exist(Grid grid, Point ubicationPoint)
         {
             Door doorToFind = null;
             doorToFind = _context.Doors
-                .Where(d =>
-                (d.Grid.GridId == grid.GridId && d.StartPoint == door.StartPoint))
+                .Where(w => (w.Grid.GridId == grid.GridId
+                && w.StartPoint.X == ubicationPoint.X)
+                && w.StartPoint.Y == ubicationPoint.Y)
                 .FirstOrDefault();
+
             return !(doorToFind == null);
         }
 

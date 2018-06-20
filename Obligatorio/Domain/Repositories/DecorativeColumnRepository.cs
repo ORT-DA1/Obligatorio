@@ -27,11 +27,14 @@ namespace Domain.Repositories
             return this.GetList(grid).Count;
         }
 
-        public bool Exist(Grid grid, DecorativeColumn decorativeColumn)
+        public bool Exist(Grid grid, Point ubicationPoint)
         {
             DecorativeColumn decorativeColumnToFind = null;
-            decorativeColumnToFind = _context.DecorativeColumns.Where(d => (d.Grid.GridId == grid.GridId
-            && d.UbicationPoint == decorativeColumn.UbicationPoint)).FirstOrDefault();
+            decorativeColumnToFind = _context.DecorativeColumns
+                .Where(w => (w.Grid.GridId == grid.GridId
+                && w.UbicationPoint.X == ubicationPoint.X)
+                && w.UbicationPoint.Y == ubicationPoint.Y)
+                .FirstOrDefault();
 
             return !(decorativeColumnToFind == null);
         }

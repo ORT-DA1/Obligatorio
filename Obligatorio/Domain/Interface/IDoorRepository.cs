@@ -9,7 +9,7 @@ namespace Domain.Interface
         void Add(Grid grid, Door door);
         List<Door> GetList(Grid grid);
         void Remove(Grid grid, Door door);
-        bool Exist(Grid grid, Door door);
         int Count(Grid grid);
+        bool Exist(Grid grid, Point startPoint);
     }
 }

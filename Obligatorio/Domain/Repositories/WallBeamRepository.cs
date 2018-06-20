@@ -62,12 +62,13 @@ namespace Domain.Repositories
             }
         }
 
-        public bool Exist(Grid grid, WallBeam wallBeam)
+        public bool Exist(Grid grid, Point ubicationPoint)
         {
             WallBeam wallBeamToFind = null;
             wallBeamToFind = _context.WallBeams
-                .Where(w =>
-                (w.Grid.GridId == grid.GridId && w.UbicationPoint == wallBeam.UbicationPoint))
+                .Where(w => (w.Grid.GridId == grid.GridId
+                && w.UbicationPoint.X == ubicationPoint.X)
+                && w.UbicationPoint.Y == ubicationPoint.Y)
                 .FirstOrDefault();
 
             return !(wallBeamToFind == null);

@@ -9,7 +9,7 @@ namespace Domain.Interface
         void Add(Grid grid, DecorativeColumn decorativeColumn);
         List<DecorativeColumn> GetList(Grid grid);
         void Remove(Grid grid, DecorativeColumn decorativeColumn);
-        bool Exist(Grid grid, DecorativeColumn decorativeColumn);
         int Count(Grid grid);
+        bool Exist(Grid grid, Point ubicationPoint);
     }
 }

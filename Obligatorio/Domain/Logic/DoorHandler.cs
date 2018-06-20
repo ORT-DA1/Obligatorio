@@ -35,7 +35,7 @@ namespace Domain.Logic
 
         public bool Exist(Grid grid, Door door)
         {
-            return doorRepository.Exist(grid, door);
+            return doorRepository.Exist(grid, door.StartPoint);
         }
 
         public int Count(Grid grid)

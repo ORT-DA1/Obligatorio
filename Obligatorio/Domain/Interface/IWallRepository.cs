@@ -9,5 +9,6 @@ namespace Domain.Interface
         List<Wall> GetList(Grid grid);
         void Remove(Grid grid, Wall intersectWall);
         List<Point> GetWallPath(Wall wall);
+        Wall ObtainWallInPoint(Grid grid, Point point);
     }
 }

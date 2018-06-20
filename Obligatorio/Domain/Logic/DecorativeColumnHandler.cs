@@ -37,7 +37,7 @@ namespace Domain.Logic
 
         public bool Exist(Grid grid, DecorativeColumn decorativeColumn)
         {
-            return decorativeColumnRepository.Exist(grid, decorativeColumn); 
+            return decorativeColumnRepository.Exist(grid, decorativeColumn.UbicationPoint); 
         }
 
         public int Count(Grid grid)

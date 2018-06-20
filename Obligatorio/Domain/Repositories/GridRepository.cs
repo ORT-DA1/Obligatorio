@@ -15,8 +15,9 @@ namespace Domain.Repositories
             _context = new DatabaseContext();
         }
 
-        public void AddGrid(Grid grid)
+        public void AddGrid(Grid grid, Client client)
         {
+            _context.Clients.Attach(client);
             _context.Grids.Add(grid);
             _context.SaveChanges();
         }
@@ -26,6 +27,7 @@ namespace Domain.Repositories
             //TODO
             //Tiene modify?!?!
         }
+
         public void DeleteGrid(Grid grid)
         {
             _context.Grids.Attach(grid);
@@ -101,6 +103,16 @@ namespace Domain.Repositories
                 co.DecorativeColumns.Add(decorativeColumn);
                 _context.SaveChanges();
             }
+        }
+
+        public bool Exist(Grid grid)
+        {
+            Grid gridToFind = null;
+            gridToFind = _context.Grids
+                .Where(g => (g.GridName == grid.GridName ))
+                .FirstOrDefault();
+
+            return !(gridToFind == null);
         }
     }
 }

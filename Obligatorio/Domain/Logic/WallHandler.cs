@@ -23,14 +23,8 @@ namespace Domain.Logic
 
         public void Add(Grid grid, Wall wall)
         {
-            try
-            {
-                this.wallRepository.Add(grid, wall);
-            }
-            catch (Exception e)
-            {
-
-            }
+            this.IsValid(grid, wall);
+            this.wallRepository.Add(grid, wall);
         }
 
         public void IsValid(Grid grid, Wall wall)
@@ -110,7 +104,7 @@ namespace Domain.Logic
         }
 
         public void Remove(Grid grid, Wall intersectWall)
-        { 
+        {
             wallRepository.Remove(grid, intersectWall);
         }
 

@@ -48,7 +48,7 @@ namespace Gui.UserControls.ABMGridScreen
             try
             {
                 Grid newGrid = fetchValues();
-                gridHandler.Add(newGrid);
+                gridHandler.Add(newGrid, (Client)this.clientList.SelectedItem);
                 Redirect(newGrid);
             }
             catch (ExceptionController Exception)

@@ -105,8 +105,9 @@
             this.doorBtn.Name = "doorBtn";
             this.doorBtn.Size = new System.Drawing.Size(264, 36);
             this.doorBtn.TabIndex = 2;
-            this.doorBtn.Text = "Agregar Puerta";
+            this.doorBtn.Text = "Agregar Ventana";
             this.doorBtn.UseVisualStyleBackColor = true;
+            this.doorBtn.Click += new System.EventHandler(this.doorBtn_Click);
             // 
             // windowBtn
             // 
@@ -115,7 +116,7 @@
             this.windowBtn.Name = "windowBtn";
             this.windowBtn.Size = new System.Drawing.Size(264, 36);
             this.windowBtn.TabIndex = 1;
-            this.windowBtn.Text = "Agregar Ventana";
+            this.windowBtn.Text = "Agregar Puerta";
             this.windowBtn.UseVisualStyleBackColor = true;
             // 
             // wallBtn
@@ -200,7 +201,7 @@
             this.addDecorativeColumnBtn.Name = "addDecorativeColumnBtn";
             this.addDecorativeColumnBtn.Size = new System.Drawing.Size(269, 23);
             this.addDecorativeColumnBtn.TabIndex = 11;
-            this.addDecorativeColumnBtn.Text = "Agregar Pared Decorativa";
+            this.addDecorativeColumnBtn.Text = "Agregar Columna Decorativa";
             this.addDecorativeColumnBtn.UseVisualStyleBackColor = true;
             // 
             // deleteDecorativeColumnBtn
@@ -209,7 +210,7 @@
             this.deleteDecorativeColumnBtn.Name = "deleteDecorativeColumnBtn";
             this.deleteDecorativeColumnBtn.Size = new System.Drawing.Size(270, 23);
             this.deleteDecorativeColumnBtn.TabIndex = 12;
-            this.deleteDecorativeColumnBtn.Text = "Quitar Pared Decorativa";
+            this.deleteDecorativeColumnBtn.Text = "Quitar Columna Decorativa";
             this.deleteDecorativeColumnBtn.UseVisualStyleBackColor = true;
             // 
             // comboBox1

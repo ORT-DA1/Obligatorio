@@ -26,6 +26,50 @@ namespace Gui
                     context.Administrators.Add(admin);
                     context.SaveChanges();
                 }
+                if (!context.Clients.Any())
+                {
+                    Client c = new Client
+                    {
+                        Username = "client",
+                        Password = "client",
+                        Name = "Ana",
+                        Surname = "Rodriguez",
+                        Address = "Cuareim 1221",
+                        RegistrationDate = (DateTime.Now),
+                        LastAccess = (DateTime.Now),
+                        Phone = "093535353"
+                    };
+                    context.Clients.Add(c);
+                    context.SaveChanges();
+                }
+                if (!context.Designers.Any())
+                {
+                    Designer d = new Designer
+                    {
+                        Username = "designer",
+                        Password = "designer",
+                        Name = "Pablo",
+                        Surname = "Pereira",
+                        RegistrationDate = (DateTime.Now),
+                        LastAccess = (DateTime.Now)
+                    };
+                    context.Designers.Add(d);
+                    context.SaveChanges();
+                }
+                if (!context.Architects.Any())
+                {
+                    Architect ar = new Architect
+                    {
+                        Username = "architect",
+                        Password = "architect",
+                        Name = "Joaquin",
+                        Surname = "Touris",
+                        RegistrationDate = (DateTime.Now),
+                        LastAccess = (DateTime.Now)
+                    };
+                    context.Architects.Add(ar);
+                    context.SaveChanges();
+                }
             }
 
             Application.EnableVisualStyles();

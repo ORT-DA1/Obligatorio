@@ -39,6 +39,7 @@ namespace Domain
             modelBuilder.Entity<WallBeam>().HasKey(w => w.WallBeamId);
             modelBuilder.Entity<Window>().HasKey(w => w.WindowId);
             modelBuilder.Entity<Door>().HasKey(d => d.DoorId);
+            modelBuilder.Entity<Signature>().HasKey(s => s.SignatureId);
             modelBuilder.Entity<Point>().HasKey(p => p.PointId);
             modelBuilder.Entity<DecorativeColumn>().HasKey(d => d.DecorativeColumnId);
             
@@ -63,12 +64,9 @@ namespace Domain
 
             modelBuilder.Entity<Grid>()
                 .HasRequired(g => g.Client);
-            
-            // configures one-to-many relationship
-            /*modelBuilder.Entity<Wall>()
-                .HasRequired<Point>(s => s.)
-                .WithMany(g => g.Path);*/
-                
+
+            modelBuilder.Entity<Signature>()
+                .HasRequired(s => s.Grid);
             #endregion
         }
 

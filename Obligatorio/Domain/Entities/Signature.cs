@@ -10,13 +10,17 @@ namespace Domain.Entities
     [Table(name: "Signatures")]
     public class Signature
     {
+        #region PK and FK
         public int SignatureId { get; set; }
+        public virtual Grid Grid { get; set; }
+        #endregion
+
         public DateTime Date { get; set; }
         public Architect Architect { get; set; }
-
         public Signature() { }
-        public Signature(Architect architect, DateTime date)
+        public Signature(Architect architect, DateTime date, Grid grid)
         {
+            this.Grid = grid;
             this.Architect = architect;
             this.Date = date;
         }

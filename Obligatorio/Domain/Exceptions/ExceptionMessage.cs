@@ -37,5 +37,8 @@
         public const string PRICE_INVALID = "El precio es invalido, ingrese nuevamente.";
 
         public const string DECORATIVE_COLUMN_NOT_EXIST = "Seleccione una columna disponible.";
+
+        public const string GRID_ALREADY_EXIST_NAME = "Ya existe un grid con este nombre.";
+        public const string DECORATIVECOLUMN_INVALID = "La columna decorativa es invalida.";
     }
 }

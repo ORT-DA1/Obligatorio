@@ -13,7 +13,7 @@ namespace Gui.Forms
     {
         private Domain.Entities.Grid grid;
         private Graphics graphic;
-        private int option=0;
+        private int option = 0;
         private List<System.Drawing.Point> pointArray;
         private Form parentForm;
 
@@ -48,7 +48,7 @@ namespace Gui.Forms
             deleteDecorativeColumnBtn.MouseClick += changeOption;
 
         }
-        
+
         private void SetupEnvironment(bool canEditGrid)
         {
             this.wallBtn.Visible = canEditGrid;
@@ -157,7 +157,7 @@ namespace Gui.Forms
                         case 1:
                             try
                             {
-                                grid.AddWall(graphic, new Wall(new Domain.Entities.Point(pointArray[0].X,pointArray[0].Y)
+                                grid.AddWall(graphic, new Wall(new Domain.Entities.Point(pointArray[0].X, pointArray[0].Y)
                                     , new Domain.Entities.Point(grid.FixPoint(pointArray[1]).X, grid.FixPoint(pointArray[1]).Y)));
                                 UpdateLines();
                             }
@@ -172,7 +172,7 @@ namespace Gui.Forms
                             {
                                 grid.AddDoor(graphic, new Domain.Entities.Point(pointArray[0].X, pointArray[0].Y)
                                     , new Domain.Entities.Point(pointArray[1].X, pointArray[1].Y)
-                                    , grid.WallSense(new Domain.Entities.Point(pointArray[0].X,pointArray[0].Y)));
+                                    , grid.WallSense(new Domain.Entities.Point(pointArray[0].X, pointArray[0].Y)));
                                 UpdateLines();
                             }
                             catch (ExceptionController Exception)
@@ -232,8 +232,16 @@ namespace Gui.Forms
                             }
                             break;
                         case 8:
-                            grid.AddDecorativeColumn(graphic,new Domain.Entities.Point(pointArray[0].X, pointArray[0].Y));
-                            UpdateLines();
+                            try
+                            {
+                                grid.AddDecorativeColumn(graphic, new Domain.Entities.Point(pointArray[0].X, pointArray[0].Y));
+                                UpdateLines();
+                            }
+                            catch (ExceptionController Exception)
+                            {
+                                string message = Exception.Message;
+                                MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                             break;
                         case 9:
                             grid.RemoveDecorativeColumn(new Domain.Entities.Point(pointArray[0].X, pointArray[0].Y));
@@ -264,7 +272,7 @@ namespace Gui.Forms
                 this.setDottedLineGrid();
             }
             else if (comboBox1.SelectedIndex == 2)
-            { 
+            {
                 this.setWithoutVisualGrid();
             }
         }
@@ -302,6 +310,11 @@ namespace Gui.Forms
             this.grid.DrawWindows(this.graphic);
             this.grid.DrawWallBeams(this.graphic);
             this.grid.DrawDecorativeColumns(this.graphic);
+        }
+
+        private void doorBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

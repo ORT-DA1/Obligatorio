@@ -1,4 +1,5 @@
 ﻿using Domain.Logic;
+using Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -25,13 +26,15 @@ namespace Domain.Entities
         public static int MINIMUM_WIDTH_IN_PIXELS = 8;
 
         PriceAndCostHandler priceAndCostHandler;
+        public GridRepository gridRepository;
         #region Constructors
 
         public DecorativeColumn() { }
 
         public DecorativeColumn(Point ubicationPoint)
         {
-            this.priceAndCostHandler = new PriceAndCostHandler();
+            this.gridRepository = new GridRepository();
+            this.priceAndCostHandler = new PriceAndCostHandler(gridRepository);
             this.UbicationPoint = ubicationPoint;
             this.wallBeamBrush = new SolidBrush(Color.Gold);
             this.width = 0.50f;

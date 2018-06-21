@@ -84,12 +84,12 @@ namespace Domain.Logic
 
         public int GetDoorPrice()
         {
-            return priceAndCostRepository.GetDoorCost();
+            return priceAndCostRepository.GetDoorPrice();
         }
 
         public int GetWindowPrice()
         {
-            return priceAndCostRepository.GetDoorCost();
+            return priceAndCostRepository.GetWindowPrice();
         }
 
         public int GetWallBeamCost()
@@ -159,6 +159,16 @@ namespace Domain.Logic
         public int TotalCostWall(Grid grid)
         {
             return priceAndCostRepository.TotalCostWall(grid);
+        }
+
+        public object GetDecorativeColumnCost()
+        {
+            return priceAndCostRepository.GetDecorativeColumnCost();
+        }
+
+        public object GetDecorativeColumnPrice()
+        {
+            return priceAndCostRepository.GetDecorativeColumnPrice();
         }
 
         #endregion

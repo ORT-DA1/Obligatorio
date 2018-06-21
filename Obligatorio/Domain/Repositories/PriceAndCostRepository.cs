@@ -32,10 +32,9 @@ namespace Domain.Repositories
 
         public void DecorativeColumnModifyPriceCost(int cost, int price)
         {
-            DecorativeColumn decorativeColumn = decorativeColumnHandler.GetFirst();
             PriceAndCost priceAndCost = _context.PricesAndCosts
-                .Where(p => p.PriceAndCostId == decorativeColumn.PriceAndCost.PriceAndCostId)
-                .First();
+                .Where(p => p.PriceAndCostId == 5)
+                .FirstOrDefault();
             priceAndCost.Cost = cost;
             priceAndCost.Price = price;
             _context.SaveChanges();
@@ -43,10 +42,9 @@ namespace Domain.Repositories
 
         public void DoorModifyPriceCost(int cost, int price)
         {
-            Door door = doorHandler.GetFirst();
             PriceAndCost priceAndCost = _context.PricesAndCosts
-                .Where(p => p.PriceAndCostId == door.PriceAndCost.PriceAndCostId)
-                .First();
+                .Where(p => p.PriceAndCostId == 4)
+                .FirstOrDefault();
             priceAndCost.Cost = cost;
             priceAndCost.Price = price;
             _context.SaveChanges();
@@ -54,21 +52,19 @@ namespace Domain.Repositories
 
         public void WallBeamColumnModifyPriceCost(int cost, int price)
         {
-            WallBeam wallBeam = wallBeamHandler.GetFirst();
             PriceAndCost priceAndCost = _context.PricesAndCosts
-                .Where(p => p.PriceAndCostId == wallBeam.PriceAndCost.PriceAndCostId)
-                .First();
+                .Where(p => p.PriceAndCostId == 2)
+                .FirstOrDefault();
             priceAndCost.Cost = cost;
             priceAndCost.Price = price;
             _context.SaveChanges();
         }
 
         public void WallModifyPriceCost(int cost, int price)
-        {
-            Wall wall = wallHandler.GetFirst();
+        {            
             PriceAndCost priceAndCost = _context.PricesAndCosts
-                .Where(p => p.PriceAndCostId == wall.PriceAndCost.PriceAndCostId)
-                .First();
+                .Where(p => p.PriceAndCostId == 1)
+                .FirstOrDefault();
             priceAndCost.Cost = cost;
             priceAndCost.Price = price;
             _context.SaveChanges();
@@ -76,10 +72,9 @@ namespace Domain.Repositories
 
         public void WindowModifyPriceCost(int cost, int price)
         {
-            Window window = windowHandler.GetFirst();
             PriceAndCost priceAndCost = _context.PricesAndCosts
-                .Where(p => p.PriceAndCostId == window.PriceAndCost.PriceAndCostId)
-                .First();
+                .Where(p => p.PriceAndCostId == 3)
+                .FirstOrDefault();
             priceAndCost.Cost = cost;
             priceAndCost.Price = price;
             _context.SaveChanges();

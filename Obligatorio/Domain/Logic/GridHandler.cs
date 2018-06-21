@@ -77,5 +77,11 @@ namespace Domain.Logic
                 throw new ExceptionController(ExceptionMessage.EMPTY_GRID_LIST);
             }
         }
+        public List<Signature> GetGridSignatures()
+        {
+            List<Signature> signatureList = this.gridRepository.GetSignatures();
+
+            return signatureList != null ? signatureList : null;
+        }
     }
 }

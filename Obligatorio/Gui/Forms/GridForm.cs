@@ -6,6 +6,7 @@ using System;
 using Domain.Exceptions;
 using Domain.TypesGrid;
 using Domain.Repositories;
+using Domain.Logic;
 
 namespace Gui.Forms
 {
@@ -16,16 +17,20 @@ namespace Gui.Forms
         private int option = 0;
         private List<System.Drawing.Point> pointArray;
         private Form parentForm;
+        private User _user;
+        private GridHandler handler;
 
         public GridForm()
         {
             InitializeComponent();
+            this.handler = new GridHandler();
             this.ControlBox = false;
         }
 
-        public GridForm(Grid grid, Form parentForm, bool canEditGrid)
+        public GridForm(Grid grid, Form parentForm, bool canEditGrid, User user)
         {
             InitializeComponent();
+            this._user = user;
             this.parentForm = parentForm;
             this.ControlBox = false;
             this.grid = grid;
@@ -120,11 +125,7 @@ namespace Gui.Forms
                     break;
                 case "finishDesignBtn":
                     option = 7;
-                    string message = "Se han guardado los cambios sobre el plano";
-                    MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    option = 0;
-                    this.Close();
-                    this.parentForm.Show();
+                    FinishAndSave();
                     break;
                 case "addDecorativeColumnBtn":
                     option = 8;
@@ -135,6 +136,19 @@ namespace Gui.Forms
                 default:
                     break;
             }
+        }
+
+        private void FinishAndSave()
+        {
+            if (this._user.CanSignGrids() && this.GRID)
+            {
+
+            }
+            string message = "Se han guardado los cambios sobre el plano";
+            MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            option = 0;
+            this.Close();
+            this.parentForm.Show();
         }
 
         private void gridPanel_MouseClick(object sender, MouseEventArgs e)
@@ -310,11 +324,6 @@ namespace Gui.Forms
             this.grid.DrawWindows(this.graphic);
             this.grid.DrawWallBeams(this.graphic);
             this.grid.DrawDecorativeColumns(this.graphic);
-        }
-
-        private void doorBtn_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

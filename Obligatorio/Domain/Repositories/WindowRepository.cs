@@ -3,6 +3,7 @@ using Domain.Interface;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using System.Data.Entity;
 
 namespace Domain.Repositories
 {
@@ -34,7 +35,7 @@ namespace Domain.Repositories
         {
             Window windowToFind = null;
             windowToFind = _context.Windows
-                .Where(w => (w.Grid.GridId == grid.GridId 
+                .Where(w => (w.Grid.GridId == grid.GridId
                 && w.StartPoint.X == ubicationPoint.X)
                 && w.StartPoint.Y == ubicationPoint.Y)
                 .FirstOrDefault();
@@ -78,6 +79,15 @@ namespace Domain.Repositories
                 }
             }
             return listName;
+        }
+
+        public Window GetWindow(Window window)
+        {
+            return _context.Windows
+                .Where(w => w.WindowId == window.WindowId)
+                .Include("StartPoint")
+                .Include("EndPoint")
+                .FirstOrDefault();
         }
 
         public void Remove(Grid grid, Window window)

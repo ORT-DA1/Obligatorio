@@ -21,26 +21,25 @@ namespace Domain.Repositories
             _context.Grids.Add(grid);
             _context.SaveChanges();
         }
-
-        public void ModifyGrid(Grid gridToModify, Grid modifiedGrid)
-        {
-            //TODO
-            //Tiene modify?!?!
-        }
-
+        
         public void DeleteGrid(Grid grid)
         {
             _context.Grids.Attach(grid);
-            _context.Grids.Remove(grid);
+            grid.isDeleted = true;
+            _context.SaveChanges();
         }
         public Grid GetGrid(Grid grid)
         {
-            return _context.Grids.Where(g => g.GridName == grid.GridName && grid.GridId == g.GridId).FirstOrDefault();
+            return _context.Grids
+                .Where(g => g.GridName == grid.GridName && grid.GridId == g.GridId && !g.isDeleted)
+                .FirstOrDefault();
 
         }
         public List<Grid> GetAllGrids()
         {
-            return _context.Grids.ToList();
+            return _context.Grids
+                .Where(g => !g.isDeleted)
+                .ToList();
         }
 
         public Grid ReadGrid(Grid grid)
@@ -49,8 +48,6 @@ namespace Domain.Repositories
             gridToReturn = (from g in _context.Grids
                             where g.GridId == grid.GridId
                             select g).FirstOrDefault();
-            //select g).Include("DecorativeColumns").FirstOrDefault();
-
             return gridToReturn;
         }
 

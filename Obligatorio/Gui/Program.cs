@@ -37,7 +37,8 @@ namespace Gui
                         Address = "Cuareim 1221",
                         RegistrationDate = (DateTime.Now),
                         LastAccess = (DateTime.Now),
-                        Phone = "093535353"
+                        Phone = "093535353",
+                        IdentityCard = "12345678"
                     };
                     context.Clients.Add(c);
                     context.SaveChanges();
@@ -68,6 +69,46 @@ namespace Gui
                         LastAccess = (DateTime.Now)
                     };
                     context.Architects.Add(ar);
+                    context.SaveChanges();
+                }
+                if (!context.PricesAndCosts.Any())
+                {                
+                    PriceAndCost priceWall = new PriceAndCost
+                    {
+                        Cost = 50,
+                        Price = 50,
+                        PriceAndCostId = 1
+                    };
+                    PriceAndCost priceWallBeam = new PriceAndCost
+                    {
+                        Cost = 50,
+                        Price = 50,
+                        PriceAndCostId = 2
+                    };
+                    PriceAndCost priceWindow = new PriceAndCost
+                    {
+                        Cost = 50,
+                        Price = 50,
+                        PriceAndCostId = 3
+                    };
+                    PriceAndCost priceDoor = new PriceAndCost
+                    {
+                        Cost = 50,
+                        Price = 50,
+                        PriceAndCostId = 4
+                    };
+                    PriceAndCost priceDecorativeColumn = new PriceAndCost
+                    {
+                        Cost = 50,
+                        Price = 50,
+                        PriceAndCostId = 5
+                    };
+
+                    context.PricesAndCosts.Add(priceWall);
+                    context.PricesAndCosts.Add(priceWallBeam);
+                    context.PricesAndCosts.Add(priceWindow);
+                    context.PricesAndCosts.Add(priceDoor);
+                    context.PricesAndCosts.Add(priceDecorativeColumn);
                     context.SaveChanges();
                 }
             }

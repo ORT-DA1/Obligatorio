@@ -86,7 +86,8 @@ namespace Domain.Entities
             if (DOOR_HANDLER == null) this.DOOR_HANDLER = new DoorHandler(gridRepository);
             foreach (Door door in DOOR_HANDLER.GetList(this))
             {
-                door.Draw(graphic);
+                Door doorToDraw = DOOR_HANDLER.GetDoor(door);
+                doorToDraw.Draw(graphic);
             }
         }
 
@@ -113,7 +114,8 @@ namespace Domain.Entities
             if (WINDOW_HANDLER == null) this.WINDOW_HANDLER = new WindowHandler(gridRepository);
             foreach (Window window in WINDOW_HANDLER.GetList(this))
             {
-                window.Draw(graphic);
+                Window windowToDraw = WINDOW_HANDLER.GetWindow(window);
+                windowToDraw.Draw(graphic);
             }
         }
 

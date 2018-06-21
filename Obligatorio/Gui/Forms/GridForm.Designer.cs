@@ -45,6 +45,8 @@
             this.addDecorativeColumnBtn = new System.Windows.Forms.Button();
             this.deleteDecorativeColumnBtn = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.signatureList = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,9 +54,9 @@
             // 
             this.gridPanel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.gridPanel.Location = new System.Drawing.Point(216, 10);
-            this.gridPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridPanel.Margin = new System.Windows.Forms.Padding(2);
             this.gridPanel.Name = "gridPanel";
-            this.gridPanel.Size = new System.Drawing.Size(572, 430);
+            this.gridPanel.Size = new System.Drawing.Size(492, 430);
             this.gridPanel.TabIndex = 0;
             this.gridPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.generateLines);
             this.gridPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gridPanel_MouseClick);
@@ -63,7 +65,7 @@
             // 
             this.menuPanel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.menuPanel.Location = new System.Drawing.Point(9, 10);
-            this.menuPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.menuPanel.Margin = new System.Windows.Forms.Padding(2);
             this.menuPanel.Name = "menuPanel";
             this.menuPanel.Size = new System.Drawing.Size(202, 261);
             this.menuPanel.TabIndex = 1;
@@ -71,7 +73,7 @@
             // deleteDoorBtn
             // 
             this.deleteDoorBtn.Location = new System.Drawing.Point(2, 168);
-            this.deleteDoorBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.deleteDoorBtn.Margin = new System.Windows.Forms.Padding(2);
             this.deleteDoorBtn.Name = "deleteDoorBtn";
             this.deleteDoorBtn.Size = new System.Drawing.Size(198, 30);
             this.deleteDoorBtn.TabIndex = 5;
@@ -81,7 +83,7 @@
             // deleteWindowBtn
             // 
             this.deleteWindowBtn.Location = new System.Drawing.Point(2, 134);
-            this.deleteWindowBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.deleteWindowBtn.Margin = new System.Windows.Forms.Padding(2);
             this.deleteWindowBtn.Name = "deleteWindowBtn";
             this.deleteWindowBtn.Size = new System.Drawing.Size(198, 30);
             this.deleteWindowBtn.TabIndex = 4;
@@ -91,7 +93,7 @@
             // deleteWallBtn
             // 
             this.deleteWallBtn.Location = new System.Drawing.Point(2, 102);
-            this.deleteWallBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.deleteWallBtn.Margin = new System.Windows.Forms.Padding(2);
             this.deleteWallBtn.Name = "deleteWallBtn";
             this.deleteWallBtn.Size = new System.Drawing.Size(198, 28);
             this.deleteWallBtn.TabIndex = 3;
@@ -101,7 +103,7 @@
             // doorBtn
             // 
             this.doorBtn.Location = new System.Drawing.Point(2, 69);
-            this.doorBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.doorBtn.Margin = new System.Windows.Forms.Padding(2);
             this.doorBtn.Name = "doorBtn";
             this.doorBtn.Size = new System.Drawing.Size(198, 29);
             this.doorBtn.TabIndex = 2;
@@ -111,7 +113,7 @@
             // windowBtn
             // 
             this.windowBtn.Location = new System.Drawing.Point(2, 36);
-            this.windowBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.windowBtn.Margin = new System.Windows.Forms.Padding(2);
             this.windowBtn.Name = "windowBtn";
             this.windowBtn.Size = new System.Drawing.Size(198, 29);
             this.windowBtn.TabIndex = 1;
@@ -121,7 +123,7 @@
             // wallBtn
             // 
             this.wallBtn.Location = new System.Drawing.Point(2, 2);
-            this.wallBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.wallBtn.Margin = new System.Windows.Forms.Padding(2);
             this.wallBtn.Name = "wallBtn";
             this.wallBtn.Size = new System.Drawing.Size(198, 30);
             this.wallBtn.TabIndex = 0;
@@ -138,7 +140,7 @@
             this.flowLayoutPanel1.Controls.Add(this.deleteDoorBtn);
             this.flowLayoutPanel1.Controls.Add(this.finishDesignBtn);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(9, 10);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(203, 261);
             this.flowLayoutPanel1.TabIndex = 6;
@@ -146,7 +148,7 @@
             // finishDesignBtn
             // 
             this.finishDesignBtn.Location = new System.Drawing.Point(2, 202);
-            this.finishDesignBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.finishDesignBtn.Margin = new System.Windows.Forms.Padding(2);
             this.finishDesignBtn.Name = "finishDesignBtn";
             this.finishDesignBtn.Size = new System.Drawing.Size(198, 59);
             this.finishDesignBtn.TabIndex = 6;
@@ -193,7 +195,7 @@
             // addDecorativeColumnBtn
             // 
             this.addDecorativeColumnBtn.Location = new System.Drawing.Point(6, 397);
-            this.addDecorativeColumnBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addDecorativeColumnBtn.Margin = new System.Windows.Forms.Padding(2);
             this.addDecorativeColumnBtn.Name = "addDecorativeColumnBtn";
             this.addDecorativeColumnBtn.Size = new System.Drawing.Size(202, 19);
             this.addDecorativeColumnBtn.TabIndex = 11;
@@ -203,7 +205,7 @@
             // deleteDecorativeColumnBtn
             // 
             this.deleteDecorativeColumnBtn.Location = new System.Drawing.Point(6, 421);
-            this.deleteDecorativeColumnBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.deleteDecorativeColumnBtn.Margin = new System.Windows.Forms.Padding(2);
             this.deleteDecorativeColumnBtn.Name = "deleteDecorativeColumnBtn";
             this.deleteDecorativeColumnBtn.Size = new System.Drawing.Size(202, 19);
             this.deleteDecorativeColumnBtn.TabIndex = 12;
@@ -218,18 +220,37 @@
             "Grilla de líneas punteadas",
             "Sin grilla visual"});
             this.comboBox1.Location = new System.Drawing.Point(8, 373);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(203, 21);
             this.comboBox1.TabIndex = 13;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // signatureList
+            // 
+            this.signatureList.FormattingEnabled = true;
+            this.signatureList.Location = new System.Drawing.Point(725, 212);
+            this.signatureList.Name = "signatureList";
+            this.signatureList.Size = new System.Drawing.Size(178, 225);
+            this.signatureList.TabIndex = 14;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(722, 181);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(106, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Firma de Arquitectos:";
             // 
             // GridForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightBlue;
-            this.ClientSize = new System.Drawing.Size(771, 449);
+            this.ClientSize = new System.Drawing.Size(915, 449);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.signatureList);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.deleteDecorativeColumnBtn);
             this.Controls.Add(this.addDecorativeColumnBtn);
@@ -240,7 +261,7 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.menuPanel);
             this.Controls.Add(this.gridPanel);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GridForm";
             this.Text = "Grid";
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -268,5 +289,7 @@
         private System.Windows.Forms.Button addDecorativeColumnBtn;
         private System.Windows.Forms.Button deleteDecorativeColumnBtn;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ListBox signatureList;
+        private System.Windows.Forms.Label label1;
     }
 }

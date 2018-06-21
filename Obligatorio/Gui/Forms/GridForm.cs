@@ -23,13 +23,13 @@ namespace Gui.Forms
         public GridForm()
         {
             InitializeComponent();
-            this.handler = new GridHandler();
             this.ControlBox = false;
         }
 
         public GridForm(Grid grid, Form parentForm, bool canEditGrid, User user)
         {
             InitializeComponent();
+            this.handler = new GridHandler();
             this._user = user;
             this.parentForm = parentForm;
             this.ControlBox = false;

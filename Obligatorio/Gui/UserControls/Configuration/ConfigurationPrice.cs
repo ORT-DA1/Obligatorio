@@ -11,16 +11,19 @@ using Gui.Interface;
 using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Logic;
+using Domain.Repositories;
 
 namespace Gui.UserControls.Configuration
 {
     public partial class ConfigurationPrice : UserControl, IController
     {
 
-        PriceAndCostHandler priceAndCostHandler;
+        public PriceAndCostHandler priceAndCostHandler;
+        public GridRepository gridRepository;
         public ConfigurationPrice()
         {
-            priceAndCostHandler = new PriceAndCostHandler();
+            this.gridRepository = new GridRepository();
+            priceAndCostHandler = new PriceAndCostHandler(gridRepository);
             InitializeComponent();
 
             this.AccessibleName = "Precios";
@@ -38,23 +41,23 @@ namespace Gui.UserControls.Configuration
                 ValidCostPrice();
                 if (elementList.SelectedItem.ToString().Equals("Pared"))
                 {
-                    priceAndCostHandler.SetCostAndPriceWall(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));   
+                    priceAndCostHandler.WallModifyPriceCost(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));   
                 }
                 else if (elementList.SelectedItem.ToString().Equals("Viga"))
                 {
-                    priceAndCostHandler.SetCostAndPriceWallBeam(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
+                    priceAndCostHandler.WallBeamColumnModifyPriceCost(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
                 }
                 else if (elementList.SelectedItem.ToString().Equals("Ventana"))
                 {
-                    priceAndCostHandler.SetCostAndPriceWindow(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
+                    priceAndCostHandler.WindowModifyPriceCost(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
                 }
                 else if (elementList.SelectedItem.ToString().Equals("Puerta"))
                 {
-                    priceAndCostHandler.SetCostAndPriceDoor(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
+                    priceAndCostHandler.DoorModifyPriceCost(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
                 }
                 else if (elementList.SelectedItem.ToString().Equals("Columna Decorativa"))
                 {
-                    priceAndCostHandler.SetCostAndPriceDecorativeColumn(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
+                    priceAndCostHandler.DecorativeColumnModifyPriceCost(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
                 }
 
                 MessageBox.Show("Se han actualizado los precios del sistema.", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);

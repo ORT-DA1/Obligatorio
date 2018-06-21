@@ -9,6 +9,6 @@ namespace Domain.Interface
 {
     public interface IElementHandler<Element>
     {
-        void Add(Grid grid, Element element);
+        void Add(Grid grid, Element element, PriceAndCost priceAndCost);
     }
 }

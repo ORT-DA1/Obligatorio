@@ -17,9 +17,9 @@ namespace Domain.Logic
             this.wallBeamRepository = new WallBeamRepository(gridRepository);
         }
 
-        public void Add(Grid grid, WallBeam wallBeam)
+        public void Add(Grid grid, WallBeam wallBeam, PriceAndCost priceAndCost)
         {
-            this.wallBeamRepository.Add(grid, wallBeam);
+            this.wallBeamRepository.Add(grid, wallBeam, priceAndCost);
         }
 
         public List<WallBeam> GetList(Grid grid)
@@ -41,6 +41,11 @@ namespace Domain.Logic
         public int Count(Grid grid)
         {
             return wallBeamRepository.Count(grid);
+        }
+
+        public WallBeam GetFirst()
+        {
+            return wallBeamRepository.GetFirst();
         }
     }
 }

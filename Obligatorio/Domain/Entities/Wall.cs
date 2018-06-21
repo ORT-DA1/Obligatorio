@@ -1,4 +1,5 @@
 ﻿using Domain.Logic;
+using Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,6 +22,7 @@ namespace Domain.Entities
 
         private Pen wallPen = new Pen(Color.LightGreen, 4);
         public PriceAndCostHandler priceAndCostHandler;
+        public GridRepository gridRepository;
 
 
         #region Constructors
@@ -33,11 +35,15 @@ namespace Domain.Entities
 
         public Wall(Point startPoint, Point endPoint)
         {
-            this.priceAndCostHandler = new PriceAndCostHandler();
+            this.gridRepository = new GridRepository();
+            this.priceAndCostHandler = new PriceAndCostHandler(gridRepository);
             SetRightSense(startPoint, endPoint);
             this.Path = new List<Point>();
             this.wallPen = new Pen(Color.LightGreen, 4);
             this.createPath();
+
+
+            this.PriceAndCost = priceAndCostHandler.GetPriceAndCostWall();
         }
 
         #endregion

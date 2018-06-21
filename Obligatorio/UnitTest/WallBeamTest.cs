@@ -7,7 +7,7 @@ namespace UnitTest
     [TestClass]
     public class WallBeamTest
     {
-        public readonly Point POINT = new Point(10, 10);
+        public readonly Domain.Entities.Point POINT = new Domain.Entities.Point(10, 10);
 
         [TestMethod]
         public void TestCreateWallBeam()

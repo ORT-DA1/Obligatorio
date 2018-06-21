@@ -14,14 +14,12 @@ namespace Domain.Repositories
         {
             _context = new DatabaseContext();
         }
-
         public void AddGrid(Grid grid, Client client)
         {
             _context.Clients.Attach(client);
             _context.Grids.Add(grid);
             _context.SaveChanges();
         }
-        
         public void DeleteGrid(Grid grid)
         {
             _context.Grids.Attach(grid);
@@ -41,7 +39,6 @@ namespace Domain.Repositories
                 .Where(g => !g.isDeleted)
                 .ToList();
         }
-
         public Grid ReadGrid(Grid grid)
         {
             Grid gridToReturn = null;
@@ -50,8 +47,6 @@ namespace Domain.Repositories
                             select g).FirstOrDefault();
             return gridToReturn;
         }
-
-
         public void AddWall(Grid grid, Wall wall)
         {
             var co = (from c in _context.Grids
@@ -68,7 +63,6 @@ namespace Domain.Repositories
             co.WallBeams.Add(wallBeam);
             _context.SaveChanges();
         }
-
         public void AddWindow(Grid grid, Window window)
         {
             var co = (from c in _context.Grids
@@ -77,7 +71,6 @@ namespace Domain.Repositories
             co.Windows.Add(window);
             _context.SaveChanges();
         }
-
         public void AddDoor(Grid grid, Door door)
         {
             using (DatabaseContext _context = new DatabaseContext())
@@ -89,7 +82,6 @@ namespace Domain.Repositories
                 _context.SaveChanges();
             }
         }
-
         public void AddDecorativeColumn(Grid grid, DecorativeColumn decorativeColumn)
         {
             using (DatabaseContext _context = new DatabaseContext())
@@ -101,7 +93,6 @@ namespace Domain.Repositories
                 _context.SaveChanges();
             }
         }
-
         public bool Exist(Grid grid)
         {
             Grid gridToFind = null;
@@ -110,6 +101,20 @@ namespace Domain.Repositories
                 .FirstOrDefault();
 
             return !(gridToFind == null);
+        }
+        public List<Signature> GetSignatures(Grid grid)
+        {
+            return _context.Signatures.Where(s => s.Grid.GridId == grid.GridId).Include("Architect").ToList();
+        }
+        public void SaveSignature(Grid grid, Signature signature)
+        {
+            Grid savedGrid = _context.Grids.Where(g => g.GridId == signature.Grid.GridId).FirstOrDefault();
+            Architect savedArchitect = _context.Architects.Where(a => a.ArchitectId == signature.Architect.ArchitectId).FirstOrDefault();
+            
+            signature.Grid = savedGrid;
+            signature.Architect = savedArchitect;
+            _context.Signatures.Add(signature);
+            _context.SaveChanges();
         }
     }
 }

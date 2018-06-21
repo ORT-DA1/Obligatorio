@@ -11,6 +11,7 @@ namespace Gui.UserControls.MyAccount
     {
         private GridHandler gridHandler;
         private Client client;
+       
         public MyAccountOwnedGrids(Client client)
         {
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace Gui.UserControls.MyAccount
             try
             {
                 LoadOwnedGrids();
+                LoadSignedGrids();
                 return this;
             }
             catch (ExceptionController Exception)
@@ -36,14 +38,23 @@ namespace Gui.UserControls.MyAccount
         private void LoadOwnedGrids()
         {
             this.ownedGridlist.Items.Clear();
-            foreach (var grid in gridHandler.GetClientGrids(this.client))
+            foreach (var grid in gridHandler.GetClientNotSignedGrids(this.client))
             {
                 this.ownedGridlist.Items.Add(grid);
             }
         }
-
-        private void seeGrid(object sender, System.EventArgs e)
+        private void LoadSignedGrids()
         {
+            this.signedGrids_list.Items.Clear();
+            foreach (var grid in gridHandler.GetClientSignedGrids(this.client))
+            {
+                this.signedGrids_list.Items.Add(grid);
+            }
+        }
+
+        private void SeeGridInProgress(object sender, System.EventArgs e)
+        {
+            this.signedGrids_list.ClearSelected();
             var selectedGrid = (Grid)this.ownedGridlist.SelectedItem;
             if (selectedGrid != null)
             {
@@ -51,15 +62,30 @@ namespace Gui.UserControls.MyAccount
             }
             else
             {
-                MessageBox.Show("Porfavor seleccione un Plano para Modificar.", "No se selecciono ningun Plano.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Porfavor seleccione un Plano.", "No se selecciono ningun Plano.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         private void RedirectToGridForm(Grid selectedGrid)
         {
-            GridForm gridForm = new GridForm(selectedGrid, this.ParentForm, false);
+            GridForm gridForm = new GridForm(selectedGrid, this.ParentForm, false, this.client);
             gridForm.Show();
             this.ParentForm.Hide();
+        }
+
+        private void SeeSignedGrids(object sender, System.EventArgs e)
+        {
+            this.ownedGridlist.ClearSelected();
+
+            var selectedGrid = (Grid)this.signedGrids_list.SelectedItem;
+            if (selectedGrid != null)
+            {
+                RedirectToGridForm(selectedGrid);
+            }
+            else
+            {
+                MessageBox.Show("Porfavor seleccione un Plano.", "No se selecciono ningun Plano.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

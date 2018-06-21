@@ -9,16 +9,16 @@ namespace UnitTest
     {
         private readonly float HIGH;
         private readonly float WIDTH;
-        private readonly Point START_POINT;
-        private readonly Point END_POINT;
+        private readonly Domain.Entities.Point START_POINT;
+        private readonly Domain.Entities.Point END_POINT;
         private readonly string NAME;
         private readonly string SENSE;
         private readonly int direction;
 
         public DoorTest()
         {
-            this.START_POINT = new Point(25,25);
-            this.END_POINT = new Point(25, 25);
+            this.START_POINT = new Domain.Entities.Point(25,25);
+            this.END_POINT = new Domain.Entities.Point(25, 25);
             this.SENSE = "vertical";
             this.NAME = "defecto";
             this.direction = 0;

@@ -55,6 +55,10 @@ namespace Domain.Entities
         {
             return true;
         }
+        public virtual bool CanSignGrids()
+        {
+            return false;
+        }
         public override string ToString()
         {
             string format = "{0} - {1} {2}";

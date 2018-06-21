@@ -19,9 +19,11 @@ namespace Gui.UserControls.ABMGridScreen
     public partial class ABMGridScreenModify : UserControl, IController
     {
         private GridHandler gridHandler;
-        public ABMGridScreenModify()
+        private User _user;
+        public ABMGridScreenModify(User user)
         {
             InitializeComponent();
+            this._user = user;
             this.gridHandler = new GridHandler();
             this.AccessibleName = "Modificar";
             this.titleTxt.Text = "Modificar Plano";
@@ -64,7 +66,7 @@ namespace Gui.UserControls.ABMGridScreen
 
         private void RedirectToModifyGridForm(Grid selectedGrid)
         {
-            GridForm gridForm = new GridForm(selectedGrid, this.ParentForm, true);
+            GridForm gridForm = new GridForm(selectedGrid, this.ParentForm, true, this._user);
             gridForm.Show();
             this.ParentForm.Hide();
         }

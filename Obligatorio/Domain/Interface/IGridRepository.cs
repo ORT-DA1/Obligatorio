@@ -20,5 +20,7 @@ namespace Domain.Interface
         void AddDecorativeColumn(Grid grid, DecorativeColumn decorativeColumn);
         Grid ReadGrid(Grid grid);
         bool Exist(Grid grid);
+        List<Signature> GetSignatures(Grid grid);
+        void SaveSignature(Grid grid, Signature signature);
     }
 }

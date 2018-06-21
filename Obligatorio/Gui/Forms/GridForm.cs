@@ -6,6 +6,7 @@ using System;
 using Domain.Exceptions;
 using Domain.TypesGrid;
 using Domain.Repositories;
+using Domain.Logic;
 
 namespace Gui.Forms
 {
@@ -16,6 +17,8 @@ namespace Gui.Forms
         private int option = 0;
         private List<System.Drawing.Point> pointArray;
         private Form parentForm;
+        private User _user;
+        private GridHandler handler;
 
         public GridForm()
         {
@@ -23,9 +26,11 @@ namespace Gui.Forms
             this.ControlBox = false;
         }
 
-        public GridForm(Grid grid, Form parentForm, bool canEditGrid)
+        public GridForm(Grid grid, Form parentForm, bool canEditGrid, User user)
         {
             InitializeComponent();
+            this.handler = new GridHandler();
+            this._user = user;
             this.parentForm = parentForm;
             this.ControlBox = false;
             this.grid = grid;
@@ -120,11 +125,7 @@ namespace Gui.Forms
                     break;
                 case "finishDesignBtn":
                     option = 7;
-                    string message = "Se han guardado los cambios sobre el plano";
-                    MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    option = 0;
-                    this.Close();
-                    this.parentForm.Show();
+                    FinishAndSave();
                     break;
                 case "addDecorativeColumnBtn":
                     option = 8;
@@ -135,6 +136,45 @@ namespace Gui.Forms
                 default:
                     break;
             }
+        }
+
+        private void FinishAndSave()
+        {
+            var signatures = handler.GetGridSignatures(this.grid);
+
+            if (this._user.CanSignGrids() && signatures == null)
+            {
+
+                DialogResult dialogResult = MessageBox.Show("Este plano no contiene firma, desea firmarlo?", "Plano Sin Firmar", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    ProcessGridSavingConfirmationWithSignature();
+                }
+
+            }
+            else if (this._user.CanSignGrids() && signatures != null)
+            {
+
+                MessageBox.Show("Estimado " + _user.Username + ", acaba de guardar un plano Firmado. Al haber editado el mismo, su firma quedara registrada.", "Plano Sin Firmar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ProcessGridSavingConfirmationWithSignature();
+            }
+
+            MessageBox.Show("Cambios Guardados Correctamente", "Confirmacion de Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            CloseView();
+        }
+
+        private void CloseView()
+        {
+            option = 0;
+            this.Close();
+            this.parentForm.Show();
+        }
+
+        private void ProcessGridSavingConfirmationWithSignature()
+        {
+            DateTime signatureDate = DateTime.Now;
+            Signature signature = new Signature((Architect)this._user, signatureDate, grid);
+            handler.SaveSignature(grid, signature);
         }
 
         private void gridPanel_MouseClick(object sender, MouseEventArgs e)
@@ -310,11 +350,6 @@ namespace Gui.Forms
             this.grid.DrawWindows(this.graphic);
             this.grid.DrawWallBeams(this.graphic);
             this.grid.DrawDecorativeColumns(this.graphic);
-        }
-
-        private void doorBtn_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -12,10 +12,12 @@ namespace Gui.UserControls.ABMGridScreen
     {
         private ClientHandler clientHandler;
         private GridHandler gridHandler;
+        private User user;
 
-        public CreateElement()
+        public CreateElement(User user)
         {
             InitializeComponent();
+            this.user = user;
             this.clientHandler = new ClientHandler();
             this.gridHandler = new GridHandler();
             this.AccessibleName = "Crear";
@@ -85,7 +87,7 @@ namespace Gui.UserControls.ABMGridScreen
         }
         private void Redirect(Grid grid)
         {
-            GridForm gridForm = new GridForm(grid, this.ParentForm, true);
+            GridForm gridForm = new GridForm(grid, this.ParentForm, true, this.user);
             gridForm.Show();
             ClearFields();
             this.ParentForm.Hide();

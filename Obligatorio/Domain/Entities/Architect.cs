@@ -11,6 +11,10 @@ namespace Domain.Entities
     public class Architect: User
     {
         public int ArchitectId { get; set; }
+
+        public virtual List<GeneratedDoor> GeneratedDoors { get; set; }
+        public virtual List<GeneratedWindow> GeneratedWindows { get; set; }
+
         public Architect() { }
 
         public Architect(string username, string password, string name, string surname, DateTime registrationDate, Nullable<DateTime> lastAccess)

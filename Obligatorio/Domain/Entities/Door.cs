@@ -13,6 +13,8 @@ namespace Domain.Entities
         public int DoorId { get; set; }
         public virtual Grid Grid { get; set; }
         public virtual PriceAndCost PriceAndCost { get; set; }
+        public virtual Architect Architect { get; set; }
+
         #endregion
 
         public string name { get; set; }

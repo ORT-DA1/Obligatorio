@@ -20,6 +20,7 @@ namespace Domain
         public DbSet<WallBeam> WallBeams { get; set; }
         public DbSet<Window> Windows { get; set; }
         public DbSet<Point> Points { get; set; }
+        public DbSet<PriceAndCost> PricesAndCosts { get; set; }
 
         public DatabaseContext()
             : base("name=DatabaseContext")
@@ -42,10 +43,27 @@ namespace Domain
             modelBuilder.Entity<Signature>().HasKey(s => s.SignatureId);
             modelBuilder.Entity<Point>().HasKey(p => p.PointId);
             modelBuilder.Entity<DecorativeColumn>().HasKey(d => d.DecorativeColumnId);
-            
+            modelBuilder.Entity<PriceAndCost>().HasKey(pc => pc.PriceAndCostId);
+
             #endregion
 
             #region modelBuilder Relations
+
+            modelBuilder.Entity<Wall>()
+                .HasRequired(w => w.PriceAndCost);
+
+            modelBuilder.Entity<Window>()
+                .HasRequired(w => w.PriceAndCost);
+
+            modelBuilder.Entity<WallBeam>()
+                .HasRequired(w => w.PriceAndCost);
+
+            modelBuilder.Entity<Door>()
+                .HasRequired(d => d.PriceAndCost);
+
+            modelBuilder.Entity<DecorativeColumn>()
+                .HasRequired(d => d.PriceAndCost);
+
 
             modelBuilder.Entity<Wall>()
                 .HasRequired(w => w.Grid);
@@ -61,12 +79,13 @@ namespace Domain
 
             modelBuilder.Entity<DecorativeColumn>()
                 .HasRequired(d => d.Grid);
+            
+            modelBuilder.Entity<Signature>()
+                .HasRequired(s => s.Grid);
 
             modelBuilder.Entity<Grid>()
                 .HasRequired(g => g.Client);
 
-            modelBuilder.Entity<Signature>()
-                .HasRequired(s => s.Grid);
             #endregion
         }
 

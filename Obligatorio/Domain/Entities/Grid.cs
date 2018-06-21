@@ -17,6 +17,7 @@ namespace Domain.Entities
         public string GridName { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
+        public bool isDeleted { get; set; }
 
         public GridRepository gridRepository;
 
@@ -33,6 +34,7 @@ namespace Domain.Entities
         public static int PixelConvertor = 25;
         public int MaxMeters = 5;
 
+        public PriceAndCostRepository PRICE_AND_COST;
         public GridHandler GRID_HANDLER;
         public WallHandler WALL_HANDLER;
         public DoorHandler DOOR_HANDLER;
@@ -42,11 +44,13 @@ namespace Domain.Entities
 
         public Grid()
         {
+            this.isDeleted = false;
             this.gridRepository = new GridRepository();
         }
 
         public Grid(string gridName, Client client, int height, int width)
         {
+            this.isDeleted = false;
             this.gridRepository = new GridRepository();
             this.Walls = new List<Wall>();
             this.WallBeams = new List<WallBeam>();
@@ -58,6 +62,7 @@ namespace Domain.Entities
             this.Client = client;
             this.Height = height * PixelConvertor;
             this.Width = width * PixelConvertor;
+            this.PRICE_AND_COST = new PriceAndCostRepository();
             this.GRID_HANDLER = new GridHandler();
             this.WALLBEAM_HANDLER = new WallBeamHandler(gridRepository);
             this.WALL_HANDLER = new WallHandler(gridRepository);
@@ -68,7 +73,7 @@ namespace Domain.Entities
 
         public void DrawWalls(Graphics graphic)
         {
-            if(WALL_HANDLER== null) this.WALL_HANDLER = new WallHandler(gridRepository);
+            if (WALL_HANDLER == null) this.WALL_HANDLER = new WallHandler(gridRepository);
             foreach (Wall wall in WALL_HANDLER.GetList(this))
             {
                 wall.Draw(graphic);
@@ -507,88 +512,47 @@ namespace Domain.Entities
 
         public int AmountCostWall()
         {
-            int result = 0;
-            foreach (Wall wall in WALL_HANDLER.GetList(this))
-            {
-                result += MetersWallCount() * Wall.CostPriceMeterWall.Item1;
-            }
-            return result;
+            return PRICE_AND_COST.TotalCostWindow(this);
         }
 
         public int AmountPriceWall()
         {
-            int result = 0;
-            foreach (Wall wall in WALL_HANDLER.GetList(this))
-            {
-                result += MetersWallCount() * Wall.CostPriceMeterWall.Item2;
-            }
-            return result;
+            return PRICE_AND_COST.TotalPriceWall(this);
         }
 
         public int AmountCostWallBeam()
         {
-            int result = 0;
-            foreach (WallBeam wallBeam in WALLBEAM_HANDLER.GetList(this))
-            {
-                result += WallBeamsCount() * WallBeam.CostPriceWallBeam.Item1;
-            }
-            return result;
+            return PRICE_AND_COST.TotalCostWallBeam(this);
         }
 
         public int AmountPriceWallBeam()
         {
-            int result = 0;
-            foreach (WallBeam wallBeam in WALLBEAM_HANDLER.GetList(this))
-            {
-                result += WallBeamsCount() * WallBeam.CostPriceWallBeam.Item2;
-            }
-            return result;
+            return PRICE_AND_COST.TotalPriceWallBeam(this);
         }
 
         public int AmountCostWindow()
         {
-            int result = 0;
-            foreach (Window window in WINDOW_HANDLER.GetList(this))
-            {
-                result += WindowsCount() * Window.CostPriceWindow.Item1;
-            }
-            return result;
+            return PRICE_AND_COST.TotalCostWindow(this);
         }
 
         public int AmountPriceWindow()
         {
-            int result = 0;
-            foreach (Window window in WINDOW_HANDLER.GetList(this))
-            {
-                result += WindowsCount() * Window.CostPriceWindow.Item2;
-            }
-            return result;
+            return PRICE_AND_COST.TotalPriceWindow(this);
         }
 
         public int AmountCostDoor()
         {
-            int result = 0;
-            foreach (Door door in DOOR_HANDLER.GetList(this))
-            {
-                result += DoorsCount() * Door.CostPriceDoor.Item1;
-            }
-            return result;
+            return PRICE_AND_COST.TotalCostDoor(this);
         }
 
         public int AmountPriceDoor()
         {
-            int result = 0;
-            foreach (Door door in DOOR_HANDLER.GetList(this))
-            {
-                result += DoorsCount() * Door.CostPriceDoor.Item2;
-            }
-            return result;
+            return PRICE_AND_COST.TotalPriceDoor(this);
         }
 
         public int TotalCost()
         {
-            return 0;
-            //return AmountCostWall() + AmountCostWallBeam() + AmountCostWindow() + AmountCostDoor();
+            return PRICE_AND_COST.TotalCost(this);
         }
 
         public int TotalPrice()

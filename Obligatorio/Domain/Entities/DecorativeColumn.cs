@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Logic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
@@ -14,6 +15,7 @@ namespace Domain.Entities
         #region PK and FK
         public int DecorativeColumnId { get; set; }
         public virtual Grid Grid { get; set; }
+        public virtual PriceAndCost PriceAndCost { get; set; }
         #endregion
 
         public Point UbicationPoint { get; set; }
@@ -21,14 +23,15 @@ namespace Domain.Entities
         public float width { get; set; }
         public static float MINIMUM_WIDTH = 0.85f;
         public static int MINIMUM_WIDTH_IN_PIXELS = 8;
-        public static Tuple<int, int> CostPriceDecorativeColumn = new Tuple<int, int>(25, 50);
 
+        PriceAndCostHandler priceAndCostHandler;
         #region Constructors
 
         public DecorativeColumn() { }
 
         public DecorativeColumn(Point ubicationPoint)
         {
+            this.priceAndCostHandler = new PriceAndCostHandler();
             this.UbicationPoint = ubicationPoint;
             this.wallBeamBrush = new SolidBrush(Color.Gold);
             this.width = 0.50f;
@@ -36,9 +39,9 @@ namespace Domain.Entities
 
         #endregion
 
-        public override void ModifyCostAndPrice(int Cost, int Price)
+        public override void ModifyCostAndPrice(int cost, int price)
         {
-            CostPriceDecorativeColumn = new Tuple<int, int>(Cost, Price);
+            priceAndCostHandler.DecorativeColumnModifyPriceCost(cost, price);
         }
 
         public override void Draw(Graphics graphic)

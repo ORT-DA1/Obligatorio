@@ -10,13 +10,17 @@ using System.Windows.Forms;
 using Gui.Interface;
 using Domain.Entities;
 using Domain.Exceptions;
+using Domain.Logic;
 
 namespace Gui.UserControls.Configuration
 {
     public partial class ConfigurationPrice : UserControl, IController
     {
+
+        PriceAndCostHandler priceAndCostHandler;
         public ConfigurationPrice()
         {
+            priceAndCostHandler = new PriceAndCostHandler();
             InitializeComponent();
 
             this.AccessibleName = "Precios";
@@ -34,25 +38,25 @@ namespace Gui.UserControls.Configuration
                 ValidCostPrice();
                 if (elementList.SelectedItem.ToString().Equals("Pared"))
                 {
-                    Wall.CostPriceMeterWall = new Tuple<int, int>(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
-
+                    priceAndCostHandler.SetCostAndPriceWall(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));   
                 }
                 else if (elementList.SelectedItem.ToString().Equals("Viga"))
                 {
-                    WallBeam.CostPriceWallBeam = new Tuple<int, int>(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
-
+                    priceAndCostHandler.SetCostAndPriceWallBeam(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
                 }
                 else if (elementList.SelectedItem.ToString().Equals("Ventana"))
                 {
-                    Window.CostPriceWindow = new Tuple<int, int>(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
-
+                    priceAndCostHandler.SetCostAndPriceWindow(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
                 }
                 else if (elementList.SelectedItem.ToString().Equals("Puerta"))
                 {
-                    Door.CostPriceDoor = new Tuple<int, int>(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
-
+                    priceAndCostHandler.SetCostAndPriceDoor(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
                 }
-                
+                else if (elementList.SelectedItem.ToString().Equals("Columna Decorativa"))
+                {
+                    priceAndCostHandler.SetCostAndPriceDecorativeColumn(int.Parse(CostTextBox.Text), int.Parse(PriceTextBox.Text));
+                }
+
                 MessageBox.Show("Se han actualizado los precios del sistema.", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 ClearFields();
@@ -99,23 +103,23 @@ namespace Gui.UserControls.Configuration
             {
                 if (elementList.SelectedItem.ToString().Equals("Pared"))
                 {
-                    CostTextBox.Text = Wall.CostPriceMeterWall.Item1.ToString();
-                    PriceTextBox.Text = Wall.CostPriceMeterWall.Item2.ToString();
+                    CostTextBox.Text = priceAndCostHandler.GetWallCost().ToString();
+                    PriceTextBox.Text = priceAndCostHandler.GetWallPrice().ToString();
                 }
                 else if (elementList.SelectedItem.ToString().Equals("Viga"))
                 {
-                    CostTextBox.Text = WallBeam.CostPriceWallBeam.Item1.ToString();
-                    PriceTextBox.Text = WallBeam.CostPriceWallBeam.Item2.ToString();
+                    CostTextBox.Text = priceAndCostHandler.GetWallBeamCost().ToString();
+                    PriceTextBox.Text = priceAndCostHandler.GetWallBeamPrice().ToString();
                 }
                 else if (elementList.SelectedItem.ToString().Equals("Ventana"))
                 {
-                    CostTextBox.Text = Window.CostPriceWindow.Item1.ToString();
-                    PriceTextBox.Text = Window.CostPriceWindow.Item2.ToString();
+                    CostTextBox.Text = priceAndCostHandler.GetWindowCost().ToString();
+                    PriceTextBox.Text = priceAndCostHandler.GetWindowPrice().ToString();
                 }
                 else if (elementList.SelectedItem.ToString().Equals("Puerta"))
                 {
-                    CostTextBox.Text = Door.CostPriceDoor.Item1.ToString();
-                    PriceTextBox.Text = Door.CostPriceDoor.Item2.ToString();
+                    CostTextBox.Text = priceAndCostHandler.GetDoorCost().ToString();
+                    PriceTextBox.Text = priceAndCostHandler.GetDoorPrice().ToString();
                 }
             }
         }

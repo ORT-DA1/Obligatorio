@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Logic;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 
@@ -10,26 +11,27 @@ namespace Domain.Entities
         #region PK and FK
         public int WallBeamId { get; set; }
         public virtual Grid Grid { get; set; }
+        public virtual PriceAndCost PriceAndCost { get; set; }
         #endregion
 
         public Point UbicationPoint { get; set; }
 
         public SolidBrush wallBeamBrush = new SolidBrush(Color.Red);
-
-        public static Tuple<int, int> CostPriceWallBeam = new Tuple<int, int>(50, 100);
-
+        public PriceAndCostHandler priceAndCostHandler;
+        
         #region Constructors
         public WallBeam() { }
         public WallBeam(Point ubicationPoint)
         {
+            this.priceAndCostHandler = new PriceAndCostHandler();
             this.UbicationPoint = ubicationPoint;
             this.wallBeamBrush = new SolidBrush(Color.Red);
         }
         #endregion
 
-        public override void ModifyCostAndPrice(int Cost, int Price)
+        public override void ModifyCostAndPrice(int cost, int price)
         {
-            CostPriceWallBeam = new Tuple<int, int>(Cost, Price);
+            priceAndCostHandler.WallBeamColumnModifyPriceCost(cost, price);
         }
 
         public override void Draw(Graphics graphic)

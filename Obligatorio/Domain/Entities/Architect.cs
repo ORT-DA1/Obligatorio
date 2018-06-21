@@ -65,5 +65,9 @@ namespace Domain.Entities
         {
             return false;
         }
+        public override bool CanSignGrids()
+        {
+            return true;
+        }
     }
 }

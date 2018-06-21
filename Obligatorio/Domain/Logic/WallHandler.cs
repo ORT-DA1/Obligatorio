@@ -21,10 +21,10 @@ namespace Domain.Logic
         }
 
 
-        public void Add(Grid grid, Wall wall)
+        public void Add(Grid grid, Wall wall, PriceAndCost priceAndCost)
         {
             this.IsValid(grid, wall);
-            this.wallRepository.Add(grid, wall);
+            this.wallRepository.Add(grid, wall, priceAndCost);
         }
 
         public void IsValid(Grid grid, Wall wall)
@@ -70,6 +70,11 @@ namespace Domain.Logic
             {
                 throw new ExceptionController(ExceptionMessage.WALL_ALREADY_EXSIST);
             }
+        }
+
+        public Wall GetFirst()
+        {
+            return wallRepository.GetFirst();
         }
 
         private void ContainedIn(Grid grid, Wall wall)

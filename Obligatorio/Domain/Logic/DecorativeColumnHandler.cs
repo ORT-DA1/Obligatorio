@@ -24,10 +24,15 @@ namespace Domain.Logic
             this.decorativeColumnRepository = new DecorativeColumnRepository(gridRepository);
         }
 
-        public void Add(Grid grid, DecorativeColumn decorativeColumn)
+        public DecorativeColumn GetFirst()
+        {
+            return decorativeColumnRepository.GetFirst();
+        }
+
+        public void Add(Grid grid, DecorativeColumn decorativeColumn, PriceAndCost priceAndCost)
         {
             this.IsValid(grid, decorativeColumn);
-            this.decorativeColumnRepository.Add(grid, decorativeColumn);
+            this.decorativeColumnRepository.Add(grid, decorativeColumn, priceAndCost);
         }
 
         private void IsValid(Grid grid, DecorativeColumn decorativeColumn)

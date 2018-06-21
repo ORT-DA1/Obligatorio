@@ -13,10 +13,12 @@ namespace Domain.Logic
     {
         private IPriceAndCostRepository priceAndCostRepository;
 
-        public PriceAndCostHandler()
+        #region Constructor
+        public PriceAndCostHandler(GridRepository gridRepository)
         {
-            this.priceAndCostRepository = new PriceAndCostRepository();
+            this.priceAndCostRepository = new PriceAndCostRepository(gridRepository);
         }
+        #endregion
 
         public void DecorativeColumnModifyPriceCost(int cost, int price)
         {
@@ -38,74 +40,127 @@ namespace Domain.Logic
             priceAndCostRepository.WallBeamColumnModifyPriceCost(cost, price);
         }
 
-        public void SetCostAndPriceWall(int v1, int v2)
-        {
-            throw new NotImplementedException();
-        }
-
         public void WindowModifyPriceCost(int cost, int price)
         {
             priceAndCostRepository.WindowModifyPriceCost(cost, price);
         }
 
-        public void SetCostAndPriceWallBeam(int v1, int v2)
+        #region Get Element Price and Cost
+
+        public int GetWallCost()
         {
-            throw new NotImplementedException();
+            return priceAndCostRepository.GetWallCost();
         }
 
-        public object GetWallCost()
+        public PriceAndCost GetPriceAndCostWall()
         {
-            throw new NotImplementedException();
+            return priceAndCostRepository.GetPriceAndCostWallBeam();
+        }
+        public PriceAndCost GetPriceAndCostWallBeam()
+        {
+            return priceAndCostRepository.GetPriceAndCostWallBeam();
+        }
+        public PriceAndCost GetPriceAndCostWindow()
+        {
+            return priceAndCostRepository.GetPriceAndCostWindow();
+        }
+        public PriceAndCost GetPriceAndCostDoor()
+        {
+            return priceAndCostRepository.GetPriceAndCostDoor();
+        }
+        public PriceAndCost GetPriceAndCostDecorativeColumn()
+        {
+            return priceAndCostRepository.GetPriceAndCostDecorativeColumn();
+        }
+        public int GetWallPrice()
+        {
+            return priceAndCostRepository.GetWallPrice();
         }
 
-        public void SetCostAndPriceWindow(int v1, int v2)
+        public int GetDoorCost()
         {
-            throw new NotImplementedException();
+            return priceAndCostRepository.GetDoorCost();
         }
 
-        public void SetCostAndPriceDecorativeColumn(int v1, int v2)
+        public int GetDoorPrice()
         {
-            throw new NotImplementedException();
+            return priceAndCostRepository.GetDoorCost();
         }
 
-        public void SetCostAndPriceDoor(int v1, int v2)
+        public int GetWindowPrice()
         {
-            throw new NotImplementedException();
+            return priceAndCostRepository.GetDoorCost();
         }
 
-        public object GetWallPrice()
+        public int GetWallBeamCost()
         {
-            throw new NotImplementedException();
+            return priceAndCostRepository.GetWallBeamCost();
         }
 
-        public object GetDoorCost()
+        public int GetWallBeamPrice()
         {
-            throw new NotImplementedException();
+            return priceAndCostRepository.GetWallBeamPrice();
         }
 
-        public object GetDoorPrice()
+        public int GetWindowCost()
         {
-            throw new NotImplementedException();
+            return priceAndCostRepository.GetWindowCost();
         }
 
-        public object GetWindowPrice()
+        public int TotalCostWindow(Grid grid)
         {
-            throw new NotImplementedException();
+            return priceAndCostRepository.TotalCostWindow(grid);
         }
 
-        public object GetWallBeamCost()
+        public int TotalPriceWall(Grid grid)
         {
-            throw new NotImplementedException();
+            return priceAndCostRepository.TotalPriceWall(grid);
         }
 
-        public object GetWallBeamPrice()
+        public int TotalCostWallBeam(Grid grid)
         {
-            throw new NotImplementedException();
+            return priceAndCostRepository.TotalCostWallBeam(grid);
         }
 
-        public object GetWindowCost()
+        public int TotalPriceWallBeam(Grid grid)
         {
-            throw new NotImplementedException();
+            return priceAndCostRepository.TotalPriceWallBeam(grid);
         }
+
+        public int TotalPriceWindow(Grid grid)
+        {
+            return priceAndCostRepository.TotalPriceWindow(grid);
+        }
+
+        public int TotalCost(Grid grid)
+        {
+            return TotalCostWall(grid) 
+                + TotalCostWallBeam(grid) 
+                + TotalCostWindow(grid)
+                + TotalCostDoor(grid)
+                + TotalCostDecorativeColumn(grid);
+        }
+
+        private int TotalCostDecorativeColumn(Grid grid)
+        {
+            return priceAndCostRepository.TotalCostDecorativeColumn(grid);
+        }
+
+        public int TotalCostDoor(Grid grid)
+        {
+            return priceAndCostRepository.TotalCostDoor(grid);
+        }
+
+        public int TotalPriceDoor(Grid grid)
+        {
+            return priceAndCostRepository.TotalPriceDoor(grid);
+        }
+
+        public int TotalCostWall(Grid grid)
+        {
+            return priceAndCostRepository.TotalCostWall(grid);
+        }
+
+        #endregion
     }
 }

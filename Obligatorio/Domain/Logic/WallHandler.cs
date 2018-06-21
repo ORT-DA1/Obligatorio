@@ -102,7 +102,7 @@ namespace Domain.Logic
             }
             return commonPoints > 1;
         }
-
+        
         public List<Wall> GetList(Grid grid)
         {
             return wallRepository.GetList(grid);

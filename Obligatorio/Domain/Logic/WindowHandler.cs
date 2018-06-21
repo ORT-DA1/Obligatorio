@@ -82,6 +82,11 @@ namespace Domain.Logic
         {
             return windowRepository.GetFirst();
         }
+
+        public Window GetWindow(Window window)
+        {
+            return windowRepository.GetWindow(window);
+        }
     }
 
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain.Entities;
 
 namespace Domain.Repositories
 {
@@ -36,6 +37,26 @@ namespace Domain.Repositories
         }
 
         public void WindowModifyPriceCost(int cost, int price)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal int TotalCostWindow(Grid grid)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal int TotalPriceWall(Grid grid)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal int TotalCostWallBeam(Grid grid)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal int TotalPriceWallBeam(Grid grid)
         {
             throw new NotImplementedException();
         }

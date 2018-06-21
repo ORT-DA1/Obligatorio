@@ -38,9 +38,74 @@ namespace Domain.Logic
             priceAndCostRepository.WallBeamColumnModifyPriceCost(cost, price);
         }
 
+        public void SetCostAndPriceWall(int v1, int v2)
+        {
+            throw new NotImplementedException();
+        }
+
         public void WindowModifyPriceCost(int cost, int price)
         {
             priceAndCostRepository.WindowModifyPriceCost(cost, price);
+        }
+
+        public void SetCostAndPriceWallBeam(int v1, int v2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetWallCost()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetCostAndPriceWindow(int v1, int v2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetCostAndPriceDecorativeColumn(int v1, int v2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetCostAndPriceDoor(int v1, int v2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetWallPrice()
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetDoorCost()
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetDoorPrice()
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetWindowPrice()
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetWallBeamCost()
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetWallBeamPrice()
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetWindowCost()
+        {
+            throw new NotImplementedException();
         }
     }
 }

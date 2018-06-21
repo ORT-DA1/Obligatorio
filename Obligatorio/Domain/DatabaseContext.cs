@@ -64,9 +64,6 @@ namespace Domain
             modelBuilder.Entity<DecorativeColumn>()
                 .HasRequired(d => d.PriceAndCost);
 
-            modelBuilder.Entity<Signature>()
-                .HasRequired(s => s.PriceAndCost);
-
 
             modelBuilder.Entity<Wall>()
                 .HasRequired(w => w.Grid);

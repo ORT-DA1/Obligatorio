@@ -40,5 +40,9 @@
 
         public const string GRID_ALREADY_EXIST_NAME = "Ya existe un grid con este nombre.";
         public const string DECORATIVECOLUMN_INVALID = "La columna decorativa es invalida.";
+
+        public static string WINDOW_NAME_ALREADY_EXIST { get; internal set; }
+        public static string WINDOW_INVALID_SIZE { get; internal set; }
+        public static string DOOR_INVALID_SIZE { get; internal set; }
     }
 }

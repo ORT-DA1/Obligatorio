@@ -11,5 +11,6 @@ namespace Domain.Interface
         bool Exist(Grid grid, Point ubicationPoint);
         void Remove(Grid grid, Window window);
         Window GetFirst();
+        List<string> GetNameList();
     }
 }

@@ -64,6 +64,22 @@ namespace Domain.Repositories
             }
         }
 
+        public List<string> GetNameList()
+        {
+            List<string> listName = new List<string>();
+            var names = from door in _context.Doors
+                        select new { door.name };
+
+            foreach (var name in names)
+            {
+                if (!listName.Contains(name.ToString()))
+                {
+                    listName.Add(name.ToString());
+                }
+            }
+            return listName;
+        }
+
         public void Remove(Grid grid, Door door)
         {
             Door doorToDelete = null;

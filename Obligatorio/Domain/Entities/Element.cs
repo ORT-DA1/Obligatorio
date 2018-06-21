@@ -7,8 +7,7 @@ namespace Domain.Entities
     abstract public class Element
     {
        // public int ElementId { get; set; }
-
-        public string name = "defecto";
+       
         abstract public void Draw(Graphics graphic);
 
         abstract public void ModifyCostAndPrice(int Cost, int Price);

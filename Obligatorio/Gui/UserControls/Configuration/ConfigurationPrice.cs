@@ -124,6 +124,11 @@ namespace Gui.UserControls.Configuration
                     CostTextBox.Text = priceAndCostHandler.GetDoorCost().ToString();
                     PriceTextBox.Text = priceAndCostHandler.GetDoorPrice().ToString();
                 }
+                else if (elementList.SelectedItem.ToString().Equals("Columna Decorativa"))
+                {
+                    CostTextBox.Text = priceAndCostHandler.GetDecorativeColumnCost().ToString();
+                    PriceTextBox.Text = priceAndCostHandler.GetDecorativeColumnPrice().ToString();
+                }
             }
         }
     }

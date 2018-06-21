@@ -42,9 +42,11 @@ namespace Domain.Repositories
 
         public void Remove(Grid grid, Wall wall)
         {
+
             _context.Grids.Attach(grid);
             _context.Walls.Attach(wall);
             wall.Grid = null;
+            wall.PriceAndCost = null;
             _context.Walls.Remove(wall);
             _context.SaveChanges();
         }

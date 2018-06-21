@@ -59,7 +59,8 @@
             "Pared",
             "Viga",
             "Ventana",
-            "Puerta"});
+            "Puerta",
+            "Columna Decorativa"});
             this.elementList.Location = new System.Drawing.Point(324, 86);
             this.elementList.Margin = new System.Windows.Forms.Padding(4);
             this.elementList.Name = "elementList";

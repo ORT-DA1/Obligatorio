@@ -21,6 +21,9 @@ namespace Domain
         public DbSet<Window> Windows { get; set; }
         public DbSet<Point> Points { get; set; }
         public DbSet<PriceAndCost> PricesAndCosts { get; set; }
+        
+        public DbSet<GeneratedDoor> GeneratedDoors { get; set; }
+        public DbSet<GeneratedWindow> GeneratedWindows { get; set; }
 
         public DatabaseContext()
             : base("name=DatabaseContext")
@@ -39,12 +42,15 @@ namespace Domain
             modelBuilder.Entity<Wall>().HasKey(w => w.WallId);
             modelBuilder.Entity<WallBeam>().HasKey(w => w.WallBeamId);
             modelBuilder.Entity<Window>().HasKey(w => w.WindowId);
+            modelBuilder.Entity<Architect>().HasKey(a => a.ArchitectId);
             modelBuilder.Entity<Door>().HasKey(d => d.DoorId);
             modelBuilder.Entity<Signature>().HasKey(s => s.SignatureId);
             modelBuilder.Entity<Point>().HasKey(p => p.PointId);
             modelBuilder.Entity<DecorativeColumn>().HasKey(d => d.DecorativeColumnId);
             modelBuilder.Entity<PriceAndCost>().HasKey(pc => pc.PriceAndCostId);
 
+            modelBuilder.Entity<GeneratedDoor>().HasKey(d => d.GeneratedDoorId);
+            modelBuilder.Entity<GeneratedWindow>().HasKey(d => d.GeneratedWindowId);
             #endregion
 
             #region modelBuilder Relations
@@ -63,6 +69,13 @@ namespace Domain
 
             modelBuilder.Entity<DecorativeColumn>()
                 .HasOptional(d => d.PriceAndCost);
+
+
+            modelBuilder.Entity<GeneratedDoor>()
+                .HasRequired(w => w.Architect);
+
+            modelBuilder.Entity<GeneratedWindow>()
+                .HasRequired(w => w.Architect);
 
 
             modelBuilder.Entity<Wall>()

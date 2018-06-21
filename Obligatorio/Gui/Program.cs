@@ -20,86 +20,45 @@ namespace Gui
         {
             using (DatabaseContext context = new DatabaseContext())
             {
+                #region Administrator
                 if (!context.Administrators.Any())
                 {
                     Administrator admin = new Administrator("admin", "admin", "Joaquin", "Touris", new DateTime(2018, 05, 05), new DateTime(2018, 05, 05));
                     context.Administrators.Add(admin);
                     context.SaveChanges();
                 }
-                if (!context.Clients.Any())
-                {
-                    Client c = new Client
-                    {
-                        Username = "client",
-                        Password = "client",
-                        Name = "Ana",
-                        Surname = "Rodriguez",
-                        Address = "Cuareim 1221",
-                        RegistrationDate = (DateTime.Now),
-                        LastAccess = (DateTime.Now),
-                        Phone = "093535353",
-                        IdentityCard = "12345678"
-                    };
-                    context.Clients.Add(c);
-                    context.SaveChanges();
-                }
-                if (!context.Designers.Any())
-                {
-                    Designer d = new Designer
-                    {
-                        Username = "designer",
-                        Password = "designer",
-                        Name = "Pablo",
-                        Surname = "Pereira",
-                        RegistrationDate = (DateTime.Now),
-                        LastAccess = (DateTime.Now)
-                    };
-                    context.Designers.Add(d);
-                    context.SaveChanges();
-                }
-                if (!context.Architects.Any())
-                {
-                    Architect ar = new Architect
-                    {
-                        Username = "architect",
-                        Password = "architect",
-                        Name = "Joaquin",
-                        Surname = "Touris",
-                        RegistrationDate = (DateTime.Now),
-                        LastAccess = (DateTime.Now)
-                    };
-                    context.Architects.Add(ar);
-                    context.SaveChanges();
-                }
+                #endregion
+
+                #region Default Costs and Prices
                 if (!context.PricesAndCosts.Any())
                 {                
                     PriceAndCost priceWall = new PriceAndCost
                     {
                         Cost = 50,
-                        Price = 50,
+                        Price = 100,
                         PriceAndCostId = 1
                     };
                     PriceAndCost priceWallBeam = new PriceAndCost
                     {
                         Cost = 50,
-                        Price = 50,
+                        Price = 100,
                         PriceAndCostId = 2
                     };
                     PriceAndCost priceWindow = new PriceAndCost
                     {
                         Cost = 50,
-                        Price = 50,
+                        Price = 75,
                         PriceAndCostId = 3
                     };
                     PriceAndCost priceDoor = new PriceAndCost
                     {
                         Cost = 50,
-                        Price = 50,
+                        Price = 100,
                         PriceAndCostId = 4
                     };
                     PriceAndCost priceDecorativeColumn = new PriceAndCost
                     {
-                        Cost = 50,
+                        Cost = 25,
                         Price = 50,
                         PriceAndCostId = 5
                     };
@@ -112,6 +71,7 @@ namespace Gui
                     context.SaveChanges();
                 }
             }
+            #endregion
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

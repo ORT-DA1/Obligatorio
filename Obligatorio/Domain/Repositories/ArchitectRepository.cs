@@ -50,7 +50,7 @@ namespace Domain.Repositories
             {
                 architectToFind = _context.Architects.Where(a => a.Username == username && a.Password == password).FirstOrDefault();
             }
-            return architectToFind == null ? true : false;
+            return architectToFind == null ? false : true;
         }
         public Architect GetArchitectByUsername(string username)
         {

@@ -14,16 +14,21 @@ namespace Domain.Entities
         public virtual Grid Grid { get; set; }
         public virtual PriceAndCost PriceAndCost { get; set; }
         #endregion
-
+        
+        public string name { get; set; }
         public Domain.Entities.Point StartPoint { get; set; }
         public Domain.Entities.Point EndPoint;
-        public string sense;
+        public string sense { get; set; }
         public float width { get; set; }
         public float high { get; set; }
+
+        public float distanceFromGround { get; set; }
+
         public static float MINIMUM_WIDTH = 0.8f;
         public static int MINIMUM_WIDTH_IN_PIXELS = 10;
         public static float MAXIMUM_WIDTH = 3.00f;
         public static float MAXIMUM_HIGH = 1.20f;
+
         public SolidBrush blueBrush = new SolidBrush(Color.Blue);
         public PriceAndCostHandler priceAndCostHandler;
         public GridRepository gridRepository;
@@ -38,12 +43,13 @@ namespace Domain.Entities
             this.EndPoint = endPoint;
             this.width = 0.80f;
             this.high = 1.00f;
-
+            this.distanceFromGround = 1.00f;
 
         }
 
-        public Window(Point startPoint, Point endPoint, string sense, float width, float high, string name)
+        public Window(Point startPoint, Point endPoint, string sense, float width, float high, float distanceFromGround, string name)
         {
+            this.distanceFromGround = distanceFromGround;
             this.gridRepository = new GridRepository();
             this.priceAndCostHandler = new PriceAndCostHandler(gridRepository);
             this.blueBrush = new SolidBrush(Color.Blue);

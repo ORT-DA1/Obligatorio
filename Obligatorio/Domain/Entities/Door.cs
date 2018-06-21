@@ -15,12 +15,14 @@ namespace Domain.Entities
         public virtual PriceAndCost PriceAndCost { get; set; }
         #endregion
 
+        public string name { get; set; }
         public Domain.Entities.Point StartPoint { get; set; }
         public Domain.Entities.Point EndPoint;
         public int direction;
-        public string sense;
+        public string sense { get; set; }
         public float width { get; set; }
         public float high { get; set; }
+
         public static float MINIMUM_WIDTH = 0.85f;
         public static int MINIMUM_WIDTH_IN_PIXELS = 15;
         public static float MAXIMUM_WIDTH = 3.00f;

@@ -12,5 +12,6 @@ namespace Domain.Interface
         int Count(Grid grid);
         bool Exist(Grid grid, Point startPoint);
         Door GetFirst();
+        List<string> GetNameList();
     }
 }

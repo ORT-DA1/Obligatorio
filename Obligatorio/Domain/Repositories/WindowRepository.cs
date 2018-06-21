@@ -64,6 +64,22 @@ namespace Domain.Repositories
             }
         }
 
+        public List<string> GetNameList()
+        {
+            List<string> listName = new List<string>();
+            var names = from window in _context.Windows
+                        select new { window.name };
+
+            foreach (var name in names)
+            {
+                if (!listName.Contains(name.ToString()))
+                {
+                    listName.Add(name.ToString());
+                }
+            }
+            return listName;
+        }
+
         public void Remove(Grid grid, Window window)
         {
             Window windowToDelete = null;

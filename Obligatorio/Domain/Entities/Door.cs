@@ -22,8 +22,9 @@ namespace Domain.Entities
         public static int MINIMUM_WIDTH_IN_PIXELS = 15;
         public static float MAXIMUM_WIDTH = 3.00f;
         public static float MAXIMUM_HIGH = 2.00f;
+        public SolidBrush blueBrush = new SolidBrush(Color.Blue);
 
-        public static Tuple<int, int> CostPriceDoor = new Tuple<int, int>(50,100);
+        public static Tuple<int, int> CostPriceDoor = new Tuple<int, int>(50, 100);
 
         #region Constructors
         public Door()
@@ -32,6 +33,7 @@ namespace Domain.Entities
 
         public Door(Point startPoint, Point endPoint, string sense)
         {
+            this.blueBrush = new SolidBrush(Color.Blue);
             this.sense = sense;
             this.direction = 0;
             this.StartPoint = startPoint;
@@ -50,28 +52,28 @@ namespace Domain.Entities
             this.direction = 0;
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;
-            
+
         }
         #endregion
         public override void ModifyCostAndPrice(int Cost, int Price)
         {
-            CostPriceDoor = new Tuple<int, int>(Cost, Price); 
+            CostPriceDoor = new Tuple<int, int>(Cost, Price);
         }
 
         public override void Draw(Graphics graphic)
         {
-            SolidBrush blueBrush = new SolidBrush(Color.Blue);
             float angle = this.startAngle(StartPoint, EndPoint);
             Point fixedPoint = fixDoorPoint(StartPoint);
             graphic.FillPie(blueBrush, fixedPoint.X, fixedPoint.Y,
-                width * MINIMUM_WIDTH_IN_PIXELS / MINIMUM_WIDTH, 
-                width * MINIMUM_WIDTH_IN_PIXELS / MINIMUM_WIDTH, 
+                width * MINIMUM_WIDTH_IN_PIXELS / MINIMUM_WIDTH,
+                width * MINIMUM_WIDTH_IN_PIXELS / MINIMUM_WIDTH,
                 angle, 90f);
         }
 
         private Point fixDoorPoint(Point startPoint)
         {
-            if (sense.Equals("vertical")) {
+            if (sense.Equals("vertical"))
+            {
                 if (this.direction.Equals(1))
                 {
                     return (new Point(startPoint.X - (MINIMUM_WIDTH_IN_PIXELS * 16 / 30), startPoint.Y - (MINIMUM_WIDTH_IN_PIXELS * 22 / 30)));
@@ -88,7 +90,8 @@ namespace Domain.Entities
                 {
                     return (new Point(startPoint.X - (MINIMUM_WIDTH_IN_PIXELS * 12 / 30), startPoint.Y - (MINIMUM_WIDTH_IN_PIXELS * 22 / 30)));
                 }
-            }else
+            }
+            else
             {
                 if (this.direction.Equals(1))
                 {

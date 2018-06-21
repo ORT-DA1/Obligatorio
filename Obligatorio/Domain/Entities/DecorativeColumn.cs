@@ -17,7 +17,7 @@ namespace Domain.Entities
         #endregion
 
         public Point UbicationPoint { get; set; }
-        private SolidBrush wallBeamBrush;
+        private SolidBrush wallBeamBrush = new SolidBrush(Color.Gold);
         public float width { get; set; }
         public static float MINIMUM_WIDTH = 0.85f;
         public static int MINIMUM_WIDTH_IN_PIXELS = 8;

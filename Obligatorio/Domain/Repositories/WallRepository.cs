@@ -18,7 +18,6 @@ namespace Domain.Repositories
         }
         public void Add(Grid grid, Wall wall)
         {
-            _context.Grids.Attach(grid);
             wall.Grid = grid;
             _context.Walls.Add(wall);
             _context.SaveChanges();
@@ -95,8 +94,6 @@ namespace Domain.Repositories
 
         public Wall ObtainWallInPoint(Grid grid, Point ubicationPoint)
         {
-            _context.Points.Attach(ubicationPoint);
-
             return _context.Walls
                 .Where(w =>
                 (w.Grid.GridId == grid.GridId

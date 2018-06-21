@@ -21,6 +21,7 @@ namespace Domain.Entities
         public static int MINIMUM_WIDTH_IN_PIXELS = 10;
         public static float MAXIMUM_WIDTH = 3.00f;
         public static float MAXIMUM_HIGH = 1.20f;
+        public SolidBrush blueBrush = new SolidBrush(Color.Blue);
 
         public static Tuple<int, int> CostPriceWindow = new Tuple<int, int>(50, 75);
 
@@ -34,10 +35,13 @@ namespace Domain.Entities
             this.EndPoint = endPoint;
             this.width = 0.80f;
             this.high = 1.00f;
+
+
         }
 
         public Window(Point startPoint, Point endPoint, string sense, float width, float high, string name)
         {
+            this.blueBrush = new SolidBrush(Color.Blue);
             this.width = width;
             this.high = high;
             this.name = name;
@@ -55,11 +59,10 @@ namespace Domain.Entities
         public override void Draw(Graphics graphic)
         {
             if (sense.Equals("vertical")) {
-                SolidBrush blueBrush = new SolidBrush(Color.Blue);
+               
                 graphic.FillRectangle(blueBrush, StartPoint.X- (MINIMUM_WIDTH_IN_PIXELS* 4/20), StartPoint.Y- (MINIMUM_WIDTH_IN_PIXELS * 10 / 20), 6, MINIMUM_WIDTH_IN_PIXELS/width);
             }
             else{
-                SolidBrush blueBrush = new SolidBrush(Color.Blue);
                 graphic.FillRectangle(blueBrush, StartPoint.X- (MINIMUM_WIDTH_IN_PIXELS * 10 / 20), StartPoint.Y- (MINIMUM_WIDTH_IN_PIXELS * 4 / 20), MINIMUM_WIDTH_IN_PIXELS/width, 6);
             }
         }

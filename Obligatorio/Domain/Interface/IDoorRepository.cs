@@ -13,5 +13,6 @@ namespace Domain.Interface
         bool Exist(Grid grid, Point startPoint);
         Door GetFirst();
         List<string> GetNameList();
+        Door GetDoor(Door door);
     }
 }

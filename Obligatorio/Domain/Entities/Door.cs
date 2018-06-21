@@ -43,7 +43,7 @@ namespace Domain.Entities
             this.direction = 0;
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;
-
+            this.name = "default";
             this.width = 0.85f;
             this.high = 2.20f;
         }
@@ -74,8 +74,7 @@ namespace Domain.Entities
                 gridRepository = new GridRepository();
             }
             Door door = this.gridRepository.GetDoor(this);
-            float angle = this.startAngle(door.StartPoint, door.EndPoint);
-            //float angle = this.startAngle(StartPoint, EndPoint);
+            float angle = this.startAngle(StartPoint, EndPoint);
             Point fixedPoint = fixDoorPoint(StartPoint);
             graphic.FillPie(blueBrush, fixedPoint.X, fixedPoint.Y,
                 width * MINIMUM_WIDTH_IN_PIXELS / MINIMUM_WIDTH,

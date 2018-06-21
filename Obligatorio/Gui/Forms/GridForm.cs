@@ -140,15 +140,41 @@ namespace Gui.Forms
 
         private void FinishAndSave()
         {
-            if (this._user.CanSignGrids() && this.GRID)
+            var signatures = handler.GetGridSignatures(this.grid);
+
+            if (this._user.CanSignGrids() && signatures == null)
             {
 
+                DialogResult dialogResult = MessageBox.Show("Este plano no contiene firma, desea firmarlo?", "Plano Sin Firmar", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    ProcessGridSavingConfirmationWithSignature();
+                }
+
             }
-            string message = "Se han guardado los cambios sobre el plano";
-            MessageBox.Show(message, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else if (this._user.CanSignGrids() && signatures != null)
+            {
+
+                MessageBox.Show("Estimado " + _user.Username + ", acaba de guardar un plano Firmado. Al haber editado el mismo, su firma quedara registrada.", "Plano Sin Firmar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ProcessGridSavingConfirmationWithSignature();
+            }
+
+            MessageBox.Show("Cambios Guardados Correctamente", "Confirmacion de Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            CloseView();
+        }
+
+        private void CloseView()
+        {
             option = 0;
             this.Close();
             this.parentForm.Show();
+        }
+
+        private void ProcessGridSavingConfirmationWithSignature()
+        {
+            DateTime signatureDate = DateTime.Now;
+            Signature signature = new Signature((Architect)this._user, signatureDate, grid);
+            handler.SaveSignature(grid, signature);
         }
 
         private void gridPanel_MouseClick(object sender, MouseEventArgs e)

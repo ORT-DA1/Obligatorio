@@ -27,7 +27,6 @@ namespace Domain.Logic
             Validate(grid);
             this.gridRepository.AddGrid(grid, client); 
         }
-
         private void Validate(Grid grid)
         {
             DataValidation.ValidateGridName(grid.GridName);
@@ -77,11 +76,15 @@ namespace Domain.Logic
                 throw new ExceptionController(ExceptionMessage.EMPTY_GRID_LIST);
             }
         }
-        public List<Signature> GetGridSignatures()
+        public List<Signature> GetGridSignatures(Grid grid)
         {
-            List<Signature> signatureList = this.gridRepository.GetSignatures();
+            List<Signature> signatureList = this.gridRepository.GetSignatures(grid);
 
             return signatureList != null ? signatureList : null;
+        }
+        public void SaveSignature(Grid grid, Signature signature)
+        {
+            this.gridRepository.SaveSignature(grid, signature);
         }
     }
 }

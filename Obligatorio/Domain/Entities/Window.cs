@@ -17,7 +17,7 @@ namespace Domain.Entities
 
         public Domain.Entities.Point StartPoint { get; set; }
         public Domain.Entities.Point EndPoint;
-        public string sense;
+        public string sense { get; set; }
         public float width { get; set; }
         public float high { get; set; }
         public static float MINIMUM_WIDTH = 0.8f;

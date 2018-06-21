@@ -76,7 +76,7 @@ namespace Domain.Logic
         {
             List<Signature> signatureList = this.gridRepository.GetSignatures(grid);
 
-            return signatureList != null ? signatureList : null;
+            return signatureList.Any() ? signatureList : null;
         }
         public void SaveSignature(Grid grid, Signature signature)
         {
@@ -97,6 +97,18 @@ namespace Domain.Logic
         private bool IsGridSigned(Grid grid)
         {
             return grid.Signatures.Any() ? true : false;
+        }
+        public List<Grid> GetGridsInProgress()
+        {
+            List<Grid> gridList = new List<Grid>();
+            foreach (Grid grid in this.gridRepository.GetAllGrids())
+            {
+                if (!IsGridSigned(grid))
+                {
+                    gridList.Add(grid);
+                }
+            }
+            return gridList;
         }
     }
 }

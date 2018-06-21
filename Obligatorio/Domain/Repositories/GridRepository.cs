@@ -71,6 +71,10 @@ namespace Domain.Repositories
             co.Windows.Add(window);
             _context.SaveChanges();
         }
+        public Door GetDoor(Door door)
+        {
+            return _context.Doors.Where(d => d.DoorId == door.DoorId).Include("StartPoint").FirstOrDefault();
+        }
         public void AddDoor(Grid grid, Door door)
         {
             using (DatabaseContext _context = new DatabaseContext())

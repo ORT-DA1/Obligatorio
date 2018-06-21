@@ -16,9 +16,9 @@ namespace Domain.Entities
         #endregion
 
         public Domain.Entities.Point StartPoint { get; set; }
-        public Domain.Entities.Point EndPoint;
+        public Domain.Entities.Point EndPoint { get; set; }
         public int direction;
-        public string sense;
+        public string sense { get; set; }
         public float width { get; set; }
         public float high { get; set; }
         public static float MINIMUM_WIDTH = 0.85f;
@@ -67,7 +67,13 @@ namespace Domain.Entities
 
         public override void Draw(Graphics graphic)
         {
-            float angle = this.startAngle(StartPoint, EndPoint);
+            if (gridRepository == null)
+            {
+                gridRepository = new GridRepository();
+            }
+            Door door = this.gridRepository.GetDoor(this);
+            float angle = this.startAngle(door.StartPoint, door.EndPoint);
+            //float angle = this.startAngle(StartPoint, EndPoint);
             Point fixedPoint = fixDoorPoint(StartPoint);
             graphic.FillPie(blueBrush, fixedPoint.X, fixedPoint.Y,
                 width * MINIMUM_WIDTH_IN_PIXELS / MINIMUM_WIDTH,

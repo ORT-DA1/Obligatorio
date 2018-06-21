@@ -59,6 +59,10 @@ namespace Domain.Entities
         {
             return false;
         }
+        public virtual bool CanCreateNewElements()
+        {
+            return false;
+        }
         public override string ToString()
         {
             string format = "{0} - {1} {2}";

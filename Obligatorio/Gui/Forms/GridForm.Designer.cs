@@ -36,7 +36,7 @@
             this.doorBtn = new System.Windows.Forms.Button();
             this.windowBtn = new System.Windows.Forms.Button();
             this.wallBtn = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.drawGridButtonPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.finishDesignBtn = new System.Windows.Forms.Button();
             this.totalConstructionCostlbl = new System.Windows.Forms.Label();
             this.costLbl = new System.Windows.Forms.Label();
@@ -52,7 +52,9 @@
             this.newOpeningBtn = new System.Windows.Forms.Button();
             this.selectOpeningLbl = new System.Windows.Forms.Label();
             this.selectGridTypeLbl = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.elementPanel = new System.Windows.Forms.Panel();
+            this.drawGridButtonPanel.SuspendLayout();
+            this.elementPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // gridPanel
@@ -135,20 +137,20 @@
             this.wallBtn.Text = "Agregar Pared";
             this.wallBtn.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel1
+            // drawGridButtonPanel
             // 
-            this.flowLayoutPanel1.Controls.Add(this.wallBtn);
-            this.flowLayoutPanel1.Controls.Add(this.windowBtn);
-            this.flowLayoutPanel1.Controls.Add(this.doorBtn);
-            this.flowLayoutPanel1.Controls.Add(this.deleteWallBtn);
-            this.flowLayoutPanel1.Controls.Add(this.deleteWindowBtn);
-            this.flowLayoutPanel1.Controls.Add(this.deleteDoorBtn);
-            this.flowLayoutPanel1.Controls.Add(this.finishDesignBtn);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(9, 10);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(203, 261);
-            this.flowLayoutPanel1.TabIndex = 6;
+            this.drawGridButtonPanel.Controls.Add(this.wallBtn);
+            this.drawGridButtonPanel.Controls.Add(this.windowBtn);
+            this.drawGridButtonPanel.Controls.Add(this.doorBtn);
+            this.drawGridButtonPanel.Controls.Add(this.deleteWallBtn);
+            this.drawGridButtonPanel.Controls.Add(this.deleteWindowBtn);
+            this.drawGridButtonPanel.Controls.Add(this.deleteDoorBtn);
+            this.drawGridButtonPanel.Controls.Add(this.finishDesignBtn);
+            this.drawGridButtonPanel.Location = new System.Drawing.Point(9, 10);
+            this.drawGridButtonPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.drawGridButtonPanel.Name = "drawGridButtonPanel";
+            this.drawGridButtonPanel.Size = new System.Drawing.Size(203, 261);
+            this.drawGridButtonPanel.TabIndex = 6;
             // 
             // finishDesignBtn
             // 
@@ -251,18 +253,19 @@
             // 
             // createNewOpening
             // 
-            this.createNewOpening.Location = new System.Drawing.Point(724, 11);
+            this.createNewOpening.Location = new System.Drawing.Point(28, 29);
             this.createNewOpening.Margin = new System.Windows.Forms.Padding(2);
             this.createNewOpening.Name = "createNewOpening";
             this.createNewOpening.Size = new System.Drawing.Size(178, 30);
             this.createNewOpening.TabIndex = 16;
             this.createNewOpening.Text = "Crear nueva Abertura";
             this.createNewOpening.UseVisualStyleBackColor = true;
+            this.createNewOpening.Click += new System.EventHandler(this.createNewOpening_Click);
             // 
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(724, 84);
+            this.comboBox2.Location = new System.Drawing.Point(28, 102);
             this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(178, 21);
@@ -270,7 +273,7 @@
             // 
             // newOpeningBtn
             // 
-            this.newOpeningBtn.Location = new System.Drawing.Point(724, 108);
+            this.newOpeningBtn.Location = new System.Drawing.Point(28, 126);
             this.newOpeningBtn.Margin = new System.Windows.Forms.Padding(2);
             this.newOpeningBtn.Name = "newOpeningBtn";
             this.newOpeningBtn.Size = new System.Drawing.Size(177, 29);
@@ -281,7 +284,7 @@
             // selectOpeningLbl
             // 
             this.selectOpeningLbl.AutoSize = true;
-            this.selectOpeningLbl.Location = new System.Drawing.Point(736, 67);
+            this.selectOpeningLbl.Location = new System.Drawing.Point(40, 85);
             this.selectOpeningLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.selectOpeningLbl.Name = "selectOpeningLbl";
             this.selectOpeningLbl.Size = new System.Drawing.Size(156, 13);
@@ -298,17 +301,26 @@
             this.selectGridTypeLbl.TabIndex = 20;
             this.selectGridTypeLbl.Text = "Seleccione el tipo de grilla";
             // 
+            // elementPanel
+            // 
+            this.elementPanel.Controls.Add(this.selectOpeningLbl);
+            this.elementPanel.Controls.Add(this.newOpeningBtn);
+            this.elementPanel.Controls.Add(this.comboBox2);
+            this.elementPanel.Controls.Add(this.createNewOpening);
+            this.elementPanel.Location = new System.Drawing.Point(732, 17);
+            this.elementPanel.Name = "elementPanel";
+            this.elementPanel.Size = new System.Drawing.Size(234, 204);
+            this.elementPanel.TabIndex = 21;
+            this.elementPanel.Visible = false;
+            // 
             // GridForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(993, 449);
+            this.Controls.Add(this.elementPanel);
             this.Controls.Add(this.selectGridTypeLbl);
-            this.Controls.Add(this.selectOpeningLbl);
-            this.Controls.Add(this.newOpeningBtn);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.createNewOpening);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.signatureList);
             this.Controls.Add(this.comboBox1);
@@ -318,13 +330,15 @@
             this.Controls.Add(this.moneyLbl);
             this.Controls.Add(this.costLbl);
             this.Controls.Add(this.totalConstructionCostlbl);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.drawGridButtonPanel);
             this.Controls.Add(this.menuPanel);
             this.Controls.Add(this.gridPanel);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GridForm";
             this.Text = "Grid";
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.drawGridButtonPanel.ResumeLayout(false);
+            this.elementPanel.ResumeLayout(false);
+            this.elementPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -340,7 +354,7 @@
         private System.Windows.Forms.Button wallBtn;
         private System.Windows.Forms.Button deleteDoorBtn;
         private System.Windows.Forms.Button deleteWindowBtn;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel drawGridButtonPanel;
         private System.Windows.Forms.Button finishDesignBtn;
         private System.Windows.Forms.Label totalConstructionCostlbl;
         private System.Windows.Forms.Label costLbl;
@@ -356,5 +370,6 @@
         private System.Windows.Forms.Button newOpeningBtn;
         private System.Windows.Forms.Label selectOpeningLbl;
         private System.Windows.Forms.Label selectGridTypeLbl;
+        private System.Windows.Forms.Panel elementPanel;
     }
 }

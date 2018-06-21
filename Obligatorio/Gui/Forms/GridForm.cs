@@ -56,15 +56,9 @@ namespace Gui.Forms
 
         private void SetupEnvironment(bool canEditGrid)
         {
-            this.wallBtn.Visible = canEditGrid;
-            this.windowBtn.Visible = canEditGrid;
-            this.doorBtn.Visible = canEditGrid;
-            this.deleteDoorBtn.Visible = canEditGrid;
-            this.deleteWallBtn.Visible = canEditGrid;
-            this.deleteWindowBtn.Visible = canEditGrid;
-            this.finishDesignBtn.Visible = canEditGrid;
-            this.addDecorativeColumnBtn.Visible = canEditGrid;
-            this.deleteDecorativeColumnBtn.Visible = canEditGrid;
+            this.menuPanel.Visible = canEditGrid;
+            this.elementPanel.Visible = canEditGrid;
+            this.createNewOpening.Visible = this._user.CanCreateNewElements();
 
             this.totalConstructionCostlbl.Visible = !canEditGrid;
             this.costLbl.Visible = !canEditGrid;
@@ -363,6 +357,12 @@ namespace Gui.Forms
             this.grid.DrawWindows(this.graphic);
             this.grid.DrawWallBeams(this.graphic);
             this.grid.DrawDecorativeColumns(this.graphic);
+        }
+
+        private void createNewOpening_Click(object sender, EventArgs e)
+        {
+            NewOpeningForm openingForm = new NewOpeningForm(this.grid.gridRepository);
+            openingForm.Show();
         }
     }
 }

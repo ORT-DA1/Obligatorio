@@ -79,6 +79,12 @@
     <Compile Include="Forms\ClientVerifyInformation.Designer.cs">
       <DependentUpon>ClientVerifyInformation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\NewOpeningForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NewOpeningForm.Designer.cs">
+      <DependentUpon>NewOpeningForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interface\IController.cs" />
     <Compile Include="MenuNode.cs" />
     <Compile Include="Program.cs" />
@@ -187,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ClientVerifyInformation.resx">
       <DependentUpon>ClientVerifyInformation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NewOpeningForm.resx">
+      <DependentUpon>NewOpeningForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

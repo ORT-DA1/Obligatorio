@@ -32,7 +32,7 @@ namespace Gui.UserControls.ABMGridScreen
         {
             try
             {
-                LoadGrids();
+                LoadGrid();
                 return this;
             }
             catch (ExceptionController Exception)
@@ -42,25 +42,35 @@ namespace Gui.UserControls.ABMGridScreen
             }
             return null;
         }
-        private void LoadGrids()
+        private void LoadGrid()
         {
             this.gridList.Items.Clear();
 
             if (this._user.CanSignGrids())
             {
-                foreach (var grid in gridHandler.GetList())
-                {
-                    this.gridList.Items.Add(grid);
-                }
+                LoadAllGrids();
             }
             else
             {
-                foreach (var grid in gridHandler.GetGridsInProgress())
-                {
-                    this.gridList.Items.Add(grid);
-                }
+                LoadSignedGrids();
             }
             
+        }
+
+        private void LoadSignedGrids()
+        {
+            foreach (var grid in gridHandler.GetGridsInProgress())
+            {
+                this.gridList.Items.Add(grid);
+            }
+        }
+
+        private void LoadAllGrids()
+        {
+            foreach (var grid in gridHandler.GetList())
+            {
+                this.gridList.Items.Add(grid);
+            }
         }
 
         private void modifyGrid(object sender, EventArgs e)

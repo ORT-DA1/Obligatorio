@@ -22,7 +22,6 @@ namespace Domain.Entities
             this.RegistrationDate = registrationDate;
             this.LastAccess = registrationDate;
         }
-
         public override bool Equals(object designerObject)
         {
             bool isEqual = false;
@@ -36,7 +35,6 @@ namespace Domain.Entities
             }
             return isEqual;
         }
-
         public override bool CanABMClients()
         {
             return false;
@@ -66,6 +64,10 @@ namespace Domain.Entities
             return false;
         }
         public override bool CanSignGrids()
+        {
+            return true;
+        }
+        public override bool CanCreateNewElements()
         {
             return true;
         }

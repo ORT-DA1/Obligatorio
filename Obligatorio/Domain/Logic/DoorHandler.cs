@@ -80,5 +80,9 @@ namespace Domain.Logic
         {
             return doorRepository.GetFirst();
         }
+        public void AddNewDoorEntity(Door door, PriceAndCost priceAndCost)
+        {
+
+        }
     }
 }

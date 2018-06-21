@@ -2,6 +2,7 @@
 using Domain.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace Domain.Repositories
@@ -46,6 +47,7 @@ namespace Domain.Repositories
                 List<DecorativeColumn> decorativeColumnList = null;
                 decorativeColumnList = _context.DecorativeColumns
                     .Where(d => d.Grid.GridId == grid.GridId)
+                    .Include("ubicationPoint")
                     .ToList();
 
                 return decorativeColumnList;

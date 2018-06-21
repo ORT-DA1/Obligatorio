@@ -14,7 +14,7 @@ namespace Domain.Entities
 
         public Point UbicationPoint { get; set; }
 
-        private SolidBrush wallBeamBrush;
+        public SolidBrush wallBeamBrush = new SolidBrush(Color.Red);
 
         public static Tuple<int, int> CostPriceWallBeam = new Tuple<int, int>(50, 100);
 

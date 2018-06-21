@@ -68,6 +68,7 @@ namespace Domain.Entities
 
         public void DrawWalls(Graphics graphic)
         {
+            if(WALL_HANDLER== null) this.WALL_HANDLER = new WallHandler(gridRepository);
             foreach (Wall wall in WALL_HANDLER.GetList(this))
             {
                 wall.Draw(graphic);
@@ -76,6 +77,7 @@ namespace Domain.Entities
 
         public void DrawDoors(Graphics graphic)
         {
+            if (DOOR_HANDLER == null) this.DOOR_HANDLER = new DoorHandler(gridRepository);
             foreach (Door door in DOOR_HANDLER.GetList(this))
             {
                 door.Draw(graphic);
@@ -84,7 +86,8 @@ namespace Domain.Entities
 
         public void DrawWallBeams(Graphics graphic)
         {
-            foreach (WallBeam wallBeam in WallBeams)
+            if (WALLBEAM_HANDLER == null) this.WALLBEAM_HANDLER = new WallBeamHandler(gridRepository);
+            foreach (WallBeam wallBeam in WALLBEAM_HANDLER.GetList(this))
             {
                 wallBeam.Draw(graphic);
             }
@@ -92,6 +95,7 @@ namespace Domain.Entities
 
         public void DrawDecorativeColumns(Graphics graphic)
         {
+            if (DECORATIVECOLUMN_HANDLER == null) this.DECORATIVECOLUMN_HANDLER = new DecorativeColumnHandler(gridRepository);
             foreach (DecorativeColumn decorativeColumn in DECORATIVECOLUMN_HANDLER.GetList(this))
             {
                 decorativeColumn.Draw(graphic);
@@ -100,6 +104,7 @@ namespace Domain.Entities
 
         public void DrawWindows(Graphics graphic)
         {
+            if (WINDOW_HANDLER == null) this.WINDOW_HANDLER = new WindowHandler(gridRepository);
             foreach (Window window in WINDOW_HANDLER.GetList(this))
             {
                 window.Draw(graphic);
@@ -143,24 +148,17 @@ namespace Domain.Entities
         private void AddWallIfCutting(Graphics graphic, Wall wall)
         {
             Point intersection = this.FirstIntersection(wall);
-            Wall intersectWall = this.FirstIntersectWall(wall);
-            AddWallBeam(graphic, intersectWall.startUbicationPoint);
-            AddWallBeam(graphic, intersectWall.endUbicationPoint);
-            BreakWall(intersectWall, intersection);
-            Wall newWall = new Wall(wall.startUbicationPoint, intersection);
-            AddWallBeam(graphic, newWall.startUbicationPoint);
-            AddWallBeam(graphic, newWall.endUbicationPoint);
-            WALL_HANDLER.Add(this, newWall);
+            BreakAndInsertWall(wall, intersection, graphic);
             Wall anotherWall = new Wall(intersection, wall.endUbicationPoint);
             AddWall(graphic, anotherWall);
         }
 
-        public void BreakWall(Wall intersectWall, Point intersection)
+        public void BreakAndInsertWall(Wall wall, Point intersection, Graphics graphic)
         {
-            Wall newWall = new Wall(intersectWall.startUbicationPoint, intersection);
-            Wall anotherNewWall = new Wall(intersection, intersectWall.endUbicationPoint);
+            Wall newWall = new Wall(wall.startUbicationPoint, intersection);
             WALL_HANDLER.Add(this, newWall);
-            WALL_HANDLER.Add(this, anotherNewWall);
+            AddWallBeam(graphic, newWall.startUbicationPoint);
+            AddWallBeam(graphic, newWall.endUbicationPoint);
         }
 
         private Wall FirstIntersectWall(Wall wall)
@@ -290,7 +288,7 @@ namespace Domain.Entities
             {
                 WallBeam wallBeam = new WallBeam(ubicationPoint);
                 WALLBEAM_HANDLER.Add(this, wallBeam);
-                wallBeam.Draw(graphic);
+                //wallBeam.Draw(graphic);
             }
         }
 
@@ -300,7 +298,7 @@ namespace Domain.Entities
             {
                 DecorativeColumn decorativeColumn = new DecorativeColumn(ubicationPoint);
                 DECORATIVECOLUMN_HANDLER.Add(this, decorativeColumn);
-                decorativeColumn.Draw(graphic);
+                //decorativeColumn.Draw(graphic);
 
             }
         }
@@ -394,8 +392,8 @@ namespace Domain.Entities
             if (FreePosition(startPoint))
             {
                 Window window = new Window(startPoint, endPoint, sense);
-                this.Windows.Add(new Window(startPoint, endPoint, sense));
-                window.Draw(graphic);
+                WINDOW_HANDLER.Add(this, window);
+                //window.Draw(graphic);
             }
         }
 
@@ -425,7 +423,7 @@ namespace Domain.Entities
             {
                 Door door = new Door(startPoint, endPoint, sense);
                 DOOR_HANDLER.Add(this, new Door(startPoint, endPoint, sense));
-                door.Draw(graphic);
+                //door.Draw(graphic);
             }
         }
 
@@ -589,7 +587,8 @@ namespace Domain.Entities
 
         public int TotalCost()
         {
-            return AmountCostWall() + AmountCostWallBeam() + AmountCostWindow() + AmountCostDoor();
+            return 0;
+            //return AmountCostWall() + AmountCostWallBeam() + AmountCostWindow() + AmountCostDoor();
         }
 
         public int TotalPrice()

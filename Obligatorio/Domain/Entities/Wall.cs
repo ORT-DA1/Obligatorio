@@ -17,7 +17,7 @@ namespace Domain.Entities
         public virtual Point endUbicationPoint { get; set; }
         public virtual List<Domain.Entities.Point> Path { get; set; }
 
-        private Pen wallPen;
+        private Pen wallPen = new Pen(Color.LightGreen, 4);
 
         public static Tuple<int, int> CostPriceMeterWall = new Tuple<int, int>(50, 100);
 

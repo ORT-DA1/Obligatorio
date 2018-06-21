@@ -80,5 +80,10 @@ namespace Domain.Logic
         {
             return doorRepository.GetFirst();
         }
+
+        public Door GetDoor(Door door)
+        {
+            return doorRepository.GetDoor(door);
+        }
     }
 }

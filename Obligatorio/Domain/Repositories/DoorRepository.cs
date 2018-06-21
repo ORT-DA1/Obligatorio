@@ -2,6 +2,7 @@
 using Domain.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace Domain.Repositories
@@ -40,6 +41,15 @@ namespace Domain.Repositories
                 .FirstOrDefault();
 
             return !(doorToFind == null);
+        }
+
+        public Door GetDoor(Door door)
+        {
+            return _context.Doors
+                .Where(d => d.DoorId == door.DoorId)
+                .Include("StartPoint")
+                .Include("EndPoint")
+                .FirstOrDefault();
         }
 
         public Door GetFirst()

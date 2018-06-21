@@ -17,7 +17,7 @@ namespace Domain.Entities
         
         public string name { get; set; }
         public Domain.Entities.Point StartPoint { get; set; }
-        public Domain.Entities.Point EndPoint;
+        public Domain.Entities.Point EndPoint { get; set; }
         public string sense { get; set; }
         public float width { get; set; }
         public float high { get; set; }
@@ -43,6 +43,7 @@ namespace Domain.Entities
             this.EndPoint = endPoint;
             this.width = 0.80f;
             this.high = 1.00f;
+            this.name = "default";
             this.distanceFromGround = 1.00f;
 
         }

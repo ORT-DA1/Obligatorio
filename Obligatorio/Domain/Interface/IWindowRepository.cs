@@ -12,5 +12,6 @@ namespace Domain.Interface
         void Remove(Grid grid, Window window);
         Window GetFirst();
         List<string> GetNameList();
+        Window GetWindow(Window window);
     }
 }

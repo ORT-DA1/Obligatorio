@@ -74,8 +74,7 @@ namespace Domain.Entities
                 gridRepository = new GridRepository();
             }
             Door door = this.gridRepository.GetDoor(this);
-            float angle = this.startAngle(door.StartPoint, door.EndPoint);
-            //float angle = this.startAngle(StartPoint, EndPoint);
+            float angle = this.startAngle(StartPoint, EndPoint);
             Point fixedPoint = fixDoorPoint(StartPoint);
             graphic.FillPie(blueBrush, fixedPoint.X, fixedPoint.Y,
                 width * MINIMUM_WIDTH_IN_PIXELS / MINIMUM_WIDTH,

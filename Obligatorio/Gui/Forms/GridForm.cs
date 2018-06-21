@@ -94,9 +94,9 @@ namespace Gui.Forms
             comboBox1_SelectedIndexChanged(sender, e);
             this.grid.GridStrategy.DrawGrid(this.graphic, grid.Height, grid.Width);
             this.grid.DrawWalls(this.graphic);
+            this.grid.DrawWallBeams(this.graphic);
             this.grid.DrawDoors(this.graphic);
             this.grid.DrawWindows(this.graphic);
-            this.grid.DrawWallBeams(this.graphic);
             this.grid.DrawDecorativeColumns(this.graphic);
         }
 

@@ -130,7 +130,7 @@ namespace Gui.Forms
             {
                 CreateElement gridScreenAdd = new CreateElement(this.user);
                 ABMGridScreenModify gridScreenModify = new ABMGridScreenModify(this.user);
-                ABMGridScreenDelete gridScreenDelete = new ABMGridScreenDelete(this.user);
+                ABMGridScreenDelete gridScreenDelete = new ABMGridScreenDelete();
 
                 gridABMNode.UserActions.Add(gridScreenAdd);
                 gridABMNode.UserActions.Add(gridScreenModify);

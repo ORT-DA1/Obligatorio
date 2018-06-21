@@ -73,7 +73,20 @@ namespace Gui.Forms
             this.moneyLbl.Visible = !canEditGrid;
 
             this.comboBox1.SelectedIndex = 0;
+            LoadDataIntoList();
 
+        }
+
+        private void LoadDataIntoList()
+        {
+            List<Signature> signatureList = this.handler.GetGridSignatures(this.grid);
+            if (signatureList != null)
+            {
+                foreach (var signature in signatureList)
+                {
+                    this.signatureList.Items.Add(signature);
+                }
+            }
         }
 
         private void generateLines(object sender, PaintEventArgs e)

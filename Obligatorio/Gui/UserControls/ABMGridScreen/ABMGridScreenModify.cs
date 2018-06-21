@@ -45,10 +45,22 @@ namespace Gui.UserControls.ABMGridScreen
         private void LoadGrids()
         {
             this.gridList.Items.Clear();
-            foreach (var grid in gridHandler.GetList())
+
+            if (this._user.CanSignGrids())
             {
-                this.gridList.Items.Add(grid);
+                foreach (var grid in gridHandler.GetList())
+                {
+                    this.gridList.Items.Add(grid);
+                }
             }
+            else
+            {
+                foreach (var grid in gridHandler.GetGridsInProgress())
+                {
+                    this.gridList.Items.Add(grid);
+                }
+            }
+            
         }
 
         private void modifyGrid(object sender, EventArgs e)

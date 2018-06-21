@@ -24,6 +24,11 @@ namespace Domain.Entities
             this.Architect = architect;
             this.Date = date;
         }
+        public override string ToString()
+        {
+            string format = "{0} / {1}";
+            return String.Format(format, this.Date, this.Architect);
+        }
 
     }
 }

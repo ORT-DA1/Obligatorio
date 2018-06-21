@@ -10,7 +10,6 @@ namespace Domain.Interface
     public interface IGridRepository
     {
         void AddGrid(Grid grid, Client client);
-        void ModifyGrid(Grid gridToModify, Grid modifiedGrid);
         void DeleteGrid(Grid grid);
         Grid GetGrid(Grid grid);
         List<Grid> GetAllGrids();

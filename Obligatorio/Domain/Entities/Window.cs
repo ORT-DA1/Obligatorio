@@ -1,4 +1,5 @@
 ﻿using Domain.Logic;
+using Domain.Repositories;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
@@ -25,6 +26,7 @@ namespace Domain.Entities
         public static float MAXIMUM_HIGH = 1.20f;
         public SolidBrush blueBrush = new SolidBrush(Color.Blue);
         public PriceAndCostHandler priceAndCostHandler;
+        public GridRepository gridRepository;
 
         #region Constructors
         public Window() { }
@@ -42,7 +44,8 @@ namespace Domain.Entities
 
         public Window(Point startPoint, Point endPoint, string sense, float width, float high, string name)
         {
-            this.priceAndCostHandler = new PriceAndCostHandler();
+            this.gridRepository = new GridRepository();
+            this.priceAndCostHandler = new PriceAndCostHandler(gridRepository);
             this.blueBrush = new SolidBrush(Color.Blue);
             this.width = width;
             this.high = high;

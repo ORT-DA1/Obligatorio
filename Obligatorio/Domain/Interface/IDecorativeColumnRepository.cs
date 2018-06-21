@@ -6,10 +6,11 @@ namespace Domain.Interface
 {
     public interface IDecorativeColumnRepository
     {
-        void Add(Grid grid, DecorativeColumn decorativeColumn);
+        void Add(Grid grid, DecorativeColumn decorativeColumn, PriceAndCost priceAndCost);
         List<DecorativeColumn> GetList(Grid grid);
         void Remove(Grid grid, DecorativeColumn decorativeColumn);
         int Count(Grid grid);
         bool Exist(Grid grid, Point ubicationPoint);
+        DecorativeColumn GetFirst();
     }
 }

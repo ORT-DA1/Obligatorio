@@ -429,7 +429,7 @@ namespace Domain.Entities
             if (FreePosition(startPoint))
             {
                 Door door = new Door(startPoint, endPoint, sense);
-                DOOR_HANDLER.Add(this, new Door(startPoint, endPoint, sense), priceAndCost);
+                DOOR_HANDLER.Add(this, door, priceAndCost);
             }
         }
 

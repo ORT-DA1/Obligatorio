@@ -30,8 +30,8 @@ namespace Domain.Logic
             if (NotDefault(door))
             {
                 NotExist(door);
+                validSize(door);
             }
-            validSize(door);
         }
 
         private void validSize(Door door)

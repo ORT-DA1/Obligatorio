@@ -43,7 +43,7 @@ namespace Domain.Entities
             this.direction = 0;
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;
-
+            this.name = "default";
             this.width = 0.85f;
             this.high = 2.20f;
         }

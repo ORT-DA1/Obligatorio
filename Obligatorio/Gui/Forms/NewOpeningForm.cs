@@ -16,8 +16,6 @@ namespace Gui.Forms
 {
     public partial class NewOpeningForm : Form
     {
-        private WindowHandler windowHandler;
-        private DoorHandler doorHandler;
         private GridRepository _repository;
         private PriceAndCostHandler priceAndCostHandler;
 
@@ -25,17 +23,32 @@ namespace Gui.Forms
         {
             InitializeComponent();
             this._repository = repository;
-            this.windowHandler = new WindowHandler(this._repository);
-            this.doorHandler = new DoorHandler(this._repository);
             this.priceAndCostHandler = new PriceAndCostHandler(this._repository);
 
         }
 
         private void create_btn_Click(object sender, EventArgs e)
         {
+            if (this.openingDropdown.SelectedItem.ToString() == "Puerta")
+            {
+                GenerateNewDoorElement();
+            }
+            else if (this.openingDropdown.SelectedItem.ToString() == "Ventana")
+            {
+                GenerateNewWindowElement();
+            }
+        }
+
+        private void GenerateNewWindowElement()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void GenerateNewDoorElement()
+        {
             ValidWidthHeight();
             var priceAndCost = this.priceAndCostHandler.GetPriceAndCostDoor();
-            Door newDoorType = new Door(null, null, "vertical" , int.Parse(this.widthTxt.Text), int.Parse(this.heightTxt.Text), this.nameTxt.Text);
+            Door newDoorType = new Door(null, null, "vertical", int.Parse(this.widthTxt.Text), int.Parse(this.heightTxt.Text), this.nameTxt.Text);
             //this.doorHandler.AddNewDoorEntity(newDoorType, priceAndCost);
         }
 

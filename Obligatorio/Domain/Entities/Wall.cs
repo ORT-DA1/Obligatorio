@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Logic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
@@ -11,6 +12,7 @@ namespace Domain.Entities
         #region PK and FK
         public int WallId { get; set; }
         public virtual Grid Grid { get; set; }
+        public virtual PriceAndCost PriceAndCost { get; set; }
         #endregion
 
         public virtual Point startUbicationPoint { get; set; }
@@ -18,8 +20,8 @@ namespace Domain.Entities
         public virtual List<Domain.Entities.Point> Path { get; set; }
 
         private Pen wallPen = new Pen(Color.LightGreen, 4);
+        public PriceAndCostHandler priceAndCostHandler;
 
-        public static Tuple<int, int> CostPriceMeterWall = new Tuple<int, int>(50, 100);
 
         #region Constructors
         public Wall()
@@ -31,6 +33,7 @@ namespace Domain.Entities
 
         public Wall(Point startPoint, Point endPoint)
         {
+            this.priceAndCostHandler = new PriceAndCostHandler();
             SetRightSense(startPoint, endPoint);
             this.Path = new List<Point>();
             this.wallPen = new Pen(Color.LightGreen, 4);
@@ -100,9 +103,9 @@ namespace Domain.Entities
             }
         }
 
-        public override void ModifyCostAndPrice(int Cost, int Price)
+        public override void ModifyCostAndPrice(int cost, int price)
         {
-            CostPriceMeterWall = new Tuple<int, int>(Cost, Price);
+            priceAndCostHandler.WallModifyPriceCost(cost, price);
         }
 
         public override void Draw(Graphics graphic)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Logic;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 
@@ -10,6 +11,7 @@ namespace Domain.Entities
         #region PK and FK
         public int DoorId { get; set; }
         public virtual Grid Grid { get; set; }
+        public virtual PriceAndCost PriceAndCost { get; set; }
         #endregion
 
         public Domain.Entities.Point StartPoint { get; set; }
@@ -23,8 +25,7 @@ namespace Domain.Entities
         public static float MAXIMUM_WIDTH = 3.00f;
         public static float MAXIMUM_HIGH = 2.00f;
         public SolidBrush blueBrush = new SolidBrush(Color.Blue);
-
-        public static Tuple<int, int> CostPriceDoor = new Tuple<int, int>(50, 100);
+        public PriceAndCostHandler priceAndCostHandler;
 
         #region Constructors
         public Door()
@@ -45,6 +46,7 @@ namespace Domain.Entities
 
         public Door(Point startPoint, Point endPoint, string sense, float width, float high, string name)
         {
+            this.priceAndCostHandler = new PriceAndCostHandler();
             this.width = width;
             this.high = high;
             this.name = name;
@@ -55,9 +57,9 @@ namespace Domain.Entities
 
         }
         #endregion
-        public override void ModifyCostAndPrice(int Cost, int Price)
+        public override void ModifyCostAndPrice(int cost, int price)
         {
-            CostPriceDoor = new Tuple<int, int>(Cost, Price);
+            priceAndCostHandler.DoorModifyPriceCost(cost, price);
         }
 
         public override void Draw(Graphics graphic)

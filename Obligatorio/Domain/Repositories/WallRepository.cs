@@ -18,6 +18,7 @@ namespace Domain.Repositories
         }
         public void Add(Grid grid, Wall wall)
         {
+            _context.Grids.Attach(grid);
             wall.Grid = grid;
             _context.Walls.Add(wall);
             _context.SaveChanges();

@@ -64,6 +64,7 @@
     <Compile Include="Entities\Element.cs" />
     <Compile Include="Entities\Grid.cs" />
     <Compile Include="Entities\Point.cs" />
+    <Compile Include="Entities\PriceAndCost.cs" />
     <Compile Include="Interface\IArchitectRepository.cs" />
     <Compile Include="Interface\IClientRepository.cs" />
     <Compile Include="Interface\IDecorativeColumnRepository.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Interface\IElementHandler.cs" />
     <Compile Include="Interface\IElementRepository.cs" />
     <Compile Include="Interface\IGridRepository.cs" />
+    <Compile Include="Interface\IPriceAndCostRepository.cs" />
     <Compile Include="Interface\IUserRepository.cs" />
     <Compile Include="Interface\IWallBeamRepository.cs" />
     <Compile Include="Interface\IWallRepository.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Logic\ArchitectHandler.cs" />
     <Compile Include="Logic\DecorativeColumnHandler.cs" />
     <Compile Include="Logic\DoorHandler.cs" />
+    <Compile Include="Logic\PriceAndCostHandler.cs" />
     <Compile Include="Logic\WallBeamHandler.cs" />
     <Compile Include="Logic\WallHandler.cs" />
     <Compile Include="Logic\WindowHandler.cs" />
@@ -90,6 +93,7 @@
     <Compile Include="Repositories\DesignerRepository.cs" />
     <Compile Include="Repositories\DoorRepository.cs" />
     <Compile Include="Repositories\GridRepository.cs" />
+    <Compile Include="Repositories\PriceAndCostRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\WallBeamRepository.cs" />
     <Compile Include="Repositories\WallRepository.cs" />

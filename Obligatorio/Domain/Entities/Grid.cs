@@ -17,6 +17,7 @@ namespace Domain.Entities
         public string GridName { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
+        public bool isDeleted { get; set; }
 
         public GridRepository gridRepository;
 
@@ -42,11 +43,13 @@ namespace Domain.Entities
 
         public Grid()
         {
+            this.isDeleted = false;
             this.gridRepository = new GridRepository();
         }
 
         public Grid(string gridName, Client client, int height, int width)
         {
+            this.isDeleted = false;
             this.gridRepository = new GridRepository();
             this.Walls = new List<Wall>();
             this.WallBeams = new List<WallBeam>();
@@ -510,7 +513,7 @@ namespace Domain.Entities
             int result = 0;
             foreach (Wall wall in WALL_HANDLER.GetList(this))
             {
-                result += MetersWallCount() * Wall.CostPriceMeterWall.Item1;
+                result += MetersWallCount() * Wall.CostPriceMeterWall.Cost;
             }
             return result;
         }
@@ -520,7 +523,7 @@ namespace Domain.Entities
             int result = 0;
             foreach (Wall wall in WALL_HANDLER.GetList(this))
             {
-                result += MetersWallCount() * Wall.CostPriceMeterWall.Item2;
+                result += MetersWallCount() * Wall.CostPriceMeterWall.Price;
             }
             return result;
         }
@@ -530,7 +533,7 @@ namespace Domain.Entities
             int result = 0;
             foreach (WallBeam wallBeam in WALLBEAM_HANDLER.GetList(this))
             {
-                result += WallBeamsCount() * WallBeam.CostPriceWallBeam.Item1;
+                result += WallBeamsCount() * WallBeam.CostPriceWallBeam.Cost;
             }
             return result;
         }
@@ -540,7 +543,7 @@ namespace Domain.Entities
             int result = 0;
             foreach (WallBeam wallBeam in WALLBEAM_HANDLER.GetList(this))
             {
-                result += WallBeamsCount() * WallBeam.CostPriceWallBeam.Item2;
+                result += WallBeamsCount() * WallBeam.CostPriceWallBeam.Price;
             }
             return result;
         }
@@ -550,7 +553,7 @@ namespace Domain.Entities
             int result = 0;
             foreach (Window window in WINDOW_HANDLER.GetList(this))
             {
-                result += WindowsCount() * Window.CostPriceWindow.Item1;
+                result += WindowsCount() * Window.CostPriceWindow.Cost;
             }
             return result;
         }
@@ -560,7 +563,7 @@ namespace Domain.Entities
             int result = 0;
             foreach (Window window in WINDOW_HANDLER.GetList(this))
             {
-                result += WindowsCount() * Window.CostPriceWindow.Item2;
+                result += WindowsCount() * Window.CostPriceWindow.Price;
             }
             return result;
         }
@@ -570,7 +573,7 @@ namespace Domain.Entities
             int result = 0;
             foreach (Door door in DOOR_HANDLER.GetList(this))
             {
-                result += DoorsCount() * Door.CostPriceDoor.Item1;
+                result += DoorsCount() * Door.CostPriceDoor.Cost;
             }
             return result;
         }
@@ -580,7 +583,7 @@ namespace Domain.Entities
             int result = 0;
             foreach (Door door in DOOR_HANDLER.GetList(this))
             {
-                result += DoorsCount() * Door.CostPriceDoor.Item2;
+                result += DoorsCount() * Door.CostPriceDoor.Price;
             }
             return result;
         }

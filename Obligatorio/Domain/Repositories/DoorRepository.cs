@@ -78,7 +78,7 @@ namespace Domain.Repositories
         {
             List<string> listName = new List<string>();
             var names = from door in _context.Doors
-                        select new { door.name };
+                        select new { door.Name };
 
             foreach (var name in names)
             {

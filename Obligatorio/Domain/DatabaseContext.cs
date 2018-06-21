@@ -71,11 +71,11 @@ namespace Domain
                 .HasOptional(d => d.PriceAndCost);
 
 
-            modelBuilder.Entity<GeneratedDoor>()
-                .HasRequired(w => w.Architect);
+            //modelBuilder.Entity<GeneratedDoor>()
+            //    .HasRequired(w => w.Architect);
 
-            modelBuilder.Entity<GeneratedWindow>()
-                .HasRequired(w => w.Architect);
+            //modelBuilder.Entity<GeneratedWindow>()
+            //    .HasRequired(w => w.Architect);
 
 
             modelBuilder.Entity<Wall>()

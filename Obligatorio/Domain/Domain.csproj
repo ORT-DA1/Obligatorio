@@ -84,6 +84,8 @@
     <Compile Include="Logic\ArchitectHandler.cs" />
     <Compile Include="Logic\DecorativeColumnHandler.cs" />
     <Compile Include="Logic\DoorHandler.cs" />
+    <Compile Include="Logic\GeneratedDoorHandler.cs" />
+    <Compile Include="Logic\GeneratedWindowHandler.cs" />
     <Compile Include="Logic\PriceAndCostHandler.cs" />
     <Compile Include="Logic\WallBeamHandler.cs" />
     <Compile Include="Logic\WallHandler.cs" />
@@ -94,6 +96,8 @@
     <Compile Include="Repositories\DecorativeColumnRepository.cs" />
     <Compile Include="Repositories\DesignerRepository.cs" />
     <Compile Include="Repositories\DoorRepository.cs" />
+    <Compile Include="Repositories\GeneratedDoorRepository.cs" />
+    <Compile Include="Repositories\GeneratedWindowRepository.cs" />
     <Compile Include="Repositories\GridRepository.cs" />
     <Compile Include="Repositories\PriceAndCostRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

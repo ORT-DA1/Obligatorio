@@ -36,7 +36,7 @@ namespace Domain.Logic
 
         private void validSize(Door door)
         {
-            if (door.high > 2.00f || door.width > 3.00f)
+            if (door.Height > 2.00f || door.Width > 3.00f)
             {
                 throw new ExceptionController(ExceptionMessage.DOOR_INVALID_SIZE);
             }
@@ -45,7 +45,7 @@ namespace Domain.Logic
         private void NotExist(Door door)
         {
             List<String> doorNames = doorRepository.GetNameList();
-            if (doorNames.Contains(door.name))
+            if (doorNames.Contains(door.Name))
             {
                 throw new ExceptionController(ExceptionMessage.WINDOW_NAME_ALREADY_EXIST);
             }
@@ -53,7 +53,7 @@ namespace Domain.Logic
 
         private bool NotDefault(Door door)
         {
-            return door.name != "default";
+            return door.Name != "default";
         }
 
         public List<Door> GetList(Grid grid)

@@ -9,11 +9,15 @@ namespace Domain.Entities
     public class GeneratedDoor
     {
         public int GeneratedDoorId { get; set; }
-        public float Width { get; set; }
-        public float High { get; set; }
-        public string Name { get; set; }
-        public virtual PriceAndCost PriceAndCost { get; set; }
-        public virtual Architect Architect { get; set; }
+
+        public GeneratedDoor(float width, float height, String name, PriceAndCost priceAndCost, Architect architect)
+        {
+            //this.Width = width;
+            //this.Height = height;
+            //this.Name = name;
+            //this.PriceAndCost = priceAndCost;
+            //this.Architect = architect;
+        }
 
     }
 }

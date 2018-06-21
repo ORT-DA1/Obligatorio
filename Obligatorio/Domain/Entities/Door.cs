@@ -17,13 +17,13 @@ namespace Domain.Entities
 
         #endregion
 
-        public string name { get; set; }
+        public string Name { get; set; }
         public Domain.Entities.Point StartPoint { get; set; }
         public Domain.Entities.Point EndPoint { get; set; }
         public int direction;
         public string sense { get; set; }
-        public float width { get; set; }
-        public float high { get; set; }
+        public float Width { get; set; }
+        public float Height { get; set; }
 
         public static float MINIMUM_WIDTH = 0.85f;
         public static int MINIMUM_WIDTH_IN_PIXELS = 15;
@@ -45,18 +45,18 @@ namespace Domain.Entities
             this.direction = 0;
             this.StartPoint = startPoint;
             this.EndPoint = endPoint;
-            this.name = "default";
-            this.width = 0.85f;
-            this.high = 2.20f;
+            this.Name = "default";
+            this.Width = 0.85f;
+            this.Height = 2.20f;
         }
 
         public Door(Point startPoint, Point endPoint, string sense, float width, float high, string name)
         {
             this.gridRepository = new GridRepository();
             this.priceAndCostHandler = new PriceAndCostHandler(gridRepository);
-            this.width = width;
-            this.high = high;
-            this.name = name;
+            this.Width = width;
+            this.Height = high;
+            this.Name = name;
             this.sense = sense;
             this.direction = 0;
             this.StartPoint = startPoint;
@@ -79,8 +79,8 @@ namespace Domain.Entities
             float angle = this.startAngle(StartPoint, EndPoint);
             Point fixedPoint = fixDoorPoint(StartPoint);
             graphic.FillPie(blueBrush, fixedPoint.X, fixedPoint.Y,
-                width * MINIMUM_WIDTH_IN_PIXELS / MINIMUM_WIDTH,
-                width * MINIMUM_WIDTH_IN_PIXELS / MINIMUM_WIDTH,
+                Width * MINIMUM_WIDTH_IN_PIXELS / MINIMUM_WIDTH,
+                Width * MINIMUM_WIDTH_IN_PIXELS / MINIMUM_WIDTH,
                 angle, 90f);
         }
 
@@ -160,7 +160,7 @@ namespace Domain.Entities
             if (doorObject != null && this.GetType().Equals(doorObject.GetType()))
             {
                 Door door = (Door)doorObject;
-                if ((this.StartPoint.Equals(door.StartPoint)) && this.name.Equals(door.name))
+                if ((this.StartPoint.Equals(door.StartPoint)) && this.Name.Equals(door.Name))
                 {
                     isEqual = true;
                 }

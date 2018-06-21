@@ -57,6 +57,7 @@ namespace Gui.Forms
         private void SetupEnvironment(bool canEditGrid)
         {
             this.menuPanel.Visible = canEditGrid;
+            this.drawGridButtonPanel.Visible = canEditGrid;
             this.elementPanel.Visible = canEditGrid;
             this.createNewOpening.Visible = this._user.CanCreateNewElements();
 
@@ -361,8 +362,9 @@ namespace Gui.Forms
 
         private void createNewOpening_Click(object sender, EventArgs e)
         {
-            NewOpeningForm openingForm = new NewOpeningForm(this.grid.gridRepository);
+            NewOpeningForm openingForm = new NewOpeningForm(this.grid.gridRepository, this._user);
             openingForm.Show();
         }
+
     }
 }

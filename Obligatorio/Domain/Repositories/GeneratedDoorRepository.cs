@@ -14,18 +14,18 @@ namespace Domain.Repositories
 
         public void Add(Architect architect, GeneratedDoor generatedDoor, PriceAndCost priceAndCost)
         {
-            using (DatabaseContext _context = new DatabaseContext())
-            {
-                PriceAndCost priceAndCostToFind = _context.PricesAndCosts
-                .Where(p => p.PriceAndCostId == 3)
-                .FirstOrDefault();
+            //using (DatabaseContext _context = new DatabaseContext())
+            //{
+            //    PriceAndCost priceAndCostToFind = _context.PricesAndCosts
+            //    .Where(p => p.PriceAndCostId == 3)
+            //    .FirstOrDefault();
 
-                generatedDoor.PriceAndCost = priceAndCostToFind;
-                _context.Architects.Attach(architect);
-                generatedDoor.Architect = architect;
-                _context.GeneratedDoors.Add(generatedDoor);
-                _context.SaveChanges();
-            }
+            //    generatedDoor.PriceAndCost = priceAndCostToFind;
+            //    _context.Architects.Attach(architect);
+            //    generatedDoor.Architect = architect;
+            //    _context.GeneratedDoors.Add(generatedDoor);
+            //    _context.SaveChanges();
+            //}
         }
 
         public GeneratedDoor GetGeneratedDoor(GeneratedDoor generatedDoor)

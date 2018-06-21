@@ -23,7 +23,7 @@ namespace Domain.Logic
 
         public void Add(Architect architect, GeneratedWindow generatedWindow, PriceAndCost priceAndCost)
         {
-            this.generatedWindowRepository.Add(architect, generatedWindow, priceAndCost);
+            this.generatedWindowRepository.Add(architect, generatedWindow);
         }
 
         public GeneratedWindow GetGeneratedWindow(GeneratedWindow generatedWindow)

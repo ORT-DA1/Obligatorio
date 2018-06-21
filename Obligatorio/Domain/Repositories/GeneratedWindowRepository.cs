@@ -37,18 +37,18 @@ namespace Domain.Repositories
 
         public void Add(Architect architect, GeneratedWindow generatedWindow)
         {
-            using (DatabaseContext _context = new DatabaseContext())
-            {
-                PriceAndCost priceAndCostToFind = _context.PricesAndCosts
-                .Where(p => p.PriceAndCostId == 3)
-                .FirstOrDefault();
+            //using (DatabaseContext _context = new DatabaseContext())
+            //{
+            //    PriceAndCost priceAndCostToFind = _context.PricesAndCosts
+            //    .Where(p => p.PriceAndCostId == 3)
+            //    .FirstOrDefault();
 
-                generatedWindow.PriceAndCost = priceAndCostToFind;
-                _context.Architects.Attach(architect);
-                generatedWindow.Architect = architect;
-                _context.GeneratedWindows.Add(generatedWindow);
-                _context.SaveChanges();
-            }
+            //    generatedWindow.PriceAndCost = priceAndCostToFind;
+            //    _context.Architects.Attach(architect);
+            //    generatedWindow.Architect = architect;
+            //    _context.GeneratedWindows.Add(generatedWindow);
+            //    _context.SaveChanges();
+            //}
         }
     }
 }

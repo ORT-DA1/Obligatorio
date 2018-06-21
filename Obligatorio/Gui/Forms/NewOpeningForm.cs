@@ -18,13 +18,18 @@ namespace Gui.Forms
     {
         private GridRepository _repository;
         private PriceAndCostHandler priceAndCostHandler;
+        private GeneratedDoorHandler generatedDoorHandler;
+        private GeneratedWindowHandler generatedWindowHandler;
+        private User user;
 
-        public NewOpeningForm(GridRepository repository)
+        public NewOpeningForm(GridRepository repository, User user)
         {
             InitializeComponent();
             this._repository = repository;
             this.priceAndCostHandler = new PriceAndCostHandler(this._repository);
-
+            this.generatedDoorHandler = new GeneratedDoorHandler();
+            this.generatedWindowHandler = new GeneratedWindowHandler();
+            this.user = user;
         }
 
         private void create_btn_Click(object sender, EventArgs e)
@@ -46,13 +51,22 @@ namespace Gui.Forms
 
         private void GenerateNewDoorElement()
         {
-            ValidWidthHeight();
-            var priceAndCost = this.priceAndCostHandler.GetPriceAndCostDoor();
-            Door newDoorType = new Door(null, null, "vertical", int.Parse(this.widthTxt.Text), int.Parse(this.heightTxt.Text), this.nameTxt.Text);
-            //this.doorHandler.AddNewDoorEntity(newDoorType, priceAndCost);
-        }
+            //ValidWidthHeight();
+            //PriceAndCost priceAndCost = priceAndCostHandler.GetPriceAndCostDoor();
+            //GeneratedDoor newDoor = new GeneratedDoor
+            //(
+            //    float.Parse(this.widthTxt.Text),
+            //    float.Parse(this.heightTxt.Text),
+            //    this.nameTxt.Text,
+            //    priceAndCost,
+            //    (Architect)this.user
+            //);
+            
+            //this.generatedDoorHandler.Add((Architect)this.user, newDoor, priceAndCost);
 
-        private void cancel_Btn_Click(object sender, EventArgs e)
+    }
+
+    private void cancel_Btn_Click(object sender, EventArgs e)
         {
             this.Close();
         }

@@ -36,7 +36,7 @@ namespace Gui.Forms
             ValidWidthHeight();
             var priceAndCost = this.priceAndCostHandler.GetPriceAndCostDoor();
             Door newDoorType = new Door(null, null, "vertical" , int.Parse(this.widthTxt.Text), int.Parse(this.heightTxt.Text), this.nameTxt.Text);
-            this.doorHandler.AddNewDoorEntity(newDoorType, priceAndCost);
+            //this.doorHandler.AddNewDoorEntity(newDoorType, priceAndCost);
         }
 
         private void cancel_Btn_Click(object sender, EventArgs e)

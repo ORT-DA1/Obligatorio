@@ -18,9 +18,9 @@ namespace Domain.Logic
             this.doorRepository = new DoorRepository(gridRepository);
         }
 
-        public void Add(Grid grid, Door door)
+        public void Add(Grid grid, Door door, PriceAndCost priceAndCost)
         {
-            this.doorRepository.Add(grid, door);
+            this.doorRepository.Add(grid, door, priceAndCost);
         }
 
         public List<Door> GetList(Grid grid)
@@ -41,6 +41,11 @@ namespace Domain.Logic
         public int Count(Grid grid)
         {
             return doorRepository.Count(grid);
+        }
+
+        public Door GetFirst()
+        {
+            return doorRepository.GetFirst();
         }
     }
 }

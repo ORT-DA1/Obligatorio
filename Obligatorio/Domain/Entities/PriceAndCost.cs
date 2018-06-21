@@ -25,8 +25,8 @@ namespace Domain.Entities
         #endregion
 
         #region Window
-        public int PriceWindow { get; set; }
-        public int CostWindow { get; set; }
+        public int Price { get; set; }
+        public int Cost { get; set; }
         #endregion
         
     }

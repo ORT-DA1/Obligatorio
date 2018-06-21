@@ -1,4 +1,5 @@
 ﻿using Domain.Logic;
+using Domain.Repositories;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
@@ -18,12 +19,15 @@ namespace Domain.Entities
 
         public SolidBrush wallBeamBrush = new SolidBrush(Color.Red);
         public PriceAndCostHandler priceAndCostHandler;
-        
+        public GridRepository gridRepository;
+
+
         #region Constructors
         public WallBeam() { }
         public WallBeam(Point ubicationPoint)
         {
-            this.priceAndCostHandler = new PriceAndCostHandler();
+            this.gridRepository = new GridRepository();
+            this.priceAndCostHandler = new PriceAndCostHandler(gridRepository);
             this.UbicationPoint = ubicationPoint;
             this.wallBeamBrush = new SolidBrush(Color.Red);
         }

@@ -20,9 +20,9 @@ namespace Domain.Logic
             this.windowRepository = new WindowRepository(gridRepository);
         }
 
-        public void Add(Grid grid, Window window)
+        public void Add(Grid grid, Window window, PriceAndCost priceAndCost)
         {
-            this.windowRepository.Add(grid, window);
+            this.windowRepository.Add(grid, window, priceAndCost);
         }
 
         public List<Window> GetList(Grid grid)
@@ -43,6 +43,11 @@ namespace Domain.Logic
         public int Count(Grid grid)
         {
             return windowRepository.Count(grid);
+        }
+
+        public Window GetFirst()
+        {
+            return windowRepository.GetFirst();
         }
     }
 

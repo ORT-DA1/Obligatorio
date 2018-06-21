@@ -16,10 +16,15 @@ namespace Domain.Repositories
         {
             this._context = gridRepository._context;
         }
-        public void Add(Grid grid, Wall wall)
+        public void Add(Grid grid, Wall wall, PriceAndCost priceAndCost)
         {
+            PriceAndCost p = _context.PricesAndCosts
+                .Where(w => w.PriceAndCostId == priceAndCost.PriceAndCostId)
+                .FirstOrDefault();
+
             _context.Grids.Attach(grid);
             wall.Grid = grid;
+            wall.PriceAndCost = p;
             _context.Walls.Add(wall);
             _context.SaveChanges();
         }
@@ -102,6 +107,10 @@ namespace Domain.Repositories
                 && p.Y == ubicationPoint.Y)))
                 .FirstOrDefault();
         }
-        
+
+        public Wall GetFirst()
+        {
+            return _context.Walls.Where(w => w.WallId == 1).FirstOrDefault();
+        }
     }
 }

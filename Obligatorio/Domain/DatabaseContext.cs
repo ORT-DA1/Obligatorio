@@ -50,19 +50,19 @@ namespace Domain
             #region modelBuilder Relations
 
             modelBuilder.Entity<Wall>()
-                .HasRequired(w => w.PriceAndCost);
+                .HasOptional(w => w.PriceAndCost);
 
             modelBuilder.Entity<Window>()
-                .HasRequired(w => w.PriceAndCost);
+                .HasOptional(w => w.PriceAndCost);
 
             modelBuilder.Entity<WallBeam>()
-                .HasRequired(w => w.PriceAndCost);
+                .HasOptional(w => w.PriceAndCost);
 
             modelBuilder.Entity<Door>()
-                .HasRequired(d => d.PriceAndCost);
+                .HasOptional(d => d.PriceAndCost);
 
             modelBuilder.Entity<DecorativeColumn>()
-                .HasRequired(d => d.PriceAndCost);
+                .HasOptional(d => d.PriceAndCost);
 
 
             modelBuilder.Entity<Wall>()

@@ -34,7 +34,7 @@ namespace Domain.Entities
         public static int PixelConvertor = 25;
         public int MaxMeters = 5;
 
-        public PriceAndCostRepository PRICE_AND_COST;
+        public PriceAndCostHandler PRICE_AND_COST_HANDLER;
         public GridHandler GRID_HANDLER;
         public WallHandler WALL_HANDLER;
         public DoorHandler DOOR_HANDLER;
@@ -46,6 +46,7 @@ namespace Domain.Entities
         {
             this.isDeleted = false;
             this.gridRepository = new GridRepository();
+            this.PRICE_AND_COST_HANDLER = new PriceAndCostHandler(gridRepository);
         }
 
         public Grid(string gridName, Client client, int height, int width)
@@ -62,7 +63,7 @@ namespace Domain.Entities
             this.Client = client;
             this.Height = height * PixelConvertor;
             this.Width = width * PixelConvertor;
-            this.PRICE_AND_COST = new PriceAndCostRepository();
+            this.PRICE_AND_COST_HANDLER = new PriceAndCostHandler(gridRepository);
             this.GRID_HANDLER = new GridHandler();
             this.WALLBEAM_HANDLER = new WallBeamHandler(gridRepository);
             this.WALL_HANDLER = new WallHandler(gridRepository);
@@ -118,52 +119,53 @@ namespace Domain.Entities
 
         public void AddWall(Graphics graphic, Wall wall)
         {
+            PriceAndCost priceAndCost = PRICE_AND_COST_HANDLER.GetPriceAndCostWall();
             if (IsCuttingAWallBeforeMaximum(wall))
             {
-                AddWallIfCutting(graphic, wall);
+                AddWallIfCutting(graphic, wall, priceAndCost);
             }
             else if (wall.SizeGreaterThanMaximum())
             {
-                AddWallIfSizeGreaterThanMaximum(graphic, wall);
+                AddWallIfSizeGreaterThanMaximum(graphic, wall, priceAndCost);
             }
             else
             {
-                AddWallNormal(graphic, wall);
+                AddWallNormal(graphic, wall, priceAndCost);
             }
         }
 
-        private void AddWallNormal(Graphics graphic, Wall wall)
+        private void AddWallNormal(Graphics graphic, Wall wall, PriceAndCost priceAndCost)
         {
-            WALL_HANDLER.Add(this, wall);
-            AddWallBeam(graphic, wall.startUbicationPoint);
-            AddWallBeam(graphic, wall.endUbicationPoint);
+            WALL_HANDLER.Add(this, wall, priceAndCost);
+            AddWallBeam(graphic, wall.startUbicationPoint, priceAndCost);
+            AddWallBeam(graphic, wall.endUbicationPoint, priceAndCost);
         }
 
-        private void AddWallIfSizeGreaterThanMaximum(Graphics graphic, Wall wall)
+        private void AddWallIfSizeGreaterThanMaximum(Graphics graphic, Wall wall, PriceAndCost priceAndCost)
         {
             Point calculatedPoint = wall.CalculateLocationPoint(MaxMeters);
             Wall anotherWall = new Wall(wall.startUbicationPoint, calculatedPoint);
-            AddWallBeam(graphic, anotherWall.startUbicationPoint);
-            AddWallBeam(graphic, anotherWall.endUbicationPoint);
-            WALL_HANDLER.Add(this, anotherWall);
+            AddWallBeam(graphic, anotherWall.startUbicationPoint, priceAndCost);
+            AddWallBeam(graphic, anotherWall.endUbicationPoint, priceAndCost);
+            WALL_HANDLER.Add(this, anotherWall, priceAndCost);
             Wall newWall = new Wall(calculatedPoint, wall.endUbicationPoint);
             AddWall(graphic, newWall);
         }
 
-        private void AddWallIfCutting(Graphics graphic, Wall wall)
+        private void AddWallIfCutting(Graphics graphic, Wall wall, PriceAndCost priceAndCost)
         {
             Point intersection = this.FirstIntersection(wall);
-            BreakAndInsertWall(wall, intersection, graphic);
+            BreakAndInsertWall(wall, intersection, graphic, priceAndCost);
             Wall anotherWall = new Wall(intersection, wall.endUbicationPoint);
             AddWall(graphic, anotherWall);
         }
 
-        public void BreakAndInsertWall(Wall wall, Point intersection, Graphics graphic)
+        public void BreakAndInsertWall(Wall wall, Point intersection, Graphics graphic, PriceAndCost priceAndCost)
         {
             Wall newWall = new Wall(wall.startUbicationPoint, intersection);
-            WALL_HANDLER.Add(this, newWall);
-            AddWallBeam(graphic, newWall.startUbicationPoint);
-            AddWallBeam(graphic, newWall.endUbicationPoint);
+            WALL_HANDLER.Add(this, newWall, priceAndCost);
+            AddWallBeam(graphic, newWall.startUbicationPoint, priceAndCost);
+            AddWallBeam(graphic, newWall.endUbicationPoint, priceAndCost);
         }
 
         private Wall FirstIntersectWall(Wall wall)
@@ -287,23 +289,22 @@ namespace Domain.Entities
             return returnPoint;
         }
 
-        public void AddWallBeam(Graphics graphic, Point ubicationPoint)
+        public void AddWallBeam(Graphics graphic, Point ubicationPoint, PriceAndCost priceAndCost)
         {
             if (FreePosition(ubicationPoint))
             {
                 WallBeam wallBeam = new WallBeam(ubicationPoint);
-                WALLBEAM_HANDLER.Add(this, wallBeam);
-                //wallBeam.Draw(graphic);
+                WALLBEAM_HANDLER.Add(this, wallBeam, priceAndCost);
             }
         }
 
         public void AddDecorativeColumn(Graphics graphic, Point ubicationPoint)
         {
+            PriceAndCost priceAndCost = PRICE_AND_COST_HANDLER.GetPriceAndCostDecorativeColumn();
             if (FreePosition(ubicationPoint))
             {
                 DecorativeColumn decorativeColumn = new DecorativeColumn(ubicationPoint);
-                DECORATIVECOLUMN_HANDLER.Add(this, decorativeColumn);
-                //decorativeColumn.Draw(graphic);
+                DECORATIVECOLUMN_HANDLER.Add(this, decorativeColumn, priceAndCost);
 
             }
         }
@@ -394,11 +395,11 @@ namespace Domain.Entities
 
         public void AddWindow(Graphics graphic, Point startPoint, Point endPoint, string sense)
         {
+            PriceAndCost priceAndCost = PRICE_AND_COST_HANDLER.GetPriceAndCostWindow();
             if (FreePosition(startPoint))
             {
                 Window window = new Window(startPoint, endPoint, sense);
-                WINDOW_HANDLER.Add(this, window);
-                //window.Draw(graphic);
+                WINDOW_HANDLER.Add(this, window, priceAndCost);
             }
         }
 
@@ -423,12 +424,12 @@ namespace Domain.Entities
 
         public void AddDoor(Graphics graphic, Point startPoint, Point endPoint, string sense)
         {
+            PriceAndCost priceAndCost = PRICE_AND_COST_HANDLER.GetPriceAndCostDoor();
             OnTheWall(startPoint);
             if (FreePosition(startPoint))
             {
                 Door door = new Door(startPoint, endPoint, sense);
-                DOOR_HANDLER.Add(this, new Door(startPoint, endPoint, sense));
-                //door.Draw(graphic);
+                DOOR_HANDLER.Add(this, new Door(startPoint, endPoint, sense), priceAndCost);
             }
         }
 
@@ -512,52 +513,47 @@ namespace Domain.Entities
 
         public int AmountCostWall()
         {
-            return PRICE_AND_COST.TotalCostWindow(this);
+            return PRICE_AND_COST_HANDLER.TotalCostWall(this);
         }
 
         public int AmountPriceWall()
         {
-            return PRICE_AND_COST.TotalPriceWall(this);
+            return PRICE_AND_COST_HANDLER.TotalPriceWall(this);
         }
 
         public int AmountCostWallBeam()
         {
-            return PRICE_AND_COST.TotalCostWallBeam(this);
+            return PRICE_AND_COST_HANDLER.TotalCostWallBeam(this);
         }
 
         public int AmountPriceWallBeam()
         {
-            return PRICE_AND_COST.TotalPriceWallBeam(this);
+            return PRICE_AND_COST_HANDLER.TotalPriceWallBeam(this);
         }
 
         public int AmountCostWindow()
         {
-            return PRICE_AND_COST.TotalCostWindow(this);
+            return PRICE_AND_COST_HANDLER.TotalCostWindow(this);
         }
 
         public int AmountPriceWindow()
         {
-            //   return PRICE_AND_COST.TotalPriceWindow(this);
-            return 1;
+            return PRICE_AND_COST_HANDLER.TotalPriceWindow(this);
         }
 
         public int AmountCostDoor()
         {
-            //return PRICE_AND_COST.TotalCostDoor(this);
-            //REVISAR
-            return 1;
+            return PRICE_AND_COST_HANDLER.TotalCostDoor(this);
         }
 
         public int AmountPriceDoor()
         {
-            //return PRICE_AND_COST.TotalPriceDoor(this);
-            return 1;
+            return PRICE_AND_COST_HANDLER.TotalPriceDoor(this);
         }
 
         public int TotalCost()
         {
-            //return PRICE_AND_COST.TotalCost(this);
-            return 1;
+            return PRICE_AND_COST_HANDLER.TotalCost(this);
         }
 
         public int TotalPrice()

@@ -50,24 +50,20 @@ namespace Domain.Logic
             IsNotEmpty(gridList);
             return gridList;
         }
-        public List<Grid> GetClientGrids(Client client)
+        public List<Grid> GetClientNotSignedGrids(Client client)
         {
             List<Grid> gridList = new List<Grid>();
             foreach(Grid grid in this.gridRepository.GetAllGrids())
             {
-                if (ClientGrid(client, grid)){
+                if (ClientGrid(client, grid) && !IsGridSigned(grid)){
                     gridList.Add(grid);
                 }
             }
-            IsNotEmpty(gridList);
             return gridList;
         }
         private bool ClientGrid(Client client, Grid grid)
         {
-            if (grid.Client.Equals(client))
-                return true;
-            else
-                return false;
+            return grid.Client.Equals(client) ? true : false;
         }
         private void IsNotEmpty(List<Grid> gridList)
         {
@@ -85,6 +81,22 @@ namespace Domain.Logic
         public void SaveSignature(Grid grid, Signature signature)
         {
             this.gridRepository.SaveSignature(grid, signature);
+        }
+        public List<Grid> GetClientSignedGrids(Client client)
+        {
+            List<Grid> gridList = new List<Grid>();
+            foreach (Grid grid in this.gridRepository.GetAllGrids())
+            {
+                if (ClientGrid(client, grid) && IsGridSigned(grid))
+                {
+                    gridList.Add(grid);
+                }
+            }
+            return gridList;
+        }
+        private bool IsGridSigned(Grid grid)
+        {
+            return grid.Signatures.Any() ? true : false;
         }
     }
 }

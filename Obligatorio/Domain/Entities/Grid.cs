@@ -537,22 +537,27 @@ namespace Domain.Entities
 
         public int AmountPriceWindow()
         {
-            return PRICE_AND_COST.TotalPriceWindow(this);
+            //   return PRICE_AND_COST.TotalPriceWindow(this);
+            return 1;
         }
 
         public int AmountCostDoor()
         {
-            return PRICE_AND_COST.TotalCostDoor(this);
+            //return PRICE_AND_COST.TotalCostDoor(this);
+            //REVISAR
+            return 1;
         }
 
         public int AmountPriceDoor()
         {
-            return PRICE_AND_COST.TotalPriceDoor(this);
+            //return PRICE_AND_COST.TotalPriceDoor(this);
+            return 1;
         }
 
         public int TotalCost()
         {
-            return PRICE_AND_COST.TotalCost(this);
+            //return PRICE_AND_COST.TotalCost(this);
+            return 1;
         }
 
         public int TotalPrice()

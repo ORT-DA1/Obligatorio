@@ -108,7 +108,11 @@ namespace Domain.Repositories
         }
         public void SaveSignature(Grid grid, Signature signature)
         {
-            signature.Grid = grid;
+            Grid savedGrid = _context.Grids.Where(g => g.GridId == signature.Grid.GridId).FirstOrDefault();
+            Architect savedArchitect = _context.Architects.Where(a => a.ArchitectId == signature.Architect.ArchitectId).FirstOrDefault();
+            
+            signature.Grid = savedGrid;
+            signature.Architect = savedArchitect;
             _context.Signatures.Add(signature);
             _context.SaveChanges();
         }

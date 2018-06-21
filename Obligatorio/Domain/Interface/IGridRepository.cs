@@ -21,5 +21,6 @@ namespace Domain.Interface
         Grid ReadGrid(Grid grid);
         bool Exist(Grid grid);
         List<Signature> GetSignatures(Grid grid);
+        void SaveSignature(Grid grid, Signature signature);
     }
 }

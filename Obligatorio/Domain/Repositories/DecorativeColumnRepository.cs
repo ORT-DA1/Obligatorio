@@ -14,13 +14,16 @@ namespace Domain.Repositories
         {
             this._context = gridRepository._context;
         }
-        public void Add(Grid grid, DecorativeColumn decorativeColumn)
+        public void Add(Grid grid, DecorativeColumn decorativeColumn, PriceAndCost priceAndCost)
         {
+            PriceAndCost priceCost = _context.PricesAndCosts
+                .Where(w => w.PriceAndCostId == priceAndCost.PriceAndCostId)
+                .FirstOrDefault();
+            decorativeColumn.PriceAndCost = priceCost;
             _context.Grids.Attach(grid);
             decorativeColumn.Grid = grid;
             _context.DecorativeColumns.Add(decorativeColumn);
             _context.SaveChanges();
-
         }
 
         public int Count(Grid grid)
@@ -38,6 +41,11 @@ namespace Domain.Repositories
                 .FirstOrDefault();
 
             return !(decorativeColumnToFind == null);
+        }
+
+        public DecorativeColumn GetFirst()
+        {
+            return _context.DecorativeColumns.Where(d => d.DecorativeColumnId == 1).FirstOrDefault();
         }
 
         public List<DecorativeColumn> GetList(Grid grid)

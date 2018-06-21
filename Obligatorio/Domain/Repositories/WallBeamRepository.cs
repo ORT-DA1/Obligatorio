@@ -15,10 +15,14 @@ namespace Domain.Repositories
             this._context = gridRepository._context;
         }
 
-        public void Add(Grid grid, WallBeam wallBeam)
+        public void Add(Grid grid, WallBeam wallBeam, PriceAndCost priceAndCost)
         {
             try
             {
+                PriceAndCost priceCost = _context.PricesAndCosts
+                .Where(w => w.PriceAndCostId == priceAndCost.PriceAndCostId)
+                .FirstOrDefault();
+                wallBeam.PriceAndCost = priceCost;
                 _context.Grids.Attach(grid);
                 wallBeam.Grid = grid;
                 _context.WallBeams.Add(wallBeam);
@@ -84,6 +88,11 @@ namespace Domain.Repositories
             
             _context.WallBeams.Remove(wallBeamToDelete);
             _context.SaveChanges();
+        }
+
+        public WallBeam GetFirst()
+        {
+            return _context.WallBeams.Where(w => w.WallBeamId == 1).FirstOrDefault();
         }
     }
 }

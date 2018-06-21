@@ -13,8 +13,12 @@ namespace Domain.Repositories
         {
             this._context = gridRepository._context;
         }
-        public void Add(Grid grid, Window window)
+        public void Add(Grid grid, Window window, PriceAndCost priceAndCost)
         {
+            PriceAndCost priceCost = _context.PricesAndCosts
+                .Where(w => w.PriceAndCostId == priceAndCost.PriceAndCostId)
+                .FirstOrDefault();
+            window.PriceAndCost = priceCost;
             _context.Grids.Attach(grid);
             window.Grid = grid;
             _context.Windows.Add(window);
@@ -36,6 +40,11 @@ namespace Domain.Repositories
                 .FirstOrDefault();
 
             return !(windowToFind == null);
+        }
+
+        public Window GetFirst()
+        {
+            return _context.Windows.Where(w => w.WindowId == 1).FirstOrDefault();
         }
 
         public List<Window> GetList(Grid grid)

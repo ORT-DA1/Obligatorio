@@ -90,6 +90,7 @@
     <Compile Include="Logic\WallBeamHandler.cs" />
     <Compile Include="Logic\WallHandler.cs" />
     <Compile Include="Logic\WindowHandler.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\AdminRepository.cs" />
     <Compile Include="Repositories\ArchitectRepository.cs" />
     <Compile Include="Repositories\ClientRepository.cs" />
@@ -126,6 +127,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Logic\packages.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
